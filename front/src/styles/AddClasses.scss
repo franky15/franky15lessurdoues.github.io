@@ -1,0 +1,179 @@
+.AddClassContainer {
+    position: absolute;
+    //width: 90%;
+    height: 400px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    //background-color: rgba(128, 128, 128, 0.317);
+   // background-color: #bf9000;
+   background-color: white;
+    //border-radius: 10px;
+    border: solid;
+    
+
+    &__option {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bolder;
+       // border: solid;
+
+        &--picture {
+            border: solid ;
+
+            .fa-x {
+
+                color: red;
+                font-size: 25px;
+            }
+        }
+
+       
+    }
+
+    &__entete {
+
+        width: 90%;
+        height: 40px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        font-weight: bolder;
+        border: solid greenyellow;
+
+        
+
+        &--classe {
+            
+            width: 15%;
+            //display: block;
+            display: flex;
+            align-items: center;
+            border: solid;
+
+            
+        }
+        &--enseignant{
+            
+            width: 60%;
+            display: flex;
+            align-items: center;
+            border: solid red; 
+        }
+        &--section {
+
+            width: 25%;
+            display: flex;
+            align-items: center;
+            border: solid;
+        }
+    }
+
+    .form {
+
+        .form__entete {
+            width: 90%;
+            height: 40px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bolder;
+            border: solid yellow;
+        
+            &--classe {
+                
+                width: 15%;
+                display: block;
+                border: solid;
+            }
+            &--enseignant{
+                
+                width: 60%;
+                border: solid red; 
+            }
+        
+        
+            .form2 {
+                
+                width: 25%;
+                border: solid;
+
+                #sections {
+
+                    width: 100%;
+                    height: 100%;
+                    border: solid green;
+
+                }
+                
+                
+                
+                
+        
+               
+                
+            }
+        
+
+        }
+
+        &__confirm {
+        
+            width: 50%;
+            height: 45px;
+            margin: auto;
+            margin-top: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: solid;
+
+            button {
+                width: 15%;
+                height: 30px;
+                border-radius: 10px;
+                color: white;
+                font-weight: bolder;
+            }
+            .colorCancel {
+
+               // color: white;
+                background-color: gray;
+            }
+            .colorValid{
+
+                //color: white;
+                background-color: #517633;
+            }
+
+
+        }
+        
+        
+    }
+
+   
+
+
+}
+    
+/*
+ <div className='form__entete--section' >
+    <div className='btnSection' >
+        
+        <span className='btnSection__choice' >Choisir une section</span> 
+        <span className='btnSection__arrow'>
+            { arrow ? <i class="fa-solid fa-angle-down" onClick={lockArrow}></i> :
+            <i class="fa-solid fa-angle-up" onClick={openArrow}></i> }
+        </span>
+    </div>
+    { arrow && <div className='btn'>
+        <div className='btn__valeur'  ref={ anglophoneRef }  data-Anglophone = "anglophone"  onClick={ dataSetAn } > Anglophone</div>
+        <div className='btn__valeur'   ref={ francophoneRef }  data-Francophone = "francophone" onClick={ dataSetFr } > Francophone</div>
+    </div> }
+</div>
+
+*/

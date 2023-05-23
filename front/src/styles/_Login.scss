@@ -1,0 +1,79 @@
+.loginContainer{
+    width: 90%;
+    margin: auto;
+    display: flex;
+   // border: solid;
+}
+
+.loginbloc1{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    //border: solid red;
+
+    .loginbloc1__titre{
+        font-weight: bolder;
+    }
+
+    form {
+
+        width: 65%;
+
+        .groupe{
+            
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            //border: solid;
+        }
+
+        .coonnexionbtn{
+            background-color: #b1bf24;//#f15844;
+            border: solid #b1bf24;
+            border-radius: 5px;
+            box-shadow: 2px 1px 5px 0px rgba(0,0,0,0.96);
+        }
+    }
+    
+
+   
+}
+
+.loginbloc2{
+
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    //justify-content: space-around ;
+
+   // border: solid red;
+
+    &__Picture{
+        
+        width: 70%;
+        height: 95%;
+        margin: auto;
+
+        .ecolePicture{
+            //border: solid;
+           // width: 70%;
+            //margin: auto;
+        }
+    }
+
+    &__description{
+
+        width: 70%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        font-weight: bolder;
+        
+        //border: solid;
+    }
+}

@@ -1,0 +1,57 @@
+
+
+
+    .iframeClassesContainer__title{
+        width: 100%;
+        height: 30px;
+        margin: auto;
+        background-color: #517633;
+        font-weight: bolder;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sectionIframe{
+
+        &__section{
+
+            font-weight: bolder;
+            color:#517633
+        }
+       
+       .classes  {
+        
+            &__classe{
+
+               // border: solid red;
+                list-style: none;
+
+                .linkClasse{
+                    display: block;
+                    //width: 100px;
+                    height: 30px;
+                    text-decoration: none;
+                    color: black;
+                    //border: solid;
+
+                    span{
+                        //border: solid blue;
+
+                        &:hover {
+
+                            cursor: pointer;
+                            color:#517633
+                        }
+                    }
+
+                    
+                    
+                }
+            }
+        }
+    }
+
+    
+   

@@ -1,0 +1,28 @@
+.homeContainer{
+   // border: solid red;
+   
+    display: flex;
+    flex-direction: column;
+}
+.ecoleImageContainer{
+   // border: solid blue;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+   
+    .ecoleImage{
+        
+       // border: solid;
+       // width: 500px;
+        height: 500px;
+        margin-bottom: 60px;
+        
+    }
+
+   
+}
+
+
+
+ 

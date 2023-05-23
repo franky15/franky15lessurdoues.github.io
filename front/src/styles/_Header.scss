@@ -1,0 +1,93 @@
+.headerPublic {
+    width: 90%;
+    margin: auto;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100px;
+    //border: solid;
+    
+    .acceuil {
+        width: 8%;
+        height: 30px;
+        border: solid #bf9000;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px -1px #000000;
+        background-color: #bf9000;
+        color: white;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .linkAcceuilPublic {
+            
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            color: white;
+            text-decoration: none;
+           
+            
+        }
+        
+    }
+    .acceuil:focus{
+        cursor: pointer;
+    }
+    
+    
+    
+}
+
+.optionContainer {
+    width: 15%;
+   // border: solid yellow;
+    display: flex;
+    justify-content: space-between;
+
+    .option {
+        //border: solid ;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .fa-solidContainer {
+            //border: solid green;
+            text-align: center;
+            .fa-solid {
+                font-size: 30px;
+                font-weight: bolder;
+                color: #000000;
+            }
+        }
+        
+        .linkHeaderPublic {
+            font-weight: bolder;
+            color: black;
+            text-decoration: none;
+            &:active{
+                color: #f15844;
+            }
+            &:visited{
+                //color: #f15844;
+            }
+            &:hover{
+                color: #bf9000;
+            }
+        }
+        
+        
+    }
+
+}
+
+.option1 {
+    display: none;
+}
+

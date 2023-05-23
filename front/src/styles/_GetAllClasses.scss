@@ -1,0 +1,220 @@
+.GetAllClasses {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+   
+   
+}
+
+.GetAllClassesContainerSection {
+
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+   // border: solid;
+
+    &__mini {
+        width: 31.5%;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        background-color: #e5e5e5;
+        border: solid 1px#c1c1c1;
+        font-weight: bolder;
+        font-size: 18px;
+        opacity: 0.8;
+        cursor: pointer;
+
+        &:hover{
+            background-color :#517633;
+            color: white;
+            opacity: 1;
+        }
+
+        .GetAllClassesContainer__mini--classes {
+
+            width: 80%;
+            display: flex;
+            align-items: center;
+            //border: solid green;
+        }
+
+        .GetAllClassesContainer__mini--quantity {
+
+            width: 10%;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            //border: solid green;
+        }
+
+    }
+
+}
+
+.GetAllClassesContainerFiltre {
+
+    width: 40%;
+    height: 50px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    //border: solid;
+
+    &__mini1 {
+
+        width: 65%;
+        border-radius: 10px;
+        background-color: #e5e5e5;
+        border: solid 1px#c1c1c1;
+        font-weight: bolder;
+        font-size: 18px;
+        opacity: 0.8;
+        //border: solid red;
+
+        form {
+
+            
+           display: flex;
+           align-items: center;
+           height: 45px;
+            //border: solid green;
+
+           p {
+
+                
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                
+
+               // border: solid yellow;
+
+                label {
+
+                    width: 20%;
+                    height: 45px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                   // border: solid;
+
+                    .fa-magnifying-glass{
+                        font-size: 40px;
+                    }
+                }
+                
+                
+                input {
+
+                    width: 80%;
+                    height: 30px;
+                    background-color: #e5e5e5;
+                    border: solid  #e5e5e5;
+                    border-radius: 5px;
+                    //opacity: 0.7;
+                    //border: solid;
+                    margin-right: 20px;
+                    
+                }
+                input::placeholder{
+
+                    font-weight: bolder;
+                    font-size: 18px;
+                    
+                    
+                }
+            }
+        } 
+
+    }
+
+    &__mini2 {
+
+        width: 31%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #e5e5e5;
+        border: solid 1px#c1c1c1;
+        opacity: 0.8;
+        //border: solid red;
+
+        &:hover{
+            background-color :#517633;
+            color: white;
+            opacity: 1;
+        }
+
+        .GetAllClassesContainerFiltre__mini2--Ajout{
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            font-size: 18px;
+            cursor: pointer;
+            
+
+            
+        }
+    }
+}
+
+.GetAllClassesContainerTable__mini {
+
+    
+    .GetAllClassesContainerValeur__mini--valeur{
+
+        margin-bottom: -20px;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        font-weight: bolder;
+        font-size: 18px;
+       // border: solid;
+    }
+
+    .GetAllClassesContainerValeur2__mini--valeur {
+
+       // display: flex;
+        //justify-content: space-between;
+
+        .valeurs {
+
+            display: flex;
+            justify-content: space-between;
+            //width: 90%;
+            //border: solid red;
+
+        }
+        .actionValeurs{
+            width: 9%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            //border: solid red;
+        }
+    }
+
+    .nomEffectif {
+
+        width: 17.5%;
+        //border: solid;
+    }
+    .enseignant {
+        
+        width: 40%;
+       // border: solid yellow;
+    }
+    .section {
+        
+        width: 25%;
+        //border: solid red;
+    }
+}
