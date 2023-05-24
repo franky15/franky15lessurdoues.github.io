@@ -4,7 +4,8 @@ import SectionAnglophone from '../../../components/classes/SectionAnglophone';
 import SectionFrancophone from '../../../components/classes/SectionFrancophone';
 import SectionSearch from '../../../components/classes/SectionSearch';
 import AddClasses from '../../../components/classes/AddClasses';
-import SectionUpdate from '../../../components/classes/SectionUpdate';
+import SectionUpdate from '../../../components/classes/SectionUpdate'; 
+import DeleteClasses from '../../../components/classes/DeleteClasses';
 
 const GetAllClasses = ( ) => {
 
@@ -56,6 +57,16 @@ const GetAllClasses = ( ) => {
 
     let lockwindowUpdateClasse = () => setWindowUpdateClasse(false); 
     let openwindowUpdateClasse = () => setWindowUpdateClasse(true); 
+
+    //gestion de la suppréssion
+    let [ windowDeleteClasse, setWindowDeleteClasse ] = useState(false)
+
+    let lockwindowDeleteClasse = () => setWindowDeleteClasse(false); 
+    let openwindowDeleteClasse = () => setWindowDeleteClasse(true); 
+
+    //gestion du dataset
+    let [ classeId, setClasseId] = useState("")
+
 
     
 
@@ -161,6 +172,27 @@ const GetAllClasses = ( ) => {
         
     }*/
 
+    //récupération de la id de la classe
+    const classeIdRef = useRef(null);
+
+    const openwindowDelete = () => {
+
+        let idClasse = classeIdRef.current.dataset.id
+        setClasseId(idClasse)
+        openwindowDeleteClasse()
+        
+        console.log("bienvenue openwindowDelete")
+        console.log("idClasse current est : " + idClasse)
+    }
+
+    const openwindowUpdate = () => {
+
+        let idClasse = classeIdRef.current.dataset.id
+        setClasseId(idClasse)
+        openwindowUpdateClasse()
+    }
+
+
     return (
 
         <div className='GetAllClasses'>
@@ -222,7 +254,7 @@ const GetAllClasses = ( ) => {
 
                     <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div>
 
-                </div>
+                </div> 
                 
 
             </div>
@@ -231,8 +263,10 @@ const GetAllClasses = ( ) => {
                     lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse }/> }
 
             { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
-                    lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse }/> }
+                    lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse } idclasse = {classeId} /> }
 
+            { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = {classeId} /> }
+            
             <div className='GetAllClassesContainerTable__mini'>
 
                 <div className='GetAllClassesContainerValeur__mini--valeur'>
@@ -261,13 +295,13 @@ const GetAllClasses = ( ) => {
                       <div className='actionValeurs'>
 
                           <div className='actionValeurs__element' >
-                              <i class="fa-solid fa-pen-to-square"  data-id={`${element.section_id}`} onClick={ openwindowUpdateClasse  }></i>
+                              <i class="fa-solid fa-pen-to-square" ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowUpdate  }></i>
                           </div>
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-x" data-id={`${element.section_id}`} ></i>
+                              <i class="fa-solid fa-x" ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowDelete } ></i>
                           </div>
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-circle-info" data-id={`${element.section_id}`} ></i>
+                              <i class="fa-solid fa-circle-info" ref={ classeIdRef } data-id={`${element.id}`} ></i>
                           </div>
                       </div>
                           

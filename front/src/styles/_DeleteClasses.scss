@@ -1,0 +1,44 @@
+.deleteClasses {
+
+    position: absolute;
+    width: 50%;
+    height: 150px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border: solid  1px;
+
+    &__titleDelete {
+
+        margin-top: 40px;
+        font-weight: bold;
+       // border: solid;
+    }
+
+    &__btn{
+
+        width: 60%;
+        height: 30px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        //border: solid red;
+
+        .btn{
+            width: 25%;
+            font-weight: bold;
+            color: white;
+            
+        }
+        .cancel {
+            background-color: gray;
+        }
+        .valid {
+
+            background-color: #517633;
+        }
+
+    }
+}
