@@ -102,11 +102,14 @@
                 width: 15%;
                 display: block;
                 //border: solid;
+
+               
             }
             &--enseignant{
                 
-                width: 60%;
+                width: 55%;
                // border: solid red; 
+            
             }
         
         
@@ -156,6 +159,9 @@
                 color: white;
                 font-weight: bolder;
                 margin-bottom: 30px;
+                &:hover {
+                    cursor: pointer;
+                }
             }
             .colorCancel {
 

@@ -93,7 +93,7 @@ const SectionUpdate = ({ classes, windowAddClasse, lockWindowAddClasse, openwind
                 </div>
 
             </div>
-            <hr className='ligne'></hr>
+          
             <form className='form'>
 
                 <div className='form__entete'>

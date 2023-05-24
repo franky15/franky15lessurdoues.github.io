@@ -3,7 +3,7 @@
     width: 90%;
     margin: auto;
     margin-top: 40px;
-    
+
    // z-index: 1;
    
 }
@@ -200,6 +200,9 @@
             justify-content: space-between;
             align-items: center;
             //border: solid red;
+            .icons:hover {
+                cursor: pointer;
+            }
         }
     }
 

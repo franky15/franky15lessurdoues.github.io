@@ -66,13 +66,9 @@ const GetAllClasses = ( ) => {
 
     //gestion du dataset
     let [ classeId, setClasseId] = useState("")
-
-
     
-
     const flag = useRef(false)
 
-    
     //requete de récupération de toutes les classes
     useEffect( () => {
 
@@ -173,9 +169,28 @@ const GetAllClasses = ( ) => {
     }*/
 
     //récupération de la id de la classe
-    const classeIdRef = useRef(null);
+    const classeIdRef = useRef();
+
+    console.log (" les classes")
+    console.log (classes)
+
+      ////////////////////////
+      let testId = () => {
+
+        setClasseId("classeIdRef.current.dataset.id est : ")
+        setClasseId(classeIdRef.current.dataset.id)
+
+        //openwindowDelete   à mettre sur le onclick
+    }
+
+    console.log("le state claccId est est : ")
+    console.log(classeId)
+
+    //////////////////
 
     const openwindowDelete = () => {
+
+        lockwindowUpdateClasse()
 
         let idClasse = classeIdRef.current.dataset.id
         setClasseId(idClasse)
@@ -184,15 +199,20 @@ const GetAllClasses = ( ) => {
         console.log("bienvenue openwindowDelete")
         console.log("idClasse current est : " + idClasse)
     }
+   
 
     const openwindowUpdate = () => {
 
         let idClasse = classeIdRef.current.dataset.id
+        
         setClasseId(idClasse)
         openwindowUpdateClasse()
     }
 
+    console.log (" le id classes useState")
+    console.log (classeId)
 
+  
     return (
 
         <div className='GetAllClasses'>
@@ -252,7 +272,7 @@ const GetAllClasses = ( ) => {
 
                 <div className='GetAllClassesContainerFiltre__mini2'>
 
-                    <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div>
+                    <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div> 
 
                 </div> 
                 
@@ -265,7 +285,7 @@ const GetAllClasses = ( ) => {
             { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
                     lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse } idclasse = {classeId} /> }
 
-            { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = {classeId} /> }
+            { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
             
             <div className='GetAllClassesContainerTable__mini'>
 
@@ -295,13 +315,13 @@ const GetAllClasses = ( ) => {
                       <div className='actionValeurs'>
 
                           <div className='actionValeurs__element' >
-                              <i class="fa-solid fa-pen-to-square" ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowUpdate  }></i>
+                              <i class="fa-solid fa-pen-to-square icons" title='Modifier la classe' ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowUpdate  }></i>
                           </div>
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-x" ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowDelete } ></i>
+                              <i class="fa-solid fa-x  icons"  title='Supprimer la classe' ref={ classeIdRef } data-id={ element.id } onClick={ openwindowDelete } ></i>
                           </div>
-                          <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-circle-info" ref={ classeIdRef } data-id={`${element.id}`} ></i>
+                          <div className='actionValeurs__element  icons'>
+                              <i class="fa-solid fa-circle-info" title='Afficher plus de détails' ref={ classeIdRef } data-id={`${element.id}`} ></i>
                           </div>
                       </div>
                           

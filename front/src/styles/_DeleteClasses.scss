@@ -30,10 +30,14 @@
             width: 25%;
             font-weight: bold;
             color: white;
+            &:hover {
+                cursor: pointer;
+            }
             
         }
         .cancel {
             background-color: gray;
+
         }
         .valid {
 
