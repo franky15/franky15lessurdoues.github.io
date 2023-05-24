@@ -4,8 +4,9 @@ import SectionAnglophone from '../../../components/classes/SectionAnglophone';
 import SectionFrancophone from '../../../components/classes/SectionFrancophone';
 import SectionSearch from '../../../components/classes/SectionSearch';
 import AddClasses from '../../../components/classes/AddClasses';
+import SectionUpdate from '../../../components/classes/SectionUpdate';
 
-const GetAllClasses = () => {
+const GetAllClasses = ( ) => {
 
     //gestion du state de toutes les classes
     let [ classes, setclasses ] = useState([])
@@ -45,10 +46,18 @@ const GetAllClasses = () => {
     let openInput = () => setValeurInputIsOpen(true); 
 
     //gestion de l'affichage de la feêtre ajouter une classe
-    let [ windowAddClasse, setWindowAddClasse ] = useState(true) //false
+    let [ windowAddClasse, setWindowAddClasse ] = useState(false) //false
 
     let lockWindowAddClasse = () => setWindowAddClasse(false); 
     let openWindowAddClasse = () => setWindowAddClasse(true); 
+
+    //gestion de l'affichage de la feêtre ajouter une classe
+    let [ windowUpdateClasse, setWindowUpdateClasse ] = useState(false) //false
+
+    let lockwindowUpdateClasse = () => setWindowUpdateClasse(false); 
+    let openwindowUpdateClasse = () => setWindowUpdateClasse(true); 
+
+    
 
     const flag = useRef(false)
 
@@ -136,31 +145,21 @@ const GetAllClasses = () => {
         lockFr()
         openInput()
       
-       /*setValeurInput({
-        ...valeurInput,
-        [e.target.name] : e.target.value
-        
-        })  */
         let value = e.target.value;
         value.length > 0 && setValeurInput( value  )
         //console.log("mon  value : " +  e.target.value)
-
-       // setValeurInput( e.target.value  )
-         
-        //console.log("mon  e.target.value : " +  e.target.value)
        
     }
     console.log("valeurInput")
     console.log(valeurInput)
    
-
+    /*
     const addClasse = (classes) => {
 
         console.log("ouverture de la fen^tre ajouter classes");
         openWindowAddClasse()
         
-
-    }
+    }*/
 
     return (
 
@@ -221,14 +220,18 @@ const GetAllClasses = () => {
 
                 <div className='GetAllClassesContainerFiltre__mini2'>
 
-                    <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={addClasse}> <span>Ajouter une classe</span></div>
+                    <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div>
 
                 </div>
                 
 
             </div>
 
-            { windowAddClasse && <AddClasses classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse } /> }
+            { windowAddClasse && <AddClasses classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
+                    lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse }/> }
+
+            { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
+                    lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse }/> }
 
             <div className='GetAllClassesContainerTable__mini'>
 
@@ -257,14 +260,14 @@ const GetAllClasses = () => {
                                   
                       <div className='actionValeurs'>
 
-                          <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-pen-to-square"></i>
+                          <div className='actionValeurs__element' >
+                              <i class="fa-solid fa-pen-to-square"  data-id={`${element.section_id}`} onClick={ openwindowUpdateClasse  }></i>
                           </div>
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-x"></i>
+                              <i class="fa-solid fa-x" data-id={`${element.section_id}`} ></i>
                           </div>
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-circle-info"></i>
+                              <i class="fa-solid fa-circle-info" data-id={`${element.section_id}`} ></i>
                           </div>
                       </div>
                           
@@ -289,86 +292,7 @@ const GetAllClasses = () => {
                
                     </>  
                   
-                  
-                  /*
-                  isOpen ? sectionFilterAnglophone.map((element, index) => (  
-              
-                      <div className='valeurs' key={`index-${element.nom}`}>
-                              
-                          <p className='nomEffectif'> { element.nom } </p>
-                          <p className='nomEffectif'> { element.effectif } </p>
-                          <p className='enseignant'>{element.enseignant } </p>
-                          <p className='section'> {  section(element.section_id) } </p>
-                                      
-                          <div className='actionValeurs'>
-  
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                              </div>
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-x"></i>
-                              </div>
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-circle-info"></i>
-                              </div>
-                          </div>
-                              
-                      </div> ) ) :
-                    
-                    //sections 
-                  isOpen ? sectionFilterFrancophone.map((element, index) => (  
-                                      
-                      <div className='valeurs' key={`index-${element.nom}`}>
-                              
-                          <p className='nomEffectif'> { element.nom } </p>
-                          <p className='nomEffectif'> { element.effectif } </p>
-                          <p className='enseignant'>{element.enseignant } </p>
-                          <p className='section'> {  section(element.section_id) } </p>
-                                      
-                          <div className='actionValeurs'>
-
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                              </div>
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-x"></i>
-                              </div>
-                              <div className='actionValeurs__element'>
-                                  <i class="fa-solid fa-circle-info"></i>
-                              </div>
-                          </div>
-                              
-                      </div> ) ) : 
-
-                      
-                      classes.filter( (val) => 
-                           val.nom === valeurInput.recherche //.toLowerCase()
-                      ).map((element, index) => (  
-                                      
-                          <div className='valeurs' key={`index-${element.nom}`}>
-                                  
-                              <p className='nomEffectif'> { element.nom } </p>
-                              <p className='nomEffectif'> { element.effectif } </p>
-                              <p className='enseignant'>{element.enseignant } </p>
-                              <p className='section'> {  section(element.section_id) } </p>
-                                          
-                              <div className='actionValeurs'>
-
-                                  <div className='actionValeurs__element'>
-                                      <i class="fa-solid fa-pen-to-square"></i>
-                                  </div>
-                                  <div className='actionValeurs__element'>
-                                      <i class="fa-solid fa-x"></i>
-                                  </div>
-                                  <div className='actionValeurs__element'>
-                                      <i class="fa-solid fa-circle-info"></i>
-                                  </div>
-                              </div>
-                                  
-                          </div> ) ) 
-                          */
-                 
-              }
+                }
 
                 </div>
             </div>
@@ -380,153 +304,3 @@ export default GetAllClasses;
 
 
 
-
-/*
-
-
-                  { isOpen ? classes.map((element, index) => (  
-                  
-                        <div className='valeurs' key={`index-${element.nom}`}>
-                                
-                            <p className='nomEffectif'> { element.nom } </p>
-                            <p className='nomEffectif'> { element.effectif } </p>
-                            <p className='enseignant'>{element.enseignant } </p>
-                            <p className='section'> {  section(element.section_id) } </p>
-                                        
-                            <div className='actionValeurs'>
-
-                                <div className='actionValeurs__element'>
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </div>
-                                <div className='actionValeurs__element'>
-                                    <i class="fa-solid fa-x"></i>
-                                </div>
-                                <div className='actionValeurs__element'>
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </div>
-                            </div>
-                                
-                        </div> ) ) : 
-                        
-                        isOpen ? classesFilter.map((element, index) => (  
-                    
-                            <div className='valeurs' key={`index-${element.nom}`}>
-                                    
-                                <p className='nomEffectif'> { element.nom } </p>
-                                <p className='nomEffectif'> { element.effectif } </p>
-                                <p className='enseignant'>{element.enseignant } </p>
-                                <p className='section'> {  section(element.section_id) } </p>
-                                            
-                                <div className='actionValeurs'>
-        
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </div>
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-x"></i>
-                                    </div>
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </div>
-                                </div>
-                                    
-                            </div> ) ) :
-
-                        isOpen ? classesFilter.map((element, index) => (  
-                                            
-                            <div className='valeurs' key={`index-${element.nom}`}>
-                                    
-                                <p className='nomEffectif'> { element.nom } </p>
-                                <p className='nomEffectif'> { element.effectif } </p>
-                                <p className='enseignant'>{element.enseignant } </p>
-                                <p className='section'> {  section(element.section_id) } </p>
-                                            
-                                <div className='actionValeurs'>
-
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </div>
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-x"></i>
-                                    </div>
-                                    <div className='actionValeurs__element'>
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </div>
-                                </div>
-                                    
-                            </div> ) ) : 
-
-                            classes.filter( (val) => 
-                                 val.nom === valeurInput.recherche //.toLowerCase()
-                            ).map((element, index) => (  
-                                            
-                                <div className='valeurs' key={`index-${element.nom}`}>
-                                        
-                                    <p className='nomEffectif'> { element.nom } </p>
-                                    <p className='nomEffectif'> { element.effectif } </p>
-                                    <p className='enseignant'>{element.enseignant } </p>
-                                    <p className='section'> {  section(element.section_id) } </p>
-                                                
-                                    <div className='actionValeurs'>
-
-                                        <div className='actionValeurs__element'>
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </div>
-                                        <div className='actionValeurs__element'>
-                                            <i class="fa-solid fa-x"></i>
-                                        </div>
-                                        <div className='actionValeurs__element'>
-                                            <i class="fa-solid fa-circle-info"></i>
-                                        </div>
-                                    </div>
-                                        
-                                </div> ) ) 
-                       
-                    }
-
-*/
-
-
-/*
-    const sectionRef = useRef(null);
-
-    const btnSection = (classes) => {
-
-        console.log("ma classes dans btnSection")
-        console.log(classes)
-        const datasetSection = sectionRef.current.dataset.laSection;
-        
-        console.log("****** ma dataset ****** :" + datasetSection)
-
-        if( parseInt(datasetSection) === 1) {
-
-            let classesAnglophone = classes.filter( element => element.section_id === 1 )
-        
-            setClassesFilter(classesAnglophone)
-            change1()
-            
-            console.log("j'ai cliqué la section Anglophone")
-            console.log(classesAnglophone)
-
-        }else{
-
-            //const btnSectionFr = (classes) => {
-
-                let classesFrancophone = classes.filter( element => element.section_id === 2 )
-                
-                setClassesFilter(classesFrancophone)
-               // setClassesFilterFranco(classesFrancophone)
-                change1()
-                //setclasses(classesFrancophone)
-              
-                console.log("j'ai cliqué la section Francophone")
-                console.log(classesFrancophone)
-               
-            //}
-        }
-
-        
-
-       
-
-    }*/

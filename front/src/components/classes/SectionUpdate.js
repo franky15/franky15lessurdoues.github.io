@@ -1,11 +1,8 @@
 import React, {  useState } from 'react'; 
 import { classesServices } from '../../_services/Classes.services';
 import { useNavigate } from 'react-router-dom';
-//import SectionAdd from './SectionAdd';
-//import SectionUpdate from './SectionUpdate';
 
-
-const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ windowAddClasse, lockWindowAddClasse, openwindowUpdateClasse, lockwindowUpdateClasse, windowUpdateClasse }
+const SectionUpdate = ({ classes, windowAddClasse, lockWindowAddClasse, openwindowUpdateClasse, lockwindowUpdateClasse  }) => {
 
     let navigate = useNavigate()
 
@@ -14,14 +11,6 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
 
     //gestion du state des sections
     let [ sectionChoice, setSectionChoice ] = useState([])
-
-
-    const display = ( windowAddClasse, setWindowAddClasse) => {
-        
-        console.log("bienvanu dans addClasses")
-        lockWindowAddClasse()
-    }
-    
     
     //récupération du data-anglophone
     const dataSeclect = (e) => {
@@ -76,11 +65,11 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
         <div className='AddClassContainer'>
             <div className='AddClassContainer__option'>
                 <p className='AddClassContainer__option--titre'>
-                    Veuillez renseigner les champs suivant pour ajouter une classe 
+                    Modifier la classe 
                 </p>
                 <div className='AddClassContainer__option--picture'>
                   
-                    <i class="fa-thin fa-x" onClick={ display }></i>
+                    <i class="fa-thin fa-x" onClick={ lockwindowUpdateClasse}></i>
                    
                 </div>
             </div>
@@ -128,7 +117,7 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
                 </div>
 
                 <div className='form__confirm'>
-                    < button className='form__confirme--cancel  colorCancel' onClick={ display }> Annuler</button>
+                    < button className='form__confirme--cancel  colorCancel' onClick={ lockwindowUpdateClasse }> Annuler</button>
                     <button className='form__confirme--valid  colorValid' onClick={ onsubmit }> Valider</button>
                 </div>
 
@@ -138,4 +127,4 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
     );
 };
 
-export default AddClasses;
+export default SectionUpdate;

@@ -194,6 +194,24 @@ exports.updateClasse = (req, res, next) =>{
 
     let elementId = parseInt(req.params.id) //convertion de la chaine en integer car front envoie chaine  et retourne false
 
+    //////////////////////////////////////////////
+
+    let sectionAnglophone = "anglophone"
+    let sectionFrancophone = "francophone"
+    if(sectionNumber.toLowerCase() === sectionAnglophone.toLowerCase()) {
+
+        sectionNumber = 1
+
+    }else if( sectionNumber.toLowerCase() === sectionFrancophone.toLowerCase() ) {
+
+        sectionNumber = 2
+
+    } 
+   
+    console.log("****** la valeur sectionNumber : ****** " + sectionNumber )
+    
+    //////////////////////////////////////////////
+    
     //récupération des classes
     const  sqlSelectAllClasses = `SELECT * FROM classes JOIN section ON classes.section_id = section.id;`
     
