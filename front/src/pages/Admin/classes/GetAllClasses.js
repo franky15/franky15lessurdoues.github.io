@@ -7,8 +7,20 @@ import AddClasses from '../../../components/classes/AddClasses';
 import SectionUpdate from '../../../components/classes/SectionUpdate'; 
 import DeleteClasses from '../../../components/classes/DeleteClasses';
 
-const GetAllClasses = ( ) => {
 
+
+const GetAllClasses = () => {
+
+    /////////////////////////////////////////////////////
+    
+
+   
+   
+
+    
+
+     /////////////////////////////////////////////////////
+    
     //gestion du state de toutes les classes
     let [ classes, setclasses ] = useState([])
 
@@ -64,8 +76,39 @@ const GetAllClasses = ( ) => {
     let lockwindowDeleteClasse = () => setWindowDeleteClasse(false); 
     let openwindowDeleteClasse = () => setWindowDeleteClasse(true); 
 
+    //gestion de l'affichage d'ajout d'élèves
+    /*
+    let [ showAddEleve, setShowAddEleve ] = useState(false)
+
+    let openShowAddEleve = () => setShowAddEleve(true)
+    let lockShowAddEleve = () => setShowAddEleve(false)
+    */
+
+
     //gestion du dataset
     let [ classeId, setClasseId] = useState("")
+
+    //gestion de la désactivation des élément
+    let [ disabled, setDisabled ] = useState(false)
+
+    //gestion du focus sur la recherche
+    let [ isFocused , setIsFocus ] = useState(false)
+
+    
+    let openFocus = () => {
+
+        lockGet()
+        lockAn()
+        lockFr()
+        setIsFocus(true)
+    }
+    let lockFocus = () => {
+
+        openGet()
+        openAn()
+        openFr()
+        setIsFocus(false)
+    }
     
     const flag = useRef(false)
 
@@ -95,8 +138,8 @@ const GetAllClasses = ( ) => {
     
     
 
-    const anglophoneRef = useRef(null);
-    const francophoneRef = useRef(null);
+    //const anglophoneRef = useRef(null);
+    //const francophoneRef = useRef(null);
 
     
     const btnSectionAn = (classes) => {
@@ -104,6 +147,7 @@ const GetAllClasses = ( ) => {
        lockFr()
         lockGet()
         openAn()
+        setDisabled(true)
         
        
     }
@@ -114,6 +158,7 @@ const GetAllClasses = ( ) => {
        lockGet()
        lockInput()
        openFr()
+       setDisabled(true)
        
       
     }
@@ -125,6 +170,7 @@ const GetAllClasses = ( ) => {
         lockFr()
         lockInput()
         openGet()
+        setDisabled(true)
 
     }
 
@@ -144,80 +190,65 @@ const GetAllClasses = ( ) => {
     }
 
     ///////////////////////////
+
+
     //récupération de l'entrée de l'input et mise à jor du state
     let onchange = (e) => {
 
-        lockGet()
-        lockAn()
-        lockFr()
-        openInput()
+       lockGet()
+       lockAn()
+       lockFr()
+       openInput()
+        
       
-        let value = e.target.value;
-        value.length > 0 && setValeurInput( value  )
-        //console.log("mon  value : " +  e.target.value)
+       let value = e.target.value;
+       value.length > 0 && setValeurInput( value  )
+
+       console.log("mon  value : " +  e.target.value)
        
     }
     console.log("valeurInput")
     console.log(valeurInput)
    
-    /*
-    const addClasse = (classes) => {
-
-        console.log("ouverture de la fen^tre ajouter classes");
-        openWindowAddClasse()
-        
-    }*/
+    
 
     //récupération de la id de la classe
-    const classeIdRef = useRef();
+    const classeIdRef = useRef(null);
+    //const classeIdRefs = useRef([]); ref={ (element) => classeIdRefs.current.push(element) }
 
-    console.log (" les classes")
-    console.log (classes)
+    const classeIdRefs = useRef([]);
 
-      ////////////////////////
-      let testId = () => {
-
-        setClasseId("classeIdRef.current.dataset.id est : ")
-        setClasseId(classeIdRef.current.dataset.id)
-
-        //openwindowDelete   à mettre sur le onclick
-    }
-
-    console.log("le state claccId est est : ")
-    console.log(classeId)
-
-    //////////////////
-
-    const openwindowDelete = () => {
+    const openwindowDelete = (id) => {
 
         lockwindowUpdateClasse()
 
-        let idClasse = classeIdRef.current.dataset.id
-        setClasseId(idClasse)
+        setClasseId(id)
         openwindowDeleteClasse()
         
+        
         console.log("bienvenue openwindowDelete")
-        console.log("idClasse current est : " + idClasse)
+       // console.log("idClasse current est : " + idClasse)
     }
    
 
-    const openwindowUpdate = () => {
-
-        let idClasse = classeIdRef.current.dataset.id
+    const openwindowUpdate = (id) => {
         
-        setClasseId(idClasse)
+        setClasseId(id)
         openwindowUpdateClasse()
     }
 
-    console.log (" le id classes useState")
-    console.log (classeId)
 
+    //récupération des valeur des datasets des sections
+    const anglophoneRef = useRef(null)
+    const francophoneRef = useRef(null)
+
+    
   
     return (
-
+       
         <div className='GetAllClasses'>
 
-
+            
             <div className='GetAllClassesContainerSection'>
 
                 <div className='GetAllClassesContainerSection__mini'  onClick={() => btnAllClasses()}>
@@ -232,7 +263,7 @@ const GetAllClasses = ( ) => {
                     </div>
                 </div>
 
-                <div className='GetAllClassesContainerSection__mini' ref={anglophoneRef} data-section = "1" onClick={() => btnSectionAn() }> 
+                <div className='GetAllClassesContainerSection__mini'  ref={anglophoneRef} data-section = "1" onClick={() => btnSectionAn() }> 
                     <div className='GetAllClassesContainer__mini--classes'   >
                         <span>Section Anglophone</span>
                     </div>
@@ -244,7 +275,7 @@ const GetAllClasses = ( ) => {
                     </div>
                 </div>
 
-                <div className='GetAllClassesContainerSection__mini' ref={francophoneRef} data-section = "2" onClick={() => btnSectionFr() }>  
+                <div className='GetAllClassesContainerSection__mini'  ref={francophoneRef} data-section = "2" onClick={() => btnSectionFr() }>  
                     <div className='GetAllClassesContainer__mini--classes'>
                         <span>Section Francophone  </span>
                     </div>
@@ -262,9 +293,9 @@ const GetAllClasses = ( ) => {
                     <form  className='GetAllClassesContainerFiltre__mini1--loupe' >
                         <p>
                             <label for="recherche" className='label'>
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <i className="fa-solid fa-magnifying-glass"></i>
                             </label>
-                            <input type="text" name="recherche" id="recherche" placeholder="Classe, Enseignant"  value={ valeurInput.name } onChange={ onchange } />
+                            <input type="text" name="recherche" id="recherche" placeholder="Classe, Enseignant"  value={ valeurInput.name } onFocus={openFocus} onBlur={lockFocus} onChange={ onchange } />
                         </p>
                     </form>
 
@@ -272,7 +303,7 @@ const GetAllClasses = ( ) => {
 
                 <div className='GetAllClassesContainerFiltre__mini2'>
 
-                    <div className='GetAllClassesContainerFiltre__mini2--Ajout' onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div> 
+                    <div className='GetAllClassesContainerFiltre__mini2--Ajout'  onClick={ openWindowAddClasse }> <span>Ajouter une classe</span></div> 
 
                 </div> 
                 
@@ -303,8 +334,8 @@ const GetAllClasses = ( ) => {
                 <div className='GetAllClassesContainerValeur2__mini--valeur'>
                     
                   
-                { startIsOpen ? classes.map((element, index) => (  
-                  
+                { startIsOpen ? classes.map((element, index) => ( 
+                    
                   <div className='valeurs' key={`index-${element.nom}`}>
                           
                       <p className='nomEffectif'> { element.nom } </p>
@@ -315,13 +346,14 @@ const GetAllClasses = ( ) => {
                       <div className='actionValeurs'>
 
                           <div className='actionValeurs__element' >
-                              <i class="fa-solid fa-pen-to-square icons" title='Modifier la classe' ref={ classeIdRef } data-id={`${element.id}`} onClick={ openwindowUpdate  }></i>
+                              <i className="fa-solid fa-pen-to-square icons" title='Modifier la classe' ref={ classeIdRef } data-id= "idDonnee" onClick={ () => openwindowUpdate(element.id)  }></i>
                           </div>
+
                           <div className='actionValeurs__element'>
-                              <i class="fa-solid fa-x  icons"  title='Supprimer la classe' ref={ classeIdRef } data-id={ element.id } onClick={ openwindowDelete } ></i>
+                              <i className="fa-solid fa-x  icons"  title='Supprimer la classe' ref={ (element) => classeIdRefs.current.push(element) } data-id={element.id} id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
                           </div>
                           <div className='actionValeurs__element  icons'>
-                              <i class="fa-solid fa-circle-info" title='Afficher plus de détails' ref={ classeIdRef } data-id={`${element.id}`} ></i>
+                              <i className="fa-solid fa-circle-info" title='Afficher plus de détails' id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
                           </div>
                       </div>
                           
@@ -342,15 +374,22 @@ const GetAllClasses = ( ) => {
                         {
                             
                             valeurInputIsOpen && <SectionSearch classes = { classes }  valeurInput = { valeurInput }/>
+
                         }
+
+                       
                
                     </>  
                   
                 }
 
                 </div>
+
+                
+
             </div>
         </div>
+       
     );
 };
 

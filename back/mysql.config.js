@@ -31,7 +31,7 @@ DB.connect(function(err) {
     if(err){
       throw err
     }
-    console.log('------------connexion à la base tutoReactYoutube réussie----------');
+    console.log('------------connexion à la base lessurdoues réussie----------');
     //console.log(res);
   })
   

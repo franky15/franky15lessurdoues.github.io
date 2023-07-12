@@ -1,0 +1,221 @@
+.getOneClasseEleves{
+
+    position: relative;
+    width: 89%;
+    height: auto;
+    margin: auto;
+    border: solid 1px ;
+    padding-left: 20px;
+    //border: solid red;
+   z-index: 0;
+
+    .enseignant {
+
+        display: flex;
+        justify-content: end;
+        margin-right: 20px;
+       // border: solid;
+    }
+
+    &__btn1 {
+
+        width: 55%;
+        //border: solid red;
+
+        
+
+        .blocBtn{
+
+            display: flex;
+            justify-content: space-between;
+            //border: solid yellow;
+
+            &__btn1 {
+
+                width: 30%;
+                height: 50px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: #d9d9d9;
+                opacity: 0.7;
+                font-weight: bold;
+                border: solid #939292 1px;
+                //border: solid;
+
+                .btn__buttonDate {
+
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    background-color: #d9d9d9;
+                    border: solid #d9d9d9 0px;
+                }
+
+                .btn__donnee {
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    //border: solid;
+                }
+            }
+        }
+        
+    }
+
+    &__btn2 {
+
+        width: 50%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+       // border: solid;
+
+        &--effectif {
+
+            width: 30%;
+            font-weight: bold;
+           // border: solid red;
+        }
+
+        &--btn {
+
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+           // border: solid red;
+
+            .btnInput { 
+
+                width: 55%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                background-color: #d9d9d9;
+                opacity: 0.7;
+                font-weight: bold;
+                border: solid #939292 1px;
+
+                .inputSearch {
+
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    //border: solid;
+
+                    .loupe{
+
+                        width: 15%;
+                        display: flex;
+                        align-items: center;
+                        //border: solid;
+
+                        .fa-solid {
+
+                            font-size: 28px;
+                            
+                        }
+                    }
+
+                    input {
+
+                        width: 70%;
+                        background-color: #d9d9d9;
+                        border: solid 0px;
+                    }
+                }
+            }
+            .blocbtn2 {
+
+                width: 38%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                background-color: #d9d9d9;
+                opacity: 0.7;
+                font-weight: bold;
+                border: solid #939292 1px;
+            }
+
+        }
+    }
+
+    &__btn3 {
+
+      // border: solid yellow;
+        
+       margin-top: 30px;
+
+        &--titre {
+
+            width: 83%;
+            display: flex;
+            justify-content: space-between;
+           
+           // border: solid;
+
+        }
+        .nomPrenom{
+            width: 25%;
+           // border: solid;
+        }
+        .DateRedoublant{
+            width: 20%;
+            //border: solid;
+        }
+
+        &--bloc {
+
+            display: flex;
+            justify-content: space-between;
+            //border: solid red;
+
+            .btn3Option {
+
+                width: 83%;
+                display: flex;
+                justify-content: space-between;
+                
+               // border: solid yellow;
+               
+            }
+            
+            .btn3Icon{
+
+                width: 15%;
+                display: flex;
+                justify-content: space-between;
+                margin-right: 20px;
+
+                //border: solid yellow;
+
+                .fa-solid {
+
+                    cursor: pointer;
+                }
+
+                .btn3IconChoice {
+
+                    .arrow{
+
+                        //border: solid red;
+                    }
+                    display: flex;
+                    //justify-content: space-around;
+                    align-items: center;
+
+                   // border: solid;
+                    
+                }
+            }
+        }
+    }
+}
+

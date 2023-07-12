@@ -1,5 +1,5 @@
 import React, {  useState } from 'react'; 
-import { classesServices } from '../../_services/Classes.services';
+import { classesServices } from '@/_services/Classes.services';
 import { useNavigate } from 'react-router-dom';
 //import SectionAdd from './SectionAdd';
 //import SectionUpdate from './SectionUpdate';
@@ -80,7 +80,7 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
                 </p>
                 <div className='AddClassContainer__option--picture'>
                   
-                    <i class="fa-thin fa-x" onClick={ display }></i>
+                    <i className="fa-thin fa-x" onClick={ display }></i>
                    
                 </div>
             </div>

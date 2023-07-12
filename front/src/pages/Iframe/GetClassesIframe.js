@@ -52,7 +52,7 @@ const GetClassesIframe = () => {
     return (
         <div className='iframeClassesContainer'>
             
-            <p className='iframeClassesContainer__title'>Liste des classes</p>
+             <p className='iframeClassesContainer__title'>Liste des classes</p>
 
             <div className='sectionIframe'>
                 <p className='sectionIframe__section'  >Section Francophone</p>
@@ -60,11 +60,16 @@ const GetClassesIframe = () => {
                 
                 <ul className='classes'>
                     {
-                        classeFrancophone.map((element, index) => <li className='classes__classe' key={index-`${element.nom}`}>
-                            <a  href={`/admin/classes/getone/${element.id}`} className='linkClasse' onClick={ () => redirectionClasse(element.id) } >
-                                <span  >{ (element.nom).toUpperCase() }</span>
-                            </a>
-                        </li>)
+                        classeFrancophone.map((element, index) => { 
+
+                            const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
+                         return   <li className='classes__classe' key={index-`${element.nom}`}>
+                            <a  style= {{ backgroundColor }} href={`/admin/eleves/getallclasseseleve/${element.id}`} className='linkClasse' onClick={ () => redirectionClasse(element.id) } >
+                                    <span  >{ (element.nom).toUpperCase() }</span>
+                                </a>
+                            </li>
+                        
+                        } )
                     }
                 </ul>
                 
@@ -74,11 +79,16 @@ const GetClassesIframe = () => {
                 <p className='sectionIframe__section'> Section Anglophone</p>
                 <ul className='classes'>
                     {
-                        classeAnglophone.map((element, index) => <li className='classes__classe' key={index-`${element.nom}`}>
-                           <a  href={`/admin/classes/getone/${element.id}`} className='linkClasse' onClick={ () => redirectionClasse(element.id) } >
-                                <span  >{ (element.nom).toUpperCase() }</span>
-                            </a>
-                        </li>)
+                        classeAnglophone.map((element, index) =>{ 
+
+                            const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
+                         return   <li className='classes__classe' key={index-`${element.nom}`}>
+                                    <a  style= {{ backgroundColor }} href={`/admin/eleves/getallclasseseleve/${element.id}`} className='linkClasse' onClick={ () => redirectionClasse(element.id) } >
+                                            <span  >{ (element.nom).toUpperCase() }</span>
+                                    </a>
+                            </li>
+                        
+                        } )
                     }
                 </ul>
                 

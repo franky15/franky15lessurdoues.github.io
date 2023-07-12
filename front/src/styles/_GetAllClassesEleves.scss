@@ -1,0 +1,77 @@
+.GetAllClassesEleves{
+
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    //border: solid 2px;
+
+    &__filter {
+
+        width: 30%; //25%
+        height: 40px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eaeaea;
+        border: solid 1px #9e9d9d;
+        border-radius: 10px;
+
+        &--input {
+
+            width: 100%;
+            //height: 100%;
+            display: flex;
+            align-items: center;
+
+            .loupe {
+
+                display: flex;
+                justify-content: center;
+                width: 15%;
+                //border: solid red;
+            }
+            input{
+
+                width: 80%;
+                height: 30px;
+                background-color: #eaeaea;
+                //border-radius: 10px;
+                border: solid 1px #eaeaea;
+            }
+        }
+        .fa-solid {
+            font-size: 20px; //28px
+        }
+    }
+
+    &__section {
+        
+        height: 200px;
+        overflow: auto;
+       //border: solid red;
+        .sectionTitre{
+
+            color: #517633;
+            font-weight: bold;
+
+        }
+
+        &--value {
+
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            border: solid 1px;
+            cursor: pointer;
+        }
+    }
+
+    &__separateur {
+
+        height: 1px;
+        background-color: #f15844;
+        border: solid #f15844;
+    }
+}

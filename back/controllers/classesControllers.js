@@ -1,7 +1,7 @@
 //import des modules nécessaires
 const DB = require("../mysql.config")
 const { response } = require("../app");
- 
+  
 //POST creation du personnel
 exports.createClasse = (req, res, next) => { 
 
@@ -26,6 +26,7 @@ exports.createClasse = (req, res, next) => {
     console.log(req.body)//////
 
 //////////////////////////////////////////////
+//converstion de l'id de la section en chiffre
     let sectionAnglophone = "anglophone"
     let sectionFrancophone = "francophone"
     if(sectionNumber.toLowerCase() === sectionAnglophone.toLowerCase()) {
@@ -34,10 +35,10 @@ exports.createClasse = (req, res, next) => {
 
     }else if( sectionNumber.toLowerCase() === sectionFrancophone.toLowerCase() ) {
 
-        sectionNumber = 2
+        sectionNumber = 2    
 
     } 
-   
+    
     console.log("****** la valeur sectionNumber : ****** " + sectionNumber )
 //////////////////////////////////////////////
 
@@ -185,12 +186,17 @@ exports.updateClasse = (req, res, next) =>{
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
     //récupération des données de la requete
-    const { nom, enseignant, sectionNumber } = req.body;
+    let { id, nom, enseignant, section_id } = req.body; //sectionNumber
+
+    console.log(req.body)
+    console.log(section_id )
 
     //vérification des donnée de la requete
-    if( !nom || !enseignant || !sectionNumber ) {
+    if( !nom || !enseignant || !section_id  ) {
         res.status(400).json({ message: "veillez remplir toutes les données du formulaire "})
     }
+
+   // console.log(sectionNumber)
 
     let elementId = parseInt(req.params.id) //convertion de la chaine en integer car front envoie chaine  et retourne false
 
@@ -198,23 +204,28 @@ exports.updateClasse = (req, res, next) =>{
 
     let sectionAnglophone = "anglophone"
     let sectionFrancophone = "francophone"
-    if(sectionNumber.toLowerCase() === sectionAnglophone.toLowerCase()) {
 
-        sectionNumber = 1
+    console.log("**** avant le if *****" + section_id )///////
 
-    }else if( sectionNumber.toLowerCase() === sectionFrancophone.toLowerCase() ) {
+    if(section_id.toLowerCase() === sectionAnglophone.toLowerCase()) {
 
-        sectionNumber = 2
+        section_id  = 1  
 
+        console.log("****bienvenue au if anglophone*****" + section_id )//////
+
+    }else if( section_id.toLowerCase() === sectionFrancophone.toLowerCase() ) {
+
+        section_id  = 2
+        console.log("****bienvenue au if francophone*****" + section_id )/////
     } 
    
-    console.log("****** la valeur sectionNumber : ****** " + sectionNumber )
+    console.log("****** la valeur sectionNumber : ****** " + section_id )
     
-    //////////////////////////////////////////////
+    ////////////////////////////////////////////// 
     
     //récupération des classes
-    const  sqlSelectAllClasses = `SELECT * FROM classes JOIN section ON classes.section_id = section.id;`
-    
+   // const  sqlSelectAllClasses = `SELECT * FROM classes JOIN section ON classes.section_id = section.id;`
+    const  sqlSelectAllClasses = `SELECT * FROM classes ;`
     DB.query(sqlSelectAllClasses, (err, response) => {
         
         console.log(" ma response est : " )///// 
@@ -222,54 +233,32 @@ exports.updateClasse = (req, res, next) =>{
 
         if(err){
             res.status(404).json({err})
-            console.log("***erreur de sqlSelectAllClasses*** " +  err)  
+            console.log("***erreur de sqlSelectAllClasses*** " +  err)   
         }else{
-            const classe = response.find( element => element.id == elementId) //attention
+            const classe = response.find( element => element.id === id) //attention //elementId
            
             console.log("testtttttttttt")
             console.log(classe)
 
-            if(!classe){
+            if(!classe){ 
                 res.status(404).json({message: "classe non trouvée"}) 
                 console.log("***classe non trouvée*** " )
             }else{
 
-                //requete de récupération des sections
-                const sqlSelectAllSections ="SELECT * FROM section"
-
-                DB.query( sqlSelectAllSections, (err, response1) => {  
-
+                
+                 //requete de mis à jour du cocktail
+                //const sqlUpdateClasse = `UPDATE classes SET nom = "${nom}", enseignant = "${enseignant}", section_id = ${parseInt(sectionNumber)}  WHERE id = ${elementId} ;` 
+                const sqlUpdateClasse = `UPDATE classes SET nom = "${nom}", enseignant = "${enseignant}", section_id = ${section_id}  WHERE id = ${id} ;`                    
+                
+                DB.query(sqlUpdateClasse, (err, response2) => {
                     if(err){
                         res.status(404).json({err})
-                        console.log("***erreur de  sqlSelectAllSections*** " +  err)  
-                    }else{
-
-                        //comparaison des section
-                        const section = response1.find( element2 => element2.id === parseInt(sectionNumber) )
-                            
-                        console.log("ma section est ")
-                        console.log(section)
-                        
-                        if(!section){
-                            res.status(404).json({message: "veillez entrer correctement la section"})
-                            console.log("***veillez entrer correctement la section*** ")
-                        }else{
-                            //requete de mis à jour du cocktail
-                            const sqlUpdateClasse = `UPDATE classes SET nom = "${nom}", enseignant = "${enseignant}", section_id = ${parseInt(sectionNumber)}  WHERE id = ${elementId} ;` 
-                                                
-                            DB.query(sqlUpdateClasse, (err, response2) => {
-                                if(err){
-                                    res.status(404).json({err})
-                                    console.log("***erreur de sqlUpdateClasse*** " +  err)  
-                                }
-                            // console.log(response1)
-                                res.status(200).json({ message: "classe mise à jour avec succès"})
-                            })
-                        }
-
+                        console.log("***erreur de sqlUpdateClasse*** " +  err)  
                     }
-                })
-               
+                // console.log(response1)
+                    res.status(200).json({ message: "classe mise à jour avec succès"})
+                    console.log(`classe ${nom} a été mise à jour avec succès`)
+                })  
                 
             }
         }
@@ -277,7 +266,7 @@ exports.updateClasse = (req, res, next) =>{
 }
 
 //DELETE supression de la classe
-exports.deleteClasse = (req, res, next) => { 
+exports.deleteClasse = (req, res, next) => {   
     console.log("***bienvenue dans deleteClasse*** " )
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
@@ -290,13 +279,15 @@ exports.deleteClasse = (req, res, next) => {
     const  sqlSelectAllClasses = `SELECT * FROM classes;` //JOIN section ON classes.section_id = section.id;`
    //requete de supression
    const sqlDeleteClasse = `DELETE FROM classes WHERE  id = ${elementId};`
+   console.log(sqlDeleteClasse)
 
-    DB.query(sqlSelectAllClasses, (err, response) => {
+    DB.query(sqlSelectAllClasses, (err, response) => {  
         if(err){
             res.status(404).json({err})
             console.log("***erreur de sqlSelectAllClasses*** " +  err)  
         }else{
             const classe = response.find( element => element.id == elementId)
+            console.log(classe)
 
             if(!classe){
                 res.status(404).json({message: "classe non trouvée"})
@@ -304,13 +295,13 @@ exports.deleteClasse = (req, res, next) => {
             }else{
                 DB.query(sqlDeleteClasse, (err, response1) => {
                     if(err){
-                        res.status(404).json({err})
+                        res.status(404).json({err}) 
                         console.log("***erreur de sqlDeleteClasse*** " +  err)  
                     }
                     //console.log(response1)
                     res.status(200).json({ message: "Classe supprimée avec succès"})
                 })
-                
+                 
             }
         }
     })

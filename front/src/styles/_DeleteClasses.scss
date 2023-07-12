@@ -1,14 +1,23 @@
+
+
 .deleteClasses {
 
     position: absolute;
-    width: 50%;
+    width: 90%;
+   // width: 50%;
     height: 150px;
+   // height: 150px;
     left: 0;
     right: 0;
+    top: 50%;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
     border: solid  1px;
+    //border-radius: 10px;
+    z-index: 1;
+
+    
 
     &__titleDelete {
 
@@ -30,6 +39,9 @@
             width: 25%;
             font-weight: bold;
             color: white;
+
+            //border-radius: 10px;
+
             &:hover {
                 cursor: pointer;
             }

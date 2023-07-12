@@ -1,8 +1,83 @@
 import React, {  useState, useEffect} from 'react';
+import SectionUpdate from './SectionUpdate';
+import DeleteClasses from './DeleteClasses';
 //import { classesServices } from '../../../_services/Classes.services';
 
 
 const SectionFrancophone = ({classes}) => {
+
+
+    console.log("**** bienvenue au composant sectionFrancophone ****")
+      /////////////////////////////////////////////////////
+    
+
+   
+   
+
+    
+
+     /////////////////////////////////////////////////////
+    
+    //gestion du state de toutes les classes
+    //let [ classes, setclasses ] = useState([])
+
+    //gestion du state des quantité de classes Anglophone
+    let [ classesFilterAnglo, setClassesFilterAnglo ] = useState([])
+
+    //gestion du state des  quantité de classes Francophone ////////////////////////////
+    let [ classesFilterFranco, setClassesFilterFranco ] = useState([])
+        
+
+    //gestion de l'affichage des valeurs////////////////////////////
+    let [ startIsOpen, setStartIsOpen ] = useState(true)
+
+    let lockGet = () => setStartIsOpen(false); 
+    let openGet = () => setStartIsOpen(true); 
+
+    //ouverture Anglophone////////////////////////////
+    let [ sectionAnglophoneOpen, setsectionAnglophoneOpen ] = useState(false)
+
+    let openAn = () => setsectionAnglophoneOpen(true);
+    let lockAn = () => setsectionAnglophoneOpen(false);
+
+     //ouverture Francophone////////////////////////////
+    let [ sectionFrancophoneOpen, setsectionFrancophoneOpen ] = useState(false)
+
+    let openFr = () => setsectionFrancophoneOpen(true);
+    let lockFr = () => setsectionFrancophoneOpen(false);
+
+    //gestion de la valeur de l'input ////////////////////////////
+    let [ valeurInput, setValeurInput ] = useState("")
+
+    //gestion de l'affichage des valeurs////////////////////////////
+    let [ valeurInputIsOpen, setValeurInputIsOpen ] = useState(true)
+
+    let lockInput = () => setValeurInputIsOpen(false); 
+    let openInput = () => setValeurInputIsOpen(true); 
+
+    //gestion de l'affichage de la feêtre ajouter une classe
+    let [ windowAddClasse, setWindowAddClasse ] = useState(false) //false
+
+    let lockWindowAddClasse = () => setWindowAddClasse(false); 
+    let openWindowAddClasse = () => setWindowAddClasse(true); 
+
+    //gestion de l'affichage de la feêtre ajouter une classe
+    let [ windowUpdateClasse, setWindowUpdateClasse ] = useState(false) //false
+
+    let lockwindowUpdateClasse = () => setWindowUpdateClasse(false); 
+    let openwindowUpdateClasse = () => setWindowUpdateClasse(true); 
+
+    //gestion de la suppréssion
+    let [ windowDeleteClasse, setWindowDeleteClasse ] = useState(false)
+
+    let lockwindowDeleteClasse = () => setWindowDeleteClasse(false); 
+    let openwindowDeleteClasse = () => setWindowDeleteClasse(true); 
+
+    //gestion du dataset
+    let [ classeId, setClasseId] = useState("")
+
+    //gestion de la désactivation des élément
+    let [ disabled, setDisabled ] = useState(false)
 
     const listeclasses = classes;
 
@@ -33,12 +108,95 @@ const SectionFrancophone = ({classes}) => {
         
     }
 
+
+    const btnSectionAn = (classes) => {
+
+        lockFr()
+         lockGet()
+         openAn()
+         setDisabled(true)
+         
+        
+     }
+ 
+     const btnSectionFr = (classes) => {
+ 
+        lockAn()
+        lockGet()
+        lockInput()
+        openFr()
+        setDisabled(true)
+        
+       
+     }
+     
+     //ouverture de toutes les classes
+     const btnAllClasses = () => {
+ 
+         lockAn()
+         lockFr()
+         lockInput()
+         openGet()
+         setDisabled(true)
+ 
+     }
+    
+     const openwindowDelete = (id) => {
+ 
+         lockwindowUpdateClasse()
+ 
+         setClasseId(id)
+         openwindowDeleteClasse()
+         
+         
+         console.log("bienvenue openwindowDelete")
+        // console.log("idClasse current est : " + idClasse)
+     }
+    
+ 
+     const openwindowUpdate = (id) => {
+         
+         setClasseId(id)
+         openwindowUpdateClasse()
+     }
+ 
+     /*
+     //////////////////////////////////////////////////
+
+     let [ sectionValeur, setSectionValeur ] = useState(true)
+     let [ tableClasses, setTableClasses ] = useState([])
+     let tableSection
+
+     if(sectionValeur ){
+
+        console.log("sectionValeur est  pour l'anglophone: " + sectionValeur)
+
+        tableSection= listeclasses.filter( element => element.section_id === 2)
+        setTableClasses(tableSection)
+     
+    }else if(sectionValeur !== 1){
+        
+        setSectionValeur(false)
+
+        tableSection = listeclasses.filter( element => element.section_id === 2)
+        setTableClasses(tableSection)
+
+        console.log("sectionValeur est  pour Francophone: " + sectionValeur)
+     }
+
+     console.log("sectionValeur est  pour Francophone: " + sectionValeur)
+     ///////////////////////////////////////////////////
+ */
+
     return (
        
         <div>
-            {
+                { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
+                lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse } idclasse = {classeId} /> }
                
-                sectionFilterFrancophone.map((element, index) => (  
+                { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
+                
+                {sectionFilterFrancophone.map((element, index) => (  
                                     
                 <div className='valeurs' key={`index-${element.nom}`}>
                         
@@ -49,21 +207,57 @@ const SectionFrancophone = ({classes}) => {
                                 
                     <div className='actionValeurs'>
 
-                        <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-pen-to-square"></i>
+                        <div className='actionValeurs__element' >
+                            <i className="fa-solid fa-pen-to-square icons" title='Modifier la classe'  data-id= "idDonnee" onClick={ () => openwindowUpdate(element.id)  }></i>
                         </div>
+
                         <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-x"></i>
+                            <i className="fa-solid fa-x  icons"  title='Supprimer la classe'  data-id={element.id} id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
                         </div>
-                        <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-circle-info"></i>
+                        <div className='actionValeurs__element  icons'>
+                            <i className="fa-solid fa-circle-info" title='Afficher plus de détails' id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
                         </div>
                     </div>
                         
-                </div> ) ) 
-            }
+                </div> ) ) }
+            
         </div>
    );
 };
 
 export default SectionFrancophone;
+
+/*
+ <div>
+                { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
+                lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse } idclasse = {classeId} /> }
+               
+                { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
+                
+                {sectionFilterFrancophone.map((element, index) => (  
+                                    
+                <div className='valeurs' key={`index-${element.nom}`}>
+                        
+                    <p className='nomEffectif'> { element.nom } </p>
+                    <p className='nomEffectif'> { element.effectif } </p>
+                    <p className='enseignant'>{element.enseignant } </p>
+                    <p className='section'> {  section(element.section_id) } </p>
+                                
+                    <div className='actionValeurs'>
+
+                        <div className='actionValeurs__element' >
+                            <i className="fa-solid fa-pen-to-square icons" title='Modifier la classe'  data-id= "idDonnee" onClick={ () => openwindowUpdate(element.id)  }></i>
+                        </div>
+
+                        <div className='actionValeurs__element'>
+                            <i className="fa-solid fa-x  icons"  title='Supprimer la classe'  data-id={element.id} id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
+                        </div>
+                        <div className='actionValeurs__element  icons'>
+                            <i className="fa-solid fa-circle-info" title='Afficher plus de détails' id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
+                        </div>
+                    </div>
+                        
+                </div> ) ) }
+            
+        </div>
+*/

@@ -3,6 +3,7 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
+    margin-top: 30px;
     //border: solid;
 
     &__utilisateur{
@@ -22,9 +23,10 @@
     }
 
     .dashboardContainer__form{
-        width: 40%;
+        width: 30%; //40%
         margin: auto;
-        //border: solid red;
+        
+       border: solid 1px; /////////////
     }
     .dashboardContainer__gestion {
 
@@ -33,20 +35,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-       // border: solid;
+       //border: solid;
        
        .dashboardContainer__gestion--titel {
         display: block;
         width: 100%;
-        height: 30px;
+        height: 45px;
         background-color :#517633;
-        border-radius: 5px;
+        border-radius: 10px; //5px
         font-weight: bolder;
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         text-decoration: none;
+        margin-top: -37px;
         //border: solid red;
     }
         

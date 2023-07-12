@@ -7,6 +7,8 @@ const SectionSearch = ({classes, valeurInput}) => {
 
     const listeclasses = classes;
     let input = valeurInput;
+    console.log("valeurInput")
+    console.log(valeurInput)
 
     //gestion du state des section
     let [ sectionInput, setsectionInput ] = useState([])
@@ -53,13 +55,13 @@ const SectionSearch = ({classes, valeurInput}) => {
                     <div className='actionValeurs'>
 
                         <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i className="fa-solid fa-pen-to-square"></i>
                         </div>
                         <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-x"></i>
+                            <i className="fa-solid fa-x"></i>
                         </div>
                         <div className='actionValeurs__element'>
-                            <i class="fa-solid fa-circle-info"></i>
+                            <i className="fa-solid fa-circle-info"></i>
                         </div>
                     </div>
                         

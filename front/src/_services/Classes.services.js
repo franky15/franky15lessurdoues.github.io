@@ -9,8 +9,8 @@ let getOneClasse = (id) =>{
     return Axios.get("/classesRoutes/" +id)  //routes du back
 }
 
-let updateClasse = (classe) => {
-    return Axios.put("/usersRoutes/" + classe[0].id,  classe)  //on envoie user 
+let updateClasse = (classeObject) => {
+    return Axios.put("/classesRoutes/" +classeObject.id,  classeObject)  //on envoie user 
 }
 
 let deleteClasse = (id) => {

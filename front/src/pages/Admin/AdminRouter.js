@@ -4,30 +4,22 @@ import { Route, Routes } from 'react-router-dom';
 import { GetAllPersonnels, GetOnePersonnels, AddPersonnels, UpdatePersonnels } from "@/pages/Admin/personnels"
 import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisateurs } from "@/pages/Admin/utilisateurs"
 import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "@/pages/Admin/classes"
+import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "@/components/eleves"
 
 import { Dashboard } from "@/pages/Admin"
-
-/*
-import { GetAllPersonnels, GetOnePersonnels, AddPersonnels, UpdatePersonnels } from "../Admin/personnels"
-import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisateurs } from "../Admin/utilisateurs"
-import { Dashboard, AdminLayout } from "../Admin"
-*/
-
-
-//import Error from '../../_utils/Error';
 
 import Error from '@/_utils/Error';
 
 const AdminRouter = () => {
+
     return (
+
         <Routes>
             
             
             
                 <Route index element={ <Dashboard/> }/>
                 
-                
-
                 <Route path='users'>
                     <Route index element={ <GetAllUtilisateurs/> }/>
                     <Route path='getall' element={ <GetAllUtilisateurs/> }/>
@@ -47,24 +39,41 @@ const AdminRouter = () => {
                 </Route>
 
                 <Route path='classes'>
-                    <Route index element={ <Dashboard/> }/>
-
-                    <Route path='dashboard' element={ <Dashboard/> }/>
-
-                    <Route path='getall' element={ <GetAllClasses/> }/>
-                    <Route path='getone/:id' element={ <GetOneClasse/> }/>
-                    <Route path='add' element={ <AddClasse/> }/>
-                    <Route path='update/:id' element={ <UpadeteClasse/> }/>
                    
+                        <Route index element={ <Dashboard/> }/>
 
-                    <Route path='*' element = { <Error/> }/> 
+                        <Route path='dashboard' element={ <Dashboard/> }/>
+                        <Route path='getall' element={ <GetAllClasses/> }/>
+                        <Route path='getone/:id' element={ <GetOneClasse/> }/>
+                        <Route path='add' element={ <AddClasse/> }/>
+                        <Route path='update/:id' element={ <UpadeteClasse/> }/>
+                    
+                        <Route path='*' element = { <Error/> }/> 
+                   
                 </Route>
+
+                <Route path='eleves'>
+                   
+                   <Route index element={ <GetAllEleves/> }/>
+
+                   <Route path='getall' element={ <GetAllEleves/> }/> 
+                   <Route path='getone/:id' element={ <GetOneEleve/> }/>
+                   <Route path='add' element={ <CreateEleve/> }/>
+                   <Route path='update/:id' element={ <UpdateEleve/> }/>
+
+                   <Route path='getallclasseseleve' element={ <GetAllClassesEleves/> }/> 
+                   <Route path='getallclasseseleve/:id' element={ <GetOneClasseEleves/> }/> 
+               
+                   <Route path='*' element = { <Error/> }/> 
+              
+           </Route>
 
                 <Route path='*' element = { <Error/> }/> 
 
            
 
         </Routes>
+  
     );
 };
 

@@ -1,0 +1,244 @@
+.createElevesContainer {
+
+    width: 60%;
+    //height: 400px;
+    margin: auto;
+    border: solid 2px;
+    background-color: #f9f9f9;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+
+    .titreTiming {
+        //display: none;
+        height: 30px;
+        background-color: #517633;
+        color: white;
+        position: absolute;
+        top: -110px; //-247px;
+        right: 0; //900
+        font-weight: bold;
+        z-index: 1;
+        //border: solid black;
+    }
+}
+
+
+.createEleves{
+
+    width: 96%;
+    margin: auto;
+    
+    &__entete{
+
+       // border: solid red;
+        .ajout{
+
+            font-weight: bold;
+        }
+        
+    }
+    
+
+}
+
+.createEleves__formulaire{
+
+   // border: solid blue;
+
+    .formulaireRadioTitre{
+
+        font-weight: bold;
+        margin-top: 30px;
+        //border: solid;
+    }
+
+    .formulaireRadio__option{
+
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        
+       //border: solid;
+        
+        
+    }
+
+    .formulaireInputDecouverte{
+
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+       //border: solid yellow;
+
+        #decouverteEcole{
+
+        height: 100px;
+
+       }
+    }
+    .formulaireInputDecouverteDate{
+
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+       // border: solid;
+
+       #dateArrivee {
+
+        height: 30px;
+        width: 20%;
+
+       }
+    }
+
+    .formulaireInputNomPrenom{
+
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+       //border: solid red;
+
+       
+
+        &__nomPrenom{
+
+            width: 49%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            
+           // border: solid;
+
+           .nomPrenom{
+
+            height: 30px;
+            
+           }
+        }
+    }
+
+    .formulaireDateSectionClasse{
+
+       // width: 90%;
+        display: flex;
+        justify-content: space-between;
+       // border: solid;
+
+        &__element {
+
+            width: 19%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+           //border: solid red;
+
+           .dateSectionClasse{
+
+            height: 30px;
+           }
+
+           .dateSectionClasselist{
+            height: 34px;
+           }
+           
+           .DatemontantPaye {
+
+            height: 28px;
+           
+           }
+
+         ::placeholder{
+
+            color: black;
+            text-align: center;
+        }
+
+         
+
+           
+        }
+    }
+
+    .formulaireReprésentants{
+
+        &__titre{
+
+            font-weight: bold;
+        }
+       // border: solid;
+
+        .formulaireDateSectionClasseContainer{
+
+            
+            display: flex;
+            justify-content: space-between;
+           // border: solid red;
+
+           .parent{
+
+            height: 30px;
+           }
+
+            &__parent {
+
+                width: 24%;
+                display: flex;
+                flex-direction: column;
+               // border: solid;
+
+            }
+
+        }
+
+        
+    }
+    .formulaireConfirm{
+        
+        display: flex;
+        justify-content: space-between;
+       // border: solid;
+
+        &__container {
+
+            width: 70%;
+           // border: solid red;
+        }
+        &__btn {
+
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            //border: solid;
+
+            button {
+                width: 40%;
+                height: 30px;
+                //border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                font-weight: bold;
+                
+            }
+            button:hover{
+                cursor: pointer;
+            }
+            
+            .colorValid{
+
+                background-color: #517633;
+            }
+            .colorCancel{
+
+                background-color: #808080;
+            }
+        }
+    }
+}
+

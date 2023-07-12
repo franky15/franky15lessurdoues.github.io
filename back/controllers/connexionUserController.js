@@ -79,6 +79,13 @@ exports.login =  (req, res, next) => {
     //requete de récupération des utilisateurs existe dans la base de données
     const sqlSelectUser = "SELECT * FROM utilisateurs"
 
+    /////////////////////////////////////
+
+    //requete de récupération des utilisateurs existe dans la base de données
+    const sqlSelectAllEleves = "SELECT id FROM eleves"
+
+    /////////////////////////////////////
+
     DB.query(sqlSelectUser, (err, response) => {
         if(err){
             res.status(404).json({err})
