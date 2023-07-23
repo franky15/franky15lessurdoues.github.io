@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react'; 
+import React, { useEffect, useState, useRef, useContext} from 'react'; 
 import { classesServices } from '../../../_services/Classes.services';
 import SectionAnglophone from '../../../components/classes/SectionAnglophone';
 import SectionFrancophone from '../../../components/classes/SectionFrancophone';
@@ -6,18 +6,25 @@ import SectionSearch from '../../../components/classes/SectionSearch';
 import AddClasses from '../../../components/classes/AddClasses';
 import SectionUpdate from '../../../components/classes/SectionUpdate'; 
 import DeleteClasses from '../../../components/classes/DeleteClasses';
+import { AddEleveContext } from '../../../_utils/ContextAddEleve';
 
 
 
 const GetAllClasses = () => {
 
+    let [ eleveValue, seteleveValue ] = useState(" ")
     /////////////////////////////////////////////////////
-    
+    let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
 
-   
-   
+   console.log("*****listeElevesContext dans le composant getAll classes***")
+   console.log(listeElevesContext)
 
-    
+   console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
+   console.log(listeElevesContext)
+
+    console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
+    console.log(listeClassesContext)
+
 
      /////////////////////////////////////////////////////
     
@@ -242,6 +249,37 @@ const GetAllClasses = () => {
     const anglophoneRef = useRef(null)
     const francophoneRef = useRef(null)
 
+    /////////////////////////////////:
+    //copie du tableau par élément complexe
+   let ElevesArray = [...listeElevesContext]
+
+   ////////////////////////////////////////////
+   
+   
+   useEffect( () => {
+
+        const idClasse = document.querySelector(".effectifId")
+        console.log("******* idClasse")
+       // console.log(idClasse.id)
+      /* let ElevesArray = [...listeElevesContext]
+      //let eleve = ElevesArray.find(element => element.id === idClasse)
+      if(eleve){
+
+      // console.log("******** eleve")
+      // console.log(eleve.enseignant)
+      seteleveValue(eleve.enseignant)
+      }*/
+
+
+   }, [listeElevesContext])
+      
+   console.log("eleveValue") 
+   console.log(eleveValue) 
+      
+    
+   let tableEffectifClasse = []
+
+   //////////////////////////////////
     
   
     return (
@@ -323,7 +361,7 @@ const GetAllClasses = () => {
                 <div className='GetAllClassesContainerValeur__mini--valeur'>
 
                     <p className='nomEffectif'>Nom de la classe</p>
-                    <p className='nomEffectif'>Effectif</p>
+                    <p className='nomEffectif'>Effectifs</p>
                     <p className='enseignant'>Enseignant</p>
                     <p className='section'>Section</p>
 
@@ -336,12 +374,14 @@ const GetAllClasses = () => {
                   
                 { startIsOpen ? classes.map((element, index) => ( 
                     
-                  <div className='valeurs' key={`index-${element.nom}`}>
+                  <div className='valeurs effectifClass' key={`index-${element.nom}`}>
                           
-                      <p className='nomEffectif'> { element.nom } </p>
-                      <p className='nomEffectif'> { element.effectif } </p>
-                      <p className='enseignant'>{element.enseignant } </p>
-                      <p className='section'> {  section(element.section_id) } </p>
+                      <p className='nomEffectif'  > { element.nom } </p>
+
+                      <p className='nomEffectif effectifId' id={`${ element.id}`} > { element.effectif } </p>
+                      
+                      <p className='enseignant'   >{element.enseignant } </p>
+                      <p className='section'  > {  section(element.section_id) } </p>
                                   
                       <div className='actionValeurs'>
 
@@ -396,4 +436,17 @@ const GetAllClasses = () => {
 export default GetAllClasses;
 
 
-
+/*
+ <>
+    { 
+    
+    tableEffectifClasse.push( listeElevesContext.find( eleve => eleve.classes_id === element.id ) ) &&
+        
+        
+        <>
+            <p className='nomEffectif effectifId' id={`${ element.id}`} > { tableEffectifClasse.length } </p>
+        </>
+    
+    }
+</>
+*/

@@ -76,7 +76,7 @@ const HeaderAdmin = () => {
                         <div className='menuContainer2MiniContainer__bar'></div>
                     </div>
                     <div className='menuContainer2MiniContainer'>
-                        <p className=''><Link to="" className='linkAdmin2'>Personnels</Link></p>
+                        <p className=''><Link to="http://localhost:3001/admin/personnels" className='linkAdmin2'>Personnels</Link></p>
                         <div className='menuContainer2MiniContainer__bar'></div>
                     </div>
                     <div className='menuContainer2MiniContainer'>

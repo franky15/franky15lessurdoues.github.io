@@ -100,6 +100,80 @@ exports.createClasse = (req, res, next) => {
                                     res.status(404).json({err})
                                     console.log("***erreur de sql sqlCreateClasse*** " +  err)  
                                 }else{
+
+                                    /////////////////////////////
+
+                                    //requete récupérant tous le personnel 
+                                    const sqlSelectAllPerso ="SELECT * FROM personnels;"
+                                    let idPersonnel
+                                    let nomEnseignant
+                                    let idClasseCurrent
+
+                                    //requete récupérant toutes les classes 
+                                    const sqlSelectClasses = "SELECT * FROM classes" 
+
+                                    
+
+                                    DB.query( sqlSelectClasses, ( errClasses, resClasses) => {
+
+                                        if(errClasses) {
+
+                                            res.status(404).json({errClasses})
+                                            console.log("***erreur deerrClasses*** " +  errClasses) 
+                                        
+                                        }else{
+
+                                            let classeCurrent = resClasses.find( element1 => element1.nom = nom )
+
+                                            idClasseCurrent = classeCurrent.id
+
+                                            DB.query( sqlSelectAllPerso, ( errAllPerso, resAllPerso) => {
+
+
+                                                if(errAllPerso) {
+        
+                                                    res.status(404).json({errAllPerso})
+                                                    console.log("***erreur de sql*** " +  errAllPerso) 
+
+                                                }else{
+        
+                                                   let  PersonnelCurrent = resAllPerso.find( element2 => element2.classes_id =  classeCurrent.id )
+        
+                                                    idPersonnel = PersonnelCurrent.id
+                                                    nomEnseignant = `${PersonnelCurrent.nom}`
+        
+                                                }
+                                            })
+
+                                        }
+
+                                    })
+
+                                     //requete de mis à jour de la classe
+                                     const sqlUpdatePersonnel = `UPDATE personnels SET  classes_id = ${idClasseCurrent }  WHERE enseignant = "${nomEnseignant}" ;`                    
+                                    
+                                     //mise à jour du personnel enseignant
+                                    DB.query( sqlUpdatePersonnel, ( errUpdatePerso, resUpdatePerso) => {
+
+
+                                        if(errUpdatePerso) {
+
+                                            res.status(404).json({errUpdatePerso})
+                                            console.log("***erreur de errUpdatePerso*** " +  errUpdatePerso) 
+                                        }else{
+
+                                           
+                                            console.log("****** le personnel enseignant a été mis ajour avec succès")
+                                            console.log(resUpdatePerso)
+                                        }
+                                    })
+                                   
+
+
+
+
+                                    ////////////////////////////
+
                                     res.status(200).json(response2)
                                     console.log("***section crée avec succès*** ")
                                 } 
@@ -246,7 +320,7 @@ exports.updateClasse = (req, res, next) =>{
             }else{
 
                 
-                 //requete de mis à jour du cocktail
+                 //requete de mis à jour de la classe
                 //const sqlUpdateClasse = `UPDATE classes SET nom = "${nom}", enseignant = "${enseignant}", section_id = ${parseInt(sectionNumber)}  WHERE id = ${elementId} ;` 
                 const sqlUpdateClasse = `UPDATE classes SET nom = "${nom}", enseignant = "${enseignant}", section_id = ${section_id}  WHERE id = ${id} ;`                    
                 

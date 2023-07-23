@@ -97,7 +97,7 @@ exports.createEleve = (req, res, next) => {
 
         let classeId 
 
-        if(err){
+        if(err){  
             res.status(404).json({err})
             console.log("***erreur de sql sqlSelectAllClasses*** " +  err)  
         }else{
@@ -123,6 +123,7 @@ exports.createEleve = (req, res, next) => {
 
         //requete récupérant toutes les élèves
         const sqlSelectAllEleves = "SELECT * FROM eleves" 
+        
 
         DB.query( sqlSelectAllEleves, (err, response) => {
 
@@ -242,6 +243,47 @@ exports.createEleve = (req, res, next) => {
                                     
                                 DB.query( sqlCreateEleve, (err, response3) => {
 
+                                    ///////////////////////
+
+                                    //gestion de la mise à jour de l'effectif de la classe
+                                    
+                                    DB.query( sqlSelectAllEleves, (errEleve, resEleve) => {
+
+                                        if(errEleve){
+
+                                            console.log("***erreur de sql sqlSelectAllEleves 2 *** " +  errEleve) 
+                                            res.status(404).json({errEleve})
+                                        }else{
+
+                                            console.log(" ****** resEleve")
+                                            console.log(resEleve)
+
+                                            let tablefilterEleve = resEleve.filter( eleve => eleve.classes_id === classeId)
+                                            console.log("****** tablefilterEleve ******")
+                                            console.log(` l'effectif de la classe ${classes_id} est : ` + tablefilterEleve.length)
+                                            
+                                            //requete de mise à jour des effectifs
+                                            let sqlUpdateEffectif = `UPDATE  classes SET effectif = ${tablefilterEleve.length} WHERE id = ${classeId}`
+
+                                            DB.query(sqlUpdateEffectif, (errUpdateEffectif, resUpdateEffectif) => {
+
+                                                if(errUpdateEffectif){
+
+                                                    console.log("***erreur de sql sqlUpdateEffectif *** " +  errUpdateEffectif) 
+                                                    res.status(404).json({ errUpdateEffectif })
+                                                }else{
+
+                                                    console.log(` ******  l'effectif de la classe ${classes_id} a été mise ajour `)
+                                                   
+                                                }
+                                            })
+                                           
+                                        }
+
+                                    })
+
+
+                                    ///////////////////////
 
                                     console.log("******** test ********$")////// 
 
@@ -365,21 +407,10 @@ exports.updateEleve = (req, res, next) => {
 
     let { idEleve, anciennete, decouverteDateArrivee, nom, prenom, dateNaissance, dateInscription, montantPaye, sectionNumber,
         classes_id,  nomParent1, contactParent1, nomParent2, contactParent2 } = req.body
+
+        console.log("classes_id :" +  classes_id)
+       
     
-        /*
-    let { idEleve, anciennete, nom, prenom, decouverteDateArrivee, dateNaissance, sectionNumber,
-        classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body
-
-    */
-
-    /*
-    if( !anciennete || !nom || !prenom || !decouverteDateArrivee || !dateNaissance || !sectionNumber
-    || !classes_id || !dateInscription || !montantPaye || !nomParent1 || !contactParent1 ){
-
-        console.log("***veillez entrer correctement toutes les information du formulaire*** ")
-        res.status(400).json({ message: "***veillez entrer correctement toutes les information du formulaire***"})
-    }
-    */
      
     //let elementId = parseInt(req.params.id) //idEleve 
     let elementId = idEleve
@@ -400,6 +431,10 @@ exports.updateEleve = (req, res, next) => {
     console.log("****** la valeur sectionNumber : ****** " + sectionNumber )
     
     let classeId 
+    let classeNomBase
+    let sqlUpdateEffectif 
+    let eleve
+    let classeChoice
 
     let sqlUpdateEleve 
 
@@ -408,11 +443,17 @@ exports.updateEleve = (req, res, next) => {
     //requete de récupération de toutes les classes
     const sqlSelectAllClasses = "SELECT * FROM classes" 
 
+    let idClasseBase
+
     /////////////////////////////
 
+    
     if( !anciennete && !nom && !prenom && !decouverteDateArrivee && !dateNaissance 
         && !montantPaye && !nomParent1 && !contactParent1 ){
 
+            console.log("** bienvenue dans le tranfert")
+
+           
             DB.query( sqlSelectAllClasses, (err, response00) => {
 
                 //let classeId 
@@ -433,12 +474,14 @@ exports.updateEleve = (req, res, next) => {
         
                         //conversion du nom de la classe de la chaine à l'integer
                         classeId = classe.id
-        
+                        classeNomBase = classe.nom
+
                     }
-                    //console.log("la valeur de classeId est : " + classeId)
+                    
                 } 
         
-                console.log("la valeur de classeId est : " + classeId)
+                console.log("la valeur de classeId est : " + classeId) 
+               
             
                 //////////////////////////////////////////////////////////////////
         
@@ -447,7 +490,15 @@ exports.updateEleve = (req, res, next) => {
         
                     console.log("****** response0********")///////
                     console.log(response0)///////
+
+                    //récupération de l'élève actuelle
+                    eleve = response0.find( eleve1 => eleve1.id === req.body.idEleve)
+                    //récupération de la classe de l'élève actuel à partir de la base de données
+                    classeChoice = response00.find( classe1 => classe1.id === eleve.classes_id)
             
+                    console.log("la valeur de classeNomBase est : " + classeNomBase)
+                    console.log("****** eleve********")///////
+                    console.log(eleve)
                     ///////////////////////////////////
                     if(err){
             
@@ -456,52 +507,93 @@ exports.updateEleve = (req, res, next) => {
                         
                     }else{
             
-                        //let sqlUpdateEleve 
-            
-                        /////////////////////
-
-                        //requete de mis à jour de l'élève                                           
-                        sqlUpdateEleve = `UPDATE eleves SET section_id=${sectionNumber}, classes_id=${classeId}, dateInscription="${dateInscription}"
-                        WHERE id = ${elementId} ;` 
-
-                        /////////////////////
-
-                        /*
-                        if(!nomParent2 || !contactParent2 ){
-            
-                            console.log("***  transfert de l'élève sans parent2*** " )
+                         /////////////////////////////////////////
+                            //classeNomBase != classes_id
+                         if( eleve.classes_id != classeId){  //comparaison de l'ancien id de la classe avc le id de la nouvelle classe
         
-                            //requete de mis à jour de l'élève                                           //classes_id
+                            console.log("**** vous êtes dans le transfert sans contact 2 et nom 2 avec la modification d'effectif et classeNomBase != classes_id")
+                          
+                            //requete de récupération de toutes les classes
+                            const sqlSelectAllClasses2 = "SELECT * FROM classes" 
+
+                            //gestion de la mise à jour de l'effectif
+                            let tablefilterEleve = response0.filter( eleve2 => eleve2.classes_id === classeId )
+                            console.log("***** tablefilterEleve.length : " + tablefilterEleve.length)
+                            console.log(tablefilterEleve)
+
                             sqlUpdateEleve = `UPDATE eleves SET section_id=${sectionNumber}, classes_id=${classeId}, dateInscription="${dateInscription}"
-                            WHERE id = ${elementId} ;` 
-            
+                            WHERE id = ${elementId} ;`
+
+                            //requete de mise à jour décrémentation de -1  des effectifs
+                            let sqlUpdateEffectifDécrémentation = `UPDATE  classes SET effectif = ${classeChoice.effectif -= 1} WHERE id = ${eleve.classes_id}`
                             
-                        }else{  
-            
-            
-                            console.log("***  le transfert de l'élève avec parent2*** " )
-        
-                            //requete de mis à jour de l'élève                                          //classes_id
+                            //requete de mise à jour incrémentation de +1  des effectifs
+                             sqlUpdateEffectif = `UPDATE  classes SET effectif = ${tablefilterEleve.length += 1} WHERE id = ${classeId}`
+
+                              ////////////////////////////////////////////////////  
+                            
+                            
+
+                            DB.query(sqlUpdateEffectif, (errUpdateEffectif, resUpdateEffectif) => {
+
+                                if(errUpdateEffectif){
+
+                                    console.log("***erreur de sql sqlUpdateEffectif *** " +  errUpdateEffectif) 
+                                    res.status(404).json({ errUpdateEffectif })
+                                }else{
+
+                                    DB.query(sqlUpdateEffectifDécrémentation, (errSqlUpdateEffectifDécrémentation, resSqlUpdateEffectifDécrémentation) => {
+
+                                        if(errSqlUpdateEffectifDécrémentation){
+
+                                            console.log("***erreur de sql sqlUpdateEffectifDécrémentation *** " +  errSqlUpdateEffectifDécrémentation) 
+                                            res.status(404).json({ errSqlUpdateEffectifDécrémentation })
+                                        }else{
+
+                                            console.log(` ******  votre décrémentation d'effectif a été faite avec succès ****`)
+                                        }
+                                    })
+
+                                    console.log(` ******  l'effectif de la classe ${classes_id} a été mise ajour ****`)
+                                    
+                                }
+                            })
+
+                            //////////////////////////////////////////////////
+                            
+                           
+                                
+                        }else{ 
+
+                            console.log("**** vous êtes dans le transfert sans contact 2 et nom 2 avec la modification d'effectif et classeNomBase pas différent classes_id")
+                            //let sqlUpdateEleve 
+                            //requete de mis à jour de l'élève                                           
                             sqlUpdateEleve = `UPDATE eleves SET section_id=${sectionNumber}, classes_id=${classeId}, dateInscription="${dateInscription}"
-                            WHERE id = ${elementId} ;` 
-            
-                        
-                        } 
-                        
-                        */
+                            WHERE id = ${elementId} ;`
+
+                        }
+
+                        ////////////////////////////////////////
 
                         console.log("résultat de la requete sqlUpdateEleve")//
                         console.log(sqlUpdateEleve)//
+
+                        console.log("résultat de la requete sqlUpdateEffectif")//
+                        console.log(sqlUpdateEffectif)//
             
-                        DB.query(sqlUpdateEleve, (err, response2) => { 
+                        DB.query(sqlUpdateEleve, (err, response2) => {  
             
                             if(err){
                                 console.log("***erreur de sqlUpdateEleve*** " +  err)
                                 res.status(404).json({ message: "erreur de sqlUpdateEleve" + err})
                                 
                             }
+                           
+
+
+                            
                             // console.log(response1)
-                            console.log(`l'élève ${nom} a été mise à jour avec succès`)
+                            console.log(`l'élève ${req.body.nom} a été mise à jour avec succès`)
                             res.status(200).json({ message: "l'élève a été mise à jour avec succès"})
                             
                         })   
@@ -529,27 +621,25 @@ exports.updateEleve = (req, res, next) => {
                     //let sqlUpdateEleve 
         
                     if(!nomParent2 || !contactParent2 ){
-        
                         
+                       
+
+                        console.log("**** vous êtes dans le transfert sans contact 2 et nom 2 sans modification d'effectif")
                         //requete de mis à jour de l'élève
                         sqlUpdateEleve = `UPDATE eleves SET anciennete="${anciennete}", decouverteDateArrivee="${decouverteDateArrivee}", nom="${nom}", prenom="${prenom}", dateNaissance="${dateNaissance}", section_id=${sectionNumber},
                         classes_id=${classes_id}, dateInscription="${dateInscription}", montantPaye=${montantPaye}, nomParent1="${nomParent1}", contactParent1=${contactParent1}
-                        WHERE id = ${elementId}   ;`   
-                        
-        
-                        
-        
-                    }else{  
-        
-                        
+                        WHERE id = ${elementId}   ;`
+                          
+                    }else{
+
+                       
+                        console.log("**** vous êtes dans le transfert avec contact 2 et nom 2 sans la modification d'effectif")
+
                         //requete de mis à jour de l'élève
                         sqlUpdateEleve = `UPDATE eleves SET anciennete="${anciennete}", decouverteDateArrivee="${decouverteDateArrivee}", nom="${nom}", prenom="${prenom}", dateNaissance="${dateNaissance}", section_id=${sectionNumber},
                         classes_id=${classes_id},  nomParent1="${nomParent1}", contactParent1=${contactParent1}
                         nomParent2="${nomParent2}", contactParent2=${contactParent2}   WHERE id = ${elementId} ;`   
-                        
-        
-                        
-                    
+
                     }
                     
                     console.log("résultat de la requete sqlUpdateEleve")//
@@ -586,7 +676,16 @@ exports.deleteEleve = (req, res, next) => {
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
     let elementId = parseInt(req.params.id)
+    console.log("****** elementId ****** " + elementId)
+    console.log(elementId)
+    let eleve
 
+    /////////////////////////
+    
+     //requete de récupération de toutes les classes
+    const sqlSelectAllClasses = "SELECT * FROM classes" 
+
+    //////////////////////
     const  sqlSelectAllEleves = `SELECT * FROM eleves;` 
    //requete de supression
    const sqlDeleteEleve = `DELETE FROM eleves WHERE  id = ${elementId};`
@@ -596,7 +695,10 @@ exports.deleteEleve = (req, res, next) => {
             res.status(404).json({err})
             console.log("***erreur de ssqlSelectAllEleves*** " +  err)  
         }else{
-            const eleve = response.find( element => element.id == elementId)
+             eleve = response.find( element => element.id == elementId)
+             console.log("***** eleve.classes_id : " + eleve.classes_id)
+             console.log("***** eleve : ")
+             console.log( eleve)
 
             if(!eleve){
                 res.status(404).json({message: "éleve non trouvé"})
@@ -607,6 +709,37 @@ exports.deleteEleve = (req, res, next) => {
                         res.status(404).json({err})
                         console.log("***erreur de sqlDeleteEleve *** " +  err)  
                     }
+
+                    
+                     /////////////////////// 
+
+                        let tablefilterEleve = response.filter( eleve2 => eleve2.classes_id === eleve.classes_id )
+                        console.log("***** tablefilterEleve.length : " + tablefilterEleve.length)
+                        console.log(tablefilterEleve)
+
+                         //requete de récupération de toutes les classes
+                        const sqlSelectAllClasses2 = "SELECT * FROM classes" 
+
+                        //requete de mise à jour des effectifs
+                        let sqlUpdateEffectif = `UPDATE  classes SET effectif = ${tablefilterEleve.length -= 1} WHERE id = ${eleve.classes_id}`
+
+                        DB.query(sqlUpdateEffectif, (errUpdateEffectif, resUpdateEffectif) => {
+
+                            if(errUpdateEffectif){
+
+                                console.log("***erreur de sql sqlUpdateEffectif *** " +  errUpdateEffectif) 
+                                res.status(404).json({ errUpdateEffectif })
+                            }else{
+
+                                console.log(` ******  l'effectif de la classe ${eleve.classes_id} a été mise ajour ****`)
+                                
+                            }
+                        })
+                       
+
+                    ///////////////////////
+
+
                     //console.log(response1)
                     res.status(200).json({ message: "élève supprimé avec succès"})
                 })
@@ -617,3 +750,13 @@ exports.deleteEleve = (req, res, next) => {
 
 
 };
+
+ /*
+ pour la modification de la classe
+                        //requete de mis à jour de l'élève
+                        sqlUpdateEleve = `UPDATE eleves SET anciennete="${anciennete}", decouverteDateArrivee="${decouverteDateArrivee}", nom="${nom}", prenom="${prenom}", dateNaissance="${dateNaissance}", section_id=${sectionNumber},
+                        classes_id=${classes_id},  nomParent1="${nomParent1}", contactParent1=${contactParent1}
+                        nomParent2="${nomParent2}", contactParent2=${contactParent2}   WHERE id = ${elementId} ;`   
+                        
+        
+                       */ 

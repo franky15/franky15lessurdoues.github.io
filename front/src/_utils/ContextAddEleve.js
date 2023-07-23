@@ -1,6 +1,7 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { classesServices } from "../_services/Classes.services";
 import { elevesServices } from "../_services/Eleves.services";
+import { personnelServices } from "../_services/Personnels.services";
 
 
 
@@ -14,6 +15,8 @@ export const ContextAddEleveProvider = ({ children }) => {
     let [ listeClassesContext, setListeClassesContext ] = useState([])
 
     let [ listeElevesContext, setListeElevesContext ] = useState([])
+
+    let [ listePersonnelContext, setListePersonnelContext ] = useState([])
 
     let flag = useRef(false)
 
@@ -45,6 +48,18 @@ export const ContextAddEleveProvider = ({ children }) => {
             .catch(err => console.log(err))
 
             ////////////////////////
+
+            //////////////////////
+            personnelServices.getPersonnels()
+            .then( res => {
+
+                setListePersonnelContext(res.data)
+                
+            })
+            .catch(err => console.log(err))
+
+
+            //////////////////////
         }
         return () => flag.current = true
 
@@ -131,7 +146,7 @@ export const ContextAddEleveProvider = ({ children }) => {
 
     return (
 
-        <AddEleveContext.Provider  value={ { listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext } } >
+        <AddEleveContext.Provider  value={ { listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext, listePersonnelContext } } >
             
             {children}
         </AddEleveContext.Provider>

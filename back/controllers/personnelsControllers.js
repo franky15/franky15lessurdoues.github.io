@@ -7,41 +7,185 @@ exports.createPersonnel = (req, res, next) => {
     console.log("***bienvenue dans createPersonnel*** " )
     console.log("***userId du token*** : " + req.auth.userId ) 
 
+    console.log(req.body)
+
     //récupération des données de la requete
-    const { nom, prenom, poste, salaire, telephone, email } = req.body
+    let { nom, prenom, poste, contact,  section, classe, groupeSalariale, email, salaire } = req.body
 
     //on l'utilisera pour insérer le userId dans utilisateurs_id
     const utilisateurs_id = req.auth.userId
 
-    //vérification des donnée de la requete
-    if( !nom || !prenom || !poste || !salaire, !telephone, !email) {
-        res.status(400).json({ message: "veillez remplir toutes les données du formulaire "})
-    }
-    console.log(req.body)
+    let section_id
+    let classes_id
+
+    //conversion des classes et sections en id
+    let sqlClasses = "SELECT * FROM classes;"
+    let sqlSection = "SELECT * FROM section;"
+
+    classe && (
+
+           // console.log("**** la classe existe : " ),
+            //gestion des classes
+            DB.query( sqlClasses,(err, responseClass) => {
+
+                console.log("**** la récupération des classes est : " )
+                console.log(responseClass )
+
+                if(err){
+
+                    console.log("***erreur de sql sqlClasses*** " +  err) 
+                    res.status(404).json({err})
+                    
+                }else{
+
+                let classesCurrent = responseClass.find( element => element.nom === classe)
+
+                   
+                    console.log("**** classesCurrent : " )
+                    console.log(classesCurrent )
+                  
+
+                    classes_id = classesCurrent.id
+                    console.log("****classes_id : " + classes_id)
+                    //////////////////
+
+                }
+
+            })
+
+            
+
+    );
+
+    section && (
+
+           // console.log("**** la section existe : " ),
+            //gestion des sections
+            DB.query( sqlSection,(err, responseSection) => {
+
+                console.log("**** la récupération des sections est : " )
+                console.log(responseSection )
+
+                if(err){
+
+                    console.log("***erreur de sql sqlSection*** " +  err) 
+                    res.status(404).json({err})
+                    
+                }else{
+
+                    let sectionCurrent = responseSection.find( element1 => element1.nom === section)
+
+                    console.log("**** sectionCurrent : " )
+                    console.log(sectionCurrent )
+
+                    section_id = sectionCurrent.id
+                    console.log("****section_id : " + section_id)
+                }
+
+            })
+
+    )
+    
     //requete récupérant tous le personnel 
-    const sqlSelectAllPerso ="SELECT * FROM personnels"
+    const sqlSelectAllPerso ="SELECT * FROM personnels;"
+
+    let idPersonnel
+
+   
 
     DB.query(sqlSelectAllPerso, (err, response) => {
+
+       
+
         if(err){
+
+            console.log("***erreur de sql sqlSelectAllPerso*** " +  err) 
             res.status(404).json({err})
-            console.log("***erreur de sql*** " +  err)  
+             
         }else{
             //requete de vérification si l'utilisateur existe dans la base de données
-            const personnel = response.find( element => element.email === email)
+            const personnel = response.find( element => element.contact === contact)
             
+            console.log("***** personnel")
+            console.log(personnel)
             if(personnel){
                 console.log(`*************le personnel ${nom} existe déjà****************`)
                 res.status(500).json({ message: `le personnel ${nom} existe déjà`})
             }else{
-                //requete de creation de l'utilisateur
-                let sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, utilisateurs_id, poste, salaire, telephone, email )
-                    VALUES ( "${nom}", "${prenom}", ${utilisateurs_id}, "${poste}",  ${salaire} , ${telephone},  "${email}");`
+
+                let sqlCreatePerso
+
+                if( !section_id || !classes_id){
+
+                    console.log("***** creation sans section_id ou classes_id")
+                      //requete de creation de l'utilisateur 
+                    sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, groupeSalariale, email, salaire )
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, "${groupeSalariale}" , "${email}", ${salaire});`
+                
+                }else if(!email){
+ 
+                    console.log("***** creation avec section_id ou classes_id et sans email")
+                      //requete de creation de l'utilisateur 
+                      sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, section_id, classes_id, groupeSalariale, salaire )
+                      VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, ${section_id}, ${classes_id}, "${groupeSalariale}", ${salaire});`
+                
+                }else if(!section_id || !classes_id && !email){
+
+                    console.log("***** creation sans section_id ou classes_id et sans email")
+                      //requete de creation de l'utilisateur 
+                    sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, groupeSalariale, salaire )
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, "${groupeSalariale}", ${salaire});`
+                
+                }else{
+                
+                    console.log("***** creation avec section_id ou classes_id")
+                      //requete de creation de l'utilisateur
+                    sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, section_id, classes_id, groupeSalariale, email, salaire )
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, ${section_id}, ${classes_id}, "${groupeSalariale}" , "${email}", ${salaire});`
+                }
+              
+
+                    console.log("******** résultat de la requete sqlCreatePerso")
+                    console.log(sqlCreatePerso)
 
                 DB.query( sqlCreatePerso, (err, response1) => {
+                    
                     if(err){
                         res.status(404).json({err})
                         console.log("***erreur de sql*** " +  err)  
                     }else{
+
+                        /////////////
+
+                        //requete de la mise à jour de l'enseignant et du personnels_id si on est dans la création d'un enseignant
+                        if( classe && section){
+
+                            console.log(" ****bienvenu dans PersonnelCurrent")
+                            console.log( classe + " " + section)
+                            PersonnelCurrent = response.find( element1 => element1.contact = contact)
+                            console.log("PersonnelCurrent")
+                            console.log(PersonnelCurrent)
+                            idPersonnel = PersonnelCurrent.id;
+                             //requete de mis à jour de la classe
+                            const sqlUpdateClasse = `UPDATE classes SET enseignant = "${nom + " " + prenom}", personnels_id = ${idPersonnel}  WHERE nom = "${classe}" ;`                    
+
+                            DB.query( sqlUpdateClasse, (errUpclass, resUpclass) => {
+
+                                if(errUpclass){
+                                   
+                                    res.status(404).json({errUpclass})
+                                    console.log("*** erreur de sqlUpdateClasse *** " +  errUpclass)  
+                               
+                                }else{
+
+                                    res.status(200).json(resUpclass)
+                                    console.log("*** enseignant et personnels_id modifiés avec succès*** ") 
+                                    console.log(resUpclass)
+                                }
+
+                            })
+                        }
+                        //////////////////::
                         res.status(200).json(response1)
                         console.log("***Personnel crée avec succès*** ")  
                     }
@@ -107,7 +251,10 @@ exports.getOnePersonnel = (req, res, next) =>{
                 res.status(404).json({message: "personnel non trouvé"})
                 console.log("***personnel non trouvé*** " +  err)
             }else{
+                console.log("****** personnel trouvé avec succès")
+                console.log(personnel)
                 res.status(200).json(personnel)
+
             }
         }
     })
@@ -119,19 +266,25 @@ exports.updatePersonnel = (req, res, next) =>{
     console.log("***bienvenue dans updatePersonnel*** " )
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
-    //récupération des données de la requete
-    const { nom, prenom, poste, telephone } = req.body 
+        //récupération des données de la requete
+        let { nom, prenom, poste, contact, section, classes, groupeSalariale, email, salaire } = req.body
     
     //const utilisateurs_id = req.auth.userId
     //const utilisateursEmail = req.auth.email
 
     let userId = parseInt(req.params.id) //convertion de la chaine en integer car front envoie chaine  et retourne false
 
+    let classes_id
+    let section_id
+
+    //conversion des classes et section de lettre en id
+    
     //récupération du personnel
     const sqlSelectAllPerso = `SELECT * FROM personnels;`
 
     //requete de mis à jour du cocktail
-    const sqlUpdatePersonnel = `UPDATE personnels SET nom = "${nom}", prenom = "${prenom}"  WHERE id = ${userId} ;` 
+    const sqlUpdatePersonnel = `UPDATE personnels SET nom = "${nom}", prenom = "${prenom}", poste = "${poste}", contact = "${contact}",
+    section_id = "${section_id}", classes_id = "${classes_id}", groupeSalariale = "${groupeSalariale}", email = "${email}", salaire = "${salaire}"  WHERE id = ${userId} ;` 
 
     DB.query(sqlSelectAllPerso, (err, response) => {
         

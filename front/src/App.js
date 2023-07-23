@@ -11,57 +11,54 @@ import GetClassesIframe from './pages/Iframe/GetClassesIframe';
 
 import { ContextAddEleveProvider } from './_utils/ContextAddEleve';
 
-
 //import { AddEleveContext } from './_utils/ContextAddEleve';
 
 
 const App = () => {
 
   
-
-
- 
 //////////////////////////////////////////
 
   return (
 
     <div>
       
-      
-      <ContextAddEleveProvider >
+     
+        <ContextAddEleveProvider >
 
-        <BrowserRouter>
+          <BrowserRouter>
+            
+                <Routes>
+
+                  <Route path='/*' element= { <PublicRouter/> }/>
+
+                  <Route path='/auth/*' element= { <LoginAuthRouter/> }/>
+                  <Route element= { <AdminLayout/> }>
+
+                      <Route path='/admin/*' element= { 
+                        
+                        <AuthGuard>
+                          <AdminRouter/> 
+                        </AuthGuard>
+                        
+                      }/>
+
+                  </Route>
+
+                  <Route path='/getalliframe' element= { 
+                    //<AuthGuard>
+                        <GetClassesIframe/> 
+                  // </AuthGuard>
+                
+                  }/>
+
+                </Routes>
+                
           
-              <Routes>
+          </BrowserRouter>
 
-                <Route path='/*' element= { <PublicRouter/> }/>
-
-                <Route path='/auth/*' element= { <LoginAuthRouter/> }/>
-                <Route element= { <AdminLayout/> }>
-
-                    <Route path='/admin/*' element= { 
-                      
-                      <AuthGuard>
-                        <AdminRouter/> 
-                      </AuthGuard>
-                      
-                    }/>
-
-                </Route>
-
-                <Route path='/getalliframe' element= { 
-                  //<AuthGuard>
-                      <GetClassesIframe/> 
-                // </AuthGuard>
-              
-                }/>
-
-              </Routes>
-              
-        
-        </BrowserRouter>
-
-       </ContextAddEleveProvider >
+        </ContextAddEleveProvider >
+      
       
 
     </div>

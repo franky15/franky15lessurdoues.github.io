@@ -21,11 +21,11 @@ const GetOneClasseEleves = () => {
 
     let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
 
-   // console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
-    //console.log(listeElevesContext)
+   console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
+   console.log(listeElevesContext)
 
-    //console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
-    //console.log(listeClassesContext)
+    console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
+    console.log(listeClassesContext)
 
     //gestion du state d'affichage de la fenêtre de modification de l'élève
    let [ showWindowEleveUpdate, setshowWindowEleveUpdate ] = useState(false)
@@ -220,13 +220,41 @@ const GetOneClasseEleves = () => {
     }
 
    
-   
-  
+   ////////////////////////////////////////////
+
+   let [ classeValue, setclasseValue ] = useState({})
+    //copie du tableau par élément complexe
+    
+    
+    useEffect( () => {
+
+        let ElevesArray = [...listeClassesContext]
+       let eleve = ElevesArray.find(element => element.id === idClasse)
+       if(eleve){
+
+       // console.log("******** eleve")
+       // console.log(eleve.enseignant)
+       setclasseValue(eleve)
+       }
+
+
+    }, [idClasse, listeClassesContext])
+       
+    console.log("classeValue") 
+    console.log(classeValue) 
+        
+       
+
+    //////////////////////////////////
+
+   // let eleve = ElevesArray.find(element => element.id === idClasse)
+   // console.log("******** eleve")
+   // console.log(eleve)
 
     return (
         <div className='getOneClasseEleves'>
 
-            <p className='enseignant'>Enseignant: {  }  </p>
+            <p className='enseignant'>Enseignant: { classeValue.enseignant }  </p>
 
             <div className='getOneClasseEleves__btn1'>
 
@@ -262,7 +290,7 @@ const GetOneClasseEleves = () => {
            
             <div className='getOneClasseEleves__btn2'>
 
-                <p className='getOneClasseEleves__btn2--effectif'>Effectif de la classe: {"valeur"}</p>
+                <p className='getOneClasseEleves__btn2--effectif'>Effectif de la classe: {classeValue.effectif}</p>
 
                 <div className='getOneClasseEleves__btn2--btn'>
 
