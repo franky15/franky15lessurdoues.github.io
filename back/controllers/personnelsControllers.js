@@ -26,19 +26,19 @@ exports.createPersonnel = (req, res, next) => {
 
            // console.log("**** la classe existe : " ),
             //gestion des classes
-            DB.query( sqlClasses,(err, responseClass) => {
+            DB.query( sqlClasses,(errClasse, responseClasse) => {
 
                 console.log("**** la récupération des classes est : " )
-                console.log(responseClass )
+                console.log(responseClasse )
 
-                if(err){
+                if(errClasse){
 
-                    console.log("***erreur de sql sqlClasses*** " +  err) 
-                    res.status(404).json({err})
+                    console.log("***erreur de sql sqlClasses*** " +  errClasse) 
+                    res.status(404).json({errClasse})
                     
                 }else{
 
-                let classesCurrent = responseClass.find( element => element.nom === classe)
+                let classesCurrent = responseClasse.find( element => element.nom === classe)
 
                    
                     console.log("**** classesCurrent : " )
@@ -108,6 +108,7 @@ exports.createPersonnel = (req, res, next) => {
             
             console.log("***** personnel")
             console.log(personnel)
+
             if(personnel){
                 console.log(`*************le personnel ${nom} existe déjà****************`)
                 res.status(500).json({ message: `le personnel ${nom} existe déjà`})
@@ -150,44 +151,81 @@ exports.createPersonnel = (req, res, next) => {
 
                 DB.query( sqlCreatePerso, (err, response1) => {
                     
-                    if(err){
+                    if(err){ 
                         res.status(404).json({err})
                         console.log("***erreur de sql*** " +  err)  
+
                     }else{
 
                         /////////////
 
-                        //requete de la mise à jour de l'enseignant et du personnels_id si on est dans la création d'un enseignant
-                        if( classe && section){
+                        //requete de récupération de tout le personnel
+                        let sqlPersonnels = "SELECT * FROM personnels;"
 
-                            console.log(" ****bienvenu dans PersonnelCurrent")
-                            console.log( classe + " " + section)
-                            PersonnelCurrent = response.find( element1 => element1.contact = contact)
-                            console.log("PersonnelCurrent")
-                            console.log(PersonnelCurrent)
-                            idPersonnel = PersonnelCurrent.id;
-                             //requete de mis à jour de la classe
-                            const sqlUpdateClasse = `UPDATE classes SET enseignant = "${nom + " " + prenom}", personnels_id = ${idPersonnel}  WHERE nom = "${classe}" ;`                    
+                        DB.query(sqlPersonnels, (errsqlPersonnels, ressqlPersonnels) => {
 
-                            DB.query( sqlUpdateClasse, (errUpclass, resUpclass) => {
+                            console.log("*** resultat de ressqlPersonnels récupération de tous le personnel")
+                            console.log(ressqlPersonnels)
 
-                                if(errUpclass){
-                                   
-                                    res.status(404).json({errUpclass})
-                                    console.log("*** erreur de sqlUpdateClasse *** " +  errUpclass)  
+                            if(errsqlPersonnels){
+
+                                console.log("*** erreur de errsqlPersonnels *** " +  errsqlPersonnels)  
+                                res.status(400).json({errsqlPersonnels})
                                
-                                }else{
+                            
+                            }else{
+                                
+                                //requete de la mise à jour de l'enseignant et du personnels_id si on est dans la création d'un enseignant
+                                if( classe && section){
 
-                                    res.status(200).json(resUpclass)
-                                    console.log("*** enseignant et personnels_id modifiés avec succès*** ") 
-                                    console.log(resUpclass)
+                                    console.log(" ****bienvenu dans PersonnelCurrent")
+                                    console.log( classe + " " + section)
+
+                                   let PersonnelCurrent = ressqlPersonnels.find( element1 => element1.contact === parseInt(contact) )
+                                    
+                                    console.log("***** PersonnelCurrent")  
+                                    console.log(PersonnelCurrent)
+
+                                    idPersonnel = parseInt(PersonnelCurrent.id);  
+                                    console.log("**** idPersonnel : " + idPersonnel)
+                                    
+                                    //requete de mis à jour de la classe
+                                    const sqlUpdateClasse = `UPDATE classes SET enseignant = "${nom + " " + prenom}", personnels_id = ${idPersonnel}  WHERE nom = "${classe}" ;`                    
+
+                                    DB.query( sqlUpdateClasse, (errUpclass, resUpclass) => {
+
+                                        console.log("**** bienvenue dans sqlUpdateClasse : ")
+
+                                        console.log("**** sqlUpdateClasse" )
+                                        console.log(sqlUpdateClasse )
+
+                                        if(errUpclass){ 
+                                        
+                                            
+                                            console.log("*** erreur de sqlUpdateClasse *** " +  errUpclass) 
+                                            res.status(404).json({errUpclass}) 
+                                    
+                                        }else{ 
+
+                                            
+                                            
+                                            console.log("*** enseignant et personnels_id modifiés avec succès*** ") 
+                                            res.status(200).json(resUpclass)
+                                            
+                                        }  
+
+                                    }) 
                                 }
+                                
 
-                            })
-                        }
-                        //////////////////::
+                            } 
+                        
+                        } )
+
+                         
                         res.status(200).json(response1)
                         console.log("***Personnel crée avec succès*** ")  
+                        
                     }
                 })
             }
@@ -264,56 +302,87 @@ exports.getOnePersonnel = (req, res, next) =>{
 exports.updatePersonnel = (req, res, next) =>{
 
     console.log("***bienvenue dans updatePersonnel*** " )
+
+    console.log(req.body)
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
         //récupération des données de la requete
-        let { nom, prenom, poste, contact, section, classes, groupeSalariale, email, salaire } = req.body
+        let { id,nom, prenom, poste, contact,  section, classe, groupeSalariale, email, salaire } = req.body
     
     //const utilisateurs_id = req.auth.userId
     //const utilisateursEmail = req.auth.email
 
     let userId = parseInt(req.params.id) //convertion de la chaine en integer car front envoie chaine  et retourne false
 
-    let classes_id
-    let section_id
+    let classes_id 
+    let section_id = parseInt(section)
+
+    //récupération de toutes les classes
+    let sqlClassesAll = "SELECT * FROM classes;"
 
     //conversion des classes et section de lettre en id
-    
-    //récupération du personnel
-    const sqlSelectAllPerso = `SELECT * FROM personnels;`
+    DB.query( sqlClassesAll, ( errsqlClasses, responsesqlClasses) => {
 
-    //requete de mis à jour du cocktail
-    const sqlUpdatePersonnel = `UPDATE personnels SET nom = "${nom}", prenom = "${prenom}", poste = "${poste}", contact = "${contact}",
-    section_id = "${section_id}", classes_id = "${classes_id}", groupeSalariale = "${groupeSalariale}", email = "${email}", salaire = "${salaire}"  WHERE id = ${userId} ;` 
+        console.log("**** responsesqlClasses")
+        console.log(responsesqlClasses)
 
-    DB.query(sqlSelectAllPerso, (err, response) => {
+        if(errsqlClasses){
+
+            console.log("***erreur de sqlClasses*** " + errsqlClasses)  
+            res.status(400).json({errsqlClasses})
         
-        console.log(response)///// 
+        }else{ 
+            
+        
+            let classeCurrent = responsesqlClasses.find( element => element.nom === classe )
+            console.log("**** classeCurrent")
+            console.log(classeCurrent.id)
 
-        if(err){
-            res.status(404).json({err})
-            console.log("***erreur de sql 1*** " +  err)  
-        }else{
-            const personnel = response.find( element => element.id == userId)
-           
-           // console.log(personnel)
+            classes_id = classeCurrent.id
+            console.log("*** classes_id : " + classes_id)
 
-            if(!personnel){
-                res.status(404).json({message: "personnel non trouvé"}) 
-                console.log("***personnel non trouvé*** " +  err)
-            }else{
-                DB.query(sqlUpdatePersonnel, (err, response1) => {
-                    if(err){
-                        res.status(404).json({err})
-                        console.log("***erreur de sql 2*** " +  err)  
-                    }
-                   // console.log(response1)
-                    res.status(200).json({ message: "personnel mis à jour avec succès"})
-                })
+            //récupération du personnel
+            const sqlSelectAllPerso = `SELECT * FROM personnels;`
+
+            //requete de mis à jour du cocktail
+            const sqlUpdatePersonnel = `UPDATE personnels SET nom = "${nom}", prenom = "${prenom}", poste = "${poste}", contact = ${parseInt(contact)},                        
+            section_id = ${section_id}, classes_id = ${classes_id}, groupeSalariale = "${groupeSalariale}", email = "${email}", salaire = ${parseInt(salaire)}  WHERE id = ${id} ;`   //${userId}
+                        //${parseInt(section)}          //${parseInt(classe)}
+            console.log("*** resulatat de la requete sqlUpdatePersonnel") 
+            console.log(sqlUpdatePersonnel)
+            DB.query(sqlSelectAllPerso, (err, response) => {
                 
-            }
+                console.log(response)///// 
+
+                if(err){
+                    res.status(404).json({err})
+                    console.log("***erreur de sql 1*** " +  err)  
+                }else{
+                    const personnel = response.find( element => element.id == id) //userId
+                
+                // console.log(personnel)
+
+                    if(!personnel){
+                        res.status(404).json({message: "personnel non trouvé"}) 
+                        console.log("***personnel non trouvé*** " +  err)
+                    }else{
+                        DB.query(sqlUpdatePersonnel, (err, response1) => {
+                            if(err){
+                                res.status(404).json({err})
+                                console.log("***erreur de sql 2*** " +  err)  
+                            }
+                        // console.log(response1)
+                            res.status(200).json({ message: "personnel mis à jour avec succès"})
+                        })
+                        
+                    }
+                }
+            })
+            
         }
     })
+
+   
 }
 
 

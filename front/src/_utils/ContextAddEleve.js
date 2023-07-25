@@ -18,6 +18,8 @@ export const ContextAddEleveProvider = ({ children }) => {
 
     let [ listePersonnelContext, setListePersonnelContext ] = useState([])
 
+    let [ section, setSection ] = useState([])
+
     let flag = useRef(false)
 
     //requete de récupération de toutes les classes

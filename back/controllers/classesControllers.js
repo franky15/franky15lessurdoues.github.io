@@ -102,7 +102,7 @@ exports.createClasse = (req, res, next) => {
                                 }else{
 
                                     /////////////////////////////
-
+                                    /*
                                     //requete récupérant tous le personnel 
                                     const sqlSelectAllPerso ="SELECT * FROM personnels;"
                                     let idPersonnel
@@ -149,6 +149,7 @@ exports.createClasse = (req, res, next) => {
 
                                     })
 
+                                    
                                      //requete de mis à jour de la classe
                                      const sqlUpdatePersonnel = `UPDATE personnels SET  classes_id = ${idClasseCurrent }  WHERE enseignant = "${nomEnseignant}" ;`                    
                                     
@@ -168,7 +169,7 @@ exports.createClasse = (req, res, next) => {
                                         }
                                     })
                                    
-
+                                    */
 
 
 

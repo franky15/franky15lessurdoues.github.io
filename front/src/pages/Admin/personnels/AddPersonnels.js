@@ -54,7 +54,7 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
         
         //e.preventDefault()
 
-        console.log("bienvenue au submit test de createEleve")
+        console.log("bienvenue au submit test de addpersonnels")
                                                                     //valTextarea
         personnelServices.createPersonnel (formPersonnel)
             .then( res => {
@@ -154,7 +154,7 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
                             <option value="vid"  >  </option>
                                 { listeClassesContext.map( (classe, index) => 
                                     
-                                    <option value={ classe.nom } key={classe-`${index}`} > { classe.nom } </option>)
+                                    <option value={ classe.nom } key={classe.nom-`${index}`} > { classe.nom } </option>)
                                 
                                 } 
 

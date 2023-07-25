@@ -5,7 +5,7 @@ import { AddEleveContext } from '../../../_utils/ContextAddEleve';
 
 import DetailsOnePersonnel from './DetailsOnePersonnel';
 import AddPersonnels from "./AddPersonnels";
-import UpdatePersonnel from "./UpdatePersonnels";
+import UpdatePersonnels from './UpdatePersonnels';
 import GetOnePersonnels from "./GetOnePersonnels";
 import DeletePersonnel from "./DeletePersonnel"
 
@@ -19,7 +19,7 @@ const GetAllPersonnels = () => {
 
 
     //gestion de l'affichage de la fenêtre ajouter un personnel
-    let [ WindowAddPersonnel, setWindowAddPersonnel ] = useState(true) //false
+    let [ WindowAddPersonnel, setWindowAddPersonnel ] = useState(false) //false
 
     let lockWindowAddPersonnel = () => setWindowAddPersonnel(false); 
     let openWindowAddPersonnel = () => setWindowAddPersonnel(true); 
@@ -338,7 +338,7 @@ const GetAllPersonnels = () => {
                    
                     <>
                     
-                            <div className='getOneClasseEleves__btn3--bloc' key={ `${personnel.nom}-${index}` }>
+                            <div className='getOneClasseEleves__btn3--bloc' key={ personnel.nom-`${index}` }>
                                 
                             
                                 <div className='btn3Option'>
@@ -346,9 +346,28 @@ const GetAllPersonnels = () => {
                                     <p className='nomPrenom'> {personnel.prenom} </p>
                                     <p className='nomPrenom'>{personnel.poste}</p>
                                     <p className='DateRedoublant'>{ personnel.contact }</p>
-                                    <p className='DateRedoublant'>{ personnel.section_id }</p>
-                                    <p className='DateRedoublant'>{ personnel.classes_id }</p>
-                                   
+
+                                    { listeClassesContext.map( perso => perso.id === personnel.classes_id &&
+                                        
+                                            <>
+                                            
+                                                { perso.id === 1  ? 
+
+                                                    <p className='DateRedoublant'>{ "Anglophone" }</p>
+                                                        
+                                                    : 
+
+                                                    <p className='DateRedoublant'>{ "Francophone" }</p>
+                                                }
+
+                                                <p className='DateRedoublant'>{ perso.nom }</p>
+                                                
+                                            </> 
+            
+                                        )
+                                       
+                                    }
+
                                 </div>
                                 
                                 <div className='btn3Icon'>
@@ -382,7 +401,7 @@ const GetAllPersonnels = () => {
             { WindowAddPersonnel && <AddPersonnels listeClassesContext={listeClassesContext}  lockWindowAddPersonnel = { lockWindowAddPersonnel } personnelId={personnelId} /> }
              
 
-            { showWindowEleveUpdate && <UpdatePersonnel showWindowEleveUpdate={showWindowEleveUpdate} setshowWindowEleveUpdate={setshowWindowEleveUpdate}  idClasse={idClasse} personnelId={personnelId } listePersonnelContext={listePersonnelContext} /> }
+            { showWindowEleveUpdate && <UpdatePersonnels showWindowEleveUpdate={showWindowEleveUpdate} setshowWindowEleveUpdate={setshowWindowEleveUpdate}  idClasse={idClasse} personnelId={personnelId } listePersonnelContext={listePersonnelContext} /> }
             {  windowDeleteClasse && <DeletePersonnel showWindowEleveDelete={showWindowEleveDelete} setshowWindowEleveDelete={setshowWindowEleveDelete}  idClasse={idClasse}   personnelId={personnelId } listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} lockwindowDeleteClasse={lockwindowDeleteClasse} openwindowDeleteClasse={openwindowDeleteClasse} listePersonnelContext={listePersonnelContext}  />  }
 
             
@@ -392,3 +411,34 @@ const GetAllPersonnels = () => {
 };
 
 export default GetAllPersonnels;
+
+/*
+<p className='DateRedoublant'>{ personnel.section_id }</p>
+ <p className='DateRedoublant'>{ personnel.classes_id }</p>
+
+*/
+
+/*
+
+ { listeClassesContext.map( perso => perso.section_id === personnel.section_id &&
+                                        
+    (perso.section_id === 1 ) ? 
+
+        
+            <p className='DateRedoublant'>{ "Anglophone" }</p>
+        
+        
+        : 
+
+        
+            
+            <p className='DateRedoublant'>{ "Francophone" }</p>
+        
+
+    
+    
+        )
+        
+}
+
+*/
