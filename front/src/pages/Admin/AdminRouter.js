@@ -5,10 +5,13 @@ import { GetAllPersonnels, GetOnePersonnels, AddPersonnels, UpdatePersonnels } f
 import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisateurs } from "@/pages/Admin/utilisateurs"
 import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "@/pages/Admin/classes"
 import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "@/components/eleves"
+import { GetAllEntree, GetOneEntree, CreateOneEntree, ComptaDetail   } from '@/pages/Admin/Compta';
 
 import { Dashboard } from "@/pages/Admin"
 
 import Error from '@/_utils/Error';
+
+
 
 const AdminRouter = () => {
 
@@ -35,6 +38,17 @@ const AdminRouter = () => {
                     <Route path='getone/:id' element={ <GetOnePersonnels/> }/>
                     <Route path='add' element={ <AddPersonnels/> }/>
                     <Route path='update/:id' element={ <UpdatePersonnels/> }/>
+                    <Route path='*' element = { <Error/> }/> 
+                </Route>
+
+                <Route path='compta'>
+
+
+                    <Route index element={ <GetAllEntree/> } /> 
+                    <Route path='getall' element={ <GetAllEntree/> } /> 
+                    <Route path='add' element={ <CreateOneEntree/> } /> 
+                    <Route path='getone/:id' element={ <GetOneEntree/> } />
+                    <Route path='detail' element={ <ComptaDetail /> } /> 
                     <Route path='*' element = { <Error/> }/> 
                 </Route>
 

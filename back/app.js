@@ -10,6 +10,8 @@ const user_router = require("./routes/userRoutes")
 const personnel_router = require("./routes/personnelsRoutes")
 const classe_router = require("./routes/classesRoutes")
 const eleve_router = require("./routes/elevesRoutes") 
+const comptaEntree_router = require("./routes/comptaEntreesRoutes")
+
 
 ////////////////////
 
@@ -35,6 +37,8 @@ app.use("/personnels", personnel_router)
 app.use("/classesRoutes", classe_router)  
 
 app.use("/eleves", eleve_router) 
+
+app.use("/comptas", comptaEntree_router) 
 
 ////////////////////
 

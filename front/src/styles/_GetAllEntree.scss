@@ -1,0 +1,154 @@
+
+/*
+.getAllEntreeContainer {
+
+    width: 90%;
+    margin: auto;
+
+    border: solid 1px;
+
+}
+*/
+
+.getAllEntree {
+
+    width: 90%;
+    margin: auto;
+
+    border: solid 1px;
+
+    &__chiffreEntree {
+
+        width: 95%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+
+        //border: solid;
+
+        &--vid {
+
+            width: 80%;
+           // border: solid blue;
+        }
+        &--valeur {
+
+            width: 20%;
+            font-weight: bold;
+            margin-top: 30px;
+
+           border: solid 2px;
+
+            .chargeTotale {
+
+                color: red;
+            }
+
+            .benefice {
+
+                color: #517633;
+            }
+        }
+    }
+
+    &__Totaux {
+
+        width: 95%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+       // border: solid yellow;
+
+        .container {
+
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+
+            //border: solid blue;
+
+            &__btn {
+
+                width: 46%;
+                height: 70px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                font-weight: bold;
+                background-color: #eaeaea;
+                border: solid #979aa1;
+
+                &--valeur {
+
+                    color: #517633;
+                }
+
+                
+            }
+            .date {
+
+                display: flex;
+                flex-direction: column;
+                border-radius: 0px;
+            }
+        }
+    }
+
+    &__affichage {
+
+        width: 95%;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        //border: solid;
+
+        .titre {
+
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            //border: solid red;
+
+            &__item {
+
+                width: 25%;
+               // border: solid;
+            }
+        }
+
+        .valeurs {
+
+            //width: 80%;
+            display: flex;
+            justify-content: space-between;
+            //border: solid yellow;
+
+            &__container {
+
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
+               // border: solid blue;
+
+                .titreValeur {
+
+                    width: 25%;
+                   // border: solid red;
+                }
+            }
+
+            .valeursIcon {
+
+                width: 20%;
+                display: flex;
+                justify-content: space-between;
+               // border: solid blue;
+            }
+
+        }
+    }
+}

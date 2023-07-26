@@ -245,7 +245,30 @@ const GetAllPersonnels = () => {
     console.log("classeValue") 
     console.log(classeValue) 
 
+    //////////////////////////////////:
+
+    //gestion du display de detail
     
+    const masquerDetail = (id) => {
+
+       // let idCible = `${id}`
+        //let detail = document.querySelector("#" + idCible)
+        let detail = document.getAttribute(`data-${id}`)
+        detail.style.display = "block"
+
+    }
+
+    const afficherDetail = (id) => {
+
+       // let idCible = `${id}`
+        //let detail = document.querySelector("#" + idCible)
+        let detail = document.getAttribute(`data-${id}`)
+        detail.style.display = "none"
+
+    }
+
+
+    ///////////////////////////////////
 
     return (
         <div className='getAllPersonnels'>
@@ -361,7 +384,11 @@ const GetAllPersonnels = () => {
                                                 }
 
                                                 <p className='DateRedoublant'>{ perso.nom }</p>
-                                                
+
+                                                <div>
+
+                                               
+                                                </div>
                                             </> 
             
                                         )
@@ -377,8 +404,9 @@ const GetAllPersonnels = () => {
                                    
                                     <div className='btn3IconChoice'>
                                     
-                                        {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(personnel.id) } ></i> </span> }
-                                        { showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(personnel.id) } ></i> </span>} 
+                                      
+                                    {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(personnel.id) } ></i> </span> }
+                                    { showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(personnel.id) } ></i> </span>} 
                                         
                                     </div> 
 
@@ -387,7 +415,12 @@ const GetAllPersonnels = () => {
                             
                             </div> 
                             
-                            { isOpen && <DetailsOnePersonnel   iconEleveDetailDown={iconEleveDetailDown} listePersonnelContext={listePersonnelContext}  idClasse={idClasse}   personnelId={personnel.id}   />  }
+                            { 
+                                      
+                                isOpen &&   <DetailsOnePersonnel   iconEleveDetailDown={iconEleveDetailDown} listePersonnelContext={listePersonnelContext}  idClasse={idClasse}   personnelId={personnel.id}   /> 
+                                       
+                        
+                            }
                     </> 
                     
 
@@ -413,32 +446,78 @@ const GetAllPersonnels = () => {
 export default GetAllPersonnels;
 
 /*
-<p className='DateRedoublant'>{ personnel.section_id }</p>
- <p className='DateRedoublant'>{ personnel.classes_id }</p>
+ {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(personnel.id) } ></i> </span> }
+{ showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(personnel.id) } ></i> </span>} 
 
 */
 
 /*
 
- { listeClassesContext.map( perso => perso.section_id === personnel.section_id &&
-                                        
-    (perso.section_id === 1 ) ? 
-
-        
-            <p className='DateRedoublant'>{ "Anglophone" }</p>
-        
-        
-        : 
-
-        
+{ 
+    listePersonnelContext.map( (personnel, index) => 
+    
+    <>
+    
+            <div className='getOneClasseEleves__btn3--bloc' key={ personnel.nom-`${index}` }>
+                
             
-            <p className='DateRedoublant'>{ "Francophone" }</p>
-        
+                <div className='btn3Option'>
+                    <p className='DateRedoublant'>{personnel.nom}</p>
+                    <p className='nomPrenom'> {personnel.prenom} </p>
+                    <p className='nomPrenom'>{personnel.poste}</p>
+                    <p className='DateRedoublant'>{ personnel.contact }</p>
 
+                    { listeClassesContext.map( perso => perso.id === personnel.classes_id &&
+                        
+                            <>
+                            
+                                { perso.id === 1  ? 
+
+                                    <p className='DateRedoublant'>{ "Anglophone" }</p>
+                                        
+                                    : 
+
+                                    <p className='DateRedoublant'>{ "Francophone" }</p>
+                                }
+
+                                <p className='DateRedoublant'>{ perso.nom }</p>
+
+                                <div>
+
+                                
+                                </div>
+                            </> 
+
+                        )
+                        
+                    }
+
+                </div>
+                
+                <div className='btn3Icon'>
+                    
+                    <div className='btn3IconChoice'> <i className="fa-solid fa-pen-to-square" title="modifier le personnel" onClick={ () => iconEleveUpdate(personnel.id) } ></i> </div>
+                    <div className='btn3IconChoice'> <i className="fa-solid fa-x" title="supprimer le personnel" onClick={ () => iconEleveDelete(personnel.id) } ></i> </div>
+                    
+                    <div className='btn3IconChoice'>
+                    
+                        {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(personnel.id) } ></i> </span> }
+                        { showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(personnel.id) } ></i> </span>} 
+                        
+                    </div> 
+
+                </div>
+                
+            
+            </div> 
+            
+            { isOpen && <DetailsOnePersonnel   iconEleveDetailDown={iconEleveDetailDown} listePersonnelContext={listePersonnelContext}  idClasse={idClasse}   personnelId={personnel.id}   />  }
+    </> 
     
+
+    ) 
     
-        )
-        
 }
+
 
 */

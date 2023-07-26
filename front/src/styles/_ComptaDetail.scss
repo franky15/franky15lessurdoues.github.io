@@ -1,0 +1,37 @@
+.detail {
+
+    width: 80%;
+    margin: auto;
+
+   // border: solid 1px;
+
+    &__titre {
+
+        display: flex;
+        justify-content: space-between;
+        //border: solid red;
+
+        .titre {
+
+            width: 17%;
+            height: 70px;
+            padding-left: 10px;
+            color: white;
+            background-color: #808080;
+            font-weight: bold;
+            border: solid white 1px;
+            
+        }
+
+        .valeur {
+
+            width: 17%;
+            height: 30px;
+            padding-left: 10px;
+            color: black;
+            background-color: #eaeaea;
+            //font-weight: bold;
+            border: solid white 1px;
+        }
+    }
+}

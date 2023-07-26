@@ -273,6 +273,8 @@ exports.getOnePersonnel = (req, res, next) =>{
     console.log(req.body)
 
     let elementId = parseInt(req.params.id) //convertion de la chaine en integer car front envoie chaine  et retourne false
+    console.log(" ***** elementId : " + elementId)
+    
     //vérification si le champ id est présent et cohérent
     if(!elementId){
         res.status(404).json({message: "absence de paramètre"})
