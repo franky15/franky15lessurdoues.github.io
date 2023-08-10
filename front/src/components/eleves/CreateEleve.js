@@ -256,9 +256,9 @@ const CreateEleves = () => { //{lockAddEleveWindow }
      
              
              setEleveCreate(false)
-             window.location.reload();
+            // window.location.reload();
              
-         }, 3000)
+         }, 1)
         
         
      
@@ -322,7 +322,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
 
                         { textareaAncien && <form  className='formulaireInputDecouverteDate' onChange={ textareaInput }>
                             <label for="decouvertDateArrivee"> Quelle est l'année d'arrivée à l'école</label>
-                            <input type='date'   name='decouverteDateArrivee' id='decouverteDateArrivee'  value={  valTextarea.dateArrivee }   className='dateSectionClasse' />
+                            <input type='date'   name='decouverteDateArrivee' id='decouverteDateArrivee'  value={    valTextarea.dateArrivee }   className='dateSectionClasse' />
                            
                         </form>}
 
@@ -340,7 +340,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
                         <div className='formulaireDateSectionClasse'>
                             <form className='formulaireDateSectionClasse__element' onChange={ dateInput } >
                                 <label for="dateNaissance">Date de naissance <span className='etoile'>*</span></label>
-                                <input type='date'   name='dateNaissance' id='dateNaissance' value={ `${ valDate.dateNaissance }`}  className='dateSectionClasse'/>
+                                <input type='date'   name='dateNaissance' id='dateNaissance' value={ valDate.dateNaissance}  className='dateSectionClasse'/>
                             </form>
                             <form className='formulaireDateSectionClasse__element' onChange={ sectionInput } >
                                 <label for="classe" className='formulaireDateSectionClasse__element--titre'> Section <span className='etoile'>*</span></label>
@@ -369,7 +369,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
                             <div className='formulaireDateSectionClasse__element'>
                                     
                                 <label for="dateInscription" className='formulaireDateSectionClasse__element--classe'>Date d'inscription <span className='etoile'>*</span></label>
-                                <input type='date' name='dateInscription' id='dateInscription' value= { valInputParent.name }  className='DatemontantPaye' onChange={ parentInput } />
+                                <input type='date' name='dateInscription' id='dateInscription' value= {   valInputParent.name}  className='DatemontantPaye' onChange={ parentInput } />
                             </div>
 
                             <div className='formulaireDateSectionClasse__element'>

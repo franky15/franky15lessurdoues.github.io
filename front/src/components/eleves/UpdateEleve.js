@@ -315,7 +315,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
              setEleveCreate(false)
              window.location.reload();
              
-         }, 3000)
+         }, 1)
         
         
      
@@ -377,12 +377,12 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
 
                         { textarea && <div  className='formulaireInputDecouverte'>
                             <label for="decouverteDateArrivee"> Comment avez-vous connu l'école ?</label>
-                            <textarea type='text' name='decouverteDateArrivee' id='decouverteDateArrivee' value= {valTextarea.decouverteDateArrivee}  onChange={ textareaInput }  maxLength={200}/>
+                            <textarea type='text' name='decouverteDateArrivee' id='decouverteDateArrivee' value= { `${ valTextarea.decouverteDateArrivee }` }  onChange={ textareaInput }  maxLength={200}/>
                         </div>}
 
                         { textareaAncien && <form  className='formulaireInputDecouverteDate' onChange={ textareaInput }>
                             <label for="decouverteDateArrivee"> Quelle est l'année d'arrivée à l'école</label>
-                            <input type='date'   name='decouverteDateArrivee' id='decouverteDateArrivee' value={  valTextarea.decouverteDateArrivee.slice(0,10) }   className='dateSectionClasse' />
+                            <input type='date'   name='decouverteDateArrivee' id='decouverteDateArrivee' value={  `${ valTextarea.decouverteDateArrivee  }` }   className='dateSectionClasse' />
                            
                         </form>}
 
@@ -400,7 +400,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
                         <div className='formulaireDateSectionClasse'>
                             <form className='formulaireDateSectionClasse__element'  onChange={ dateInput } >
                                 <label for="dateNaissance">Date de naissance <span className='etoile'>*</span></label>
-                                <input type='date'  name='dateNaissance' id='date dateNaissance' value={ valDate.dateNaissance.slice(0,10) }  className='dateSectionClasse'/>
+                                <input type='date'  name='dateNaissance' id='date dateNaissance' value={  `${ valDate.dateNaissance }`}  className='dateSectionClasse'/>
                             </form>
                             <form className='formulaireDateSectionClasse__element' onChange={ sectionInput } >
                                 <label for="classe" className='formulaireDateSectionClasse__element--titre'> Section <span className='etoile'>*</span></label>
@@ -429,13 +429,13 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
                             <div className='formulaireDateSectionClasse__element'>
                                     
                                 <label for="dateInscription" className='formulaireDateSectionClasse__element--classe'>Date d'inscription <span className='etoile'>*</span></label>
-                                <input type='date' name='dateInscription' id='dateInscription' value= { valDate.dateInscription.slice(0,10) } className='DatemontantPaye' onChange={ parentInput } />
+                                <input type='date' name='dateInscription' id='dateInscription' value= {   `${ valDate.dateInscription }` } className='DatemontantPaye' onChange={ parentInput } />
                             </div>
 
                             <div className='formulaireDateSectionClasse__element'>
                                     
                                 <label for="montantPaye" className='formulaireDateSectionClasse__element--classe'>Montant scolarité payé <span className='etoile'>*</span></label>
-                                <input type='text' name='montantPaye' id='montantPaye'  placeholder='0 FCFA'  value= { valDate.montantPaye } className='DatemontantPaye' onChange={ parentInput } />
+                                <input type='text' name='montantPaye' id='montantPaye'  placeholder='0 FCFA'  value= {   `${ valDate.montantPaye }` } className='DatemontantPaye' onChange={ parentInput } />
                             </div>
 
                         </div>

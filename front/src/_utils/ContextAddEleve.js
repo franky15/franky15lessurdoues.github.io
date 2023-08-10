@@ -2,6 +2,8 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { classesServices } from "../_services/Classes.services";
 import { elevesServices } from "../_services/Eleves.services";
 import { personnelServices } from "../_services/Personnels.services";
+import { comptaServices } from "../_services/Compta.Services";
+import { comptaChargesServices } from "../_services/ComptaCharges.services";
 
 
 
@@ -17,6 +19,43 @@ export const ContextAddEleveProvider = ({ children }) => {
     let [ listeElevesContext, setListeElevesContext ] = useState([])
 
     let [ listePersonnelContext, setListePersonnelContext ] = useState([])
+
+    let [ listePaiementContext, setlistePaiementContext ] = useState([])
+
+
+    let [ listeChargesContext, setlisteChargesContext] = useState([])
+
+    //////////////////////:
+    let [ positionAcceuilContext, setpositionAcceuilContext] = useState(false)
+    const openpositionAcceuilContext = () => setpositionAcceuilContext(true)
+    const lockpositionAcceuilContext = () => setpositionAcceuilContext(false)
+
+    let [ positionEleveContext, setpositionEleveContext] = useState(false)
+    const openpositionEleveContext = () => setpositionEleveContext(true)
+    const lockpositionEleveContext = () => setpositionEleveContext(false)
+
+    let [ positionPersonnelContext, setpositionPersonnelContext] = useState(false)
+    const openpositionPersonnelContext = () => setpositionPersonnelContext(true)
+    const lockpositionPersonnelContext = () => setpositionPersonnelContext(false)
+
+
+    let [ positionChargesContext, setpositionChargesContext] = useState(false)
+    const openpositionChargesContext = () => setpositionChargesContext(true)
+    const lockpositionChargesContext = () => setpositionChargesContext(false)
+
+
+    let [ positionEntreesContext, setpositionEntreesContext] = useState(false)
+    const openpositionEntreesContext = () => setpositionEntreesContext(true)
+    const lockpositionEntreesContext = () => setpositionEntreesContext(false)
+
+    let listePositionPageContext = [ {positionAcceuilContext, openpositionAcceuilContext, lockpositionAcceuilContext} ,{positionEleveContext,
+        
+        openpositionEleveContext, lockpositionEleveContext}, {positionPersonnelContext, openpositionPersonnelContext, lockpositionPersonnelContext},
+       { positionChargesContext, openpositionChargesContext, lockpositionChargesContext},
+        {positionEntreesContext, openpositionEntreesContext, lockpositionEntreesContext}
+    ]
+
+    ///////////////////////
 
     let [ section, setSection ] = useState([])
 
@@ -56,13 +95,44 @@ export const ContextAddEleveProvider = ({ children }) => {
             .then( res => {
 
                 setListePersonnelContext(res.data)
+
+                console.log("***** liste personnel du contexte ")
+                console.log( res.data)
                 
             })
             .catch(err => console.log(err))
 
 
             //////////////////////
+
+            ///////////////////////
+            comptaServices.getComptas()
+            .then( res => {
+    
+                setlistePaiementContext(res.data)
+                
+               
+            })
+            .catch(err => console.log(err))
+
+            ////////////////////////
+
+            ///////////////////////
+            comptaChargesServices.getComptacharges()
+            .then( res => {
+    
+                //setlistePaiementContext(res.data)
+                setlisteChargesContext(res.data)
+                
+               
+            })
+            .catch(err => console.log(err))
+
+            ////////////////////////
+
         }
+
+
         return () => flag.current = true
 
     }, []) 
@@ -116,39 +186,13 @@ export const ContextAddEleveProvider = ({ children }) => {
   
   }
   
-   ///////////////////////////////////////////////:::: 
   
-   //const flag2 = useRef(false)
-   //requete de récupération de tous les élèves
-   /*
-   useEffect( () => {
-
-    console.log("Deuxième use effect")
-
-    //console.log("bienvenue dans le useEffect de  ContextAddEleve de la  récupération de tous les élèves")
-    
-    if(flag.current === false) {
-
-        elevesServices.getEleves()
-        .then( res => {
-
-            setListeElevesContext(res.data)
-            
-           
-        })
-        .catch(err => console.log(err))
-    }
-    return () => flag.current = true
-
-
-   }, [])
-   */
-  // console.log("listeElevesContext")
-   //console.log(listeElevesContext)
+  
+   
 
     return (
 
-        <AddEleveContext.Provider  value={ { listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext, listePersonnelContext } } >
+        <AddEleveContext.Provider  value={ { listePaiementContext, listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext, listePersonnelContext, listeChargesContext, listePositionPageContext } } >
             
             {children}
         </AddEleveContext.Provider>

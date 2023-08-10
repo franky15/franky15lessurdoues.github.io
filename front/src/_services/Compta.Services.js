@@ -29,6 +29,6 @@ let createCompta = (compta) => {
     return Axios.post("/comptas", compta)  //on envoie user 
 }
 
-export const personnelServices = {
+export const comptaServices = {
     getComptas, getOneCompta, updateCompta, deleteCompta, createCompta 
 }

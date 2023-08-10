@@ -24,6 +24,8 @@ exports.createEleve = (req, res, next) => {
     
     */
     
+    //new Date(dateFormatee).toLocaleDateString("fr")
+
     let { anciennete, nom, prenom, decouverteDateArrivee, dateNaissance, sectionNumber,
             classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body
     
@@ -34,7 +36,19 @@ exports.createEleve = (req, res, next) => {
         res.status(400).json({ message: "***veillez entrer correctement toutes les information du formulaire***"})
     }
    
-     
+    /*
+    let dateNaissance1 = new Date(dateNaissance).toLocaleDateString()
+    let dateInscription1 = new Date(dateInscription).toLocaleDateString()
+
+    let decouverteDateArrivee1
+
+    if(decouverteDateArrivee1 == Date){
+
+        decouverteDateArrivee1 = new Date(decouverteDateArrivee).toLocaleDateString()
+
+    }
+    */
+
         /*
     let { anciennete, decouverte, dateArrivee, nom, prenom, dateNaissance, sectionNumber,
         classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body;
@@ -429,7 +443,23 @@ exports.updateEleve = (req, res, next) => {
     } 
    
     console.log("****** la valeur sectionNumber : ****** " + sectionNumber )
-    
+    ////////////////////////////:
+
+    /*
+    let dateNaissance1 = new Date(dateNaissance).toLocaleDateString()
+    let dateInscription1 = new Date(dateInscription).toLocaleDateString()
+
+    let decouverteDateArrivee1
+
+    if(decouverteDateArrivee1 == Date){
+
+        decouverteDateArrivee1 = new Date(decouverteDateArrivee).toLocaleDateString()
+
+    }
+    */
+
+
+    //////////////////////////
     let classeId 
     let classeNomBase
     let sqlUpdateEffectif 

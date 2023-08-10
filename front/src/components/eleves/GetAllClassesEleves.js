@@ -8,7 +8,12 @@ const GetAllClassesEleves = () => {
 
     let navigate = useNavigate()
 
-    const {listeClassesContext} = useContext(AddEleveContext)
+    const {listeClassesContext, listePositionPageContext} = useContext(AddEleveContext)
+
+    let openpositionEleveContext = listePositionPageContext[1].openpositionEleveContext()
+    
+    console.log("**** openpositionEleveContext  dans getallpersonnels")
+    console.log(openpositionEleveContext)
 
     //gestion du choix des sections
     //let [ classeChoice, setClasseChoice ] = useState([])

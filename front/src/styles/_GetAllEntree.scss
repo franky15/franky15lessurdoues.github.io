@@ -60,26 +60,36 @@
         margin-top: 30px;
        // border: solid yellow;
 
-        .container {
+       //////////////////////////////
+       .containercharges{
 
-            width: 30%;
+           
+            //width: 30%;
             display: flex;
             justify-content: space-between;
 
-            //border: solid blue;
+           // border: solid blue;
 
-            &__btn {
+           
 
-                width: 46%;
+            input {
+
+                cursor: pointer;
+            }
+
+            .charges {
+
+                width: 31%; //46%
                 height: 70px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                border-radius: 10px;
+                border-radius: 5px;
                 font-weight: bold;
                 background-color: #eaeaea;
-                border: solid #979aa1;
+                border: solid 2px#979aa1;
+                cursor: pointer;
 
                 &--valeur {
 
@@ -88,14 +98,145 @@
 
                 
             }
+            
             .date {
 
                 display: flex;
                 flex-direction: column;
                 border-radius: 0px;
             }
+
+            .chargeBackground{
+
+                background-color: #517633;
+                color: white;
+                border: solid #517633;
+            }
+
+        }
+       /// ////////////////////
+       
+       
+        .container {
+
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+
+           // border: solid blue;
+
+           
+
+            input {
+
+                cursor: pointer;
+            }
+
+            &__btn {
+
+                width: 23%; //46%
+                height: 70px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+                font-weight: bold;
+                background-color: #eaeaea;
+                border: solid 2px#979aa1;
+                
+
+               // border: solid yellow;
+
+                
+
+                &--valeur {
+
+                   
+                    color: #517633;
+                   
+                }
+
+                
+            }
+            
+        }
+        .date {
+
+            display: flex;
+            flex-direction: column;
+            border-radius: 0px;
+            font-size: 12px;
+        }
+        .containerDateFiltre{
+
+            width: 25%;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            //border: solid;
+
+            &__btn {
+
+
+                width: 46%;
+                height: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                background-color: #eaeaea;
+                border: solid 2px#979aa1;
+
+                
+            }
+
+        }
+
+
+    }
+    
+
+    .rechercheContainer{
+
+        width: 25%;
+        height: 50px;
+        display: flex;
+        //justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+        margin-left: 40px;
+        border-radius: 5px;
+        background-color: #eaeaea;
+        border: solid 2px#979aa1;
+
+        label {
+
+            width: 10%;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+
+           // border: solid yellow;
+
+            .fa-magnifying-glass {
+
+                font-size: 30px;
+            }
+            
+
+        }
+        input {
+
+            width: 80%;
+            height: 25px;
+            background-color: #eaeaea;
+            border: solid  #eaeaea;
         }
     }
+    
 
     &__affichage {
 
@@ -107,11 +248,11 @@
 
         .titre {
 
-            width: 80%;
+            width: 90%;
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            //border: solid red;
+           // border: solid red;
 
             &__item {
 
@@ -125,30 +266,198 @@
             //width: 80%;
             display: flex;
             justify-content: space-between;
-            //border: solid yellow;
+
+           // border: solid yellow;
 
             &__container {
 
-                width: 80%;
+                width: 90%;  //90%;
                 display: flex;
                 justify-content: space-between;
+                
                // border: solid blue;
 
                 .titreValeur {
 
                     width: 25%;
-                   // border: solid red;
+                  // border: solid red;
                 }
             }
 
             .valeursIcon {
 
-                width: 20%;
+                width: 10%;
                 display: flex;
                 justify-content: space-between;
-               // border: solid blue;
+               // border: solid red;
+
+               
             }
+            .arrow{
+
+                width: 30px;
+               text-align: center;
+                background-color: white;
+                border: solid white;
+
+                .fa-solid {
+                
+                   
+                    font-size: 20px;
+                    cursor: pointer;
+    
+                   }
+                
+            }
+           
 
         }
+        
     }
+
+    .rechercheContainerblock{
+
+        width: 95%;
+        margin: auto;
+        margin-top: 50px;
+        display: flex;
+        //justify-content: space-between;
+        align-items: center;
+       // border: solid red;
+
+
+        .rechercheContainer1{
+
+            width: 25%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           // margin-top: 50px;
+           // margin-left: 40px;
+            border-radius: 5px;
+            background-color: #eaeaea;
+            border: solid 2px#979aa1;
+    
+            label {
+    
+                width: 10%;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+    
+               // border: solid yellow;
+    
+                .fa-magnifying-glass {
+    
+                    font-size: 30px;
+                }
+                
+    
+            }
+            input {
+    
+                width: 80%;
+                height: 25px;
+                background-color: #eaeaea;
+                border: solid  #eaeaea;
+            }
+
+            
+        }
+
+        .valeursIcon__choice{
+
+            width: 12%;
+            height: 50px;
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            background-color: #eaeaea;
+            border: solid 2px#979aa1;
+            border-radius: 5px;
+            cursor: pointer;
+
+            
+           
+        }
+        .valeursIcon__choice:hover{
+
+            background-color: #517633;
+            color: white;
+
+        }
+
+       
+    }
+}
+
+.detail {
+
+    width: 80%;
+    margin: auto;
+
+   //border: solid red 1px;
+
+    &__titre {
+
+        display: flex;
+        justify-content: space-between;
+        //border: solid red;
+
+        .titre {
+
+            width: 17%;
+            height: 70px;
+            padding-left: 10px;
+            color: white;
+            background-color: #808080;
+            font-weight: bold;
+            border: solid white 1px;
+            
+        }
+
+        .valeur {
+
+            width: 17%;
+            height: 30px;
+            padding-left: 10px;
+            color: black;
+            background-color: #eaeaea;
+            //font-weight: bold;
+            border: solid white 1px;
+        }
+    }
+}
+
+/////////////////////////////partie charges
+//
+.detailCharges{
+
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    border: solid black 2px;
+
+    &__titre{
+
+       // border: solid yellow;
+    }
+
+    &__valeur{
+
+        
+            height: 50px;
+            padding-left: 10px;
+            color: black;
+            background-color: white;
+            //font-weight: bold;
+            //border: solid black;
+
+    }
+
+    
+
 }

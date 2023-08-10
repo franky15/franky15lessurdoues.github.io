@@ -14,7 +14,16 @@ const GetAllClasses = () => {
 
     let [ eleveValue, seteleveValue ] = useState(" ")
     /////////////////////////////////////////////////////
-    let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
+    let  { listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
+
+    console.log("**** listePositionPageContext")
+    console.log(listePositionPageContext)
+
+    //const  openpositionPersonnelContext = listePositionPageContext[2].openpositionPersonnelContext()
+
+    //openpositionPersonnelContext()
+
+    
 
    console.log("*****listeElevesContext dans le composant getAll classes***")
    console.log(listeElevesContext)

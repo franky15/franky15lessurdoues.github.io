@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from "react-router-dom"
 //import { useNavigate } from 'react-router-dom';
 import { accountServices } from '../../_services/Account.services';
@@ -6,10 +6,12 @@ import CreateEleves from '../eleves/CreateEleve';
 
 import { AddEleveContext } from '../../_utils/ContextAddEleve';
 
+
+
 const HeaderAdmin = () => {
 
     ////////////////////////////
-   const { listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, confirmationEleveCreate, eleveCreate } = useContext(AddEleveContext)
+   const { listePositionPageContext, listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, confirmationEleveCreate, eleveCreate } = useContext(AddEleveContext)
     /////////////////////////////
 
    // const openWindowAddEleveContext = useContext(AddEleveContext)
@@ -36,6 +38,109 @@ const HeaderAdmin = () => {
         accountServices.logout()
         //navigate("/admin")
     }
+
+    ////////////////////////////////////////
+    //gestion des position de la page
+
+    /*
+    useEffect( () => {
+
+
+
+    }, [])
+    */
+
+    console.log("****** listePositionPageContext")
+    console.log(listePositionPageContext)
+
+    let listeAcceuil = listePositionPageContext[0]
+    let listeEleve = listePositionPageContext[1]
+    let listePersonnel = listePositionPageContext[2]
+    let listeCharge = listePositionPageContext[3]
+    let listeEntrees = listePositionPageContext[4]
+    
+    //gestion de la barre Acceuil
+    const acceuilPosition = () => {
+
+
+        const openColorAcceuil =  listeAcceuil.openpositionAcceuilContext()
+
+
+        const lockColorEleve  = listeEleve.lockpositionEleveContext()
+        const lockColorPersonnel= listePersonnel.lockpositionPersonnelContext()
+        const lockColorCharge = listeCharge.lockpositionChargesContext()
+        const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
+
+       // const lockColorAcceuil = listeAcceuil.lockpositionAcceuilContext()
+
+    }
+
+    //gestion de la barre eleve
+    const elevePosition = () => {
+
+        
+        const openColorEleve =  listeEleve.openpositionEleveContext()
+
+
+        const lockColorAcceuil = listeAcceuil.lockpositionAcceuilContext()
+        const lockColorPersonnel= listePersonnel.lockpositionPersonnelContext()
+        const lockColorCharge = listeCharge.lockpositionChargesContext()
+        const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
+
+       // const lockColorEleve  = listeEleve.lockpositionEleveContext()
+
+    }
+
+    //gestion de la barre personnel
+    const personnelPosition = () => {
+
+        
+        const openColorPersonnel =  listePersonnel.openpositionPersonnelContext()
+
+        const lockColorAcceuil = listeAcceuil.lockpositionAcceuilContext()
+        const lockColorEleve  = listeEleve.lockpositionEleveContext()
+        const lockColorCharge = listeCharge.lockpositionChargesContext()
+        const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
+       // const lockColorPersonnel= listePersonnel.lockpositionPersonnelContext()
+
+    }
+
+    //gestion de la barre charge
+    const chargesPosition = () => {
+
+        
+        const openColorCharge =  listeCharge.openpositionChargesContext()
+
+
+        const lockColorAcceuil = listeAcceuil.lockpositionAcceuilContext()
+        const lockColorEleve  = listeEleve.lockpositionEleveContext()
+        const lockColorPersonnel= listePersonnel.lockpositionPersonnelContext()
+        const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
+       // const lockColorCharge = listeCharge.lockpositionChargeContext()
+
+    }
+
+    //gestion de la barre entrée d'argent
+    const EntreesPosition = () => {
+
+        
+        const openColorEntree =  listeEntrees.openpositionEntreesContext()
+
+
+        const lockColorAcceuil = listeAcceuil.lockpositionAcceuilContext()
+        const lockColorEleve  = listeEleve.lockpositionEleveContext()
+        const lockColorPersonnel= listePersonnel.lockpositionPersonnelContext()
+        const lockColorCharge = listeCharge.lockpositionChargesContext()
+
+       // const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
+
+    }
+
+
+
+
+
+    //////////////////////////////////////////::
     
     return (
         <div className='headerAdmin'>
@@ -65,26 +170,113 @@ const HeaderAdmin = () => {
 
 
                 <div  className='menuContainer2__acceuil'>
-                   
-                    <p className='acceuilBtn'><Link to="/admin/classes" className='linkAdmin2'>Acceuil</Link></p>
+                   {
+
+                    listeAcceuil.positionAcceuilContext ?
+
+                
+                    <div className='acceuilBtn'>
+                        <div className='Bar' ></div>
+                        <Link to="/admin/classes" className='linkAdmin2' onClick={ acceuilPosition }>Acceuil</Link>
+                    
+                    </div>
+                    :
+                    <p ><Link to="/admin/classes" className='linkAdmin2' onClick={ acceuilPosition }>Acceuil</Link></p>
+                        
+                       
+                   }
+                    
                 </div>
 
                 <div className='menuContainer2__container'>
 
                     <div className='menuContainer2MiniContainer'>
-                        <p className=''><Link to="/admin/eleves/getallclasseseleve" className='linkAdmin2'>Elèves</Link></p>
+
+                         {
+
+                            listeEleve.positionEleveContext ?
+
+                        
+                            <div className='acceuilBtn'>
+                                <div className='Bar' ></div>
+                                <Link to="/admin/eleves/getallclasseseleve" className='linkAdmin2' onClick={ elevePosition }>Elèves</Link>
+                            
+                            </div>
+                            :
+                            
+                            <p className=''><Link to="/admin/eleves/getallclasseseleve" className='linkAdmin2' onClick={ elevePosition }>Elèves</Link></p>
+                                
+                            
+                        }
+                    
                         <div className='menuContainer2MiniContainer__bar'></div>
                     </div>
                     <div className='menuContainer2MiniContainer'>
-                        <p className=''><Link to="http://localhost:3001/admin/personnels" className='linkAdmin2'>Personnels</Link></p>
+
+                        {
+
+                            listePersonnel.positionPersonnelContext ?
+
+                        
+                            <div className='acceuilBtn'>
+                                <div className='Bar' ></div>
+                                <Link to="/admin/personnels" className='linkAdmin2' onClick={ personnelPosition }>Personnels</Link>
+                            
+                            </div>
+                            :
+                            <p className=''><Link to="/admin/personnels" className='linkAdmin2' onClick={ personnelPosition }>Personnels</Link></p>
+                           
+                        
+                       
+                        }
+                        
+                        <div className='menuContainer2MiniContainer__bar'></div>
+                    </div>
+
+                    <div className='menuContainer2MiniContainer'>
+
+                        {
+
+                            listeCharge.positionChargesContext ?
+
+                        
+                            <div className='acceuilBtn'>
+                                <div className='Bar' ></div>
+                                <Link to="/admin/comptacharges" className='linkAdmin2' onClick={ chargesPosition }>Charges</Link>
+                                
+                            
+                            </div>
+                            :
+                            <p className=''><Link to="/admin/comptacharges" className='linkAdmin2' onClick={ chargesPosition }>Charges</Link></p>
+                            
+                           
+                        
+                       
+                        }
+
+                       
                         <div className='menuContainer2MiniContainer__bar'></div>
                     </div>
                     <div className='menuContainer2MiniContainer'>
-                        <p className=''><Link to="" className='linkAdmin2'>Charges</Link></p>
-                        <div className='menuContainer2MiniContainer__bar'></div>
-                    </div>
-                    <div className='menuContainer2MiniContainer'>
-                        <p className=''><Link to="" className='linkAdmin2'>Entrés d'argent</Link></p>
+
+                        {
+
+                            listeEntrees.positionEntreesContext ?
+
+                        
+                            <div className='acceuilBtn'>
+                                <div className='Bar' ></div>
+                                <Link to="/admin/compta" className='linkAdmin2' onClick={ EntreesPosition }>Entrés d'argent</Link>
+                                
+                            
+                            </div>
+                            :
+                            <p className=''><Link to="/admin/compta" className='linkAdmin2' onClick={ EntreesPosition }>Entrés d'argent</Link></p>
+                           
+                        
+                       
+                        }
+                       
                     </div>
 
                 </div>

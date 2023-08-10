@@ -1,6 +1,6 @@
 //import des modules nécessaires
 const DB = require("../mysql.config")
-const { response } = require("../app");
+const { response } = require("../app"); 
 
 //POST creation du personnel
 exports.createPersonnel = (req, res, next) => {

@@ -1,14 +1,20 @@
-import React, {  useRef,useState } from 'react';
+import React, {  useRef,useState, useContext } from 'react';
 //import { Link, useNavigate } from 'react-router-dom'; // useNavigate permet de parametrer un lien vers lequel on sera redirigé 
 import { useEffect } from 'react';
 import { classesServices } from '@/_services/Classes.services';
 import { useNavigate } from 'react-router-dom';
 import { GetAllClassesEleves } from '../../components/eleves';
+import { AddEleveContext } from '../../_utils/ContextAddEleve';
 
 
 
 const Dashboard = ( ) => {
 
+    let  { listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
+    let openpositionAcceuilContext = listePositionPageContext[0].openpositionAcceuilContext()
+    
+    console.log("**** openpositionAcceuilContext  dans getallpersonnels")
+    console.log(openpositionAcceuilContext)
     console.log("*** Bienvenue dans le dashboard ***")
 
     let navigate = useNavigate()

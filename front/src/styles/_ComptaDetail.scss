@@ -3,7 +3,7 @@
     width: 80%;
     margin: auto;
 
-   // border: solid 1px;
+   //border: solid red 1px;
 
     &__titre {
 
@@ -35,3 +35,34 @@
         }
     }
 }
+
+/////////////////////////////partie charges
+//
+.detailCharges{
+
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    border: solid black 2px;
+
+    &__titre{
+
+       // border: solid yellow;
+    }
+
+    &__valeur{
+
+        
+            height: 50px;
+            padding-left: 10px;
+            color: black;
+            background-color: white;
+            //font-weight: bold;
+            //border: solid black;
+
+    }
+
+    
+
+}
+

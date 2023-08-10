@@ -14,7 +14,7 @@ const DetailsOnePersonnel = ( {  personnelId, listeElevesContext, listePersonnel
     return (
         <div className='detailsOneEleve'>
             
-            <p> GroupeSalariale : { personnel.groupeSalariale }</p>
+           
             <p> Email : { personnel.email }</p>
             <p> Salaire : { personnel.salaire }</p>
             
@@ -23,3 +23,5 @@ const DetailsOnePersonnel = ( {  personnelId, listeElevesContext, listePersonnel
 };
 
 export default DetailsOnePersonnel;
+
+// <p> GroupeSalariale : { personnel.groupeSalariale }</p>

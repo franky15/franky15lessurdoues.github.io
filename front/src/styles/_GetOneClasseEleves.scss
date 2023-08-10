@@ -6,6 +6,7 @@
     margin: auto;
     border: solid 1px ;
     padding-left: 20px;
+
     //border: solid red;
    z-index: 0;
 
@@ -14,12 +15,13 @@
         display: flex;
         justify-content: end;
         margin-right: 20px;
+        font-weight: bold;
        // border: solid;
     }
 
     &__btn1 {
 
-        width: 55%;
+        width: 65%;
         //border: solid red;
 
         
@@ -28,122 +30,174 @@
 
             display: flex;
             justify-content: space-between;
-            //border: solid yellow;
+            align-items: center;
+
+           // border: solid yellow;
+
+           .personnelBackground{
+
+            background-color: #517633;
+            color: white;
+            border: solid #517633;
+        }
+
+            .containerDateFiltre{
+
+                width: 35%;
+                display: flex;
+                justify-content: space-between;
+                
+              // border: solid red;
+
+                .containerDateFiltre__btn{
+                    
+                    width: 44%;
+                    height: 50px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    background-color: #eaeaea;
+                    border: solid #939292 2px;
+                    //border: solid blue;
+                }
+                label{
+                    font-size: 12px;
+                    padding-top: 4px;
+                }
+                .date{
+
+                   
+                    display: flex;
+                    justify-content: center;
+                   font-weight: bold;
+                    
+                }
+                input{
+
+                    width: 80%;
+                    margin: auto;
+                }
+            }
+            
 
             &__btn1 {
 
-                width: 30%;
-                height: 50px;
+                width: 29%;
+                height: 70px;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
-                border-radius: 10px;
+                border-radius: 5px;
                 cursor: pointer;
-                background-color: #d9d9d9;
-                opacity: 0.7;
+               
                 font-weight: bold;
-                border: solid #939292 1px;
-                //border: solid;
+                border: solid #939292 2px;
+                
+               // border: solid;
 
-                .btn__buttonDate {
+               
 
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 10px;
-                    background-color: #d9d9d9;
-                    border: solid #d9d9d9 0px;
-                }
-
-                .btn__donnee {
-
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    //border: solid;
-                }
+                
             }
+
+           
         }
+
+        
         
     }
 
     &__btn2 {
 
-        width: 50%;
+        width: 45%;
         height: 50px;
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
-       // border: solid;
+
+       // border: solid red;
 
         &--effectif {
 
-            width: 30%;
+            width: 25%;
             font-weight: bold;
            // border: solid red;
         }
 
         &--btn {
 
-            width: 70%;
+            width: 71%;
             display: flex;
             justify-content: space-between;
-           // border: solid red;
+           
+            //border: solid red;
 
             .btnInput { 
 
-                width: 55%;
+                width: 62%;
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                border-radius: 10px;
+                justify-content: space-around;
+                border-radius: 5px;
                 background-color: #d9d9d9;
                 opacity: 0.7;
                 font-weight: bold;
                 border: solid #939292 1px;
 
-                .inputSearch {
+                .recherche {
 
-                    width: 100%;
-                    height: 100%;
+                    width: 80%;
+                    height: 60%;
                     display: flex;
                     justify-content: space-around;
+                    background-color: #d9d9d9;
+                    border: #d9d9d9;
                     //border: solid;
 
-                    .loupe{
+                   
 
-                        width: 15%;
-                        display: flex;
-                        align-items: center;
-                        //border: solid;
-
-                        .fa-solid {
-
-                            font-size: 28px;
-                            
-                        }
-                    }
-
-                    input {
-
-                        width: 70%;
-                        background-color: #d9d9d9;
-                        border: solid 0px;
-                    }
+                    
                 }
-            }
-            .blocbtn2 {
+                label{
 
-                width: 38%;
+                    width: 10%;
+                    height: 60%;
+                    display: flex;
+                    align-items: center;
+
+                    //border: solid blue;
+                }
+                .fa-solid {
+
+                    
+                    display: flex;
+                    align-items: center;
+                    font-size: 28px;
+                    //border: solid ;
+
+                    
+                }
+
+                
+
+               
+            }
+            
+            .btn__button {
+
+                       
+                width: 30%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 10px;
+                border-radius: 5px;
                 background-color: #d9d9d9;
-                opacity: 0.7;
                 font-weight: bold;
+                cursor: pointer;
                 border: solid #939292 1px;
-            }
 
+               // border: solid red;
+            }
         }
     }
 
@@ -158,6 +212,7 @@
             width: 83%;
             display: flex;
             justify-content: space-between;
+            font-weight: bold;
            
            // border: solid;
 

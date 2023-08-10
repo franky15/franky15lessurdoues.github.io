@@ -11,33 +11,62 @@
 
         .blocBtn{
 
+            width: 60%;
             display: flex;
             justify-content: space-between;
-            width: 85%;
             margin-left: 20px;
            
-            //border: solid red;
+           // border: solid red;
             &__btn1 {
 
-                width: 18%;
+                width: 23%;
                 height: 60px;
                 display: flex;
-                
-                margin-top: 40px;
-                justify-content: space-between;
+                justify-content: space-around;
                 align-items: center;
+                font-weight: bold;
+                margin-top: 40px;
                 background-color: #eaeaea;
                 border: solid 1px #9e9d9d;
-                border-radius: 10px;
+                border-radius: 5px;
         
                 //border: solid blue;
+
+               ///////////////
+               position: relative;
+
+               .btn__button{
+
+                width: 100%;
+
+                height: 100%;
+                font-weight: bold;
+                cursor: pointer;
+
+                background-color: #eaeaea;
+                border: solid 0px;
+
+               
+
+               }
+               .personnelBackground {
+
+                color: white;
+                background-color: #517633;
+
+               }
+               .btn__donnee{
+
+                margin-left: 50px;
+                   
+               }
             }
 
         }
 
         &__btn2{
 
-            width: 70%; //25%
+            width: 50%; //25%
             height: 50px;
             margin-left: 20px;
             margin-top: 40px;
@@ -46,6 +75,70 @@
             align-items: center;
 
             //border: solid yellow;
+
+
+            //////////////////////////
+            
+            .totalPerson{
+
+                width: 22%;
+                font-weight: bold;
+               // border: solid red;
+            }
+            .rechercheContainer{
+
+                width: 50%;
+                height: 50px;
+                display: flex;
+                //justify-content: space-around;
+                align-items: center;
+               // margin-top: 50px;
+               // margin-left: 40px;
+                border-radius: 5px;
+                background-color: #eaeaea;
+                border: solid 1px#979aa1;
+        
+                label {
+        
+                    width: 10%;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+        
+                   // border: solid yellow;
+        
+                    .fa-magnifying-glass {
+        
+                        font-size: 30px;
+                    }
+                    
+        
+                }
+                input {
+        
+                    width: 80%;
+                    height: 25px;
+                    background-color: #eaeaea;
+                    border: solid  #eaeaea;
+                }
+            }
+
+            .btn__button{
+
+                width: 21%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                border-radius: 5px;
+                background-color: #eaeaea;
+                border: solid 1px#979aa1;
+                cursor: pointer;
+
+               // border: solid red;
+            }
+            /// //////////////////////////
 
             
         }
@@ -62,7 +155,7 @@
         align-items: center;
         background-color: #eaeaea;
         border: solid 1px #9e9d9d;
-        border-radius: 10px;
+        border-radius: 5px;
 
         
 
@@ -93,6 +186,17 @@
             font-size: 20px; //28px
         }
     }
+    ////////////////////////////////////
+    /// //rajout dans Getallpersonnel
+    .getOneClasseEleves__btn3--titre{
+
+        font-weight: bold;
+    }
+    .enseignant{
+        font-weight: bold;
+    }
+
+     ////////////////////////////////////
 
     &__section {
         
