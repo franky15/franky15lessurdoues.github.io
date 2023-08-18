@@ -6,7 +6,7 @@ import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisate
 import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "@/pages/Admin/classes"
 import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "@/components/eleves"
 import { GetAllEntree, GetOneEntree, CreateOneEntree, ComptaDetail   } from '@/pages/Admin/Compta';
-import { GetAllComptaCharges, GetOneComptaCharge, CreateOneComptaCharge, ComptaChargeDetail   } from "../../pages/Admin/comptaCharges";
+import { GetAllComptaCharges, GetOneComptaCharge, CreateOneComptaCharge  } from "../../pages/Admin/comptaCharges";
 
 import { Dashboard } from "@/pages/Admin"
 
@@ -60,7 +60,7 @@ const AdminRouter = () => {
                     <Route path='getall' element={ <GetAllComptaCharges/> } /> 
                     <Route path='add' element={ <CreateOneComptaCharge/> } /> 
                     <Route path='getone/:id' element={ <GetOneComptaCharge /> } />
-                    <Route path='detail' element={ <ComptaChargeDetail /> } /> 
+                   
                     <Route path='*' element = { <Error/> }/> 
                 </Route>
 

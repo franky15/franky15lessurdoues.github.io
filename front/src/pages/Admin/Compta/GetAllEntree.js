@@ -127,24 +127,143 @@ const GetAllEntree = () => {
 console.log("**** idEleveCurrent " )
 console.log( idEleveCurrent)
 
-   
-let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves_id === idEleveCurrent.idEleve)  //eleve.id
-
-//console.log("***** paiementCurrent")
-//// console.log(paiementCurrent)
+//calcule des sous totaux
 
 
- let dernierElementPaiementCurrent = paiementCurrent[paiementCurrent.length - 1]
+//////////////////////////::
+let [listeScolariteEleve1, setlisteScolariteEleve1 ] = useState([])
 
-// console.log("***** dernierElementPaiementCurrent")
- //console.log(dernierElementPaiementCurrent)
+let [ listetenueClasseEleve1, setlistetenueClasseEleve1 ] = useState([])
+
+let [listeTransportEleve1 , setlisteTransportEleve1  ] = useState([])
+
+let [listeCantineEleve1 , setlisteCantineEleve1  ] = useState([])
+
+let [ mergeChiffreAffaire1 , setmergeChiffreAffaire1  ] = useState() 
+
+let [ mergeChargeTotale1 , setmergeChargeTotale1  ] = useState() 
+
+
+let [ benefice1 , setbenefice1  ] = useState()
+
+
+
+///////////////////////////
+useEffect( () => {
+
+    //let listeScolariteEleve1 = listeElevesContext.map( element => element.scolariteTotale)
+    let listeScolariteEleve1 = listePaiementContext.map( element => element.scolarite)
+
+    setlisteScolariteEleve1(listeScolariteEleve1 )
+
+    //let listetenueClasseEleve1 = listeElevesContext.map( element => element.tenueClasseTotale)
+    let listetenueClasseEleve1 = listePaiementContext.map( element => element.tenueClasse)
+
+    setlistetenueClasseEleve1( listetenueClasseEleve1 )
+
+    //let listeTransportEleve1 = listeElevesContext.map( element => element.transportTotale)
+    let listeTransportEleve1 = listePaiementContext.map( element => element.transport)
+
+    setlisteTransportEleve1( listeTransportEleve1 )
+
+    ///let listeCantineEleve1 = listeElevesContext.map( element => element.cantineTotale)
+    let listeCantineEleve1 =listePaiementContext.map( element => element.cantine)
+    setlisteCantineEleve1( listeCantineEleve1 )
+
+
+     //récupération de tous les montants payé
+     const listeMontantPaye = listePaiementContext.map( element => element.montantPaye)
+
+     console.log("***** listeMontantPaye")
+     console.log(listeMontantPaye)
+ 
+ 
+     //calcul du chifffre d'affaire
+     const mergeChiffreAffaire1 = listeMontantPaye.reduce( (acc, current) => {
+ 
+        // console.log("***** acc.montantPaye += current.montantPaye")
+         //console.log(acc + current)
+ 
+         return acc + current
+ 
+     }, 0 )
+
+     setmergeChiffreAffaire1(mergeChiffreAffaire1 )
+ 
+      //récupération de tous les montants payé
+      const listeMontantPayeCharge = listeChargesContext.map( element => element.montantPaye)
+ 
+     //calcul du chifffre d'affaire listeChargesContext
+     const mergeChargeTotale1 = listeMontantPayeCharge.reduce( (acc, current) => {
+ 
+        // console.log("***** acc.montantPaye += current.montantPaye")
+        // console.log(acc + current)
+ 
+         return acc + current
+ 
+     }, 0 )
+
+     setmergeChargeTotale1(mergeChargeTotale1)
+ 
+     const benefice1 = mergeChiffreAffaire1 - mergeChargeTotale1
+
+     setbenefice1(benefice1)
+
+
+
+},[listeElevesContext, listeChargesContext, listePaiementContext ])
+
+console.log("***** listeScolariteEleve1" )
+console.log( listeScolariteEleve1 )
+
+console.log("*****  listetenueClasseEleve1" )
+console.log(  listetenueClasseEleve1 )
+
+console.log("*****  listeTransportEleve1" )
+console.log(  listeTransportEleve1 )
+
+console.log("*****  listeCantineEleve1" )
+console.log(  listeCantineEleve1 )
+
+console.log("***** mergeChiffreAffaire1")
+ console.log(mergeChiffreAffaire1)
+
+ console.log("***** mergeChargeTotale1")
+ console.log(mergeChargeTotale1)
+
+ console.log("***** benefice")
+ console.log(benefice1)
+
+
+ //eleve.id
+ /*
+ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves_id === idEleveCurrent.idEleve) 
+
+ let listeTotaux = [...listeScolariteEleve1, ...listetenueClasseEleve1, ...listeTransportEleve1, ...listeCantineEleve1  ]
+
+ //calcule du chiffre d'affaire
+ console.log("***** listeTotaux ")
+ console.log( listeTotaux)
+
+ const mergeChiffreAffaire1 = listeTotaux.reduce( (acc, current) => {
+     
+     return acc + current
+ }, 0)
+
+ console.log("***** mergeChiffreAffaire1")
+ console.log(mergeChiffreAffaire1)
+*/
+
+
+
 
  ///////////////////////////////////////:
+ /*
     //récupération de tous les montants payé
     const listeMontantPaye = listePaiementContext.map( element => element.montantPaye)
 
-   // console.log("***** listeMontantPaye")
-   // console.log(listeMontantPaye)
+    console.log("***** listeMontantPaye")
+    console.log(listeMontantPaye)
 
 
     //calcul du chifffre d'affaire
@@ -170,14 +289,15 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
 
     }, 0 )
 
+    const benefice = mergeChiffreAffaire1 - mergeChargeTotale
     //console.log("****** mergeChargeTotale  dans charges")
     //console.log(mergeChargeTotale )
 
-    const benefice = mergeChiffreAffaire - mergeChargeTotale
+   
 
+    //const benefice = mergeChiffreAffaire - mergeChargeTotale
 
-   // console.log("****** mergeChiffreAffaire")
-   // console.log(mergeChiffreAffaire)
+    */
 
     //calcul du montant total payé par l'élève
 
@@ -188,6 +308,7 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
     // console.log(listeMontantTotalEleve)
  
  
+    /*
      //calcul du montant total payé par l'élève
      const mergemontantTotalEleve = listeMontantTotalEleve.reduce( (acc, current) => {
  
@@ -197,6 +318,7 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
          return acc + current
  
      }, 0 )
+     */
  
     // console.log("****** mergemontantTotalEleve ")
     // console.log(mergemontantTotalEleve )
@@ -216,17 +338,19 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
 
  
 
-     let listeScolariteEleve = listePaiementContext.map( element => element.scolarite)
-     let listetenueClasseEleve = listePaiementContext.map( element => element.tenueClasse)
-     let listeTransportEleve = listePaiementContext.map( element => element.transport)
-     let listeCantineEleve = listePaiementContext.map( element => element.cantine)
+
+    
+
+     //let listeScolariteEleve = listePaiementContext.map( element => element.scolarite)
+     //let listetenueClasseEleve = listePaiementContext.map( element => element.tenueClasse)
+     //let listeTransportEleve = listePaiementContext.map( element => element.transport)
+     //let listeCantineEleve = listePaiementContext.map( element => element.cantine)
 
     let valeursTotauxCategorie = {}
 
     
-
-   //let listelistePaiementCategorie = [ listeScolariteEleve, listetenueClasseEleve, listeTransportEleve, listeCantineEleve]
-   let listelistePaiementCategorie = [ { scolarite: listeScolariteEleve }, { tenueClasse: listetenueClasseEleve}, { transport : listeTransportEleve}, { cantine : listeCantineEleve}]
+    //let listelistePaiementCategorie = [ { scolarite: listeScolariteEleve }, { tenueClasse: listetenueClasseEleve }, { transport : listeTransportEleve }, { cantine : listeCantineEleve }]
+   let listelistePaiementCategorie = [ { scolarite: listeScolariteEleve1 }, { tenueClasse: listetenueClasseEleve1}, { transport : listeTransportEleve1}, { cantine : listeCantineEleve1}]
    ///////////////////////////
       //calcul du montantde la catégorie totale payée par l'élève
 
@@ -381,7 +505,7 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
  
         // console.log("mon  value : " +  e.target.value)
      
-     }else if(e.target.value === "scolarite" || e.target.value === "tenueClasse" || e.target.value === "transport"  || e.target.value === "cantine"  ){
+     } /*else if(e.target.value === "scolarite" || e.target.value === "tenueClasse" || e.target.value === "transport"  || e.target.value === "cantine"  ){
 
         console.log("***** bienvenue dans onchange  bouton filtre" )
 
@@ -401,7 +525,7 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
         // console.log("****** filtrebtnEntree") 
         // console.log(filtrebtnEntree)  
 
-    }
+    }*/
      
      
  }
@@ -486,13 +610,13 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
                     <div className='getAllEntree__chiffreEntree--valeur'>
 
                         <p className='getAllEntree__chiffreEntree--element chiffreAffaire' >
-                            Chiffre d'affaire : {mergeChiffreAffaire} FCFA
+                            Chiffre d'affaire : {mergeChiffreAffaire1} FCFA
                         </p>
                         <p className='getAllEntree__chiffreEntree--element chargeTotale' >
-                            Charge Totale : {mergeChargeTotale} FCFA
+                            Charge Totale : {mergeChargeTotale1} FCFA
                         </p>
                         <p className='getAllEntree__chiffreEntree--element benefice' >
-                            Bénéfice : {benefice} FCFA
+                            Bénéfice : {benefice1} FCFA
                         </p>
 
                     </div>
@@ -541,20 +665,23 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
                     
                     }
 
-                    <form className='containerDateFiltre '>
+                 
+                        <form className='containerDateFiltre deactiveDate' >
 
-                        <di className='containerDateFiltre__btn '>
-                            <label for="dateDebut" className='date'> Date début</label>
-                            <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateDebut  } onChange  ={  onchange } />
-                            
-                        </di>
-                        <di className='containerDateFiltre__btn '>
-                            <label for="dateFin" className='date'> Date de fin</label>
-                            <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateFin  }  onChange ={  onchange }/>
-                            
-                        </di>
+                            <di className='containerDateFiltre__btn deactiveDate__btn'>
+                                <label for="dateDebut" className='date'> Date début</label>
+                                <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateDebut  } onChange  ={  onchange } disabled />
+                                
+                            </di>
+                            <di className='containerDateFiltre__btn deactiveDate__btn'>
+                                <label for="dateFin" className='date'> Date de fin</label>
+                                <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateFin  }  onChange ={  onchange } disabled/>
+                                
+                            </di>
 
-                    </form>
+                        </form>
+
+                 
                 </div>
 
                 <div className='rechercheContainerblock'>
@@ -562,12 +689,12 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
                     <form className='rechercheContainer1'>
 
                         <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
-                        <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
+                        <input type='text' name='recherche' id='recherche' className='recherche' placeholder="Nom élève, Prénom élève, Nom Parent, Téléphone parent"
                         value={ valeurInputEntree.value } onFocus={ openFocus } onBlur={ lockFocus }  onChange ={  onchange }/>
 
                     </form>
                     
-                    <div className='valeursIcon__choice' onClick={ () =>  windowShowCreateCompta()  }> Ajouter un paiement</div>
+                   
 
                 </div>
 
@@ -633,6 +760,7 @@ let paiementCurrent = listePaiementContext.filter( (paiement) => paiement.eleves
                                 <div className='valeursIcon' >
                                                                                                         
                                 
+                                <div className='valeursIcon__choice'> <i className="fa-solid fa-plus"  onClick={ () =>  windowShowCreateCompta(eleve.id)  } ></i></div>
 
                                     {  <button   style={{ display: 'block' }} className={ `arrow  arrowDow${eleve.id}` }  value={eleve.nom}  > <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> </button> }
                                     {  <button style={{ display: 'none' }} className={ `arrow  arrowUp${eleve.id}` } value={eleve.nom} > <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(eleve.id) } ></i> </button>} 

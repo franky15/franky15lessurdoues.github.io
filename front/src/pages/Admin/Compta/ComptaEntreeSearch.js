@@ -116,28 +116,44 @@ console.log( idEleveCurrent)
 
 ////////////////////////////////////////
 
+
+
 let dateDebut = valeurInputDateEntree.dateDebut
 let dateFin = valeurInputDateEntree.dateFin
 
+console.log("******  dateDebut")
+console.log( dateDebut)
 
-/*
-let dateDebut = datePaiement.dateDebut
-let dateFin = datePaiement.dateFin
-*/
+console.log("******  dateFin")
+console.log( dateFin)
+
+
+
 let mergeTable = [ ...listeElevesContext, ...listePaiementContext]
 
 console.log("****** mergeTable")
 console.log(mergeTable)
 
-let valeurInputEntree = mergeTable.filter( elevePaiement => elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree || elevePaiement.prenom.toUpperCase() === valeurInputSearchEntree || elevePaiement.prenom === valeurInputSearchEntree || elevePaiement.nom.toLowerCase()=== valeurInputSearchEntree ||  
+//let valeurInputEntree
 
-    elevePaiement.nom.toUpperCase() === valeurInputSearchEntree || elevePaiement.nom === valeurInputSearchEntree || elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree  ||  elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree  ||
-    elevePaiement.nomParent1.toUpperCase()  === valeurInputSearchEntree  ||
-    elevePaiement.contactParent1 === valeurInputSearchEntree  || ( elevePaiement.dateDernierPaiement  >= dateDebut &&  elevePaiement.dateDernierPaiement  <= dateFin ) )
-    
-    
-console.log("***** valeurInputEntree de comptaEntreeSearch")
-console.log(valeurInputEntree)
+
+let valeurInputEntree = mergeTable.filter( elevePaiement => (elevePaiement.prenom && (elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) ) ||  (elevePaiement.nom && (elevePaiement.nom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) ) ||  
+
+( elevePaiement.nomParent1 &&  ( elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) )  || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom.toLowerCase()  +  " " +   elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) /* ||
+   
+   ( elevePaiement.dateDernierPaiement  >= dateDebut  &&  elevePaiement.dateDernierPaiement  <= dateFin)  */ )
+
+
+
+/*
+   let valeurInputEntree = mergeTable.filter( elevePaiement => (elevePaiement.prenom === valeurInputSearchEntree ) ||   (elevePaiement.nom === valeurInputSearchEntree ) ||  
+
+(   elevePaiement.nomParent1 === valeurInputSearchEntree )  || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom  +  " " +   elevePaiement.prenom === valeurInputSearchEntree ) ||
+   
+   ( elevePaiement.dateDernierPaiement  >= dateDebut  &&  elevePaiement.dateDernierPaiement  <= dateFin)   )
+
+*/
+
 
 
 
@@ -162,6 +178,7 @@ console.log(valeurInputEntree)
 
                                     <div className='titreValeur'>{eleve.nom}</div>
                                     <div className='titreValeur'>{eleve.prenom}</div>
+                                    
 
                                    { 
                                       
@@ -172,7 +189,7 @@ console.log(valeurInputEntree)
                                                                      ?
 
                                         <div className='titreValeur'  >{ (eleve.dateDernierPaiement) }</div>
-                                        :
+                                       :
 
                                         <div className='titreValeur'  >{ (eleve.dateInscription)  }</div>
                                         
@@ -181,6 +198,7 @@ console.log(valeurInputEntree)
                                     }
 
                                     {
+                                    
                                         eleve.montantTotalEleve ?
 
                                              <div className='titreValeur'>{eleve.montantTotalEleve }</div>
@@ -189,7 +207,7 @@ console.log(valeurInputEntree)
                                         
                                             <div className='titreValeur'>{eleve.montantPaye  }</div>
                                         
-                                    
+                                        
                                     }
 
                                     

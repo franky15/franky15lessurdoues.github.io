@@ -15,6 +15,11 @@
     width: 90%;
     margin: auto;
 
+    ////////////////////
+    position: relative;
+
+     ////////////////////
+
     border: solid 1px;
 
     &__chiffreEntree {
@@ -195,10 +200,40 @@
 
         }
 
+        .deactiveDate{ //pour les entrées d'argent montrer que c'est désactivé
+
+            opacity: 0.3;
+        }
+       
+
 
     }
     
+    .blockAdd{  //présent dans charges
 
+        
+       display: flex;
+       align-items: center;
+      
+        //border: solid red;
+
+        .valeursIcon__choice{
+
+            width: 15%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 30px;
+            margin-top: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: #eaeaea;
+            border: solid 2px#979aa1;
+            cursor: pointer;
+        }
+    }
     .rechercheContainer{
 
         width: 25%;
@@ -386,6 +421,7 @@
         .valeursIcon__choice:hover{
 
             background-color: #517633;
+           
             color: white;
 
         }
@@ -453,11 +489,40 @@
             padding-left: 10px;
             color: black;
             background-color: white;
-            //font-weight: bold;
+           // font-weight: bold;
             //border: solid black;
+
+            .valeurSpan{
+
+                font-weight: bold;
+            }
 
     }
 
     
+    
 
 }
+
+
+
+.componentCreateEntree{
+
+    width: 100%;
+ 
+    position: absolute;
+    top: 640px;
+   // border: solid red;
+}
+
+/*
+#detail1{
+
+    //width: 80%;
+    margin: auto;
+    background-color: #808080;
+   // box-shadow: 2px 2px 21px -1px rgba(0,0,0,0.99);
+    border: solid 1px;
+}
+*/
+

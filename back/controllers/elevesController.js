@@ -12,17 +12,7 @@ exports.createEleve = (req, res, next) => {
     console.log("*** req.body *** " )
     console.log(req.body) 
 
-   /* let { anciennete, decouverteDateArrivee, nom, prenom, dateNaissance, sectionNumber,
-        classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body;
-    
-        if( !anciennete || !decouverteDateArrivee || !nom || !prenom || !dateNaissance || !sectionNumber ||
-        !classes_id  || !dateInscription || !montantPaye ||  !nomParent1 || !contactParent1    ){
-
-        console.log("***veillez entrer correctement toutes les information du formulaire*** ")
-        res.status(400).json({ message: "***veillez entrer correctement toutes les information du formulaire***"})
-    }
-    
-    */
+  
     
     //new Date(dateFormatee).toLocaleDateString("fr")
 
@@ -35,49 +25,6 @@ exports.createEleve = (req, res, next) => {
         console.log("***veillez entrer correctement toutes les information du formulaire*** ")
         res.status(400).json({ message: "***veillez entrer correctement toutes les information du formulaire***"})
     }
-   
-    /*
-    let dateNaissance1 = new Date(dateNaissance).toLocaleDateString()
-    let dateInscription1 = new Date(dateInscription).toLocaleDateString()
-
-    let decouverteDateArrivee1
-
-    if(decouverteDateArrivee1 == Date){
-
-        decouverteDateArrivee1 = new Date(decouverteDateArrivee).toLocaleDateString()
-
-    }
-    */
-
-        /*
-    let { anciennete, decouverte, dateArrivee, nom, prenom, dateNaissance, sectionNumber,
-        classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body;
-
-    */ 
-
-
-        //cas ou le parent 2 n'existe pas
-   /* if( !req.body.nomParent2 || !req.body.contactParent2 ) { 
-
-        if( !anciennete ||  !nom || !prenom || !dateNaissance || !sectionNumber ||
-            !classes_id || !nomParent1 || !contactParent1 || !dateInscription || !montantPaye   ) {  //|| !nomParent2 || !contactParent2
-    
-            res.status(400).json({ message: "veillez remplir toutes les données du formulaire "})
-        }
-
-    }else{
-
-         //cas ou le parent 2 existe
-        let { anciennete, decouverte, dateArrivee, nom, prenom, dateNaissance, sectionNumber,
-            classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = req.body;
-
-        if( !anciennete || decouverte || dateArrivee || !nom || !prenom || !dateNaissance || !sectionNumber ||
-            !classes_id || !nomParent1 || !contactParent1 || !nomParent2 || !contactParent2 || !dateInscription || !montantPaye   ) {  //|| !nomParent2 || !contactParent2
-    
-            res.status(400).json({ message: "veillez remplir toutes les données du formulaire "})
-        }
-    }
-    */
     
 
     //on l'utilisera pour insérer le userId dans utilisateurs_id
@@ -190,9 +137,9 @@ exports.createEleve = (req, res, next) => {
                                    
                                     //requete de création de l'élève
                                     sqlCreateEleve = `INSERT INTO eleves ( anciennete, decouverteDateArrivee, nom, prenom, dateNaissance, section_id,
-                                        classes_id, utilisateurs_id, nomParent1, contactParent1, dateInscription, montantPaye)
+                                        classes_id, utilisateurs_id,scolariteTotale, montantTotalEleve, nomParent1, contactParent1, dateInscription, montantPaye)
                                     VALUES (  "${anciennete}", "${decouverteDateArrivee}", "${nom}", "${prenom}", "${dateNaissance}", ${sectionNumber},
-                                        ${classeId}, ${utilisateurs_id}, "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
+                                        ${classeId}, ${utilisateurs_id}, ${montantPaye} , ${montantPaye}, "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
     
 
 
@@ -202,63 +149,23 @@ exports.createEleve = (req, res, next) => {
                                    
                                     //requete de création de l'élève
                                     sqlCreateEleve = `INSERT INTO eleves ( anciennete, decouverteDateArrivee, nom, prenom, dateNaissance, section_id,
-                                        classes_id, utilisateurs_id, nomParent1, contactParent1, dateInscription, montantPaye)
+                                        classes_id, utilisateurs_id, scolariteTotale, montantTotalEleve, nomParent1, contactParent1, dateInscription, montantPaye)
                                     VALUES (  "${anciennete}", "${decouverteDateArrivee}", "${nom}", "${prenom}", "${dateNaissance}", ${sectionNumber},
-                                        ${classeId}, ${utilisateurs_id}, "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
+                                        ${classeId}, ${utilisateurs_id}, ${montantPaye} , ${montantPaye},  "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
     
-
-                                 }
-                                /*
-                                if(!nomParent2 || !contactParent2 ){
-
-                                   if(decouverte === undefined) {
-
-
-                                    console.log("ma requete sqlCreateEleve avec des valeurs nulles et sans decouverte  : ")
-                                   
-                                    //requete de création de l'élève
-                                    sqlCreateEleve = `INSERT INTO eleves ( anciennete, dateArrivee, nom, prenom, dateNaissance, section_id,
-                                        classes_id, utilisateurs_id, nomParent1, contactParent1, dateInscription, montantPaye)
-                                    VALUES (  "${anciennete}", "${dateArrivee}", "${nom}", "${prenom}", "${dateNaissance}", ${sectionNumber},
-                                        ${classeId}, ${utilisateurs_id}, "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
-    
-                                   }else{
-
-                                    console.log("ma requete sqlCreateEleve avec des valeurs nulles et sans dateArrivee : ")
-                                   
-                                    //requete de création de l'élève
-                                    sqlCreateEleve = `INSERT INTO eleves ( anciennete, decouverte, nom, prenom, dateNaissance, section_id,
-                                        classes_id, utilisateurs_id, nomParent1, contactParent1, dateInscription, montantPaye)
-                                    VALUES (  "${anciennete}", "${decouverte}", "${nom}", "${prenom}", "${dateNaissance}", ${sectionNumber},
-                                        ${classeId}, ${utilisateurs_id}, "${nomParent1}", ${contactParent1}, "${dateInscription}", ${montantPaye} );`
-    
-                                   } 
-
+ 
+                                 } 
                                
-                                }else  { 
-
-                                    
-
-                                        console.log("ma requete sqlCreateEleve sans valeurs nulles  : ")
-                                    
-                                        //requete de création de l'élève
-                                        sqlCreateEleve = `INSERT INTO eleves ( anciennete, decouverte, dateArrivee, nom, prenom, dateNaissance, section_id,
-                                            classes_id, utilisateurs_id, nomParent1, contactParent1, nomParent2, contactParent2 , dateInscription, montantPaye)
-                                        VALUES (  "${anciennete}", "${decouverte}","${dateArrivee}", "${nom}", "${prenom}", "${dateNaissance}", ${sectionNumber},
-                                            ${classeId}, ${utilisateurs_id}, "${nomParent1}", ${contactParent1}, "${nomParent2}", ${contactParent2}, "${dateInscription}", ${montantPaye} );`
-                                    
-                                    
-                                
-                                } 
-                                */
-                                
-                            
+                                 console.log("****** sqlCreateEleve")
                                 console.log(sqlCreateEleve)
                                     
+                                
+
                                 DB.query( sqlCreateEleve, (err, response3) => {
 
                                     ///////////////////////
 
+                                    let listeEleveBase
                                     //gestion de la mise à jour de l'effectif de la classe
                                     
                                     DB.query( sqlSelectAllEleves, (errEleve, resEleve) => {
@@ -269,6 +176,7 @@ exports.createEleve = (req, res, next) => {
                                             res.status(404).json({errEleve})
                                         }else{
 
+                                             listeEleveBase = resEleve
                                             console.log(" ****** resEleve")
                                             console.log(resEleve)
 
@@ -291,10 +199,154 @@ exports.createEleve = (req, res, next) => {
                                                    
                                                 }
                                             })
+
+
+
+                                             ////////////////////////////////////
+
+                                             //récupération de l'id du dernier élève crée
+                                             let dernierEleveCree = resEleve[resEleve.length - 1]
+
+                                             console.log("***** dernierEleveCree")
+                                             console.log(dernierEleveCree)
+
+                                             let scolarite= "scolarite"
+
+                                             //requete de création du paiement  
+
+                                             /******** */
+
+                                             
+                                             //formatage de la date avant d'éxécuter la requete
+                                             
+                                             const moment = require('moment');
+
+                                             // Date au format initial
+                                             const dateStr = `${dernierEleveCree.dateInscription}`;
+                                             
+                                             // Convertir la date en objet Moment
+                                             const dateObj = moment(dateStr, "ddd MMM DD YYYY HH:mm:ss Z");
+                                             
+                                             // Extraire l'année, le mois et le jour
+                                             const year = dateObj.format("YYYY");
+                                             const month = dateObj.format("MM");
+                                             const day = dateObj.format("DD");
+                                             
+                                             // Maintenant, vous pouvez utiliser ces valeurs dans votre requête SQL
+                                             const sqlQuery = `
+                                               INSERT INTO entreesArgent (scolarite, datePaiement, montantPaye, eleves_id)
+                                               VALUES (500, '${year}-${month}-${day}', 500, 118);
+                                             `;
+                                            
+                                             /******** */
+
+                                            let sqlCreatePaiement = `INSERT INTO entreesArgent ( scolarite, datePaiement, montantPaye, eleves_id )
+                                            VALUES ( ${parseInt(dernierEleveCree.montantPaye)},  '${year}-${month}-${day}', ${parseInt(dernierEleveCree.montantPaye)}, ${dernierEleveCree.id} ) ;`
+           
+                                            console.log(" ****** la requete est sqlCreatePaiement")
+                                            console.log( sqlCreatePaiement)
+
+                                            DB.query( sqlCreatePaiement, (errsqlCreatePaiement, ressqlCreatePaiement) =>{
+
+                                                console.log("bienvenue au test sqlCreatePaiement")
+
+                                                if(errsqlCreatePaiement){ 
+
+                                                    console.log("***erreur de errsqlCreatePaiement *** " +  errsqlCreatePaiement) 
+                                                    res.status(400).json({errsqlCreatePaiement})
+                                                   
+                                        
+                                                }else{
+
+
+                                                    console.log("le paiement a été crée avec succès pour la première creation de l'élève")
+
+                                                }
+
+
+                                                /********************** */
+                                                         ////////////
+
+                                                    let sqlAllPaiementEntree = "SELECT * FROM entreesArgent"
+                                                    
+                                                
+
+                                                    DB.query( sqlAllPaiementEntree, (errsqlAllPaiementEntree, ressqlAllPaiementEntree) =>{
+
+
+                                                        console.log(" resultat récupération de toutes les entrées sqlAllPaiementEntree")
+                                                        console.log(ressqlAllPaiementEntree)
+
+                                                        if(errsqlAllPaiementEntree){ 
+
+                                                            console.log("***erreur de errsqlAllPaiementEntree *** " +  errsqlAllPaiementEntree)  
+                                                            res.status(400).json({errsqlAllPaiementEntree})
+                                                        
+                                                        
+                                                        }else{
+
+                                                            let dernierpaiement2 = ressqlAllPaiementEntree[ressqlAllPaiementEntree.length - 1]
+                                                            
+                                                            console.log("**** dernierpaiement2")
+                                                            console.log(dernierpaiement2)
+                                                        
+                                                            //requete de mis à jour de l'élève
+                                                            let sqlUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement2.id } WHERE id = ${ dernierpaiement2.eleves_id } ;`   
+
+                                                            DB.query( sqlUpdateEleve, (errsqlUpdateEleve, ressqlUpdateEleve) =>{
+
+                                                                if(errsqlUpdateEleve){ 
+
+                                                                    console.log("***erreur de errsqlUpdateEleve *** " +  errsqlUpdateEleve) 
+                                                                    res.status(400).json({errsqlUpdateEleve})
+ 
+                                                        
+                                                                }else{
+
+
+                                                                    console.log("l'id entreesArgent a été mis à jour avec succès")
+
+                                                                   
+                                                                }
+                                                                
+
+                                                            })
+
+                                                        }
+
+
+                                                    })
+
+
+
+                                                /************************** */
+
+                                            })
+
+                                           
+                                            ////////////////////////////////////
+
                                            
                                         }
 
                                     })
+
+
+                                    ////////////////////////////////////
+
+                                     //mise à jour de entreesArgent_id de l'élève
+
+                                    
+                                     console.log(" ****** listeEleveBasee")
+                                     console.log(listeEleveBase)
+                                   
+                                   
+
+
+
+                                     ////////////////////////////////////
+
+                                    
 
 
                                     ///////////////////////
@@ -313,6 +365,7 @@ exports.createEleve = (req, res, next) => {
                                         console.log("***élève crée avec succès*** ")   
                                     } 
                                 })
+                                
                             
                             
                             }

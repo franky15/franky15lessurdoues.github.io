@@ -275,6 +275,8 @@ const GetOneClasseEleves = () => {
      //gestion du state de l'apparition de la fenêtre creation élévève
      let [ createEleve, setcreateEleve ] = useState(false)
 
+    const  lockAddEleveWindow = () => { setcreateEleve(false) }
+
     const  createEleveFunction = () => {
 
         setcreateEleve(true)
@@ -754,7 +756,7 @@ const onchange = (e) => {
             {  showWindowEleveTransfert && <TransfertOneEleve  lockshowWindowEleveTransfert={lockshowWindowEleveTransfert} openshowWindowEleveTransfert={openshowWindowEleveTransfert} showWindowEleveTransfert={showWindowEleveTransfert} setshowWindowEleveTransfert={setshowWindowEleveTransfert} idClasse={idClasse}   eleveId={eleveId} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  } 
             
             { 
-                createEleve &&  <CreateEleve/> 
+                createEleve &&  <CreateEleve lockAddEleveWindow /> 
                 
             }
         </div>

@@ -4,6 +4,7 @@ import { elevesServices } from "../_services/Eleves.services";
 import { personnelServices } from "../_services/Personnels.services";
 import { comptaServices } from "../_services/Compta.Services";
 import { comptaChargesServices } from "../_services/ComptaCharges.services";
+import { userServices } from "../_services/Utilisateurs.services";
 
 
 
@@ -24,6 +25,8 @@ export const ContextAddEleveProvider = ({ children }) => {
 
 
     let [ listeChargesContext, setlisteChargesContext] = useState([])
+
+    let [  listeutilisateurContext, setlisteutilisateurContext ] = useState({})
 
     //////////////////////:
     let [ positionAcceuilContext, setpositionAcceuilContext] = useState(false)
@@ -75,6 +78,16 @@ export const ContextAddEleveProvider = ({ children }) => {
 
                 setListeClassesContext(res.data)
                 
+            })
+            .catch(err => console.log(err))
+
+            /////////////////////////////
+            userServices.getAllUsers()
+            .then( res => {
+    
+                setlisteutilisateurContext(res.data)
+                
+               
             })
             .catch(err => console.log(err))
 
@@ -137,11 +150,7 @@ export const ContextAddEleveProvider = ({ children }) => {
 
     }, []) 
 
-    //console.log("***** listeClassesContext est:  ******")
-    //console.log(listeClassesContext)
-
-     //console.log("***** listeElevesContext est:  ******")
-    //console.log(listeElevesContext)
+    
 
     ///////////////////////////////
     let [ addEleveWindow, setAddEleveWindow ] = useState(false)
@@ -192,7 +201,7 @@ export const ContextAddEleveProvider = ({ children }) => {
 
     return (
 
-        <AddEleveContext.Provider  value={ { listePaiementContext, listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext, listePersonnelContext, listeChargesContext, listePositionPageContext } } >
+        <AddEleveContext.Provider  value={ { listeutilisateurContext, listePaiementContext, listeClassesContext, addEleveWindow, openAddEleveWindow ,lockAddEleveWindow,confirmationEleveCreate,eleveCreate, listeElevesContext, listePersonnelContext, listeChargesContext, listePositionPageContext } } >
             
             {children}
         </AddEleveContext.Provider>

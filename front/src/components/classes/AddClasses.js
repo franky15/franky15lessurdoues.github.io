@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'; 
+import React, {  useState, useEffect } from 'react'; 
 import { classesServices } from '@/_services/Classes.services';
 import { useNavigate } from 'react-router-dom';
 //import SectionAdd from './SectionAdd';
@@ -56,12 +56,118 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
     console.log("*****fusion des states : *****")
     console.log({...input, ...sectionChoice})
 
+    //////////////////////////////////////
+
+    let [ alerteForm, setalerteForm ] = useState(false)
+
+    const nomClasse1 = document.querySelector(".nom")
+    const nomClasse2 = document.querySelector(".enseignant")
+    const nomClasse3 = document.querySelector(".section")
+
+    let valeurClasse = {...input, ...sectionChoice}
+    let {  nom, enseignant, sectionNumber } =   valeurClasse
+
+    console.log("{ enseignant, nom, sectionNumber }")
+    console.log(  nom, enseignant, sectionNumber )
+
+
+    useEffect( ()=> {
+
+       
+
+        if( enseignant || nom || sectionNumber ){
+    
+    
+                setalerteForm(false)
+        }
+
+    },[ enseignant, nom, sectionNumber])
+
+
+    
+
+
+    //gestion des alerte à l'origine
+    const alerteInitiale = () => {
+
+        if( nom  ){
+
+            nomClasse1.style.border = "solid 1px black "
+            
+            //nomClasse1.style.display = "none"
+        
+           }
+           
+           if( enseignant  ){
+        
+            nomClasse2.style.border = "solid  0px black"
+            //nomClasse2.style.display = "none"
+        
+           }
+           
+           if( sectionNumber){
+        
+            nomClasse3.style.border = "solid  1px black"
+            //nomClasse3.style.display = "none"
+        
+           }
+    }
+    alerteInitiale()
+
+     // gestion des expressions régulières 
+     let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+
+    /////////////////////////////////////////
+
     //soumission du formulaire
     let onsubmit = (e) => {
 
 
         e.preventDefault()
-        classesServices.addClasse( {...input, ...sectionChoice} ) //insertion du state de l'input dans la requete
+
+        if( !enseignant || !nom || !sectionNumber){
+
+            setalerteForm(true)
+
+                if( !nom || regexNomPrenom.test( nom ) === false ){
+
+                    console.log("bienvenue dans la condition nom")
+
+                    setalerteForm(true)
+
+                    console.log( regexNomPrenom.test( nom )  )
+        
+                    const nomClasse1 = document.querySelector(".nom")
+                    nomClasse1.style.border = "solid 1px red"
+
+            } 
+
+            if( !enseignant || regexNomPrenom.test( enseignant ) === false ){
+
+                console.log("bienvenue dans la condition nom")
+
+                setalerteForm(true)
+
+                console.log( regexNomPrenom.test( enseignant )  )
+    
+                const nomClasse2 = document.querySelector(".enseignant")
+                nomClasse2.style.border = "solid 1px red"
+
+            } 
+
+            if( !sectionNumber){
+
+                console.log("bienvenue dans la condition nom")
+
+                setalerteForm(true)
+
+                const nomClasse3 = document.querySelector(".section")
+                nomClasse3.style.border = "solid 1px red"
+
+            } 
+        }else{
+
+            classesServices.addClasse( {...input, ...sectionChoice} ) //insertion du state de l'input dans la requete
             .then( res => {
                 console.log("données du formulaire envoyées")
                 console.log(res)
@@ -69,11 +175,16 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
             })
             .catch( err => console.log(err))
 
+        }
+       
+
     }
     
 
     return (
         <div className='AddClassContainer'>
+ { alerteForm &&   <p className='alerteError'>Tous les champs avec étoiles ou en rouge doivent être remplis</p> }
+           
             <div className='AddClassContainer__option'>
                 <p className='AddClassContainer__option--titre'>
                     Veuillez renseigner les champs suivant pour ajouter une classe 
@@ -88,17 +199,17 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
             <div className='AddClassContainer__entete'>
 
                 <div className='AddClassContainer__entete--classe' >
-                    <div className='block'>
+                    <div className='block '>
                         <span className='titre'>Nom de la class</span><span className='etoile'>*</span>
                     </div>
                 </div>
                 <div className='AddClassContainer__entete--enseignant' >
-                    <div className='block'>
+                    <div className='block '>
                         <span className='titre'>Enseignant</span><span className='etoile'>*</span>
                     </div>
                 </div>
                 <div className='AddClassContainer__entete--section' >
-                    <div className='block'>
+                    <div className='block '>
                         <span className='titre'>Section</span><span className='etoile'>*</span>
                     </div>
                 </div>
@@ -109,13 +220,13 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
 
                 <div className='form__entete'>
 
-                        <input  type='text' className='form__entete--classe' name='nom'  value={input.name} onChange={onchange} />
+                        <input  type='text' className='form__entete--classe nom' name='nom'  value={input.name} onChange={onchange} />
 
-                        <input  type='text' className='form__entete--enseignant' name='enseignant' value={input.name} onChange={onchange} />
+                        <input  type='text' className='form__entete--enseignant enseignant' name='enseignant' value={input.name} onChange={onchange} />
                         
-                    <form className='form2' >
+                    <form className='form2 ' >
                     
-                        <select name="sections" id='sections' onChange={ dataSeclect } >
+                        <select name="sections" id='sections' onChange={ dataSeclect } className='section' >
                             
                             <option value="vid" > </option>
                             <option value="anglophone"  >Anglophone</option>

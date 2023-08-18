@@ -376,15 +376,17 @@ const GetAllClasses = () => {
 
                 </div>
 
-                <hr></hr>
-
+                
+              
                 <div className='GetAllClassesContainerValeur2__mini--valeur'>
                     
                   
-                { startIsOpen ? classes.map((element, index) => ( 
+                { startIsOpen ?  classes.map((element, index) =>  <>
+                   
+                    <hr></hr>
                     
                   <div className='valeurs effectifClass' key={`index-${element.nom}`}>
-                          
+                         
                       <p className='nomEffectif'  > { element.nom } </p>
 
                       <p className='nomEffectif effectifId' id={`${ element.id}`} > { element.effectif } </p>
@@ -406,7 +408,7 @@ const GetAllClasses = () => {
                           </div>
                       </div>
                           
-                  </div> ) ) : 
+                  </div>   </>) : 
 
                    <>
                         {

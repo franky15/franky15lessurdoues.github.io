@@ -15,17 +15,29 @@
     margin-right: auto;
     z-index: 1;
 
+   // border: solid red;
+
+   .alerteError{
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    color: red;
+    font-weight: bold;
+   }
+
     .titreTiming {
         //display: none;
+        width: 250px;
         height: 30px;
         background-color: #517633;
         color: white;
         position: absolute;
-        top: -110px; //-247px;
+        top: -295px;
         right: 0; //900
         font-weight: bold;
         z-index: 1;
-        //border: solid black;
+       // border: solid black;
     }
 }
 

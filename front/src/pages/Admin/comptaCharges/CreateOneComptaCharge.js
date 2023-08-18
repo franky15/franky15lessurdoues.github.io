@@ -82,7 +82,10 @@ const CreateOneComptaCharge = ({ openCreateOpen, idPersonnelCurrent, lockCreateO
     
    useEffect( () => {
 
+    if(categorie || datePaiement || montantPaye || poste|| commentaire || nomPrenom ){
 
+        setalerteForm(false)
+    }
 
         const comptaFunction  = () => {
 
@@ -185,6 +188,193 @@ const CreateOneComptaCharge = ({ openCreateOpen, idPersonnelCurrent, lockCreateO
     }
 
     
+    let [ alerteForm, setalerteForm ] = useState(false)
+
+    let { categorie, datePaiement, montantPaye, poste, commentaire, nomPrenom } = formCompta
+    
+    const nomClasse1 = document.querySelector(".categorie")
+    const nomClasse2 = document.querySelector(".datePaiement")
+    const nomClasse3 = document.querySelector(".montantPaye")
+    const nomClasse4 = document.querySelector(".poste")
+    const nomClasse5 = document.querySelector(".commentaire")
+    const nomClasse6 = document.querySelector(".nomPrenom")
+    
+       //gestion des alerte à l'origine
+    const alerteInitiale = () => {
+    
+        /*
+        if( categorie  ){
+     
+         nomClasse1.style.border = "solid 1px black "
+         
+         //nomClasse1.style.display = "none"
+     
+        }*/
+        
+        if( datePaiement ){
+     
+         nomClasse2.style.border = "solid  0px black"
+         //nomClasse2.style.display = "none"
+     
+        }
+        
+        if(montantPaye){
+     
+         nomClasse3.style.border = "solid  1px black"
+         //nomClasse3.style.display = "none"
+     
+        }
+        
+        if(poste ){
+     
+         nomClasse4.style.border = "solid 1px black"
+         //nomClasse4.style.display = "none"
+     
+        }
+        
+        if(commentaire  ){
+     
+         nomClasse5.style.border = "solid 1px black"
+         //nomClasse5.style.display = "none"
+     
+        }
+    
+        if(nomPrenom  ){
+     
+            nomClasse5.style.border = "solid 1px black"
+            //nomClasse5.style.display = "none"
+        
+           }
+        
+     
+        }
+     
+        alerteInitiale()
+     
+       // gestion des expressions régulières 
+       let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+    
+       let regexScolarite = new RegExp("^[0-9]{1,6}$")
+    
+       let reagexTel = new RegExp("^[0-9]{1,20}$")
+    
+       let regexCommentaire = new RegExp("^[a-zA-Z ]{5,}$")
+    
+       let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
+    
+    
+    
+       const submit = (e) => {
+    
+           
+        e.preventDefault()
+    
+        console.log("bienvenue au submit test de createOneEntree")
+                                                                    //valTextarea
+    
+          if( !categorie || !datePaiement || !montantPaye || !poste || !commentaire ){
+     
+             console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
+         
+             setalerteForm(true)
+    
+             
+            // }else{
+    
+            /* 
+             if( !categorie   ){
+    
+                     console.log("bienvenue dans la condition nom")
+    
+                     setalerteForm(true)
+    
+         
+                     const nomClasse = document.querySelector(".categorie")
+                     nomClasse.style.border = "solid 1px red"
+    
+             } 
+             */
+             
+             /*else*/ if( !datePaiement){
+    
+                     console.log("bienvenue dans la condition anciennete")
+    
+                     setalerteForm(true)
+         
+                     const nomClasse = document.querySelector(".datePaiement")
+                     nomClasse.style.border = "solid 1px red"
+    
+             }
+    
+             /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+    
+                     console.log("bienvenue dans la condition nom")
+    
+                     setalerteForm(true)
+    
+                     console.log( regexScolarite.test( montantPaye )  )
+         
+                     const nomClasse = document.querySelector(".montantPaye")
+                     
+                     nomClasse.style.border = "solid 1px red"
+    
+             }  
+             
+             /*else*/ if( !poste || regexNomPrenom.test( poste ) === false  ){
+    
+                     console.log("bienvenue dans la condition nom")
+    
+                     setalerteForm(true)
+    
+                     const nomClasse = document.querySelector(".poste")
+                     nomClasse.style.border = "solid 1px red"
+    
+             } 
+    
+            /*else*/ if( !commentaire  || regexCommentaire.test( commentaire  ) === false ){
+    
+                     console.log("bienvenue dans la condition sectionNumber")
+    
+                     setalerteForm(true)
+         
+                     const nomClasse = document.querySelector(".commentaire ")
+                     nomClasse.style.border = "solid 1px red"
+    
+             }  
+    
+             if(!nomPrenom || regexCommentaire.test( nomPrenom ) === false ){
+    
+                 console.log("bienvenue dans la condition sectionNumber")
+    
+                 setalerteForm(true)
+     
+                 const nomClasse = document.querySelector(".nomPrenom")
+                 nomClasse.style.border = "solid 1px red"
+    
+         }  
+             
+            
+             
+         } else{
+    
+             comptaChargesServices.createComptacharges(formCompta)
+             .then( res => {
+                 console.log("données du formulaire envoyées")
+                 console.log(res)
+                 //navigate("/admin/classes" ) 
+                 ////////////////////////////
+     
+                 confirmationPaiementCreate()
+     
+                 ////////////////////////////
+             })
+             .catch( err => console.log(err))
+    
+         }
+       
+        
+    }
+    /*
     const submit = () => {
 
         
@@ -206,7 +396,7 @@ const CreateOneComptaCharge = ({ openCreateOpen, idPersonnelCurrent, lockCreateO
             .catch( err => console.log(err))
         
     }
-    
+    */
     
   
 

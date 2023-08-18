@@ -10,9 +10,16 @@ import { AddEleveContext } from '../../_utils/ContextAddEleve';
 
 const Dashboard = ( ) => {
 
-    let  { listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
+    let  { listeutilisateurContext, listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
+    
     let openpositionAcceuilContext = listePositionPageContext[0].openpositionAcceuilContext()
     
+     
+
+    console.log("**** listeutilisateurContext  dans getallpersonnels")
+    console.log(listeutilisateurContext)
+
+
     console.log("**** openpositionAcceuilContext  dans getallpersonnels")
     console.log(openpositionAcceuilContext)
     console.log("*** Bienvenue dans le dashboard ***")
@@ -26,6 +33,8 @@ const Dashboard = ( ) => {
     //const contextValue = useContext(myContext);
    // console.log("context value" + contextValue)
 
+   let idUtilisateur 
+
    useEffect( () => {
 
     if(flag.current === false){
@@ -38,10 +47,17 @@ const Dashboard = ( ) => {
                 setClasse(res.data)
             })
             .catch(err => console.log(err))
+
+           
+
+            
+
     }
     return () => flag.current = true
         
     }, [])
+
+   
 
     const classeFrancophone =  classe.filter( element => element.section_id === 2)
     const classeAnglophone =  classe.filter( element => element.section_id === 1)
@@ -62,7 +78,7 @@ const Dashboard = ( ) => {
 
             
             
-            <p className='dashboardContainer__utilisateur'> Utilisateur connecté : a rentrer plustard lors que je ferai les utilisateurs{ }</p>
+            <p className='dashboardContainer__utilisateur'> Bienvenue votre espace CARRERA</p>
             <div className='dashboardContainer__bar'></div>
             
             
@@ -71,16 +87,22 @@ const Dashboard = ( ) => {
                 <p className='iframeClassesContainer__title'>Liste des classes</p>
                 <div className='GetAllClassesEleves__section' >
                     <p className='sectionTitre'>Section Anglophone</p>
-                    {
-                        classeAnglophone.map( (classe, index) => 
-                        { 
-                            const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
-                            
-                        return <p className='GetAllClassesEleves__section--value'  key={`index-${classe.nom}`} style= {{ backgroundColor }} onClick={ () => getElevesOneClasse( classe.id ) } >{ classe.nom.toUpperCase() }</p> 
+
+                    <div className='contaiterClasse'>
+
+                        {
+                            classeAnglophone.map( (classe, index) => 
+                            { 
+                                const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
+                                
+                            return <p className='GetAllClassesEleves__section--value'  key={`index-${classe.nom}`} style= {{ backgroundColor }} onClick={ () => getElevesOneClasse( classe.id ) } >{ classe.nom.toUpperCase() }</p> 
+                            }
+                                
+                            )  
                         }
-                            
-                        )  
-                    }
+                        
+                    </div>
+                    
 
                 </div>
 
@@ -88,16 +110,21 @@ const Dashboard = ( ) => {
 
                 <div className='GetAllClassesEleves__section' >
                     <p className='sectionTitre'>Section Francophone</p>
-                    {
-                    classeFrancophone.map( (classe, index) => 
+
+                     <div className='contaiterClasse'>
+
+                        {
+                            classeFrancophone.map( (classe, index) => 
+                            
+                            { 
+                                const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
+                            return <p className='GetAllClassesEleves__section--value' key={`index-${classe.nom}`} style= {{ backgroundColor }} onClick={ () => getElevesOneClasse( classe.id ) } >{ classe.nom.toUpperCase() }</p> 
+                            }
+                            
+                            )  
+                        }
+                    </div>
                     
-                    { 
-                        const backgroundColor = index % 2 === 0 ? "#eaeaea" : "white" ;
-                    return <p className='GetAllClassesEleves__section--value' key={`index-${classe.nom}`} style= {{ backgroundColor }} onClick={ () => getElevesOneClasse( classe.id ) } >{ classe.nom.toUpperCase() }</p> 
-                    }
-                    
-                    )  
-                    }
                     
                 </div>  
 

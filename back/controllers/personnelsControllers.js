@@ -18,9 +18,9 @@ exports.createPersonnel = (req, res, next) => {
     let section_id
     let classes_id
 
-    //conversion des classes et sections en id
+    //conversion des classes et sections en id 
     let sqlClasses = "SELECT * FROM classes;"
-    let sqlSection = "SELECT * FROM section;"
+    let sqlSection = "SELECT * FROM section;" 
 
     classe && (
 
@@ -34,7 +34,7 @@ exports.createPersonnel = (req, res, next) => {
                 if(errClasse){
 
                     console.log("***erreur de sql sqlClasses*** " +  errClasse) 
-                    res.status(404).json({errClasse})
+                    res.status(404).json({errClasse}) 
                     
                 }else{
 

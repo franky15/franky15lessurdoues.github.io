@@ -139,112 +139,186 @@ exports.createEntree = (req, res, next ) => {
                             console.log("****** mergeMontantTotalEleve ")
                             console.log(mergeMontantTotalEleve )
 
-                            /***************$ */
+                            //////////////////////////////////////////////////////////////////////////////////////
+
+                            //let elveEncour 
+                            //récupération de tous les élèves
+                            let sqlAllEleves = "SELECT * FROM eleves"
+
+                            DB.query( sqlAllEleves, (errsqlAllEleves, ressqlAllEleves) => {
+
+
+                                console.log("****** resultat de la requete  ressqlAllEleves")
+                                console.log(ressqlAllEleves)
+
+                                if(errsqlAllEleves){ 
+
+                                    console.log("*** erreur de sqlAllEleves *** " +  sqlAllEleves)  
+                                    res.status(400).json({sqlAllEleves})
+                                    
+                                    
+                        
+                                }else{
+
+                                     //récupération des totaux de l'élève
+                                    let elveEncour = ressqlAllEleves.find( eleveEncours =>  eleveEncours.id === idEleve)
+
+                                    console.log("***** elveEncour ")
+                                    console.log(elveEncour )
+
+
+                            
+                           
+
+                                    //mise en correspondance des valeurs table eleves et typePaiement
+                                    let scolariteTotale = elveEncour.scolariteTotale
+                                    let tenueClasseTotale = elveEncour.tenueClasseTotale 
+                                    let transportTotale = elveEncour.transportTotale
+                                    let cantineTotale = elveEncour.cantineTotale
+
+                                    if(typePaiement === "scolarite"){
+
+                                       /* if(!elveEncour.scolariteTotale){
+
+                                            scolariteTotale = parseInt(montantPaye)
+
+                                            console.log("**** le if de !elveEncour.scolariteTotale")
+
+                                       // }else{*/
+
+                                            //console.log("**** le else de !elveEncour.scolariteTotale")
+                                            
+                                            scolariteTotale = elveEncour.scolariteTotale + parseInt(montantPaye)
+
+                                       // }
+                                        
+                                        
+                                    }
+
+                                    if(typePaiement === "tenueClasse"){
+
+                                        if(!elveEncour.tenueClasseTotale ){
+
+                                            tenueClasseTotale =  parseInt(montantPaye)
+
+                                        }else{
+
+                                            tenueClasseTotale = elveEncour.tenueClasseTotale + parseInt(montantPaye)
+
+                                        }
+                                       
+                                      
+                                    }
+
+                                    if(typePaiement === "transport"){ 
+
+                                        if(!elveEncour.transportTotale ){
+
+                                            transportTotale = parseInt(montantPaye)
+
+                                        }else{
+
+                                             transportTotale = elveEncour.transportTotale + parseInt(montantPaye)
+
+                                        }
+
+                                       
+                                       
+                                    }
+
+                                    if(typePaiement === "cantine"){
+
+                                        if(!elveEncour.cantineTotale ){ 
+
+                                            cantineTotale = parseInt(montantPaye)
+
+                                        }else{
+
+                                              cantineTotale = elveEncour.cantineTotale + parseInt(montantPaye)
+
+                                        }
+
+                                      
+                                      
+                                    }
+
+
+                                    
+                                    console.log("**** elveEncour.scolariteTotale")
+                                    console.log(elveEncour)
+
+                                    //calcule de la scolarité total payé par l'élève
+                                    console.log("**** scolariteTotale " + scolariteTotale)
+                                    
+
+                                    //calcule du montant total tenues de classe payé par l'élève
+                                    console.log("**** tenueClasseTotale " + tenueClasseTotale)
+                                
+
+
+
+                                    //calcule du montant total du transport de classe payé par l'élève
+                                    console.log("**** transportTotale " + transportTotale)
+                                    
+
+
+                                    //calcule du montant total du transport de classe payé par l'élève
+                                    console.log("**** cantineTotale " + cantineTotale)
+                                    
+
+
+                                    /********************************** */
+
+                                    //requete de mis à jour de l'élève
+                                    let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id }, scolariteTotale = ${ scolariteTotale  }, tenueClasseTotale = ${ tenueClasseTotale }, transportTotale = ${ transportTotale }, cantineTotale = ${ cantineTotale }, montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${ dateFormatee }"  WHERE id = ${ dernierpaiement.eleves_id } ;`   
+                                
+                                
+                                    // let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id },  montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${  dateFormatee}"  WHERE id = ${ dernierpaiement.eleves_id } ;`                    
+        
+                                    DB.query(  sqlSUpdateEleve, (errUpdateEleve, resUpdateEleve) => {
+        
+                                        console.log("****** resultat de la requete sqlSUpdateEleve")
+                                        console.log(sqlSUpdateEleve)
+        
+                                        if(errUpdateEleve){ 
+        
+                                            console.log("*** erreur de sqlSUpdateEleve *** " +  errUpdateEleve)  
+                                            res.status(400).json({errUpdateEleve})
+                                            
+                                            
+                                
+                                        }else{
+        
+                                            console.log("*** modification de l'élève effectuée avec succès*** ") 
+                                            console.log(resUpdateEleve) 
+                                        
+        
+ 
+                                     
+ 
+                                        } 
+        
+                                    })
+
+
+
+
+
+
+                                    /********************************** */
+  
+                                }
+
+                            })
+                            
+                            //////////////////////////////////////////////////////////////////////////////////////
 
                             /*
-                            //calcule de la scolarité total payé par l'élève
-                            let listeScolariteEleve = resAllPaiement2.map( element => element.scolariteTotale)
-                          
-                            console.log("******* listeScolariteEleve")
-                            console.log(listeScolariteEleve)
-
-                            
-                            let  mergescolariteTotale = listeScolariteEleve.reduce( (acc, current) => {
-
-                                console.log("***** mergescolariteTotale")
-                                console.log(acc + current)
-                        
-                                return acc + current
-
-
-
-                            },0 )
-
-                            console.log("****** mergescolariteTotale ")
-                            console.log(mergescolariteTotale)
-
-                            //
-
-                            //calcule du montant total tenues de classe payé par l'élève
-                            let listetenueClasseEleve = resAllPaiement2.map( element => element.tenueClasseTotale)
-                          
-                            console.log("******* listetenueClasseEleve")
-                            console.log(listetenueClasseEleve)
-
-                            
-                            let  mergetenueClasseTotale = listetenueClasseEleve.reduce( (acc, current) => {
-
-                                console.log("***** mergetenueClasseTotale")
-                                console.log(acc + current)
-                        
-                                return acc + current
-
-
-
-                            },0 )
-
-                            console.log("******mergetenueClasseTotale ")
-                            console.log(mergetenueClasseTotale)
-
-                             //
-
-
-                              //calcule du montant total du transport de classe payé par l'élève
-                            let listeTransportEleve = resAllPaiement2.map( element => element.transportTotale)
-                          
-                            console.log("******* listeTransportEleve")
-                            console.log(listeTransportEleve)
-
-                            
-                            let  mergelisteTransportEleve = listeTransportEleve.reduce( (acc, current) => {
-
-                                console.log("***** mergelisteTransportEleve")
-                                console.log(acc + current)
-                        
-                                return acc + current
-
-
-
-                            },0 )
-
-                            console.log("****** mergelisteTransportEleve ")
-                            console.log(mergelisteTransportEleve)
-
-
-                             //
-
-
-                              //calcule du montant total du transport de classe payé par l'élève
-                              let listeCantineEleve = resAllPaiement2.map( element => element.cantinTotale)
-                          
-                              console.log("******* listeCantineEleve")
-                              console.log(listeCantineEleve)
-  
-                              
-                              let  mergelisteCantineEleve = listeCantineEleve.reduce( (acc, current) => {
-  
-                                  console.log("***** mergelisteCantineEleve")
-                                  console.log(acc + current)
-                          
-                                  return acc + current
-  
-  
-  
-                              },0 )
-  
-                              console.log("****** mergelisteCantineEleve ")
-                              console.log(mergelisteCantineEleve)
-
-                              */
-
-
-
-
-                            ////////////////////////////////////////
-
                              //requete de mis à jour de l'élève
-                           // let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id }, scolariteTotale = ${ mergescolariteTotale  }, tenueClasseTotale = ${ mergetenueClasseTotale }, transportTotale = ${ mergelisteTransportEleve }, cantineTotale = ${ mergelisteCantineEleve }, montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${ dateFormatee }"  WHERE id = ${ dernierpaiement.eleves_id } ;`                    
-                            let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id },  montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${  dateFormatee}"  WHERE id = ${ dernierpaiement.eleves_id } ;`                    
+                            let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id }, scolariteTotale = ${ scolariteTotale  }, tenueClasseTotale = ${ tenueClasseTotale }, transportTotale = ${ transportTotale }, cantineTotale = ${ cantineTotale }, montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${ dateFormatee }"  WHERE id = ${ dernierpaiement.eleves_id } ;`   
+                           
+                           
+                           // let sqlSUpdateEleve = `UPDATE eleves SET  entreesArgent_id = ${ dernierpaiement.id },  montantTotalEleve = ${mergeMontantTotalEleve}, dateDernierPaiement = "${  dateFormatee}"  WHERE id = ${ dernierpaiement.eleves_id } ;`                    
 
                             DB.query(  sqlSUpdateEleve, (errUpdateEleve, resUpdateEleve) => {
 
@@ -252,7 +326,7 @@ exports.createEntree = (req, res, next ) => {
                                 console.log(sqlSUpdateEleve)
 
                                 if(errUpdateEleve){ 
-
+ 
                                     console.log("*** erreur de sqlSUpdateEleve *** " +  errUpdateEleve)  
                                     res.status(400).json({errUpdateEleve})
                                     
@@ -270,7 +344,7 @@ exports.createEntree = (req, res, next ) => {
 
                             })
 
-
+                            */
                             ////////////////////////////////////////
                         
                         

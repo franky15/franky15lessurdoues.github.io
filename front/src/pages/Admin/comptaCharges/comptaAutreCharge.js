@@ -10,6 +10,7 @@ const ComptaAutreCharge = ({  openCreateOpen, idPersonnelCurrent, lockCreateOpen
     /////////////////////////
     let [ formCompta, setFormCompta ]  = useState({}) //{idPersonnel : idPersonnelCurrent.idPersonnel}
    
+    let [ alerteForm, setalerteForm ] = useState(false)
    
     const comptaFunction = (e) => {
 
@@ -44,11 +45,27 @@ console.log("****** formCompta autre charge")
 console.log(formCompta)
 console.log(formCompta.categorie)
 
+let { categorie, datePaiement, montantPaye, libelle, commentaire } = formCompta
+
+const nomClasse1 = document.querySelector(".categorie")
+const nomClasse2 = document.querySelector(".datePaiement")
+const nomClasse3 = document.querySelector(".montantPaye")
+const nomClasse4 = document.querySelector(".libelle")
+const nomClasse5 = document.querySelector(".commentaire")
+
+
+
+
+   console.log("******** nomClasse1")
+   console.log(nomClasse1)
 
 
 useEffect( () => {
 
+    if(categorie || datePaiement || montantPaye || libelle|| commentaire ){
 
+        setalerteForm(false)
+    }
 
     const comptaFunction  = () => {
 
@@ -95,11 +112,65 @@ useEffect( () => {
     comptaFunction()
 
 
-}, [formCompta] )
+}, [formCompta,categorie ,datePaiement, montantPaye, libelle, commentaire , lockAutreCharge, lockElectricite, lockSalaire, openElectricite, openSalaire ] )
 
 
+//gestion des alerte à l'origine
+const alerteInitiale = () => {
 
+    /*
+    if( categorie  ){
+ 
+     nomClasse1.style.border = "solid 1px black "
+     
+     //nomClasse1.style.display = "none"
+ 
+    }*/
+    
+    if( datePaiement ){
+ 
+     nomClasse2.style.border = "solid  0px black"
+     //nomClasse2.style.display = "none"
+ 
+    }
+    
+    if(montantPaye){
+ 
+     nomClasse3.style.border = "solid  1px black"
+     //nomClasse3.style.display = "none"
+ 
+    }
+    
+    if(libelle ){
+ 
+     nomClasse4.style.border = "solid 1px black"
+     //nomClasse4.style.display = "none"
+ 
+    }
+    
+    if(commentaire  ){
+ 
+     nomClasse5.style.border = "solid 1px black"
+     //nomClasse5.style.display = "none"
+ 
+    }
+    
+ 
+    }
+ 
+    alerteInitiale()
+ 
 
+    // gestion des expressions régulières 
+    let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+
+    let regexScolarite = new RegExp("^[0-9]{1,6}$")
+
+    let reagexTel = new RegExp("^[0-9]{1,20}$")
+
+    let regexCommentaire = new RegExp("^[a-zA-Z ]{5,}$")
+
+    let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
 
 
@@ -138,25 +209,114 @@ useEffect( () => {
     }
 
 
-   const submit = () => {
+   const submit = (e) => {
 
        
-       //e.preventDefault()
+       e.preventDefault()
 
        console.log("bienvenue au submit test de createOneEntree")
                                                                    //valTextarea
-       comptaChargesServices.createComptacharges(formCompta)
-           .then( res => {
-               console.log("données du formulaire envoyées")
-               console.log(res)
-               //navigate("/admin/classes" ) 
-              ////////////////////////////
 
-              confirmationPaiementCreate()
+         if( !categorie || !datePaiement || !montantPaye || !libelle || !commentaire ){
+    
+            console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
+        
+            setalerteForm(true)
 
-              ////////////////////////////
-           })
-           .catch( err => console.log(err))
+            
+           // }else{
+
+           /* 
+            if( !categorie   ){
+
+                    console.log("bienvenue dans la condition nom")
+
+                    setalerteForm(true)
+
+        
+                    const nomClasse = document.querySelector(".categorie")
+                    nomClasse.style.border = "solid 1px red"
+
+            } 
+            */
+            
+            /*else*/ if( !datePaiement){
+
+                    console.log("bienvenue dans la condition anciennete")
+
+                    setalerteForm(true)
+        
+                    const nomClasse = document.querySelector(".datePaiement")
+                    nomClasse.style.border = "solid 1px red"
+
+            }
+
+            /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+
+                    console.log("bienvenue dans la condition nom")
+
+                    setalerteForm(true)
+
+                    console.log( regexScolarite.test( montantPaye )  )
+        
+                    const nomClasse = document.querySelector(".montantPaye")
+                    
+                    nomClasse.style.border = "solid 1px red"
+
+            }  
+            
+            /*else*/ if( !libelle || regexNomPrenom.test( libelle ) === false  ){
+
+                    console.log("bienvenue dans la condition nom")
+
+                    setalerteForm(true)
+
+                    const nomClasse = document.querySelector(".libelle")
+                    nomClasse.style.border = "solid 1px red"
+
+            } 
+
+           /*else*/ if( !libelle || regexCommentaire.test( libelle ) === false ){
+
+                    console.log("bienvenue dans la condition sectionNumber")
+
+                    setalerteForm(true)
+        
+                    const nomClasse = document.querySelector(".libelle")
+                    nomClasse.style.border = "solid 1px red"
+
+            }  
+
+            if(!commentaire || regexCommentaire.test( commentaire ) === false ){
+
+                console.log("bienvenue dans la condition sectionNumber")
+
+                setalerteForm(true)
+    
+                const nomClasse = document.querySelector(".commentaire")
+                nomClasse.style.border = "solid 1px red"
+
+        }  
+            
+           
+            
+        } else{
+
+            comptaChargesServices.createComptacharges(formCompta)
+            .then( res => {
+                console.log("données du formulaire envoyées")
+                console.log(res)
+                //navigate("/admin/classes" ) 
+                ////////////////////////////
+    
+                confirmationPaiementCreate()
+    
+                ////////////////////////////
+            })
+            .catch( err => console.log(err))
+
+        }
+      
        
    }
 
@@ -233,7 +393,7 @@ useEffect( () => {
 
                 <div className='formulaireConfirm__btn'>
                     < button className='btn  colorCancel' onClick={ annuler } > Annuler</button>
-                    <button className='btn  colorValid' onClick={ submit }> Valider</button>
+                    <button  type='submit' className='btn  colorValid' onClick={ submit }> Valider</button>
                 </div>
         }
 

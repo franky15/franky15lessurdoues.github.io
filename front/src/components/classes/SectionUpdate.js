@@ -1,4 +1,4 @@
-import React, {  useState} from 'react'; 
+import React, {  useState, useEffect} from 'react'; 
 import { classesServices } from '@/_services/Classes.services';
 
 
@@ -139,8 +139,6 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
     let classeObject = {  ...idVal, ...input, ...sectionChoice } 
 
     
-
-
     //soumission du formulaire
     let onsubmit = (e) => {
 
@@ -150,6 +148,10 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
 
         console.log("****** le state global classe est  *****")
     // console.log(classe)
+
+
+
+    
     console.log(classeObject)
     
         classesServices.updateClasse( classeObject ) //insertion du state de l'input dans la requete
@@ -168,6 +170,8 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
         
         })
         .catch( err => console.log(err))
+
+        
         
       
     }
@@ -181,6 +185,8 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
        <>
         { classeUpdate1 && <p className='titreTiming'>La classe a été modifiée avec succès</p> }
         
+       
+
          { hidenUpdate && <div className='AddClassContainer'>
             
             <div className='AddClassContainer__option'>
@@ -218,13 +224,13 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
 
                 <div className='form__entete'>
 
-                        <input  type='text' className='form__entete--classe'     name='nom'  value={input.nom} onChange={onchange} />
+                        <input  type='text' className='form__entete--classe nomClasse'     name='nom'  value={input.nom} onChange={onchange} />
 
-                        <input  type='text' className='form__entete--enseignant'   name='enseignant' value={input.enseignant} onChange={onchange} />
+                        <input  type='text' className='form__entete--enseignant enseignant'   name='enseignant' value={input.enseignant} onChange={onchange} />
                         
-                    <form className='form2' >
+                    <form className='form2 section' >
                     
-                        <select name="sections" id='sections' onChange={ dataSelect } >
+                        <select name="sections" id='sections' onChange={ dataSelect }  >
                             
                             <option value={`${input.sectionNumber}`} > {sectionNumber}</option>
                             <option value="anglophone"  >Anglophone</option>

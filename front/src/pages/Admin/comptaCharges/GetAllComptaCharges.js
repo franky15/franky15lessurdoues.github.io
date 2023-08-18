@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState} from 'react';
 import CreateOneComptaCharge from './CreateOneComptaCharge';
-import ComptaChargeDetail from './ComptaChargeDetail';
+//import ComptaChargeDetail from './ComptaChargeDetail';
 import { AddEleveContext } from '../../../_utils/ContextAddEleve';
 import ComptaChargeSearch  from './ComptaChargeSearch';
 
@@ -669,15 +669,26 @@ const onchange2 = (e) => {
                    
                 </div>
 
-                <form className='rechercheContainer'>
+                <div className='blockAdd'>
 
-                <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
-                <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
-                        value={ valeurInput.value} onFocus={openFocus} onBlur={lockFocus}  onChange ={  onchange }/>
+                     <form className='rechercheContainer'>
+
+                    <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
+                    <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
+                            value={ valeurInput.value} onFocus={openFocus} onBlur={lockFocus}  onChange ={  onchange }/>
                 
-                </form>
 
-            
+                
+                    </form>
+
+                    <div className='valeursIcon__choice' onClick={ () =>  windowShowCreateCompta() }> Ajouter une charge </div>
+
+                </div>
+               
+
+                                                                                                                                
+
+                
                 <div className='getAllEntree__affichage'>
 
                     <div className='titre titreCharge' >
@@ -718,8 +729,7 @@ const onchange2 = (e) => {
                                 </div>
 
                                 <div className='valeursIcon' >
-                                                                                                            
-                                    <div className='valeursIcon__choice'> <i className="fa-solid fa-plus"  onClick={ () =>  windowShowCreateCompta(charge.id)  } ></i></div>
+
 
                                     {  <span style={{ display: 'block' }} className={ `arrow  arrowDow${charge.id}` }> <i className="fa-solid fa-angle-down"  title="plus de détails" onClick={ () => iconEleveDetailUp(charge.id) } ></i> </span> }
                                     { <span style={{ display: 'none' }} className={ `arrow  arrowUp${charge.id}` }> <i className="fa-solid fa-angle-up"  onClick={ () => iconEleveDetailDown(charge.id) } ></i> </span>} 
@@ -729,37 +739,33 @@ const onchange2 = (e) => {
 
                             </div>
 
-                            <div  className= { ` detail1 detailCharges  detail${charge.id}` }  style={{ display: 'none' }}>
+                            <div  className= { ` detail1 detailCharges  detail${charge.id}` } id='detail1' style={{ display: 'none' }}>
             
 
-                                { 
-                                    listeChargesContext.map( (charge, index) =>
+                                <div className='detail__titre1 detailCharges__titre' key={ charge.categorie-`${index}` } >
 
-                                        <div className='detail__titre1 detailCharges__titre' key={ charge.categorie-`${index}` } >
-
-                                        {  <div className='detail__titre1--item valeur detailCharges__valeur'> pour quel mois ? { charge.electriciteMois }</div>}
-                                        {  <div className='detail__titre1--item valeur detailCharges__valeur'>  Nom et prénom :  { charge.nomPrenom }</div>}
-                                        {  <div className='detail__titre1--item valeur detailCharges__valeur'> poste :  {charge.poste }</div>}
+                                    {  <div className='detail__titre1--item valeur detailCharges__valeur'> <span className='valeurSpan'>pour quel mois ? </span>{ charge.electriciteMois   }</div>}
+                                    {  <div className='detail__titre1--item valeur detailCharges__valeur'> <span className='valeurSpan'>Nom et prénom :</span>   { charge.nomPrenom  }</div>}
+                                    {  <div className='detail__titre1--item valeur detailCharges__valeur'> <span className='valeurSpan'>poste :</span>  {charge.poste   }</div>}
 
 
-                                        </div>
+                                </div>
                                     
-                                    )
-
-                                }
-            
+                                
             
                             </div>
 
-                           
+                            
                             
                         </>
                         
-
+                                
                         
                         )
 
                     }
+
+                    
 
                     {
                         isOpenSearch &&
@@ -786,6 +792,21 @@ export default GetAllComptaCharges;
 //{ < ComptaDetail/> }  
 
 /*
-  { isOpen && < ComptaChargeDetail listePaiementContext = { listePaiementContext } listeElevesContext = { listeElevesContext } idChargeCurrent = {idChargeCurrent} listePersonnelContext = {listePersonnelContext} listeChargesContext= {listeChargesContext}/> }
+  
 
+    { 
+        listeChargesContext.map( (charge, index) =>
+
+            <div className='detail__titre1 detailCharges__titre' key={ charge.categorie-`${index}` } >
+
+            {  <div className='detail__titre1--item valeur detailCharges__valeur'> pour quel mois ? { charge.electriciteMois }</div>}
+            {  <div className='detail__titre1--item valeur detailCharges__valeur'>  Nom et prénom :  { charge.nomPrenom }</div>}
+            {  <div className='detail__titre1--item valeur detailCharges__valeur'> poste :  {charge.poste }</div>}
+
+
+            </div>
+        
+        )
+
+    }
 */
