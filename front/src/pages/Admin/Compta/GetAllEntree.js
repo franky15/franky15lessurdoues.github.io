@@ -666,7 +666,7 @@ console.log("***** mergeChiffreAffaire1")
                     }
 
                  
-                        <form className='containerDateFiltre deactiveDate' >
+                        <form className='containerDateFiltre deactiveDate' disabled>
 
                             <di className='containerDateFiltre__btn deactiveDate__btn'>
                                 <label for="dateDebut" className='date'> Date début</label>

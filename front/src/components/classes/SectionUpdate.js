@@ -1,6 +1,6 @@
 import React, {  useState, useEffect} from 'react'; 
-import { classesServices } from '@/_services/Classes.services';
-
+//import { classesServices } from '@/_services/Classes.services';
+import { classesServices } from '../../_services/Classes.services';
 
 
 

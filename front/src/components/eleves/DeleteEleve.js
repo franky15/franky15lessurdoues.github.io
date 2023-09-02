@@ -1,5 +1,8 @@
 import React,{useState} from 'react';
-import { elevesServices } from '@/_services/Eleves.services'; 
+
+//import { elevesServices } from '@/_services/Eleves.services'; 
+import { elevesServices } from '../../_services/Eleves.services';
+
 import { useNavigate } from 'react-router-dom';
 
 const DeleteEleve = ({ lockwindowDeleteClasse, openwindowDeleteClasse, listeElevesContext, eleveId }) => {

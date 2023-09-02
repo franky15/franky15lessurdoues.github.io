@@ -1,16 +1,19 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { GetAllPersonnels, GetOnePersonnels, AddPersonnels, UpdatePersonnels } from "@/pages/Admin/personnels"
-import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisateurs } from "@/pages/Admin/utilisateurs"
-import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "@/pages/Admin/classes"
-import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "@/components/eleves"
-import { GetAllEntree, GetOneEntree, CreateOneEntree, ComptaDetail   } from '@/pages/Admin/Compta';
+import { GetAllPersonnels, GetOnePersonnels, AddPersonnels, UpdatePersonnels } from "../../pages/Admin/personnels"  //"@/pages/Admin/personnels"
+import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisateurs } from "../../pages/Admin/utilisateurs"  //"@/pages/Admin/utilisateurs"
+import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "../../pages/Admin/classes"  //"@/pages/Admin/classes"
+import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "../../components/eleves"  //"@/components/eleves"
+import { GetAllEntree, GetOneEntree, CreateOneEntree, ComptaDetail   } from '../../pages/Admin/Compta'; //'@/pages/Admin/Compta';
 import { GetAllComptaCharges, GetOneComptaCharge, CreateOneComptaCharge  } from "../../pages/Admin/comptaCharges";
 
-import { Dashboard } from "@/pages/Admin"
+//import { Dashboard } from "@/pages/Admin"
+import { Dashboard } from "../../pages/Admin"
 
-import Error from '@/_utils/Error';
+
+//import Error from '@/_utils/Error';
+import Error from '../../_utils/Error';
 
 
 

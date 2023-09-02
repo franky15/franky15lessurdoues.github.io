@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { accountServices } from '@/_services/Account.services';
+//import { accountServices } from '@/_services/Account.services';  
+import { accountServices } from '../../_services/Account.services';
+
 
 import ecole from '../../images/imageEcole.jpg'
 

@@ -1,9 +1,11 @@
 
 import React from 'react'; //{useState}
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PublicRouter from '@/pages/Public/PublicRouter';
-import LoginAuthRouter from '@/pages/Auth/LoginAuthRouter';
-import AdminRouter from '@/pages/Admin/AdminRouter';
+//import PublicRouter from '@/pages/Public/PublicRouter';
+import PublicRouter from './pages/Public/PublicRouter';
+import LoginAuthRouter from './pages/Auth/LoginAuthRouter'; //'@/pages/Auth/LoginAuthRouter';
+
+import AdminRouter from './pages/Admin/AdminRouter'; //@/pages/Admin/AdminRouter';
 import AdminLayout from './pages/Admin/AdminLayout';
 import AuthGuard from './_helpers/AuthGuard';
 //import IframeRouter from './pages/Iframe/IframeRouter';

@@ -1,5 +1,7 @@
 import React, {  useState, useEffect } from 'react'; 
-import { classesServices } from '@/_services/Classes.services';
+//import { classesServices } from '@/_services/Classes.services';
+import { classesServices } from '../../_services/Classes.services';
+
 import { useNavigate } from 'react-router-dom';
 //import SectionAdd from './SectionAdd';
 //import SectionUpdate from './SectionUpdate';

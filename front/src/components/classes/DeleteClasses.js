@@ -1,5 +1,6 @@
 import React,{useState} from 'react'; //{ useEffect, useState, useRef}
-import { classesServices } from '@/_services/Classes.services';
+//import { classesServices } from '@/_services/Classes.services';
+import { classesServices } from '../../_services/Classes.services';
 import { useNavigate } from 'react-router-dom';
 
 const DeleteClasses = ( { classes, lockwindowDeleteClasse, idclasse } ) => {

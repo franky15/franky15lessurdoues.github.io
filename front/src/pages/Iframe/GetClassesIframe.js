@@ -1,7 +1,9 @@
 import React, {  useRef,useState } from 'react';
 //import { Link, useNavigate } from 'react-router-dom'; // useNavigate permet de parametrer un lien vers lequel on sera redirigé 
 import { useEffect } from 'react';
-import { classesServices } from '@/_services/Classes.services';
+
+//import { classesServices } from '@/_services/Classes.services';
+import { classesServices } from '../../_services/Classes.services';
 
 
 

@@ -9,10 +9,10 @@ const DB = require("./mysql.config")
 
 //creation de l'application
 const app = require("./app");
-app.set("port", process.env.PORT || process.env.PORT2); 
+app.set("port", process.env.PORT || process.env.PORT2);  
 
 //creation du server
-const server = http.createServer(app)    
+const server = http.createServer(app)     
 
 
 

@@ -1,7 +1,9 @@
 //fermeture du mini router <AdminRouter/> permet l'authentification
 
 import { Navigate } from "react-router-dom";
-import { accountServices } from "@/_services/Account.services";
+//import { accountServices } from "./_services/Account.services";  //"@/_services/Account.services";
+import { accountServices } from "../_services/Account.services";
+
 
 //import React from 'react';
 

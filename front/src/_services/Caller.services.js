@@ -6,7 +6,7 @@ import axios from "axios" //on a installé axios avec npm
 import { accountServices } from "./Account.services"
 
 const Axios = axios.create({ // creation ou itération de l'objet baseUrsl qu'on utilisera partout
-    baseURL: "http://localhost:3000"
+    baseURL: "http://localhost:3000" //"https://ecolelessurdoues.fr"//
 })
 
 /**intercepteur pour le token  c'est ici qu'on va insérer le token dans la requete 

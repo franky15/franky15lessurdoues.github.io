@@ -398,7 +398,7 @@ exports.getAllEntrees = (req, res, next ) => {
             
             
 
-        }else{
+        }else{ 
 
             console.log("*** paiement récupérés avec succès*** ") 
             res.status(200).json(resPaiement)
