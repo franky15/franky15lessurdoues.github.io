@@ -11,7 +11,7 @@ import { AddEleveContext } from '../../_utils/ContextAddEleve';
 const HeaderAdmin = () => {
 
     ////////////////////////////
-   const { listePositionPageContext, listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, confirmationEleveCreate, eleveCreate } = useContext(AddEleveContext)
+   const { listePositionPageContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, confirmationEleveCreate, eleveCreate,listeClassesContext } = useContext(AddEleveContext)
     /////////////////////////////
 
    // const openWindowAddEleveContext = useContext(AddEleveContext)

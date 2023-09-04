@@ -3,9 +3,17 @@ import { classesServices } from '../../../_services/Classes.services';
 import SectionAnglophone from '../../../components/classes/SectionAnglophone';
 import SectionFrancophone from '../../../components/classes/SectionFrancophone';
 import SectionSearch from '../../../components/classes/SectionSearch';
+
 import AddClasses from '../../../components/classes/AddClasses';
+//import AddClasse from './AddClasse';
+
+
 import SectionUpdate from '../../../components/classes/SectionUpdate'; 
+
+
 import DeleteClasses from '../../../components/classes/DeleteClasses';
+//import DeleteOneClasse from './DeleteOneClasse'; 
+
 import { AddEleveContext } from '../../../_utils/ContextAddEleve';
 
 

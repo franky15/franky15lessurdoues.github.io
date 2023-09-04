@@ -28,9 +28,9 @@ Axios.interceptors.response.use( response => {
 }, error => {     //on arrive à l'erreur car il n y a pas le token dans response
     if(error.response.status === 401){    //si le status de response est 401 alors...
         accountServices.logout() //netoyage du token
-        window.location = "/auth/login" //ici il faut rediriger vers une page qui n'a pas besoin du state car on le vide ici 
+        window.location = "/auth/login"   //ici il faut rediriger vers une page qui n'a pas besoin du state car on le vide ici 
     }else{
-        return Promise.reject(error)
+        return Promise.reject(error)  
     }
 })
 export default Axios

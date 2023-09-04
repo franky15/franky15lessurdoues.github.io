@@ -27,6 +27,8 @@ app.use(express.urlencoded({ extended: true })); //l'encodage des url car on a p
 //app.get("/", (req, res) => res.send("je suis en ligne bien venue")); 
 //app.get("*", (req, res) => res.status(501).send("la données que vous cherchez n'existe pas"));
 
+
+
 ////////////////////
 //mise en place du routage
 

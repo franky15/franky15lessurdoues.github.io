@@ -14,4 +14,12 @@ router.get("/:id", auth, classesController.getOneClasse )
 router.get("/", auth, classesController.getClasses)
 router.post("/", auth, classesController.createClasse)
 
+
+////////////////////////////
+//test
+//router.get("/", auth, classesController.classesRoutes)
+
+
+//////////////////////////
+
 module.exports = router; 

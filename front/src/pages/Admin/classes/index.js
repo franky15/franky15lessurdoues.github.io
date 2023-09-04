@@ -3,6 +3,6 @@
 
 
 export { default as GetAllClasses } from "./GetAllClasses"
-export { default as  GetOneClasse }  from "./GetOneClasse"
-export { default as AddClasse } from "./AddClasse"
-export { default as UpadeteClasse } from "./UpadeteClasse"
+//export { default as  GetOneClasse }  from "./GetOneClasse"
+//export { default as AddClasse } from "./AddClasse"
+//export { default as UpadeteClasse } from "./UpadeteClasse"
