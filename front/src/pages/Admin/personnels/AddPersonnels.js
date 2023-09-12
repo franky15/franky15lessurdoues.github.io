@@ -32,6 +32,16 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
 
     console.log("***formPersonnel")
     console.log(formPersonnel)
+
+    let groupeSalarialValueExForm = formPersonnel.groupeSalariale;
+    let nomValueExForm = formPersonnel.nom;
+    let prenomValueExForm = formPersonnel.prenom;
+    let posteValueExForm = formPersonnel.poste;
+    let contactValueExForm = formPersonnel.contact;
+    let sectionValueExForm = formPersonnel.section;
+    let classeValueExForm = formPersonnel.classe;
+    let emeilValueExForm = formPersonnel.email;
+    let salaireValueExForm = formPersonnel.salaire;
     /////////////////////////
 
     let [ eleveCreate, setEleveCreate ] = useState(false) //false
@@ -59,8 +69,9 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
 
        //////////////////////////////////////
 
-   let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
-
+//    let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
+let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire } = formPersonnel
+   
     console.log("******** nom")
     console.log(nom)
 
@@ -126,14 +137,14 @@ const alerteInitiale = () => {
  
     }
     
-    if(section_id ){
+    if(section ){ //section_id
  
      nomClasse6.style.border = "solid 1px black"
      //nomClasse8.style.display = "none"
  
     }
     
-    if(classes_id  ){
+    if(classe ){ //classes_id
  
      nomClasse7.style.border = "solid 1px black"
      //nomClasse9.style.display = "none"
@@ -165,6 +176,8 @@ const alerteInitiale = () => {
     let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
     /////////////////////////////////////////////////////////////////
 
+        //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
+        let [ classExist, setclassExist ] = useState()
 
     const submit = (e) => {
 
@@ -176,7 +189,7 @@ const alerteInitiale = () => {
 
          console.log("bienvenue au submit test de createEleve")
 
-        if( !nom || !prenom || !contact || !email || !groupeSalariale || !poste || !section_id || !classes_id || !salaire ){
+        if( !nom || !prenom || !contact || !email || !groupeSalariale || !poste || !section || !classe || !salaire ){  //section_id, classes_id
     
             console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
         
@@ -256,26 +269,26 @@ const alerteInitiale = () => {
 
             } 
             
-            /*else*/ if( !section_id){
+            /*else*/ if( !section){ //section_id
 
                     console.log("bienvenue dans la condition regexScolarite")
 
                     setalerteForm(true)
 
-                    console.log( regexScolarite.test( parseInt(section_id) )  )
+                    console.log( regexScolarite.test( parseInt(section) )  ) //section_id
         
                     const nomClasse = document.querySelector(".section_id")
                     nomClasse.style.border = "solid 1px red"
 
             }  
             
-            /*else*/ if( !classes_id ){
+            /*else*/ if( !classe ){ //classes_id
 
                     console.log("bienvenue dans la condition nomParent1")
 
                     setalerteForm(true)
 
-                    console.log( regexNomPrenom.test(classes_id)  )
+                    console.log( regexNomPrenom.test(classe)  ) //classes_id
         
                     const nomClasse = document.querySelector(".classes_id")
                     nomClasse.style.border = "solid 1px red"
@@ -312,7 +325,15 @@ const alerteInitiale = () => {
 
                 ////////////////////////////
                 })
-                .catch( err => console.log(err))
+                //.catch( err => console.log(err))
+                .catch( err => {
+
+                    setclassExist(`Vous ne pouvez pas créer le personnel ${nom} car il existe déjà` )
+                 
+                    console.log(` **** le personnel ${nom} existe déjà : ` + err)
+                   
+                
+                })
 
             }
 
@@ -391,7 +412,7 @@ const alerteInitiale = () => {
 
     useEffect( () => {
 
-        if( nom || prenom || contact || email || groupeSalariale || poste || section_id || classes_id || salaire ){
+        if( nom || prenom || contact || email || groupeSalariale || poste || section || classe || salaire ){  //section_id ,classes_id
     
     
             setalerteForm(false)
@@ -447,7 +468,7 @@ const alerteInitiale = () => {
         
 
 
-    }, [formPersonnel, lockaddEnseignantgroupe, openaddEnseignantgroupe,nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire ])
+    }, [formPersonnel, lockaddEnseignantgroupe, openaddEnseignantgroupe,nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire ]) //section_id, //classes_id
     
     ////////////////////////////
 
@@ -455,121 +476,132 @@ const alerteInitiale = () => {
 
     return (
 
-       
+        <>
+       {   formenseignant &&
         <div className='addpersonnelContainer'>
 
             { alerteForm &&   <p className='alerteError' style={{ fontWeight: "bold", color: 'red', marginLeft: "20px" }} >Tous les champs avec étoiles ou en rouge doivent être remplis</p> }
-           
+            { classExist &&   <p className='alerteError2' style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }} >{classExist}</p> }
+            
             <div className='addpersonnel'>
                 
-                <p className='titlePersonnel'>Ajouter un personnel</p>
-                <p className='descriptionPersonnel'>Veuillez compléter les champs ci-dessous puis cliquer sur le bouton « Valider » pour créer un personnel </p>
-                <hr></hr>
+                { // formenseignant && }
 
-               {  formenseignant &&
-               
-                <form className='addpersonnel__form'>
+                    <>
+                        <p className='titlePersonnel'>Ajouter un personnel</p>
+                        <p className='descriptionPersonnel'>Veuillez compléter les champs ci-dessous puis cliquer sur le bouton « Valider » pour créer un personnel </p>
+                        <hr></hr>
 
-                        <form  className='formulaireInputNomPrenom'>
-
-                            <div className='formulaireInputNomPrenom__nomPrenom'>
-                                <label for="nom"> Nom <span className='etoile'>*</span></label>
-                                <input type='text' name='nom' id='decouverteEcole nomPrenom' className='nomPrenom nom' value={ formPersonnel.nom }  onChange={  personnelFunction }  maxLength={200} />
-                            </div>
-                            <div className='formulaireInputNomPrenom__nomPrenom'>
-                                <label for="prenom"> Prénom <span className='etoile'>*</span></label>
-                                <input type='text' name='prenom' id='prenom' className='nomPrenom prenom' value={ formPersonnel.prenom }  onChange={ personnelFunction }  maxLength={200} />
-                            </div>
-                            <div className='formulaireInputNomPrenom__nomPrenom'>
-                                <label for="contact">Tel <span className='etoile'>*</span></label>
-                                <input type='text' name='contact' id='tel' className='nomPrenom contact' value={ formPersonnel.tel }  onChange={ personnelFunction }  maxLength={200} />
-                            </div>
-                            <div className='formulaireInputNomPrenom__nomPrenom'>
-                                <label for="email"> Email <span className='etoile'> </span></label>
-                                <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
-                            </div>
-                        
-                        </form>
-
-                        <form  className='formulaireInputgroupeSalarial'>
-
-                            <form className='formulaireInputgroupeSalarial__element ' onChange={ personnelFunction } >
-                                <label for="groupeSalarial" className='formulaireInputgroupeSalarial__element--titre'> Groupe Salarial <span className='etoile'>*</span></label>
-                                <select name="groupeSalariale" id='formulaireInputgroupeSalarial__element--select'  className='formulaireInputgroupeSalarial__element--select groupeSalariale' >
-                                    
-                                    <option value="vide" > </option>
-                                    <option value="fondateurs" >Fondateur(s)</option>
-                                    <option  value="administration" >Administration </option >
-                                    <option  value="enseignant"  >Enseignant(s) </option >
-                                    <option  value="autrePersonnel"  >Autres Personnel(s) </option >
-
-                                </select>
-                            </form>
-                            
-                            <div className='formulaireInputgroupeSalarial__element'>
-                                <label for="poste"> Poste <span className='etoile'>*</span></label>
-                                <input type='text' name='poste' id='poste' className='poste' value={ formPersonnel.poste }  onChange={ personnelFunction }  maxLength={200} />
-                            </div>
-
-                        </form>
-
-                        <form  className='formulaireInputSectionClasseSalaire'>
-
-                            <form className='formulaireInputSectionClasseSalaire__element ' onChange={ personnelFunction } >
-                                
-                                <label for="section" className='formulaireDateSectionClasse__element--titre'> Section <span className='etoile'>*</span></label>
-                                <select name="section" id='formulaireDateSectionClasse__element--select'  className='dateSectionClasselist section_id' >
-                                    
-                                    <option value="vide" > </option>
-                                    <option value="anglophone"  >Anglophone</option>
-                                    <option  value="francophone"  >Francophone </option >
-
-                                </select>
-                                
-                            </form>
-
-                            <form className='formulaireInputSectionClasseSalaire__element ' onChange={ personnelFunction }>
-                                        
-                                <label for="classe" className='formulaireDateSectionClasse__element--classe'>Classe <span className='etoile'>*</span></label>
-                                <select name="classe" id='classe' className='classe classes_id' >
-
-                                <option value="vid"  >  </option>
-                                    { listeClassesContext.map( (classe, index) => 
-                                        
-                                        <option value={ classe.nom } key={classe.nom-`${index}`} > { classe.nom } </option>)
-                                    
-                                    } 
-
-                                </select>
-
-                            </form>
-
-                            <div className='formulaireInputSectionClasseSalaire__element'>
-                                <label for="salaire"> Salaire <span className='etoile'>*</span></label>
-                                <input type='text' name='salaire' id='salaire' className='salaire' value={ formPersonnel.salaire }  onChange={ personnelFunction }  maxLength={200} />
-                            </div>
-
-                        </form>
-                        
-                        <div className='formulaireConfirm'>
-
-                            <div className='formulaireConfirm__container'></div>
-                            <div className='formulaireConfirm__btn'>
-                                < button className='form__confirme--cancel  colorCancel' onClick={ lockaddEnseignantgroupe  } > Annuler</button>
-                                <button  type='submit' className='form__confirme--valid  colorValid' onClick={ submit }> Valider</button>
-                            </div>
-                                
-                        </div>
-
-                    </form>
                     
+                    
+                        <form className='addpersonnel__form'>
+
+                                <form  className='formulaireInputNomPrenom'>
+
+                                    <div className='formulaireInputNomPrenom__nomPrenom'>
+                                        <label for="nom"> Nom <span className='etoile'>*</span></label>
+                                        <input type='text' name='nom' id='decouverteEcole nomPrenom' className='nomPrenom nom' value={ formPersonnel.nom }  onChange={  personnelFunction }  maxLength={200} />
+                                    </div>
+                                    <div className='formulaireInputNomPrenom__nomPrenom'>
+                                        <label for="prenom"> Prénom <span className='etoile'>*</span></label>
+                                        <input type='text' name='prenom' id='prenom' className='nomPrenom prenom' value={ formPersonnel.prenom }  onChange={ personnelFunction }  maxLength={200} />
+                                    </div>
+                                    <div className='formulaireInputNomPrenom__nomPrenom'>
+                                        <label for="contact">Tel <span className='etoile'>*</span></label>
+                                        <input type='text' name='contact' id='tel' className='nomPrenom contact' value={ formPersonnel.tel }  onChange={ personnelFunction }  maxLength={200} />
+                                    </div>
+                                    <div className='formulaireInputNomPrenom__nomPrenom'>
+                                        <label for="email"> Email <span className='etoile'> </span></label>
+                                        <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
+                                    </div>
+                                
+                                </form>
+
+                                <form  className='formulaireInputgroupeSalarial'>
+
+                                    <form className='formulaireInputgroupeSalarial__element ' onChange={ personnelFunction } >
+                                        <label for="groupeSalarial" className='formulaireInputgroupeSalarial__element--titre'> Groupe Salarial <span className='etoile'>*</span></label>
+                                        <select name="groupeSalariale" id='formulaireInputgroupeSalarial__element--select'  className='formulaireInputgroupeSalarial__element--select groupeSalariale' >
+                                            
+                                            <option  ></option>
+                                            <option value="fondateurs" >Fondateur(s)</option>
+                                            <option  value="administration" >Administration </option >
+                                            <option  value="enseignant"  >Enseignant(s) </option >
+                                            <option  value="autrePersonnel"  >Autres Personnel(s) </option >
+
+                                        </select>
+                                    </form>
+                                    
+                                    <div className='formulaireInputgroupeSalarial__element'>
+                                        <label for="poste"> Poste <span className='etoile'>*</span></label>
+                                        <input type='text' name='poste' id='poste' className='poste' value={ formPersonnel.poste }  onChange={ personnelFunction }  maxLength={200} />
+                                    </div>
+
+                                </form>
+
+                                <form  className='formulaireInputSectionClasseSalaire'>
+
+                                    <form className='formulaireInputSectionClasseSalaire__element ' onChange={ personnelFunction } >
+                                        
+                                        <label for="section" className='formulaireDateSectionClasse__element--titre'> Section <span className='etoile'>*</span></label>
+                                        <select name="section" id='formulaireDateSectionClasse__element--select'  className='dateSectionClasselist section_id' >
+                                            
+                                            <option value="vide" > </option>
+                                            <option value="anglophone"  >Anglophone</option>
+                                            <option  value="francophone"  >Francophone </option >
+
+                                        </select>
+                                        
+                                    </form>
+
+                                    <form className='formulaireInputSectionClasseSalaire__element ' onChange={ personnelFunction }>
+                                                
+                                        <label for="classe" className='formulaireDateSectionClasse__element--classe'>Classe <span className='etoile'>*</span></label>
+                                        <select name="classe" id='classe' className='classe classes_id' >
+
+                                        <option value="vid"  >  </option>
+                                            { listeClassesContext.map( (classe, index) => 
+                                                
+                                                <option value={ classe.nom } key={classe.nom-`${index}`} > { classe.nom } </option>)
+                                            
+                                            } 
+
+                                        </select>
+
+                                    </form>
+
+                                    <div className='formulaireInputSectionClasseSalaire__element'>
+                                        <label for="salaire"> Salaire <span className='etoile'>*</span></label>
+                                        <input type='text' name='salaire' id='salaire' className='salaire' value={ formPersonnel.salaire }  onChange={ personnelFunction }  maxLength={200} />
+                                    </div>
+
+                                </form>
+                                
+                                <div className='formulaireConfirm'>
+
+                                    <div className='formulaireConfirm__container'></div>
+                                    <div className='formulaireConfirm__btn'>
+                                        < button className='form__confirme--cancel  colorCancel' onClick={ lockaddEnseignantgroupe  } > Annuler</button>
+                                        <button  type='submit' className='form__confirme--valid  colorValid' onClick={ submit }> Valider</button>
+                                    </div>
+                                        
+                                </div>
+
+                        </form>
+                        
+                    </>
                 }
 
+                { /*
+                
                 { 
 
                     administrationgroupe && 
                     
-                    <AddAdministration listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} /> 
+                    <AddAdministration groupeSalarialValueExForm = {groupeSalarialValueExForm} listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe}
+                     nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+                     sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+                     emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}/> 
 
                 }
 
@@ -577,7 +609,11 @@ const alerteInitiale = () => {
 
                     autrePersonnelgroupe  && 
                     
-                    <AddAutrePersonnel listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} /> 
+                    <AddAutrePersonnel  groupeSalarialValueExForm = {groupeSalarialValueExForm}  listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe}
+                     nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+                     sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+                     emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}
+                    /> 
 
                 }
 
@@ -585,12 +621,74 @@ const alerteInitiale = () => {
 
                     fondateurgroupe && 
                     
-                    <AddFondateur listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe}/> 
+                    <AddFondateur  groupeSalarialValueExForm = {groupeSalarialValueExForm} listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe}
+                     nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+                     sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+                     emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}
+                    
+                     AddPersonnels={AddPersonnels} AddAutrePersonnel={AddAutrePersonnel} AddAdministration={AddAdministration}
+                    
+                    /> 
 
+                } */
+                
                 }
 
             </div>
-        </div>
+        </div>}
+
+
+        {/*********************************$ */}
+
+
+        { 
+
+            administrationgroupe && 
+            
+            <AddAdministration groupeSalarialValueExForm = {groupeSalarialValueExForm} listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe}
+             nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+             sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+             emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}
+             
+             AddPersonnels={AddPersonnels} AddFondateur={AddFondateur} AddAutrePersonnel={AddAutrePersonnel}
+             /> 
+
+
+        }
+
+        { 
+
+            autrePersonnelgroupe  && 
+            
+            <AddAutrePersonnel  groupeSalarialValueExForm = {groupeSalarialValueExForm}  listeClassesContext={listeClassesContext} 
+             lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe} 
+             nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+             sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+             emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}
+
+             AddPersonnels={AddPersonnels} AddAdministration={AddAdministration} AddFondateur={AddFondateur}
+            /> 
+
+        }
+
+        { 
+
+            fondateurgroupe && 
+            
+            <AddFondateur  groupeSalarialValueExForm = {groupeSalarialValueExForm} listeClassesContext={listeClassesContext}  lockaddEnseignantgroupe={lockaddEnseignantgroupe} openaddEnseignantgroupe={openaddEnseignantgroupe}
+             nomValueExForm={nomValueExForm} prenomValueExForm={prenomValueExForm} contactValueExForm={contactValueExForm}
+             sectionValueExForm={sectionValueExForm} classeValueExForm={classeValueExForm}
+             emeilValueExForm={emeilValueExForm} salaireValueExForm={salaireValueExForm} posteValueExForm={posteValueExForm}
+            
+             AddPersonnels={AddPersonnels} AddAutrePersonnel={AddAutrePersonnel} AddAdministration={AddAdministration}
+            
+            /> 
+
+        }
+
+    </>
+
+
      
         
     );

@@ -493,7 +493,11 @@ console.log("***** mergeChiffreAffaire1")
          console.log("***** bienvenue à la condition recherche" )
  
          let value = [ e.target.name]
-         value = e.target.value;
+        //  value = e.target.value;
+        /////////////////////
+
+        value = e.target.value;
+        /////////////////////
      
          setvaleurInputDateEntree({})
          setfiltrebtnEntree({})
@@ -666,16 +670,16 @@ console.log("***** mergeChiffreAffaire1")
                     }
 
                  
-                        <form className='containerDateFiltre deactiveDate' disabled>
+                        <form className='containerDateFiltre deactiveDate' >
 
                             <di className='containerDateFiltre__btn deactiveDate__btn'>
                                 <label for="dateDebut" className='date'> Date début</label>
-                                <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateDebut  } onChange  ={  onchange } disabled />
+                                <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateDebut  } onChange  ={  onchange }  />
                                 
                             </di>
                             <di className='containerDateFiltre__btn deactiveDate__btn'>
                                 <label for="dateFin" className='date'> Date de fin</label>
-                                <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateFin  }  onChange ={  onchange } disabled/>
+                                <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre'  value={ valeurInputDateEntree.dateFin  }  onChange ={  onchange } />
                                 
                             </di>
 

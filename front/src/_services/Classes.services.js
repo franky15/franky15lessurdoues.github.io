@@ -6,7 +6,7 @@ let getAllClasses = () =>{
 }
 
 //en cmmentaire car les pages n'existe plus elles ont été supprimées
-/*
+
 let getOneClasse = (id) =>{
     return Axios.get("/classesRoutes/" +id)  //routes du back
 }
@@ -22,7 +22,7 @@ let deleteClasse = (id) => {
 let addClasse = (classe) => {
     return Axios.post("/classesRoutes", classe)  //on envoie user 
 }
-*/
+
 export const classesServices = {
-    getAllClasses//, getOneClasse, updateClasse, deleteClasse, addClasse
+    getAllClasses, getOneClasse, updateClasse, deleteClasse, addClasse,
 }

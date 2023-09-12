@@ -314,7 +314,7 @@ const GetAllClasses = () => {
                         {
 
                         }
-                        <span> { classes.length }</span>
+                        <span> { classes.length }</span> 
                     </div>
                 </div>
 

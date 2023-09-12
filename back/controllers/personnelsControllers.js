@@ -15,8 +15,15 @@ exports.createPersonnel = (req, res, next) => {
     //on l'utilisera pour insérer le userId dans utilisateurs_id
     const utilisateurs_id = req.auth.userId
 
-    let section_id
+    ///////////
+	//nouveau
+	let section_id
     let classes_id
+	
+    let salaireConverter = parseInt(salaire)
+    let contactConverter = parseInt(contact)
+
+    /////////
 
     //conversion des classes et sections en id 
     let sqlClasses = "SELECT * FROM classes;"
@@ -26,6 +33,7 @@ exports.createPersonnel = (req, res, next) => {
 
            // console.log("**** la classe existe : " ),
             //gestion des classes
+            //récupération de toutes les classes
             DB.query( sqlClasses,(errClasse, responseClasse) => {
 
                 console.log("**** la récupération des classes est : " )
@@ -95,7 +103,10 @@ exports.createPersonnel = (req, res, next) => {
 
     DB.query(sqlSelectAllPerso, (err, response) => {
 
-       
+        console.log("***** vous êtes dans sqlSelectAllPerso")
+
+        console.log("***** response  de sqlSelectAllPerso")
+            console.log(response)
 
         if(err){
 
@@ -103,8 +114,11 @@ exports.createPersonnel = (req, res, next) => {
             res.status(404).json({err})
              
         }else{
+
+            console.log("*** vous êtes dans vérification existance du personnel sqlSelectAllPerso*** " )
+
             //requete de vérification si l'utilisateur existe dans la base de données
-            const personnel = response.find( element => element.contact === contact)
+            const personnel = response.find( element => element.contact === contactConverter )
             
             console.log("***** personnel")
             console.log(personnel)
@@ -121,28 +135,28 @@ exports.createPersonnel = (req, res, next) => {
                     console.log("***** creation sans section_id ou classes_id")
                       //requete de creation de l'utilisateur 
                     sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, groupeSalariale, email, salaire )
-                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, "${groupeSalariale}" , "${email}", ${salaire});`
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contactConverter}, "${groupeSalariale}" , "${email}", ${salaireConverter});`
                 
                 }else if(!email){
  
                     console.log("***** creation avec section_id ou classes_id et sans email")
                       //requete de creation de l'utilisateur 
                       sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, section_id, classes_id, groupeSalariale, salaire )
-                      VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, ${section_id}, ${classes_id}, "${groupeSalariale}", ${salaire});`
+                      VALUES ( "${nom}", "${prenom}", "${poste}", ${contactConverter}, ${section_id}, ${classes_id}, "${groupeSalariale}", ${salaireConverter});`
                 
                 }else if(!section_id || !classes_id && !email){
 
                     console.log("***** creation sans section_id ou classes_id et sans email")
                       //requete de creation de l'utilisateur 
                     sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, groupeSalariale, salaire )
-                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, "${groupeSalariale}", ${salaire});`
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contactConverter}, "${groupeSalariale}", ${salaireConverter});`
                 
                 }else{
                 
                     console.log("***** creation avec section_id ou classes_id")
                       //requete de creation de l'utilisateur
                     sqlCreatePerso = `INSERT INTO personnels ( nom, prenom, poste, contact, section_id, classes_id, groupeSalariale, email, salaire )
-                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contact}, ${section_id}, ${classes_id}, "${groupeSalariale}" , "${email}", ${salaire});`
+                    VALUES ( "${nom}", "${prenom}", "${poste}", ${contactConverter}, ${section_id}, ${classes_id}, "${groupeSalariale}" , "${email}", ${salaireConverter});`
                 }
               
 
@@ -181,7 +195,7 @@ exports.createPersonnel = (req, res, next) => {
                                     console.log(" ****bienvenu dans PersonnelCurrent")
                                     console.log( classe + " " + section)
 
-                                   let PersonnelCurrent = ressqlPersonnels.find( element1 => element1.contact === parseInt(contact) )
+                                   let PersonnelCurrent = ressqlPersonnels.find( element1 => element1.contact === contactConverter ) //parseInt(contact)
                                     
                                     console.log("***** PersonnelCurrent")  
                                     console.log(PersonnelCurrent)
@@ -203,14 +217,14 @@ exports.createPersonnel = (req, res, next) => {
                                         
                                             
                                             console.log("*** erreur de sqlUpdateClasse *** " +  errUpclass) 
-                                            res.status(404).json({errUpclass}) 
+                                            //res.status(404).json({errUpclass}) 
                                     
                                         }else{ 
 
                                             
                                             
                                             console.log("*** enseignant et personnels_id modifiés avec succès*** ") 
-                                            res.status(200).json(resUpclass)
+                                            //res.status(200).json(resUpclass)
                                             
                                         }  
 
@@ -277,7 +291,7 @@ exports.getOnePersonnel = (req, res, next) =>{
     
     //vérification si le champ id est présent et cohérent
     if(!elementId){
-        res.status(404).json({message: "absence de paramètre"})
+        res.status(404).json({message: "absence de paramètre"}) 
     }
 
     DB.query(sqlSelectAllPerso, (err, response) => {

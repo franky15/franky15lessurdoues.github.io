@@ -1,16 +1,16 @@
 //import des modules nécessaires
 const DB = require("../mysql.config")
-const { response } = require("../app"); 
+const { response } = require("../app");   
  
 //POST creation de l'élève
-exports.createEleve = (req, res, next) => {  
+exports.createEleve = (req, res, next) => {   
  
     console.log("***bienvenue dans createEleve*** " )
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
     
-    console.log("*** req.body *** " )
-    console.log(req.body) 
+    console.log("*** req.body *** " ) 
+    console.log(req.body)  
 
   
     
@@ -29,7 +29,7 @@ exports.createEleve = (req, res, next) => {
 
     //on l'utilisera pour insérer le userId dans utilisateurs_id
     const utilisateurs_id = req.auth.userId
- 
+  
  
     console.log("****** la valeur sectionNumber avant le if: ****** " + sectionNumber )
 
@@ -282,7 +282,7 @@ exports.createEleve = (req, res, next) => {
                                                             console.log("***erreur de errsqlAllPaiementEntree *** " +  errsqlAllPaiementEntree)  
                                                             res.status(400).json({errsqlAllPaiementEntree})
                                                         
-                                                        
+                                                         
                                                         }else{
  
                                                             let dernierpaiement2 = ressqlAllPaiementEntree[ressqlAllPaiementEntree.length - 1]
@@ -300,7 +300,7 @@ exports.createEleve = (req, res, next) => {
                                                                     console.log("***erreur de errsqlUpdateEleve *** " +  errsqlUpdateEleve) 
                                                                     res.status(400).json({errsqlUpdateEleve})
  
-                                                        
+                                                         
                                                                 }else{
 
 

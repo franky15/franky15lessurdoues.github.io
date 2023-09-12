@@ -47,7 +47,7 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
         setInput({
 
             ...input,
-            [e.target.name] : e.target.value,
+            [e.target.name] : e.target.value, 
             //sectionChoice //section
         })
             
@@ -121,6 +121,10 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
 
     /////////////////////////////////////////
 
+    //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
+    let [ classExist, setclassExist ] = useState()
+
+
     //soumission du formulaire
     let onsubmit = (e) => {
 
@@ -175,17 +179,27 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
                 console.log(res)
                 navigate("/admin/classes")
             })
-            .catch( err => console.log(err))
+            .catch( err => {
+
+                setclassExist(`Vous ne pouvez pas créer la classe ${nom} car elle existe déjà` )
+             
+                console.log(` **** laclasse ${nom} existe déjà : ` + err)
+               
+            
+            })
 
         }
        
 
     }
     
+    console.log( classExist)
+
 
     return (
         <div className='AddClassContainer'>
  { alerteForm &&   <p className='alerteError'>Tous les champs avec étoiles ou en rouge doivent être remplis</p> }
+ { classExist &&   <p className='alerteError' style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }} >{classExist}</p> }
            
             <div className='AddClassContainer__option'>
                 <p className='AddClassContainer__option--titre'>
@@ -202,7 +216,7 @@ const AddClasses = ( { windowAddClasse, lockWindowAddClasse } ) => {  //{ window
 
                 <div className='AddClassContainer__entete--classe' >
                     <div className='block '>
-                        <span className='titre'>Nom de la class</span><span className='etoile'>*</span>
+                        <span className='titre'>Nom de la classe</span><span className='etoile'>*</span>
                     </div>
                 </div>
                 <div className='AddClassContainer__entete--enseignant' >

@@ -452,6 +452,9 @@ const alerteInitiale = () => {
 
     ////////////////////////////////////////
 
+     //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
+     let [ classExist, setclassExist ] = useState()
+
     let validationBtn = document.querySelector(".form__confirme--valid")
 
     const submit = (e) => {
@@ -643,7 +646,15 @@ const alerteInitiale = () => {
                // lockAddEleveWindow()
                
                 })
-                .catch( err => console.log(err))
+                //.catch( err => console.log(err))
+                .catch( err => {
+
+                    setclassExist(`Vous ne pouvez pas créer l'élève ${nom} car il existe déjà` )
+                 
+                    console.log(` **** l'élève ${nom} existe déjà : ` + err)
+                   
+                
+                })
 
                
                
@@ -664,7 +675,7 @@ const alerteInitiale = () => {
         <div className='createElevesContainer'>
 
              { alerteForm &&   <p className='alerteError'>Tous les champs avec étoiles ou en rouge doivent être remplis</p> }
-             
+             { classExist &&   <p className='alerteError' style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }} >{classExist}</p> }
              { 
              
              

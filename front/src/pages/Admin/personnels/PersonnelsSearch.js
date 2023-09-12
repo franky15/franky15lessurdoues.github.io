@@ -17,10 +17,10 @@ const PersonnelsSearch = ({  valeurInputSearch, filtrebtn }) => {
 
 
     console.log("***$ filtrebtn dans PersonnelSearch")
-    console.log(filtrebtn)
+    console.log( filtrebtn + " de type:  " + typeof filtrebtn)
 
     console.log("***$ valeurInputSearch dans PersonnelSearch")
-    console.log(valeurInputSearch)
+    console.log(valeurInputSearch + " de type:  " + typeof valeurInputSearch )
 
     //gestion de l'affichage de la fenêtre ajouter un personnel
     let [ WindowAddPersonnel, setWindowAddPersonnel ] = useState(false) //false
@@ -286,12 +286,58 @@ const PersonnelsSearch = ({  valeurInputSearch, filtrebtn }) => {
 
     //gestion de de l'affichage des données
 
-
+    /*
     let valeurInput =  listePersonnelContext.filter( personnel => personnel.nom.toLowerCase() === valeurInputSearch ||  personnel.nom.toUpperCase() === valeurInputSearch || personnel.nom === valeurInputSearch || personnel.prenom.toLowerCase() === valeurInputSearch || personnel.prenom.toUpperCase() === valeurInputSearch || personnel.prenom === valeurInputSearch 
-    || personnel.contact === valeurInputSearch 
+        || personnel.contact === valeurInputSearch 
         || personnel.poste.toUpperCase() === valeurInputSearch  || personnel.poste.toLowerCase() === valeurInputSearch  || personnel.poste === valeurInputSearch || personnel.groupeSalariale === filtrebtn 
-        || personnel.groupeSalariale.toUpperCase() === filtrebtn || personnel.groupeSalariale.toLowerCase() === filtrebtn || personnel.groupeSalariale === filtrebtn)
+        || personnel.groupeSalariale.toUpperCase() === filtrebtn || personnel.groupeSalariale.toLowerCase() === filtrebtn || personnel.groupeSalariale === filtrebtn  //||  `${personnel.nom.toLowerCase() + " " + personnel.prenom.toLowerCase()}` === valeurInputSearch.toLowerCase()
+        
+    )
+    */
+
+    /*
+    let valeurInput =  listePersonnelContext.filter( personnel => personnel.nom.toLowerCase() === valeurInputSearch.toLowerCase() ||  personnel.prenom.toLowerCase() === valeurInputSearch.toLowerCase() || 
+            personnel.contact === valeurInputSearch 
+            || personnel.poste.toLowerCase() === valeurInputSearch.toLowerCase()   ||  `${personnel.nom.toLowerCase() + " " + personnel.prenom.toLowerCase()}` === valeurInputSearch.toLowerCase()
+            || personnel.groupeSalariale === filtrebtn 
+            || personnel.groupeSalariale.toUpperCase() === filtrebtn || personnel.groupeSalariale.toLowerCase() === filtrebtn || personnel.groupeSalariale === filtrebtn
+            
+        )
+    */
+    
+     
+    let valeurInput 
+
+    //vérification si 
+    if( valeurInputSearch ) {
+        
+        console.log("***valeurInputSearch existe")
+
+         valeurInput =  listePersonnelContext.filter( personnel => personnel.nom.toLowerCase() === valeurInputSearch.toLowerCase() ||  personnel.prenom.toLowerCase() === valeurInputSearch.toLowerCase() || 
+            personnel.contact === valeurInputSearch 
+            || personnel.poste.toLowerCase() === valeurInputSearch.toLowerCase()   ||  `${personnel.nom.toLowerCase() + " " + personnel.prenom.toLowerCase()}` === valeurInputSearch.toLowerCase()
+            
+            /*|| personnel.groupeSalariale === filtrebtn 
+            ||  personnel.groupeSalariale.toLowerCase() === filtrebtn.toLowerCase()  //|| personnel.groupeSalariale === filtrebtn
+            */
+        ) 
+    }else{
+
+        console.log("***valeurInputSearch est null")
+            valeurInput =  listePersonnelContext.filter( personnel => personnel.nom.toLowerCase() === valeurInputSearch ||  personnel.nom.toUpperCase() === valeurInputSearch || personnel.nom === valeurInputSearch || personnel.prenom.toLowerCase() === valeurInputSearch || personnel.prenom.toUpperCase() === valeurInputSearch || personnel.prenom === valeurInputSearch 
+            || personnel.contact === valeurInputSearch 
+            || personnel.poste.toUpperCase() === valeurInputSearch  || personnel.poste.toLowerCase() === valeurInputSearch  || personnel.poste === valeurInputSearch || personnel.groupeSalariale === filtrebtn 
+            || personnel.groupeSalariale.toLowerCase() === filtrebtn.toLowerCase()
+            
+        )
+
+
+    }
+    
+    
+        
              
+    
 
     let valeurInput1 =  listePersonnelContext.filter( personnel =>  personnel.groupeSalariale === filtrebtn  )
     

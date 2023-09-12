@@ -847,7 +847,7 @@ const onchange2 = (e) => {
 
                    
     
-                    <p  className='btn__button' onClick={ openaddEnseignantgroupe }> Ajoutter Personnel</p>
+                    <p  className='btn__button' onClick={ openaddEnseignantgroupe }> Ajouter Personnel</p>
                         
                    
 

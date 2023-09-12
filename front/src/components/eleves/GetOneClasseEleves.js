@@ -693,7 +693,7 @@ const onchange = (e) => {
                     <>
                             <hr></hr>
                     
-                            <div className='getOneClasseEleves__btn3--bloc' key={ `${eleve.nom}-${index}` }>
+                            <div className='getOneClasseEleves__btn3--bloc' key={ `${eleve.nom}-${index}` }> 
                                 
                             
                                 <div className='btn3Option'>

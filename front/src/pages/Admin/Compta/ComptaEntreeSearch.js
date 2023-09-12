@@ -15,7 +15,8 @@ const ComptaEntreeSearch = ({ listeClassesContext, listeElevesContext, listePers
      console.log(listePaiementContext)
 
      console.log("***** valeurInputSearch de comptaEntreeSearch")
-    console.log(valeurInputSearchEntree)
+  
+    console.log(valeurInputSearchEntree + " de type:  " + typeof valeurInputSearchEntree )
  
      //gestion du state de l'affichage de la fenêtre de creation
      let [ createOpen, setcreateOpen ] = useState(false)
@@ -129,19 +130,77 @@ console.log( dateFin)
 
 
 
-let mergeTable = [ ...listeElevesContext, ...listePaiementContext]
+let mergeTableOrigine = [ ...listeElevesContext, ...listePaiementContext]
 
-console.log("****** mergeTable")
-console.log(mergeTable)
+console.log("****** mergeTableOrigine")
+console.log(mergeTableOrigine)
 
-//let valeurInputEntree
+let mergeTable = JSON.parse(JSON.stringify(mergeTableOrigine));
+
+console.log(" ** mergeTable")
+console.log( mergeTable)
+
+////////////////////////
 
 
+
+
+
+
+
+let valeurInputEntree 
+//let valeurInputEntree = mergeTable
+
+if(valeurInputSearchEntree  ){
+
+    console.log("*** valeurInputSearchEntree existe")
+
+    valeurInputEntree = listeElevesContext.filter( elevePaiement => elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase()  ||  elevePaiement.nom.toLowerCase() === valeurInputSearchEntree.toLowerCase() 
+               )
+   
+    /*
+    valeurInputEntree = mergeTable.filter( elevePaiement => elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase()  ||  elevePaiement.nom.toLowerCase() === valeurInputSearchEntree.toLowerCase()  
+     ||  elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree.toLowerCase()  
+     ||  `${elevePaiement.nom.toLowerCase() + " " + elevePaiement.prenom.toLowerCase()}` === valeurInputSearchEntree.toLowerCase()
+     || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom.toLowerCase()  +  " " +   elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) 
+    
+   )
+   */
+
+   /*
+   valeurInputEntree = mergeTable.filter( elevePaiement => elevePaiement.prenom === valeurInputSearchEntree.toLowerCase()
+         ||  elevePaiement.nom === valeurInputSearchEntree 
+        ||  elevePaiement.nomParent1 === valeurInputSearchEntree 
+        ||  `${elevePaiement.nom + " " + elevePaiement.prenom}` === valeurInputSearchEntree
+        
+
+   )*/
+    
+
+}else{
+
+    console.log("*** valeurInputSearchEntree est null")
+
+     valeurInputEntree =  mergeTable.filter( elevePaiement => /*elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase()  ||  elevePaiement.nom.toLowerCase() === valeurInputSearchEntree.toLowerCase()  ||  
+
+         elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree.toLowerCase()  || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom.toLowerCase()  +  " " +   elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) // ||
+        
+        //`${elevePaiement.nom.toLowerCase() + " " + elevePaiement.prenom.toLowerCase()}` === valeurInputSearchEntree.toLowerCase()  ||*/
+         ( elevePaiement.dateDernierPaiement  >= dateDebut  &&  elevePaiement.dateDernierPaiement  <= dateFin)
+        
+        ) 
+
+
+}
+
+/*
 let valeurInputEntree = mergeTable.filter( elevePaiement => (elevePaiement.prenom && (elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) ) ||  (elevePaiement.nom && (elevePaiement.nom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) ) ||  
 
-( elevePaiement.nomParent1 &&  ( elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) )  || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom.toLowerCase()  +  " " +   elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) /* ||
+( elevePaiement.nomParent1 &&  ( elevePaiement.nomParent1.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) )  || ( elevePaiement.nom && elevePaiement.prenom &&  elevePaiement.nom.toLowerCase()  +  " " +   elevePaiement.prenom.toLowerCase() === valeurInputSearchEntree.toLowerCase() ) // ||
    
-   ( elevePaiement.dateDernierPaiement  >= dateDebut  &&  elevePaiement.dateDernierPaiement  <= dateFin)  */ )
+   ( elevePaiement.dateDernierPaiement  >= dateDebut  &&  elevePaiement.dateDernierPaiement  <= dateFin)  ) 
+   
+   */ 
 
 
 

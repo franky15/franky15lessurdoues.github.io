@@ -17,7 +17,10 @@ const SectionSearch = ({classes, valeurInput}) => {
         console.log( " entrain de taper sur l'input " )
 
         //filtre des sections
-        let listeSearch = listeclasses.filter( element => element.nom.toLowerCase() === input.toLowerCase())
+         let listeSearch = listeclasses.filter( element => element.nom.toLowerCase() === input.toLowerCase())
+        
+
+        
         setsectionInput(listeSearch )
 
     }, [listeclasses, input])
