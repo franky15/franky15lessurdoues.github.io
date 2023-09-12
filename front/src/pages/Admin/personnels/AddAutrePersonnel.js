@@ -6,7 +6,7 @@ const AddAutrePersonnel = ({ listeClassesContext, lockaddEnseignantgroupe, opena
       sectionValueExForm, classeValueExForm,emeilValueExForm, salaireValueExForm,
        openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, listePersonnelContext,posteValueExForm,
        
-       AddPersonnels,AddAdministration, AddFondateur
+       AddPersonnels,AddAdministration, AddFondateur 
 }) => {
 
 
