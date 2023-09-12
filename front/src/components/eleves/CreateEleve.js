@@ -823,18 +823,5 @@ const alerteInitiale = () => {
 
 export default CreateEleves;
 
-/*
-<form className='formulaireDateSectionClasse__element' onChange={ classeInput }>
-                                
-    <label for="classe" className='formulaireDateSectionClasse__element--classe'>Classe <span className='etoile'>*</span></label>
-    <select name="sections" id='formulaireDateSectionClasse__element--select' className='dateSectionClasselist' >
-        
-        <option value={ `${ valClasse.classes_id }`} >{ valClasse.classes_id } </option>
-        <option value="cM7"  >cM7</option>
-        <option  value="classe7"  >class7 </option >
 
-    </select>
-</form>
 
-*/
-// ligne 302 textareaInputMontant

@@ -69,7 +69,7 @@ export const ContextAddEleveProvider = ({ children }) => {
     const currentURL = window.location.href; 
 
     // Vérifiez si l'URL contient le chemin spécifique
-    const shouldExecute = !currentURL.includes("http://localhost:3001/auth/login");  //"http://localhost:3001/auth/login"
+    const shouldExecute = !currentURL.includes("/auth/login");  //"http://localhost:3001/auth/login"
 
 
     /*****************************/

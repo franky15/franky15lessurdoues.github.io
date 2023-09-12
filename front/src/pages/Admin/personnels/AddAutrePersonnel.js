@@ -406,7 +406,7 @@ let groupeSalarialAutrePersonnel = formPersonnel.autrePersonnel
 
 
 /////////////////////////////////
-let [ formenseignant, setformenseignant ] = useState(false) //true
+let [ formenseignant, setformenseignant ] = useState(false) //true n
 
 
 const openenseignantgroupe = () => setformenseignant(true) 
@@ -649,4 +649,5 @@ useEffect( () => {
 };
 
 export default AddAutrePersonnel;
+
 

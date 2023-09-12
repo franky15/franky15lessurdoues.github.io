@@ -5,8 +5,6 @@ let getAllClasses = () =>{
     return Axios.get("/classesRoutes")  //routes du back
 }
 
-//en cmmentaire car les pages n'existe plus elles ont été supprimées
-
 let getOneClasse = (id) =>{
     return Axios.get("/classesRoutes/" +id)  //routes du back
 }

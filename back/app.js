@@ -24,10 +24,12 @@ app.use(express.json()); //l'api va communiquer en json
 app.use(express.urlencoded({ extended: true })); //l'encodage des url car on a plusieurs types d'url
 
 
-//app.get("/", (req, res) => res.send("je suis en ligne bien venue")); 
-//app.get("*", (req, res) => res.status(501).send("la données que vous cherchez n'existe pas"));
-
-
+////////////////////
+/*
+//à décommenter sur le vps (plesk)
+app.use(express.static(path.join(__dirname, '../front/build'))); 
+});
+*/
 
 ////////////////////
 //mise en place du routage
@@ -46,5 +48,14 @@ app.use("/comptas", comptaEntree_router)
 app.use("/comptaCharges", comptaCharges_router )
 
 ////////////////////
+/*
+//à décommenter sur le vps (plesk)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../front/build', 'index.html'));
+});
+*/
+
+///////////////////
 
 module.exports = app; 
+

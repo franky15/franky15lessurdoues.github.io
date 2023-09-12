@@ -66,45 +66,9 @@ const AddAdministration = ({ groupeSalarialValueExForm, nomValueExForm, prenomVa
        }, 1)
    }
 
-   /*
-   const submit = () => {
-
-       
-       //e.preventDefault()
-
-       console.log("bienvenue au submit test de addpersonnels")
-                                                                   //valTextarea
-       personnelServices.createPersonnel (formPersonnel)
-           .then( res => {
-               console.log("données du formulaire envoyées")
-               console.log(res)
-               //navigate("/admin/classes" ) 
-              ////////////////////////////
-
-              confirmationPersonnelCreate()
-
-              ////////////////////////////
-           })
-           .catch( err => console.log(err))
-       
-   }
-   */
 
    //////////////////////////////////////////////////////////////////////$$$$$$$
 
-   //////////////////////////////////////////::::
-   
-    //gestion du state du salaire
-    /*
-    let [ addEnseignantgroupe, setaddEnseignantgroupe ] = useState(false)
-
-    const openaddEnseignantgroupe = () => setaddEnseignantgroupe(true) 
-    const lockaddEnseignantgroupe = () => setaddEnseignantgroupe(false) 
-   */
-
-
-
-   /////////////////////////////////////////////////
 
 //    let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
 let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire } = formPersonnel
@@ -334,20 +298,6 @@ const submit = (e) => {
 
        }  
        
-       /*
-        if( !classe  || classe === "" || classe === "undefined"){ //classes_id
-
-               console.log("bienvenue dans la condition nomParent1")
-
-               setalerteForm(true)
-
-               console.log( regexNomPrenom.test(classe)  ) //classes_id
-   
-               const nomClasse = document.querySelector(".classes_id")
-               nomClasse.style.border = "solid 1px red"
-
-       }
-       */
        
 
        
@@ -391,20 +341,7 @@ const submit = (e) => {
 
        }
 
-   /*
-   personnelServices.createPersonnel (formPersonnel)
-       .then( res => {
-           console.log("données du formulaire envoyées")
-           console.log(res)
-           //navigate("/admin/classes" ) 
-          ////////////////////////////
-
-          confirmationPersonnelCreate()
-
-          ////////////////////////////
-       })
-       .catch( err => console.log(err))
-   */
+  
    
 }
 
@@ -652,17 +589,172 @@ useEffect( () => {
 export default AddAdministration;
 
 /*
-                      <form className='formulaireInputgroupeSalarial__element' onChange={ personnelFunction } >
-                                        <label for="groupeSalarial" className='formulaireInputgroupeSalarial__element--titre'> Groupe Salarial <span className='etoile'>*</span></label>
-                                        <select name="groupeSalariale" id='formulaireInputgroupeSalarial__element--select'  className='formulaireInputgroupeSalarial__element--select groupeSalariale' >
-                                            
-                                        <option value={formPersonnel.groupeSalariale} > { formPersonnel.groupeSalariale === "undefined" ? setFormPersonnel( {...formPersonnel,groupeSalariale:""}) : formPersonnel.groupeSalariale}</option>
-                                            <option value="fondateurs" >Fondateur(s)</option>
-                                            <option  value="administration" >Administration </option >
-                                            <option  value="enseignant"  >Enseignant(s) </option >
-                                            <option  value="autrePersonnel"  >Autres Personnel(s) </option >
+//version qui tournait sur plesk
 
-                                        </select>
-                                    </form>
+import React,{useEffect, useState} from 'react';
+import { personnelServices } from '../../../_services/Personnels.services';
 
+const AddAdministration = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, listePersonnelContext  }) => {
+
+
+
+    //gestion du gros object pour un seul formulaire
+    /////////////////////////
+    let [ formPersonnel, setFormPersonnel ]  = useState({})
+
+
+    const personnelFunction = (e) => {
+
+        setFormPersonnel({
+
+            ...formPersonnel,
+            [e.target.name] : e.target.value
+
+        }) 
+
+
+    }
+
+    console.log("***formPersonnel")
+    console.log(formPersonnel)
+    /////////////////////////
+
+    let [ eleveCreate, setEleveCreate ] = useState(false) //false
+     //confirmation de la mise à jour
+     let confirmationPersonnelCreate = () => {
+     
+        
+        setEleveCreate(true)
+       // setHidenEleveCreate(false)
+       
+    
+        //cacher la confirmation après 3000 millisecondes
+        setTimeout( () => {
+    
+            
+            setEleveCreate(false)
+            window.location.reload();
+            
+        }, 1)
+    }
+    const submit = () => {
+
+        
+        //e.preventDefault()
+
+        console.log("bienvenue au submit test de addpersonnels")
+                                                                    //valTextarea
+        personnelServices.createPersonnel (formPersonnel)
+            .then( res => {
+                console.log("données du formulaire envoyées")
+                console.log(res)
+                //navigate("/admin/classes" ) 
+               ////////////////////////////
+
+               confirmationPersonnelCreate()
+
+               ////////////////////////////
+            })
+            .catch( err => console.log(err))
+        
+    }
+
+
+    
+
+
+    return (
+
+        <>
+
+        <h1>****** bienvenue au AddAdministration</h1>
+
+        <form className='addpersonnel__form'>
+
+            <form  className='formulaireInputNomPrenom'>
+
+                <div className='formulaireInputNomPrenom__nomPrenom'>
+                    <label for="nom"> Nom <span className='etoile'>*</span></label>
+                    <input type='text' name='nom' id='decouverteEcole nomPrenom' className='nomPrenom' value={ formPersonnel.nom }  onChange={  personnelFunction }  maxLength={200} />
+                </div>
+                <div className='formulaireInputNomPrenom__nomPrenom'>
+                    <label for="prenom"> Prénom <span className='etoile'>*</span></label>
+                    <input type='text' name='prenom' id='prenom' className='nomPrenom' value={ formPersonnel.prenom }  onChange={ personnelFunction }  maxLength={200} />
+                </div>
+                <div className='formulaireInputNomPrenom__nomPrenom'>
+                    <label for="contact">Tel <span className='etoile'>*</span></label>
+                    <input type='text' name='contact' id='tel' className='nomPrenom' value={ formPersonnel.tel }  onChange={ personnelFunction }  maxLength={200} />
+                </div>
+                <div className='formulaireInputNomPrenom__nomPrenom'>
+                    <label for="email"> Email <span className='etoile'> </span></label>
+                    <input type='text' name='email' id='email' className='nomPrenom' value={ formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
+                </div>
+            
+            </form>
+
+            <form  className='formulaireInputgroupeSalarial'>
+
+                <form className='formulaireInputgroupeSalarial__element' onChange={ personnelFunction } >
+                    <label for="groupeSalarial" className='formulaireInputgroupeSalarial__element--titre'> Groupe Salarial <span className='etoile'>*</span></label>
+                    <select name="groupeSalariale" id='formulaireInputgroupeSalarial__element--select'  className='formulaireInputgroupeSalarial__element--select' >
+                        
+                        <option value="vide" > </option>
+                        <option value="fondatrice" >Fondateur(s)</option>
+                        <option  value="administration" >Administration </option >
+                        <option  value="enseignant"  >Enseignant(s) </option >
+                        <option  value="autrePersonnel"  >Autres Personnel(s) </option >
+
+                    </select>
+                </form>
+                
+                <div className='formulaireInputgroupeSalarial__element'>
+                    <label for="poste"> Poste <span className='etoile'>*</span></label>
+                    <input type='text' name='poste' id='poste' className='poste' value={ formPersonnel.poste }  onChange={ personnelFunction }  maxLength={200} />
+                </div>
+
+            </form>
+
+            <form  className='formulaireInputSectionClasseSalaire'>
+
+                <form className='formulaireInputSectionClasseSalaire__element' onChange={ personnelFunction } >
+                    
+                    <label for="section" className='formulaireDateSectionClasse__element--titre'> Section <span className='etoile'>*</span></label>
+                    <select name="section" id='formulaireDateSectionClasse__element--select'  className='dateSectionClasselist' >
+                        
+                        <option value="vide" > </option>
+                        <option value="anglophone"  >Anglophone</option>
+                        <option  value="francophone"  >Francophone </option >
+
+                    </select>
+                    
+                </form>
+
+                
+
+                <div className='formulaireInputSectionClasseSalaire__element'>
+                    <label for="salaire"> Salaire <span className='etoile'>*</span></label>
+                    <input type='text' name='salaire' id='salaire' className='salaire' value={ formPersonnel.salaire }  onChange={ personnelFunction }  maxLength={200} />
+                </div>
+
+            </form>
+            
+            <div className='formulaireConfirm'>
+
+                <div className='formulaireConfirm__container'></div>
+                <div className='formulaireConfirm__btn'>
+                    < button className='form__confirme--cancel  colorCancel' onClick={ lockAddEleveWindow } > Annuler</button>
+                    <button className='form__confirme--valid  colorValid' onClick={ submit }> Valider</button>
+                </div>
+                    
+            </div>
+
+        </form>
+
+        </>
+   
+
+    );
+};
+
+export default AddAdministration;
 */
