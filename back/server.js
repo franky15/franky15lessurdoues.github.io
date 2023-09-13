@@ -5,6 +5,9 @@ const http = require("http");
 const dotenv = require("dotenv").config();
 //importation de la base de données
 const DB = require("./mysql.config")  
+
+//pour éxécuter le __le dirname
+const path = require('path');
  
 
 //creation de l'application

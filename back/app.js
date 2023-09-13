@@ -2,6 +2,9 @@
 const express = require("express");
 const cors = require("cors"); 
 
+//pour éxécuter le __le dirname
+const path = require('path');
+
 
 ////////////////////
 //import des modules de routages
@@ -25,11 +28,10 @@ app.use(express.urlencoded({ extended: true })); //l'encodage des url car on a p
 
 
 ////////////////////
-/*
-//à décommenter sur le vps (plesk)
+
 app.use(express.static(path.join(__dirname, '../front/build'))); 
-});
-*/
+
+
 
 ////////////////////
 //mise en place du routage
@@ -48,12 +50,14 @@ app.use("/comptas", comptaEntree_router)
 app.use("/comptaCharges", comptaCharges_router )
 
 ////////////////////
-/*
-//à décommenter sur le vps (plesk)
+
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../front/build', 'index.html'));
 });
-*/
+
+
+
 
 ///////////////////
 
