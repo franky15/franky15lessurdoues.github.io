@@ -16,20 +16,26 @@ const AddAdministration = ({ groupeSalarialValueExForm, nomValueExForm, prenomVa
     /////////////////////////
     let [ formPersonnel, setFormPersonnel ]  = useState({
 
-       // "classe": `${classeValueExForm}`,
-        "section": `${sectionValueExForm}`,
-       "contact": `${contactValueExForm}`,
-       "email": `${emeilValueExForm}`,
+
+        //"classe": `${classeValueExForm ?? ""}`,
+        "section": `${sectionValueExForm ?? ""}`,
+       "contact": `${contactValueExForm ?? ""}`,
+       "email": `${emeilValueExForm ?? ""}`,
        "groupeSalariale": `${groupeSalarialValueExForm}`,
-       "nom": `${nomValueExForm}`,
-       "prenom": `${prenomValueExForm}`,
-       "poste": `${posteValueExForm}`,
-       "salaire": `${salaireValueExForm}`
+       "nom": `${nomValueExForm ?? ""}`,
+       "prenom": `${prenomValueExForm ?? ""}`,
+       "poste": `${posteValueExForm ?? ""}`,
+       "salaire": `${salaireValueExForm ?? ""}`
+
+
+
    })
 
    console.log("******nom state : "  + formPersonnel.nom)
 
    const personnelFunction = (e) => {
+
+   
 
        setFormPersonnel({
 
@@ -94,10 +100,11 @@ console.log(nomClasse1)
 //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
+    console.log("***** bienvenue dans alerteInitiale()")
 
     document.addEventListener("DOMContentLoaded", function() {
 
- 
+        console.log("***** bienvenue dans alerteInitiale() après charge dom")
    
         if( nom  ){
 
@@ -106,7 +113,7 @@ const alerteInitiale = () => {
 
         nomClasse.style.border = "solid 1px black "
         
-        //nomClasse1.style.display = "none"
+        // nomClasse.style.display = "none"
 
         }
 
@@ -114,35 +121,35 @@ const alerteInitiale = () => {
         if(prenom){
 
         nomClasse1.style.border = "solid  1px black"
-        //nomClasse3.style.display = "none"
+        // nomClasse1.style.display = "none"
 
         }
 
         if(contact ){
 
         nomClasse2.style.border = "solid 1px black"
-        //nomClasse4.style.display = "none"
+        // nomClasse2.style.display = "none"
 
         }
 
         if(email  ){
 
         nomClasse3.style.border = "solid 1px black"
-        //nomClasse5.style.display = "none"
+        // nomClasse3.style.display = "none"
 
         }
 
         if(groupeSalariale ){
 
         nomClasse4.style.border = "solid 1px black"
-        //nomClasse6.style.display = "none"
+        // nomClasse4.style.display = "none"
 
         }
 
         if(poste  ){
 
         nomClasse5.style.border = "solid 1px black"
-        // nomClasse7.style.display = "none"
+        // nomClasse5.style.display = "none"
 
         }
 
@@ -150,7 +157,7 @@ const alerteInitiale = () => {
         if(section ){ //section_id
 
         nomClasse6.style.border = "solid 1px black"
-        //nomClasse8.style.display = "none"
+        // nomClasse6.style.display = "none"
 
         }
 
@@ -166,7 +173,7 @@ const alerteInitiale = () => {
         if(salaire ){
 
         nomClasse8.style.border = "solid  1px black"
-        //nomClasse10.style.display = "none"
+        // nomClasse8.style.display = "none"
 
         }
         
@@ -192,6 +199,10 @@ let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
    //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
    let [ classExist, setclassExist ] = useState()
+    let [ classExistShow, setclassExistShow ] = useState(false)
+
+    const classExistShowIsOpen = () =>{ setclassExistShow(true) }
+    const classExistShowIsLock = () =>{ setclassExistShow(false) }
 
 const submit = (e) => {
 
@@ -203,7 +214,7 @@ const submit = (e) => {
 
     console.log("bienvenue au submit test de createEleve")
 
-   if( !nom || !prenom || !contact || !email || !groupeSalariale || !poste || !salaire | !section || !classe  ){  //|| !section || !classe 
+   if( !nom || !prenom || !contact  || !groupeSalariale || !poste || !salaire | !section  ){  //|| !email
 
        console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
    
@@ -332,6 +343,7 @@ const submit = (e) => {
            //.catch( err => console.log(err))
            .catch( err => {
 
+                classExistShowIsOpen()
                setclassExist(`Vous ne pouvez pas créer le personnel ${nom} car il existe déjà` )
             
                console.log(` **** le personnel ${nom} existe déjà : ` + err)
@@ -403,7 +415,7 @@ let [ alerteForm, setalerteForm ] = useState(false)
 
 useEffect( () => {
 
-   if( nom || prenom || contact || email || groupeSalariale || poste || section || classe || salaire ){  //section_id ,classes_id
+   if( nom || prenom || contact || email || groupeSalariale || poste || section ||  salaire ){  //classe ||
 
 
        setalerteForm(false)
@@ -485,7 +497,7 @@ useEffect( () => {
                     
 
                     { alerteForm &&   <p className='alerteError' style={{ fontWeight: "bold", color: 'red', marginLeft: "20px" }} >Tous les champs avec étoiles ou en rouge doivent être remplis</p> }
-                    { classExist &&   <p className='alerteError2' style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }} >{classExist}</p> }
+                    { classExistShow &&   <p className='alerteError2' style={{ color: 'red', fontSize: '16px', fontWeight: 'bold' }} >{classExist}</p> }
 
                     <div className='addpersonnel'>
                     
@@ -500,15 +512,15 @@ useEffect( () => {
 
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="nom"> Nom <span className='etoile'>*</span></label>
-                                        <input type='text' name='nom' id='decouverteEcole nomPrenom' className='nomPrenom nom' value={ formPersonnel.nom === "undefined" ? setFormPersonnel( {...formPersonnel, nom:""}) :  formPersonnel.nom  }  onChange={  personnelFunction }  maxLength={200} />
+                                        <input type='text' name='nom' id='decouverteEcole nomPrenom' className='nomPrenom nom' value={ formPersonnel.nom   }  onChange={  personnelFunction }  maxLength={200} />
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="prenom"> Prénom <span className='etoile'>*</span></label>
-                                        <input type='text' name='prenom' id='prenom' className='nomPrenom prenom' value={ formPersonnel.prenom=== "undefined" ? setFormPersonnel( {...formPersonnel, prenom:""}) : formPersonnel.prenom }  onChange={ personnelFunction}    maxLength={200} />
+                                        <input type='text' name='prenom' id='prenom' className='nomPrenom prenom' value={ formPersonnel.prenom }  onChange={ personnelFunction}    maxLength={200} />
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="contact">Tel <span className='etoile'>*</span></label>
-                                        <input type='text' name='contact' id='tel' className='nomPrenom contact' value={  formPersonnel.contact === "undefined" ? setFormPersonnel( {...formPersonnel,contact:""}) : formPersonnel.contact }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='contact' id='tel' className='nomPrenom contact' value={  formPersonnel.contact  }  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="email"> Email <span className='etoile'></span></label>
@@ -523,12 +535,12 @@ useEffect( () => {
 
                                     <div className='formulaireInputgroupeSalarial__element'>
                                         <label for="groupeSalarial" className='formulaireInputgroupeSalarial__element--titre'> Groupe Salarial <span className='etoile'>*</span></label>
-                                        <input type='text' name='groupeSalarial' id='formulaireInputgroupeSalarial__element--select' className='formulaireInputgroupeSalarial__element--select groupeSalariale' value={ formPersonnel.groupeSalariale === "undefined" ? setFormPersonnel( {...formPersonnel, groupeSalariale:""}) : formPersonnel.groupeSalariale}  onChange={ personnelFunction }    maxLength={200} />
+                                        <input type='text' name='groupeSalarial' id='formulaireInputgroupeSalarial__element--select' className='formulaireInputgroupeSalarial__element--select groupeSalariale' value={ formPersonnel.groupeSalariale }  onChange={ personnelFunction }    maxLength={200} />
                                     </div>
                                     
                                     <div className='formulaireInputgroupeSalarial__element'>
                                         <label for="poste"> Poste <span className='etoile'>*</span></label>
-                                        <input type='text' name='poste' id='poste' className='poste' value={ formPersonnel.poste === "undefined" ? setFormPersonnel( {...formPersonnel,poste:""}) : formPersonnel.poste }  onChange={ personnelFunction }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='poste' id='poste' className='poste' value={ formPersonnel.poste  }  onChange={ personnelFunction }   maxLength={200} />
                                     </div>
 
                                 </form>
@@ -550,7 +562,7 @@ useEffect( () => {
 
                                     <div className='formulaireInputSectionClasseSalaire__element'>
                                         <label for="salaire"> Salaire <span className='etoile'>*</span></label>
-                                        <input type='text' name='salaire' id='salaire' className='salaire' value={ formPersonnel.salaire === "undefined" ? setFormPersonnel( {...formPersonnel,salaire:""}) : formPersonnel.salaire }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='salaire' id='salaire' className='salaire' value={ formPersonnel.salaire  }  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
 
                                 </form>
