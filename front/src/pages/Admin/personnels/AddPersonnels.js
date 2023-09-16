@@ -90,6 +90,15 @@ let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salai
    console.log("******** nomClasse1")
    console.log(nomClasse1)
 
+     // gestion des expressions régulières 
+     let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+
+     let regexScolarite = new RegExp("^[0-9]{1,6}$")
+ 
+     let reagexTel = new RegExp("^[0-9]{1,20}$")
+ 
+     let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
+
    //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
@@ -116,7 +125,7 @@ const alerteInitiale = () => {
  
     }
     
-    if(email  ){
+    if(email && regexEmail.test( email ) === true   ){
  
      nomClasse3.style.border = "solid 1px black"
      //nomClasse5.style.display = "none"
@@ -166,14 +175,7 @@ const alerteInitiale = () => {
  
     alerteInitiale()
  
-    // gestion des expressions régulières 
-    let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
-
-    let regexScolarite = new RegExp("^[0-9]{1,6}$")
-
-    let reagexTel = new RegExp("^[0-9]{1,20}$")
-
-    let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
+  
     /////////////////////////////////////////////////////////////////
 
         //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
@@ -512,7 +514,7 @@ const alerteInitiale = () => {
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="email"> Email <span className='etoile'> </span></label>
-                                        <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email ?? "mail@domain.com"}  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
                                 
                                 </form>

@@ -124,6 +124,14 @@ const nomClasse5 = document.querySelector(".poste")
 // const nomClasse7 = document.querySelector(".classes_id")
 const nomClasse8 = document.querySelector(".salaire")
 
+// gestion des expressions régulières 
+let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+
+let regexScolarite = new RegExp("^[0-9]{1,6}$")
+
+let reagexTel = new RegExp("^[0-9]{1,20}$")
+
+ let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
 
 console.log("******** nomClasse1")
@@ -161,7 +169,7 @@ const alerteInitiale = () => {
 
         }
 
-        if(email  ){
+        if(email && regexEmail.test( email ) === true ){
 
         nomClasse3.style.border = "solid 1px black"
         //nomClasse5.style.display = "none"
@@ -214,14 +222,7 @@ const alerteInitiale = () => {
 
 alerteInitiale()
 
-// gestion des expressions régulières 
-let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
 
-let regexScolarite = new RegExp("^[0-9]{1,6}$")
-
-let reagexTel = new RegExp("^[0-9]{1,20}$")
-
-let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 /////////////////////////////////////////////////////////////////
 
     //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
@@ -288,7 +289,7 @@ const submit = (e) => {
 
         } 
 
-       /*else*/ if( !email || regexEmail.test( email ) === false || email === "" || email === "undefined"){
+       /*else*/ if(  regexEmail.test( email ) === false ){  // !email || || email === "" || email === "undefined"
 
                 console.log("bienvenue dans la condition email")
 
@@ -575,7 +576,7 @@ useEffect( () => {
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="email"> Email <span className='etoile'> </span></label>
-                                        <input type='text' name='email' id='email' className='nomPrenom email' value={   formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='email' id='email' className='nomPrenom email' value={   formPersonnel.email  ?? "mail@domain.com"}  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
                                 
                                 </form>

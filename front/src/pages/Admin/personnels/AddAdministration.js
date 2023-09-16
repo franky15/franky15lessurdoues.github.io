@@ -92,7 +92,14 @@ const nomClasse6 = document.querySelector(".section_id")
 const nomClasse7 = document.querySelector(".classes_id")
 const nomClasse8 = document.querySelector(".salaire")
 
+// gestion des expressions régulières 
+let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
 
+let regexScolarite = new RegExp("^[0-9]{1,6}$")
+
+let reagexTel = new RegExp("^[0-9]{1,20}$")
+
+ let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
 console.log("******** nomClasse1")
 console.log(nomClasse1)
@@ -132,7 +139,7 @@ const alerteInitiale = () => {
 
         }
 
-        if(email  ){
+        if(email && regexEmail.test( email ) === true   ){
 
         nomClasse3.style.border = "solid 1px black"
         // nomClasse3.style.display = "none"
@@ -186,14 +193,7 @@ const alerteInitiale = () => {
 
 alerteInitiale()
 
-// gestion des expressions régulières 
-let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
 
-let regexScolarite = new RegExp("^[0-9]{1,6}$")
-
-let reagexTel = new RegExp("^[0-9]{1,20}$")
-
-let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
 /////////////////////////////////////////////////////////////////
 
@@ -524,7 +524,7 @@ useEffect( () => {
                                     </div>
                                     <div className='formulaireInputNomPrenom__nomPrenom'>
                                         <label for="email"> Email <span className='etoile'></span></label>
-                                        <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email }  onChange={ personnelFunction }  maxLength={200} />
+                                        <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email  ?? "mail@domain.com"}  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
                                 
                                 </form>
