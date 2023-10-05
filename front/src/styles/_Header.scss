@@ -7,10 +7,16 @@
     align-items: center;
     flex-wrap: wrap;
     height: 100px;
-    //border: solid;
+    
+    //border: solid red;
+    //style version mobile
+    @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        font-size: 0.9em;
+     }
     
     .acceuil {
-        width: 8%;
+        width: 15%;
         height: 30px;
         border: solid #bf9000;
         border-radius: 5px;
@@ -21,6 +27,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+       // border: solid blue;
         
         .linkAcceuilPublic {
             
@@ -46,10 +54,11 @@
 }
 
 .optionContainer {
-    width: 15%;
-   // border: solid yellow;
+    width: 22%;
+    
     display: flex;
     justify-content: space-between;
+    // border: solid yellow;
 
     .option {
         //border: solid ;
@@ -84,6 +93,13 @@
         
         
     }
+
+     //style version mobile
+     @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        width: 30%;
+        font-size: 0.9em;
+     }
 
 }
 
