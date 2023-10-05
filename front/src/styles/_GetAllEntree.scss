@@ -22,6 +22,12 @@
 
     border: solid 1px;
 
+     //style version mobile
+     @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        font-size: 0.9em;
+     }
+
     &__chiffreEntree {
 
         width: 95%;
@@ -53,6 +59,54 @@
 
                 color: #517633;
             }
+        }
+
+        //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+        
+            
+            &--vid {
+
+                display: none;
+                width: 80%;
+               // border: solid blue;
+            }
+
+            &--valeur{
+
+                width: 50%;
+                margin: auto;
+                margin-top: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+               // border: solid red;
+            }
+
+        }
+        @media screen and (max-width: 1200px) and (orientation: landscape) {
+        
+            
+            &--vid {
+
+                display: none;
+                width: 80%;
+               // border: solid blue;
+            }
+
+            &--valeur{
+
+                width: 50%;
+                margin: auto;
+                margin-top: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+               // border: solid red;
+            }
+
         }
     }
 
@@ -172,6 +226,7 @@
             flex-direction: column;
             border-radius: 0px;
             font-size: 12px;
+          
         }
         .containerDateFiltre{
 
@@ -207,6 +262,64 @@
         }
        */
 
+        //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+
+            display: flex;
+            flex-direction: column;
+            
+
+            //border: solid black;
+
+            .container{
+
+                width: 100%;
+               // border: solid red;
+            }
+
+            .container__btn {
+
+
+              //  border: solid yellow;
+            }
+
+            .containerDateFiltre{
+
+                width: 50%;
+                margin-top: 30px;
+                //border: solid black;
+            }
+        }
+
+        //style version mobile
+        @media screen and (max-width: 1200px) and (orientation: landscape) {
+
+            display: flex;
+            flex-direction: column;
+            
+
+            //border: solid black;
+
+            .container{
+
+                width: 100%;
+               // border: solid red;
+            }
+
+            .container__btn {
+
+
+              //  border: solid yellow;
+            }
+
+            .containerDateFiltre{
+
+                width: 50%;
+                margin-top: 30px;
+                //border: solid black;
+            }
+        }
+
 
     }
     
@@ -234,6 +347,29 @@
             border: solid 2px#979aa1;
             cursor: pointer;
         }
+
+        //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+
+           
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+
+            //border: solid blue;
+
+             .valeursIcon__choice{
+     
+                width: 20%;
+                margin-top: 0px;
+                margin-left: 20px;
+
+                //border: solid yellow;
+             }
+     
+         }
+
+         
     }
     .rechercheContainer{
 
@@ -271,7 +407,25 @@
             background-color: #eaeaea;
             border: solid  #eaeaea;
         }
+
+         //style version mobile
+         @media screen and (max-width: 900px) and (orientation: landscape) {
+
+
+            width: 40%;
+            margin-top: 0px;
+            margin-left: 15px;
+        
+           
+         }
+    
+         
     }
+
+       
+       
+
+     
     
 
     &__affichage {
@@ -373,6 +527,7 @@
            // margin-left: 40px;
             border-radius: 5px;
             background-color: #eaeaea;
+
             border: solid 2px#979aa1;
     
             label {
@@ -397,6 +552,7 @@
                 height: 25px;
                 background-color: #eaeaea;
                 border: solid  #eaeaea;
+               
             }
 
             
@@ -426,6 +582,20 @@
             color: white;
 
         }
+
+        //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+
+
+            margin-top: 30px;
+           // border: solid yellow;
+
+            .rechercheContainer1{
+
+                width: 40%;
+
+            }
+         }
 
        
     }
@@ -465,7 +635,86 @@
             background-color: #eaeaea;
             //font-weight: bold;
             border: solid white 1px;
+            display: flex;
+            //justify-content: space-between;
+            align-items: center;
         }
+    }
+    &__totaux{
+
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        
+        //border: solid red;
+
+        .valeur {
+
+            width: 17%;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+            background-color: #517633;
+            //font-weight: bold;
+            border: solid white 1px;
+
+            display: flex;
+            //justify-content: space-between;
+            align-items: center;
+
+           
+        }
+
+        .valeurScolarite{
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        span{
+
+            display: block;
+            border: solid 1px;
+            padding-right: 5px;
+           
+        }
+         //style version mobile
+         @media screen and (max-width: 900px) and (orientation: landscape) {
+
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .valeur {
+
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            span{
+
+            
+                display: block;
+                border: solid 1px;
+                font-size: 0.8em;
+               // padding-right: 5px;
+               
+            }
+            .prixTotal{
+
+                width: 25%;
+
+            }
+            .resteAPayer{
+
+                width: 60%;
+            }
+
+
+         }
+
     }
 }
 

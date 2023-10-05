@@ -605,7 +605,7 @@ const onchange = (e) => {
                
                     :
 
-                    <button  className='btn__button blocBtn__btn1  '  onClick ={  onchange } value={"Non"} > Nouvel élève(s) 1 <span className='eleveSpanVal'>{nouveauEleveTotal.length}</span></button >
+                    <button  className='btn__button blocBtn__btn1  '  onClick ={  onchange } value={"Non"} > Nouvel élève(s)  <span className='eleveSpanVal'>{nouveauEleveTotal.length}</span></button >
                     
                 }
                        

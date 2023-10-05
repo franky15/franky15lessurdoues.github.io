@@ -9,7 +9,7 @@ exports.createEleve = (req, res, next) => {
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
     
-    console.log("*** req.body *** " ) 
+    console.log("*** req.body *** " )  
     console.log(req.body)  
 
   
@@ -25,7 +25,7 @@ exports.createEleve = (req, res, next) => {
         console.log("***veillez entrer correctement toutes les information du formulaire*** ")
         res.status(400).json({ message: "***veillez entrer correctement toutes les information du formulaire***"})
     }
-    
+     
 
     //on l'utilisera pour insérer le userId dans utilisateurs_id
     const utilisateurs_id = req.auth.userId

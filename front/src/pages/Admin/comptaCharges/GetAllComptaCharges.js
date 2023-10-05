@@ -673,8 +673,8 @@ const onchange2 = (e) => {
 
                      <form className='rechercheContainer'>
 
-                    <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
-                    <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
+                        <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
+                        <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
                             value={ valeurInput.value} onFocus={openFocus} onBlur={lockFocus}  onChange ={  onchange }/>
                 
 

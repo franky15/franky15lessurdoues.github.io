@@ -558,7 +558,7 @@ useEffect( () => {
                             <p className='descriptionPersonnel'>Veuillez compléter les champs ci-dessous puis cliquer sur le bouton « Valider » pour créer un(e) Fondateur(trice) </p>
                             <hr></hr>
                             
-                            <form className='addpersonnel__form'>
+                            <form className='addpersonnel__form'> 
 
                                 <form  className='formulaireInputNomPrenom'>
 

@@ -273,7 +273,7 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
 
     return (
         <>
-            <h1>******* bienvenue dans ElevesSearch</h1>
+           
         { 
            valeurInput.map( (eleve, index) => 
             

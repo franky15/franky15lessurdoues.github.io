@@ -600,7 +600,8 @@ console.log("***** mergeChiffreAffaire1")
  
  
 
-
+//montant de la scolarité
+const PriceScolarite = 150000
 
 
     return (
@@ -799,9 +800,9 @@ console.log("***** mergeChiffreAffaire1")
 
                                             <div className='detail__titre'  key={ paiement.montantPaye-`${index}` } >
                         
-                                            {   <div className='detail__titre--item valeur'> { (paiement.datePaiement).slice(0,10) }</div>}
-                                            {  <div className='detail__titre--item valeur'> {paiement.montantPaye}</div>}
-                                            {  <div className='detail__titre--item valeur'> {paiement.scolarite}</div>}
+                                                {   <div className='detail__titre--item valeur'> { (paiement.datePaiement).slice(0,10) }</div>}
+                                                {  <div className='detail__titre--item valeur'> {paiement.montantPaye}</div>}
+                                                {  <div className='detail__titre--item valeur'> {paiement.scolarite}</div>}
                                                 {  <div className='detail__titre--item valeur'> {paiement.tenueClasse}</div>}
                                                 {    <div className='detail__titre--item valeur'> {paiement.transport}</div>}
                                                 {  <div className='detail__titre--item valeur'> {paiement.cantine}</div>}
@@ -810,7 +811,24 @@ console.log("***** mergeChiffreAffaire1")
                                         
                                         
                                         )
+                                            
+                                       
                         
+                                    }
+
+                                    {
+                                        
+                                         <div className='detail__totaux' >
+
+                                                {   <div className='detail__titre--item valeur'> Totaux de l'élève</div>}
+                                                {  <div className='detail__titre--item valeur'> {eleve.montantTotalEleve}</div>}
+                                                {  <div className='detail__titre--item valeur  valeurScolarite'> <span className='prixTotal'> {eleve.scolariteTotale  }</span> <span className='resteAPayer' title='Reste à payer'> { "RP:"}  {   PriceScolarite - eleve.scolariteTotale}</span> </div>}
+                                                {  <div className='detail__titre--item valeur'> {eleve.tenueClasseTotale}</div>}
+                                                {    <div className='detail__titre--item valeur'> {eleve.transportTotale}</div>}
+                                                {  <div className='detail__titre--item valeur'> {eleve.cantineTotale}</div>}
+                        
+
+                                         </div>
                                     }
                                 
                                 

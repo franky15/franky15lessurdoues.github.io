@@ -7,7 +7,7 @@ import {GetAllUtilisateurs, GetOneUtilisateurs, AddUtilisateurs, UpdateUtilisate
 //import { GetAllClasses, GetOneClasse, AddClasse, UpadeteClasse } from "../../pages/Admin/classes"  //"@/pages/Admin/classes"
 import { GetAllClasses } from "../../pages/Admin/classes"
 
-import {GetAllEleves, GetOneEleve, CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "../../components/eleves"  //"@/components/eleves"
+import { CreateEleve, UpdateEleve, GetAllClassesEleves, GetOneClasseEleves } from "../../components/eleves"  //"@/components/eleves"
 import { GetAllEntree, GetOneEntree, CreateOneEntree, ComptaDetail   } from '../../pages/Admin/Compta'; //'@/pages/Admin/Compta';
 import { GetAllComptaCharges, GetOneComptaCharge, CreateOneComptaCharge  } from "../../pages/Admin/comptaCharges";
 
@@ -83,10 +83,10 @@ const AdminRouter = () => {
 
                 <Route path='eleves'>
                    
-                   <Route index element={ <GetAllEleves/> }/>
+                  
 
-                   <Route path='getall' element={ <GetAllEleves/> }/> 
-                   <Route path='getone/:id' element={ <GetOneEleve/> }/>
+                 
+                  
                    <Route path='add' element={ <CreateEleve/> }/>
                    <Route path='update/:id' element={ <UpdateEleve/> }/>
 

@@ -1,14 +1,20 @@
 .getOneClasseEleves{
 
     position: relative;
-    width: 89%;
+    width: 90%;
     height: auto;
     margin: auto;
     border: solid 1px ;
-    padding-left: 20px;
+    //padding-left: 20px;
 
     //border: solid red;
    z-index: 0;
+
+    //style version mobile
+    @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        font-size: 0.9em;
+     }
 
     .enseignant {
 
@@ -22,6 +28,7 @@
     &__btn1 {
 
         width: 65%;
+        padding-left: 20px;
         //border: solid red;
 
         
@@ -31,7 +38,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
+            
            // border: solid yellow;
 
            .personnelBackground{
@@ -89,7 +96,7 @@
                 align-items: center;
                 border-radius: 5px;
                 cursor: pointer;
-               
+                
                 font-weight: bold;
                 border: solid #939292 2px;
                 
@@ -103,6 +110,12 @@
            
         }
 
+         //style version mobile
+         @media screen and (max-width: 900px) and (orientation: landscape) {
+
+            width: 95%;
+            //border: solid red;
+        }
         
         
     }
@@ -114,7 +127,7 @@
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
-
+        padding-left: 20px;
        // border: solid red;
 
         &--effectif {
@@ -199,13 +212,23 @@
                // border: solid red;
             }
         }
+
+        //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+
+            width: 95%;
+            //border: solid red;
+        }
     }
 
     &__btn3 {
 
-      // border: solid yellow;
-        
+      
+        width: 97%;
+       margin: auto;
        margin-top: 30px;
+       //padding-left: 20px;
+      // border: solid yellow;
 
         &--titre {
 
@@ -228,6 +251,7 @@
 
         &--bloc {
 
+            
             display: flex;
             justify-content: space-between;
             //border: solid red;
@@ -235,6 +259,7 @@
             .btn3Option {
 
                 width: 83%;
+                
                 display: flex;
                 justify-content: space-between;
                 
@@ -270,7 +295,16 @@
                     
                 }
             }
+            
         }
     }
+}
+
+//style version mobile
+@media screen and (max-width: 767px) and (orientation: landscape) {
+                
+
+
+
 }
 

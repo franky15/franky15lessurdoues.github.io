@@ -578,7 +578,7 @@ useEffect( () => {
                                         <input type='text' name='email' id='email' className='nomPrenom email' value={ formPersonnel.email ?? "mail@domain.com" }  onChange={ personnelFunction }  maxLength={200} />
                                     </div>
                                 
-                                </form>
+                                </form> 
 
                                 <form  className='formulaireInputgroupeSalarial'>
 
@@ -596,7 +596,7 @@ useEffect( () => {
                                 </form>
 
                                 <form  className='formulaireInputSectionClasseSalaire'>
-
+ 
                                     <form className='formulaireInputSectionClasseSalaire__element' onChange={ personnelFunction } >
                                         
                                         <label for="section" className='formulaireDateSectionClasse__element--titre section_id'> Section <span className='etoile'></span></label>

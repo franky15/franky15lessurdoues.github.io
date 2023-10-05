@@ -7,6 +7,12 @@
     margin-top: 20px;
     border: solid 1px;
 
+     //style version mobile
+     @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        font-size: 0.9em;
+     }
+
     
 
         .blocBtn{
@@ -60,6 +66,13 @@
                 margin-left: 50px;
                    
                }
+            }
+
+             //style version mobile
+            @media screen and (max-width: 900px) and (orientation: landscape) {
+
+                width: 95%;
+               // border: solid red;
             }
 
         }
@@ -140,6 +153,12 @@
             }
             /// //////////////////////////
 
+              //style version mobile
+              @media screen and (max-width: 900px) and (orientation: landscape) {
+
+                width: 95%;
+                //border: solid red;
+            }
             
         }
 
@@ -186,6 +205,12 @@
             font-size: 20px; //28px
         }
     }
+    .getOneClasseEleves__btn3{
+
+        width: 97%;
+        margin: auto;
+       // border: solid red;
+    }
     ////////////////////////////////////
     /// //rajout dans Getallpersonnel
     .getOneClasseEleves__btn3--titre{
@@ -227,4 +252,29 @@
         background-color: #f15844;
         border: solid #f15844;
     }
+}
+
+  //style version mobile
+  @media screen and (max-width: 900px) and (orientation: landscape) {
+
+
+    .getOneClasseEleves__btn3--bloc{
+
+        display: flex;
+        justify-content: space-between;
+       // border: solid blue;
+    }
+    .btn3Option{
+
+        width: 90%;
+       // border: solid yellow;
+    }
+    .btn3Icon{
+
+        width: 10%;
+        position: relative;
+        left: 20px;
+        //border: solid red;
+    }
+   
 }

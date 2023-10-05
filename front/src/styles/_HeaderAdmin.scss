@@ -20,7 +20,8 @@ $colorLink : white;
      align-items: center;
      flex-wrap: wrap;
      height: 100px;
-     //border: solid;
+
+    // border: solid black;
 
     .menuContainer1__acceuil{
         width: 8%;
@@ -51,7 +52,20 @@ $colorLink : white;
         }
 
         
-        
+         //style version mobile
+        @media screen and (max-width: 900px) and (orientation: landscape) {
+
+            width: 15%;
+
+
+        }
+         //style version mobile
+        @media screen and (max-width: 1200px) and (orientation: landscape) {
+
+            width: 15%;
+
+
+        }
     }
 
     
@@ -60,6 +74,7 @@ $colorLink : white;
 }
 
 .optionContainer1{
+
     //border: solid red;
     width: 20%;
     height: 30px;
@@ -84,6 +99,25 @@ $colorLink : white;
             color: #bf9000;
         }
     }
+
+    //style version mobile
+    @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        width: 40%;
+
+
+    }
+    //style version mobile
+    @media screen and (max-width: 1200px) and (orientation: landscape) {
+
+        width: 40%;
+        //border: solid red;
+
+
+    }
+
+
+    
 }
 
 //integration du deuxième menu
@@ -110,12 +144,14 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.96);
     align-items: center;
     font-weight: bolder;
     color: $colorLink;
-   // border: solid;
+
+   // border: solid red;
 
     .menuContainer2__acceuil{
         width: 5%;
         margin-left: 20px;
-       // border: solid;
+
+       // border: solid blue;
     }
 
     /////////////////////////////////
@@ -147,7 +183,8 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.96);
         margin-right: 20px;
         display: flex;
         justify-content: space-between;
-        //border: solid red;
+
+        //border: solid blue;
 
         .menuContainer2MiniContainer{
 
@@ -161,6 +198,32 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.96);
         border: dashed white 1px;
 
     }
+
+     //style version mobile
+     @media screen and (max-width: 900px) and (orientation: landscape) {
+
+        .menuContainer2__container{
+
+            width: 70%;
+            margin-right: 0px;
+           // border: solid yellow;
+        }
+
+
+    }
+     //style version mobile
+     @media screen and (max-width: 1200px) and (orientation: landscape) {
+
+        .menuContainer2__container{
+
+            width: 70%;
+            margin-right: 15px;
+           // border: solid yellow;
+        }
+
+
+    }
+     
 
 }
 
