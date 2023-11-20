@@ -9,7 +9,7 @@ exports.createEleve = (req, res, next) => {
     console.log("***elementId du token*** : " + req.auth.userId ) 
 
     
-    console.log("*** req.body *** " )  
+    console.log("*** req.body *** " )   
     console.log(req.body)  
 
   

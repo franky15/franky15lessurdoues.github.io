@@ -14,9 +14,6 @@ const ComptaAutreCharge = ({  openCreateOpen, idPersonnelCurrent, lockCreateOpen
    
     const comptaFunction = (e) => {
 
-        console.log("bienvenue dans comptaFunction ")
-
-        
         openAutreCharge()
 
         lockElectricite()
@@ -30,20 +27,8 @@ const ComptaAutreCharge = ({  openCreateOpen, idPersonnelCurrent, lockCreateOpen
         
         }) 
 
-        console.log("{[e.target.name] : e.target.value}")
-        console.log({[e.target.name] : e.target.value})
-
-        console.log("****formCompta")
-        console.log(formCompta)
-      
-
-    
 
     }
-
-console.log("****** formCompta autre charge")
-console.log(formCompta)
-console.log(formCompta.categorie)
 
 let { categorie, datePaiement, montantPaye, libelle, commentaire } = formCompta
 
@@ -52,12 +37,6 @@ const nomClasse2 = document.querySelector(".datePaiement")
 const nomClasse3 = document.querySelector(".montantPaye")
 const nomClasse4 = document.querySelector(".libelle")
 const nomClasse5 = document.querySelector(".commentaire")
-
-
-
-
-   console.log("******** nomClasse1")
-   console.log(nomClasse1)
 
 
 useEffect( () => {
@@ -74,8 +53,6 @@ useEffect( () => {
 
                 if(formCompta.categorie === "salaire" ){
         
-                    console.log("/////bienvenue au if  salaire")
-                    
                     lockElectricite()
                     lockAutreCharge()
 
@@ -91,8 +68,6 @@ useEffect( () => {
         const categorieElectricite = () => {  //categorieAutreCharge 
     
             if(formCompta.categorie === "electricite" ){
-    
-                console.log("/////bienvenue au if  electricite")
     
                 openElectricite()
 
@@ -118,15 +93,7 @@ useEffect( () => {
 //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
-    /*
-    if( categorie  ){
- 
-     nomClasse1.style.border = "solid 1px black "
-     
-     //nomClasse1.style.display = "none"
- 
-    }*/
-    
+   
     if( datePaiement ){
  
      nomClasse2.style.border = "solid  0px black"
@@ -177,9 +144,6 @@ const alerteInitiale = () => {
 
  ///////////////////////////////////////////////////////////
 
-    console.log("****** formCompta autre charge")
-    console.log(formCompta)
-
     let [ eleveCreate, setEleveCreate ] = useState(false) //false
     //confirmation de la mise à jour
     let confirmationPaiementCreate = () => {
@@ -214,89 +178,51 @@ const alerteInitiale = () => {
        
        e.preventDefault()
 
-       console.log("bienvenue au submit test de createOneEntree")
-                                                                   //valTextarea
-
-         if( !categorie || !datePaiement || !montantPaye || !libelle || !commentaire ){
+        if( !categorie || !datePaiement || !montantPaye || !libelle || !commentaire ){
     
-            console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
-        
             setalerteForm(true)
 
-            
-           // }else{
+            if( !datePaiement){
 
-           /* 
-            if( !categorie   ){
+                setalerteForm(true)
 
-                    console.log("bienvenue dans la condition nom")
-
-                    setalerteForm(true)
-
-        
-                    const nomClasse = document.querySelector(".categorie")
-                    nomClasse.style.border = "solid 1px red"
-
-            } 
-            */
-            
-            /*else*/ if( !datePaiement){
-
-                    console.log("bienvenue dans la condition anciennete")
-
-                    setalerteForm(true)
-        
-                    const nomClasse = document.querySelector(".datePaiement")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".datePaiement")
+                nomClasse.style.border = "solid 1px red"
 
             }
 
-            /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+            if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
 
-                    console.log("bienvenue dans la condition nom")
-
-                    setalerteForm(true)
-
-                    console.log( regexScolarite.test( montantPaye )  )
-        
-                    const nomClasse = document.querySelector(".montantPaye")
-                    
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".montantPaye")
+                nomClasse.style.border = "solid 1px red"
 
             }  
-            
-            /*else*/ if( !libelle || regexNomPrenom.test( libelle ) === false  ){
+                
+            if( !libelle || regexNomPrenom.test( libelle ) === false  ){
 
-                    console.log("bienvenue dans la condition nom")
 
-                    setalerteForm(true)
-
-                    const nomClasse = document.querySelector(".libelle")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".libelle")
+                nomClasse.style.border = "solid 1px red"
 
             } 
 
-           /*else*/ if( !libelle || regexCommentaire.test( libelle ) === false ){
+            if( !libelle || regexCommentaire.test( libelle ) === false ){
 
-                    console.log("bienvenue dans la condition sectionNumber")
-
-                    setalerteForm(true)
-        
-                    const nomClasse = document.querySelector(".libelle")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".libelle")
+                nomClasse.style.border = "solid 1px red"
 
             }  
 
             if(!commentaire || regexCommentaire.test( commentaire ) === false ){
 
-                console.log("bienvenue dans la condition sectionNumber")
-
                 setalerteForm(true)
-    
                 const nomClasse = document.querySelector(".commentaire")
                 nomClasse.style.border = "solid 1px red"
 
-        }  
+            }  
             
            
             
@@ -304,14 +230,9 @@ const alerteInitiale = () => {
 
             comptaChargesServices.createComptacharges(formCompta)
             .then( res => {
-                console.log("données du formulaire envoyées")
-                console.log(res)
-                //navigate("/admin/classes" ) 
-                ////////////////////////////
-    
+              
                 confirmationPaiementCreate()
     
-                ////////////////////////////
             })
             .catch( err => console.log(err))
 

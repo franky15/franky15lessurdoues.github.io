@@ -63,9 +63,6 @@ const ComptaSalaire = ( {  openCreateOpen, idPersonnelCurrent, lockCreateOpen, l
  
     }
 
-    console.log("****** formCompta salaire")
-    console.log(formCompta)
-
     let [ eleveCreate, setEleveCreate ] = useState(false) //false
     //confirmation de la mise à jour
     let confirmationPaiementCreate = () => {
@@ -101,15 +98,6 @@ const nomClasse6 = document.querySelector(".nomPrenom")
    //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
-    /*
-    if( categorie  ){
- 
-     nomClasse1.style.border = "solid 1px black "
-     
-     //nomClasse1.style.display = "none"
- 
-    }*/
-    
     if( datePaiement ){
  
      nomClasse2.style.border = "solid  0px black"
@@ -171,105 +159,70 @@ const alerteInitiale = () => {
     console.log("bienvenue au submit test de createOneEntree")
                                                                 //valTextarea
 
-      if( !categorie || !datePaiement || !montantPaye || !poste || !commentaire ){
+    if( !categorie || !datePaiement || !montantPaye || !poste || !commentaire ){
  
-         console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
-     
-         setalerteForm(true)
+        
+        setalerteForm(true)
 
+        if( !datePaiement){
+
+            setalerteForm(true)
+
+            const nomClasse = document.querySelector(".datePaiement")
+            nomClasse.style.border = "solid 1px red"
+
+        }
+
+        if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+
+            setalerteForm(true)
+
+            const nomClasse = document.querySelector(".montantPaye")
+            
+            nomClasse.style.border = "solid 1px red"
+
+        }  
          
-        // }else{
+        if( !poste || regexNomPrenom.test( poste ) === false  ){
 
-        /* 
-         if( !categorie   ){
+            setalerteForm(true)
 
-                 console.log("bienvenue dans la condition nom")
+            const nomClasse = document.querySelector(".poste")
+            nomClasse.style.border = "solid 1px red"
 
-                 setalerteForm(true)
+        } 
 
-     
-                 const nomClasse = document.querySelector(".categorie")
-                 nomClasse.style.border = "solid 1px red"
+        if( !commentaire  || regexCommentaire.test( commentaire  ) === false ){
 
-         } 
-         */
-         
-         /*else*/ if( !datePaiement){
+            setalerteForm(true)
 
-                 console.log("bienvenue dans la condition anciennete")
+            const nomClasse = document.querySelector(".commentaire ")
+            nomClasse.style.border = "solid 1px red"
 
-                 setalerteForm(true)
-     
-                 const nomClasse = document.querySelector(".datePaiement")
-                 nomClasse.style.border = "solid 1px red"
+        }  
 
-         }
+        if(!nomPrenom || regexCommentaire.test( nomPrenom ) === false ){
 
-         /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+            setalerteForm(true)
 
-                 console.log("bienvenue dans la condition nom")
+            const nomClasse = document.querySelector(".nomPrenom")
+            nomClasse.style.border = "solid 1px red"
 
-                 setalerteForm(true)
-
-                 console.log( regexScolarite.test( montantPaye )  )
-     
-                 const nomClasse = document.querySelector(".montantPaye")
-                 
-                 nomClasse.style.border = "solid 1px red"
-
-         }  
-         
-         /*else*/ if( !poste || regexNomPrenom.test( poste ) === false  ){
-
-                 console.log("bienvenue dans la condition nom")
-
-                 setalerteForm(true)
-
-                 const nomClasse = document.querySelector(".poste")
-                 nomClasse.style.border = "solid 1px red"
-
-         } 
-
-        /*else*/ if( !commentaire  || regexCommentaire.test( commentaire  ) === false ){
-
-                 console.log("bienvenue dans la condition sectionNumber")
-
-                 setalerteForm(true)
-     
-                 const nomClasse = document.querySelector(".commentaire ")
-                 nomClasse.style.border = "solid 1px red"
-
-         }  
-
-         if(!nomPrenom || regexCommentaire.test( nomPrenom ) === false ){
-
-             console.log("bienvenue dans la condition sectionNumber")
-
-             setalerteForm(true)
- 
-             const nomClasse = document.querySelector(".nomPrenom")
-             nomClasse.style.border = "solid 1px red"
-
-     }  
+        }  
          
         
          
-     } else{
+    } else{
 
          comptaChargesServices.createComptacharges(formCompta)
          .then( res => {
-             console.log("données du formulaire envoyées")
-             console.log(res)
-             //navigate("/admin/classes" ) 
-             ////////////////////////////
+            
+            confirmationPaiementCreate()
  
-             confirmationPaiementCreate()
- 
-             ////////////////////////////
          })
          .catch( err => console.log(err))
 
-     }
+    }
    
     
 }

@@ -2,18 +2,7 @@ import React, {  useState, useEffect} from 'react';
 //import { classesServices } from '@/_services/Classes.services';
 import { classesServices } from '../../_services/Classes.services';
 
-
-
-
-
 const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwindowUpdateClasse, lockwindowUpdateClasse, idclasse}) => {
-
-  /////////////////////////////////////////
-  
-
-
-
-  /////////////////////////////////////////
 
   //gestion du state des sections
   let [ sectionChoice, setSectionChoice ] = useState({})
@@ -29,32 +18,19 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
     //récupération de classe encours
     const classeCurrent = classes.find(element => element.id === idclasse)
 
-    console.log("classeCurrent")
-    console.log(classeCurrent)
-
-
-
-     //conversion des section_id en lettre 
-     let sectionNumber //section
-     
-     if(classeCurrent.section_id === 1){  //section_id
-
+    //conversion des section_id en lettre 
+    let sectionNumber //section
+    
+    if(classeCurrent.section_id === 1){  //section_id
 
         sectionNumber = "Anglophone"
-         console.log("*****bienvenue au section_id= 1 anglophone*****")
-     }else if(classeCurrent.section_id === 2) { //section_id
+    
+    }else if(classeCurrent.section_id === 2) { //section_id
         
         sectionNumber = "Francophone" //section
-         console.log("*****bienvenue au section_id= 2 francophone*****")
  
-     }
-     console.log("sectionNumber")
-     console.log(sectionNumber)
-     console.log("sectionChoice.sectionNumber")
-     console.log(sectionChoice.sectionNumber)
-   
-     
-
+    }
+    
     //gestion du state des formulaires
     let [ input, setInput ] = useState({
 
@@ -66,10 +42,8 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
 
     })
 
-    
-    
-     //récupérations des inputs du formulaire
-     const onchange = (e) => {
+    //récupérations des inputs du formulaire
+    const onchange = (e) => {
 
         setInput({
 
@@ -90,20 +64,14 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
     
     //récupération du data-anglophone
     const dataSelect = (e) => {
-
-        console.log("*****clique sur la section*****")
-         console.log(e.target.value)
-          
-         setSectionChoice({
+ 
+        setSectionChoice({
   
-              ...sectionChoice,
-              section_id : e.target.value //sectionNumber
-          })
+            ...sectionChoice,
+            section_id : e.target.value //sectionNumber
+        })
   
     }
-
-    console.log("****input est*****")
-    console.log(input)
    ///////////////////////////////////////////////:::: 
 
     //confirmation de la mise à jour
@@ -127,15 +95,8 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
 
     }
 
-     ///////////////////////////////////////////////:::: 
-    //récupération de classe encours
-    //const classeCurrent = classes.find(element => element.id === idclasse)
+    ///////////////////////////////////////////////:::: 
 
-   
-    
-
-    console.log("*****fusion des states : *****")
-    console.log({  ...idVal, ...input,...sectionChoice  }) 
     let classeObject = {  ...idVal, ...input, ...sectionChoice } 
 
     
@@ -144,43 +105,19 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
 
         e.preventDefault()
 
-        console.log("****** bienvenu dans le onsubmit  *****")
-
-        console.log("****** le state global classe est  *****")
-    // console.log(classe)
-
-
-
-    
-    console.log(classeObject)
-    
         classesServices.updateClasse( classeObject ) //insertion du state de l'input dans la requete
         .then( res => {
 
-            console.log("données du formulaire envoyées")
-            console.log(res)
-            
-            
-            //confirmation()
-            
-          
           confirmation1()
           //window.location.reload();
           
-        
         })
         .catch( err => console.log(err))
 
-        
-        
-      
     }
     
 
     return (
-
-      
-        
 
        <>
         { classeUpdate1 && <p className='titreTiming'>La classe a été modifiée avec succès</p> }
@@ -248,17 +185,11 @@ const SectionUpdate = ( { classes, windowAddClasse, lockWindowAddClasse, openwin
                 </div>
                
             </form>
-            
-             
-            
+   
         </div> }
-       
-         
-        
+   
         </>
     );
 };
 
 export default SectionUpdate;
-
-//{ classeUpdate &&  <div className='classeUpdate' > La classe {classeObject.nom} a été mise à jour avec succès </div>}

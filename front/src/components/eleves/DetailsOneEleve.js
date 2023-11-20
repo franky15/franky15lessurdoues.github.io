@@ -3,14 +3,6 @@ import React from 'react';
 const DetailsOneEleve = ( {  iconEleveDetailDown, idClasse,   eleveId, listeElevesContext, listeClassesContext, listeEleves }) => {
     
     const eleve = listeElevesContext.find( element => element.id === eleveId)
-    console.log("eleve")
-    console.log(eleve)
-
-    console.log("listeElevesContext")
-    console.log(listeElevesContext)
-
-    console.log("eleveId")
-    console.log(eleveId)
 
     return (
         <div className='detailsOneEleve'>

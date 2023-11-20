@@ -18,7 +18,7 @@ const AddAdministration = ({ groupeSalarialValueExForm, nomValueExForm, prenomVa
 
 
         //"classe": `${classeValueExForm ?? ""}`,
-        "section": `${sectionValueExForm ?? ""}`,
+       "section": `${sectionValueExForm ?? ""}`,
        "contact": `${contactValueExForm ?? ""}`,
        "email": `${emeilValueExForm ?? ""}`,
        "groupeSalariale": `${groupeSalarialValueExForm}`,
@@ -29,13 +29,9 @@ const AddAdministration = ({ groupeSalarialValueExForm, nomValueExForm, prenomVa
 
 
 
-   })
+    })
 
-   console.log("******nom state : "  + formPersonnel.nom)
-
-   const personnelFunction = (e) => {
-
-   
+    const personnelFunction = (e) => {
 
        setFormPersonnel({
 
@@ -45,43 +41,31 @@ const AddAdministration = ({ groupeSalarialValueExForm, nomValueExForm, prenomVa
        }) 
 
 
-   }
-
-   console.log("***formPersonnel")
-   console.log(formPersonnel)
-   /////////////////////////
+    }
 
    let [ eleveCreate, setEleveCreate ] = useState(false) //false
     //confirmation de la mise à jour
     let confirmationPersonnelCreate = () => {
     
        
-       setEleveCreate(true)
+        setEleveCreate(true)
      
-       //cacher la confirmation après 3000 millisecondes
-       setTimeout( () => {
-   
-           
+        //cacher la confirmation après 3000 millisecondes
+        setTimeout( () => {
+
            setEleveCreate(false)
            window.location.reload();
 
-           /////////////////////////////
-           //lockaddEnseignantgroupe()
-           /////////////////////////////
-           
-       }, 1)
-   }
+        }, 1)
+    }
 
 
    //////////////////////////////////////////////////////////////////////$$$$$$$
 
 
-//    let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
+//let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
 let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire } = formPersonnel
   
-console.log("******** nom")
-console.log(nom)
-
 const nomClasse = document.querySelector(".nom")
 const nomClasse1 = document.querySelector(".prenom")
 const nomClasse2 = document.querySelector(".contact")
@@ -101,26 +85,16 @@ let reagexTel = new RegExp("^[0-9]{1,20}$")
 
  let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
-console.log("******** nomClasse1")
-console.log(nomClasse1)
-
 //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
-    console.log("***** bienvenue dans alerteInitiale()")
-
     document.addEventListener("DOMContentLoaded", function() {
 
-        console.log("***** bienvenue dans alerteInitiale() après charge dom")
-   
         if( nom  ){
 
-            console.log("bienvenue dans le if  nom")
-            console.log( nomClasse)
-
-        nomClasse.style.border = "solid 1px black "
+            nomClasse.style.border = "solid 1px black "
         
-        // nomClasse.style.display = "none"
+            // nomClasse.style.display = "none"
 
         }
 
@@ -168,15 +142,6 @@ const alerteInitiale = () => {
 
         }
 
-
-        /*if(classe ){ //classes_id
-
-        nomClasse7.style.border = "solid 1px black"
-        //nomClasse9.style.display = "none"
-
-        }*/
-
-
         if(salaire ){
 
         nomClasse8.style.border = "solid  1px black"
@@ -187,163 +152,116 @@ const alerteInitiale = () => {
         
     })
 
-
-
 }
 
 alerteInitiale()
 
-
-
 /////////////////////////////////////////////////////////////////
 
-   //gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
-   let [ classExist, setclassExist ] = useState()
-    let [ classExistShow, setclassExistShow ] = useState(false)
+//gestion du state de l'erreur si la classe qu'on veut créer existe déjà 
+let [ classExist, setclassExist ] = useState()
+let [ classExistShow, setclassExistShow ] = useState(false)
 
-    const classExistShowIsOpen = () =>{ setclassExistShow(true) }
-    const classExistShowIsLock = () =>{ setclassExistShow(false) }
+const classExistShowIsOpen = () =>{ setclassExistShow(true) }
+const classExistShowIsLock = () =>{ setclassExistShow(false) }
 
 const submit = (e) => {
 
    
    e.preventDefault()
 
-   console.log("bienvenue au submit test de addpersonnels")
-                                                               //valTextarea
-
-    console.log("bienvenue au submit test de createEleve")
-
    if( !nom || !prenom || !contact  || !groupeSalariale || !poste || !salaire | !section  ){  //|| !email
 
-       console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
-   
        setalerteForm(true)
-
-       
-      // }else{
 
        if( !nom || regexNomPrenom.test( nom ) === false || nom === "" || nom === "undefined" ){   //!nom || regexNomPrenom.test( nom ) === false 
 
-               console.log("bienvenue dans la condition nom")
+            setalerteForm(true)
 
-               setalerteForm(true)
-
-               console.log( regexNomPrenom.test( nom )  )
-   
-               const nomClasse = document.querySelector(".nom")
-               nomClasse.style.border = "solid 1px red"
+            const nomClasse = document.querySelector(".nom")
+            nomClasse.style.border = "solid 1px red"
 
        } 
 
-       /*else*/ if( !prenom || regexNomPrenom.test( prenom ) === false  || prenom === "" || prenom === "undefined"){
+       if( !prenom || regexNomPrenom.test( prenom ) === false  || prenom === "" || prenom === "undefined"){
 
-               console.log("bienvenue dans la condition prenom")
+            setalerteForm(true)
 
-               setalerteForm(true)
+            const nomClasse = document.querySelector(".prenom")
+            
+            nomClasse.style.border = "solid 1px red"
 
-               console.log( regexNomPrenom.test( prenom )  )
-   
-               const nomClasse = document.querySelector(".prenom")
-               
-               nomClasse.style.border = "solid 1px red"
-
-       }  
+        }  
        
-       /*else*/ if( !parseInt(contact ) || reagexTel.test( parseInt(contact )) === false  || contact === "" || contact === undefined){
+        if( !parseInt(contact ) || reagexTel.test( parseInt(contact )) === false  || contact === "" || contact === undefined){
 
-               console.log("bienvenue dans la condition contact")
+            setalerteForm(true)
 
-               setalerteForm(true)
+            const nomClasse = document.querySelector(".contact")
+            nomClasse.style.border = "solid 1px red"
 
-               const nomClasse = document.querySelector(".contact")
-               nomClasse.style.border = "solid 1px red"
+        } 
 
-       } 
+        if( !email || regexEmail.test( email ) === false || email === "" || email === "undefined"){
 
-      /*else*/ if( !email || regexEmail.test( email ) === false || email === "" || email === "undefined"){
+            setalerteForm(true)
 
-               console.log("bienvenue dans la condition email")
+            const nomClasse = document.querySelector(".email")
+            nomClasse.style.border = "solid 1px red"
 
-               setalerteForm(true)
-   
-               const nomClasse = document.querySelector(".email")
-               nomClasse.style.border = "solid 1px red"
+        }  
 
-       }  
-
-       if( !groupeSalariale || groupeSalariale === "" || groupeSalariale === "undefined"){
-
-           console.log("bienvenue dans la condition groupe salariale")
+        if( !groupeSalariale || groupeSalariale === "" || groupeSalariale === "undefined"){
 
            setalerteForm(true)
 
            const nomClasse = document.querySelector(".groupeSalariale")
            nomClasse.style.border = "solid 1px red"
 
-   }  
+        }  
        
-       /*else*/ if( !poste || regexNomPrenom.test( poste ) === false || poste === "" || poste === "undefined"){
+        if( !poste || regexNomPrenom.test( poste ) === false || poste === "" || poste === "undefined"){
 
-               console.log("bienvenue dans la condition poste")
+            setalerteForm(true)
 
-               setalerteForm(true)
+            let nomClasse = document.querySelector(".poste")
+            nomClasse.style.border = "solid 1px red"
 
-               let nomClasse = document.querySelector(".poste")
-               nomClasse.style.border = "solid 1px red"
-
-              
-
-       } 
+        } 
        
-       if( !section || section === "" || section === "undefined"){ //section_id
+        if( !section || section === "" || section === "undefined"){ //section_id
 
-               console.log("bienvenue dans la condition regexScolarite")
+            setalerteForm(true)
 
-               setalerteForm(true)
+            const nomClasse = document.querySelector(".section_id")
+            nomClasse.style.border = "solid 1px red"
 
-               console.log( regexScolarite.test( parseInt(section) )  ) //section_id
-   
-               const nomClasse = document.querySelector(".section_id")
-               nomClasse.style.border = "solid 1px red"
-
-       }  
+        }  
        
-       
-
-       
-       /*else*/ if( regexScolarite.test( parseInt(salaire)) === false  || salaire === "undefined"  || salaire === "" ){  //|| salaire === "undefined"  || salaire === ""
-
-           console.log("bienvenue dans la condition salaire")
+      
+        if( regexScolarite.test( parseInt(salaire)) === false  || salaire === "undefined"  || salaire === "" ){  //|| salaire === "undefined"  || salaire === ""
 
            setalerteForm(true)
 
            const nomClasse = document.querySelector(".salaire")
            nomClasse.style.border = "solid 1px red"
 
-               
+        }
+       
+       
+       
+    } else{
 
-       }
-       
-       
-       
-       } else{
-
-           personnelServices.createPersonnel (formPersonnel)
+        personnelServices.createPersonnel (formPersonnel)
            .then( res => {
-               console.log("données du formulaire envoyées")
-               console.log(res)
-               //navigate("/admin/classes" ) 
-           ////////////////////////////
+             
+            //navigate("/admin/classes" ) 
+            confirmationPersonnelCreate()
 
-           confirmationPersonnelCreate()
-
-           ////////////////////////////
            })
-           //.catch( err => console.log(err))
            .catch( err => {
 
-                classExistShowIsOpen()
+               classExistShowIsOpen()
                setclassExist(`Vous ne pouvez pas créer le personnel ${nom} car il existe déjà` )
             
                console.log(` **** le personnel ${nom} existe déjà : ` + err)
@@ -351,10 +269,8 @@ const submit = (e) => {
            
            })
 
-       }
-
+    }
   
-   
 }
 
 //gestion du state de l'affichage de la fenêtre de creation
@@ -405,9 +321,6 @@ let [ fondateurgroupe, setfondateurgroupe ] = useState(false) //true
 const openfondateurgroupe = () => setfondateurgroupe(true) 
 const lockfondateurgroupe = () => setfondateurgroupe(false)
 
-
-
-
 let listeStateWindow = [ {openaddEnseignantgroupe, lockaddEnseignantgroupe}, {openadministrationgroupe, lockadministrationgroupe}, {openautrePersonnelgroupe, lockautrePersonnelgroupe}, {openfondateurgroupe, lockfondateurgroupe }]
 
 let [ alerteForm, setalerteForm ] = useState(false)
@@ -421,10 +334,8 @@ useEffect( () => {
        setalerteForm(false)
    }
 
-   //gestion d'affichage des composants
-   if(formPersonnel.groupeSalariale === "administration"){
-
-       console.log("**** bienvenue à la condition formPersonnel.administration")
+    //gestion d'affichage des composants
+    if(formPersonnel.groupeSalariale === "administration"){
 
        openadministrationgroupe()
 
@@ -433,21 +344,16 @@ useEffect( () => {
        lockenseignantgroupe()
       // lockaddEnseignantgroupe()
 
-   } else if(formPersonnel.groupeSalariale === "fondateurs"){
-
-       console.log("**** bienvenue à la condition formPersonnel.fondateurs")
+    } else if(formPersonnel.groupeSalariale === "fondateurs"){
 
        openfondateurgroupe()
        
-
        lockautrePersonnelgroupe()
        lockadministrationgroupe()
        lockenseignantgroupe()
        //lockaddEnseignantgroupe()//
 
-   } else if(formPersonnel.groupeSalariale === "autrePersonnel"){
-
-       console.log("**** bienvenue à la condition formPersonnel.autrePersonnel")
+    } else if(formPersonnel.groupeSalariale === "autrePersonnel"){
 
        openautrePersonnelgroupe()
 
@@ -456,9 +362,7 @@ useEffect( () => {
        lockenseignantgroupe()
        
 
-   }else if(formPersonnel.groupeSalariale === "enseignant"){
-
-       console.log("**** bienvenue à la condition formPersonnel.administration")
+    }else if(formPersonnel.groupeSalariale === "enseignant"){
 
        openaddEnseignantgroupe()
 
@@ -467,24 +371,10 @@ useEffect( () => {
        lockadministrationgroupe()
        
 
-   }
-
-
-   
+    }
 
 
 }, [formPersonnel, lockaddEnseignantgroupe, openaddEnseignantgroupe,nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire ]) //section_id, //classes_id
-
-////////////////////////////
-
-
-
-
-
-   ///////////////////////////////////////////////////////////////////////$$$$$$
-
-
-
 
     return (
 

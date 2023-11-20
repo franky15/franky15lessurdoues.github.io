@@ -6,7 +6,7 @@ import axios from "axios" //on a installé axios avec npm
 import { accountServices } from "./Account.services"
 
 const Axios = axios.create({ // creation ou itération de l'objet baseUrsl qu'on utilisera partout
-    baseURL: "http://localhost:3000" //"https://ecolelessurdoues.fr"    à remplacer sur plesk//
+    baseURL: "http://localhost:3000" //"https://ecolelessurdoues.fr"  sur plesk  et en local //   
 })
 
 /**intercepteur pour le token  c'est ici qu'on va insérer le token dans la requete 
@@ -30,7 +30,7 @@ Axios.interceptors.response.use( response => {
         accountServices.logout() //netoyage du token
         window.location = "/auth/login"   //ici il faut rediriger vers une page qui n'a pas besoin du state car on le vide ici 
     }else{
-        return Promise.reject(error)  
-    }
+        return Promise.reject(error)    
+    } 
 })
 export default Axios

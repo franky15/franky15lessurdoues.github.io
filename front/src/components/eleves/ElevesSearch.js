@@ -2,22 +2,6 @@ import React,{useState, useEffect } from 'react';
 import DetailsOneEleve from './DetailsOneEleve';
 
 const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeurInputSearch,  filtrebtn, valeurInputDate }) => {
-
-    console.log("****** filtrebtn dans ElevesSearch" )
-    console.log(filtrebtn )
-
-    console.log("****** valeurInputDate  dans ElevesSearch" )
-    console.log(valeurInputDate  )
-
-    ////    //////////////////////////////////////////:
-
-    //let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
-
-    console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
-    console.log(listeElevesContext)
- 
-     console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
-     console.log(listeClassesContext)
  
      //gestion du state d'affichage de la fenêtre de modification de l'élève
     let [ showWindowEleveUpdate, setshowWindowEleveUpdate ] = useState(false)
@@ -45,13 +29,6 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
     //récupération de la liste des élèves d'une classe précise
      let listeEleves = listeElevesContext.filter( element => element.classes_id === idClasse  )
  
-     console.log("$$la liste listeEleves de la classse est $$" )
-     console.log(listeEleves )
- 
-     //let classe = listeClassesContext.find(element => element.id === idClasse)
-     //console.log("classe")
-    // console.log(classe.enseignant)
- 
     //////////////////////////////
  
      //gestion de la suppréssion
@@ -68,78 +45,58 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
  
          
  
-             setshowWindowEleveUpdate(true)
- 
-             setshowWindowEleveDelete(false)
-             setshowWindowEleveTransfert(false)
- 
-             setshowWindowEleveDetailUp(false)
-             setshowWindowEleveDetailDown(true)
- 
-             //setshowWindowEleveDetailUp(true)
-             //setshowWindowEleveDetailDown(false)
- 
-             //console.log("vous avez cliqué sur modifier")
-             //console.log(idEleve)
- 
-             setEleveId({
-                 ...eleveId,
-                 idEleve
- 
-             })
+        setshowWindowEleveUpdate(true)
+
+        setshowWindowEleveDelete(false)
+        setshowWindowEleveTransfert(false)
+
+        setshowWindowEleveDetailUp(false)
+        setshowWindowEleveDetailDown(true)
+
+        setEleveId({
+            ...eleveId,
+            idEleve
+
+        })
          
-         
- 
     }
  
     //fonction de la suppresssion de l'élève
     const iconEleveDelete = (idEleve) => {
  
          
-         setWindowDeleteClasse(true)
-         //setshowWindowEleveDelete(true)
- 
-         setshowWindowEleveUpdate(false)
-         setshowWindowEleveTransfert(false)
- 
-         setshowWindowEleveDetailUp(false)
-         setshowWindowEleveDetailDown(true)
- 
-         //setshowWindowEleveDetailUp(true)
-         //setshowWindowEleveDetailDown(false)
- 
-         //console.log("vous avez cliqué sur supression")
-         //console.log(idEleve)
- 
-         setEleveId({
-             ...eleveId,
-             idEleve
- 
-         })
+        setWindowDeleteClasse(true)
+        //setshowWindowEleveDelete(true)
+
+        setshowWindowEleveUpdate(false)
+        setshowWindowEleveTransfert(false)
+
+        setshowWindowEleveDetailUp(false)
+        setshowWindowEleveDetailDown(true)
+
+        setEleveId({
+            ...eleveId,
+            idEleve
+
+        })
  
      }
  
      //fonction de modification de la classe de l'élève de l'élève iconEleveDetailUp(eleve.id) }
      const iconEleveUpdateTransfert = (idEleve) => {
  
-         setshowWindowEleveTransfert(true)
- 
-         setshowWindowEleveDelete(false)
-         setshowWindowEleveUpdate(false)
-         setshowWindowEleveDetailUp(false)
-         setshowWindowEleveDetailDown(true)
- 
-        // setshowWindowEleveDetailUp(true)
-        // setshowWindowEleveDetailDown(false)
-        
-         //console.log("vous avez cliqué sur transfert de l'élève")
-         //console.log(idEleve)
- 
-         setEleveId({
-             ...eleveId,
-             idEleve
- 
-         })
+        setshowWindowEleveTransfert(true)
+
+        setshowWindowEleveDelete(false)
+        setshowWindowEleveUpdate(false)
+        setshowWindowEleveDetailUp(false)
+        setshowWindowEleveDetailDown(true)
+
+        setEleveId({
+            ...eleveId,
+            idEleve
+
+        })
  
     }
  
@@ -147,30 +104,20 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
      const iconEleveDetailUp = (idEleve) => {
  
          
-       setshowWindowEleveDetailUp(true)
-       setshowWindowEleveDetailDown(false)
+        setshowWindowEleveDetailUp(true)
+        setshowWindowEleveDetailDown(false)
  
-        //setshowWindowEleveDetailUp(false)
-        //setshowWindowEleveDetailDown(true)
-        ////////////////////
-        setisOpen(true) //
- 
- 
-        /////////////////
-     
-         
-         setshowWindowEleveTransfert(false)
-         setshowWindowEleveDelete(false)
-         setshowWindowEleveUpdate(false)
- 
-         //console.log("vous avez cliqué sur le detail de l'élève")
-         console.log(idEleve)
- 
-         setEleveId({
-             ...eleveId,
-             idEleve
- 
-         })
+        setisOpen(true)
+
+        setshowWindowEleveTransfert(false)
+        setshowWindowEleveDelete(false)
+        setshowWindowEleveUpdate(false)
+
+        setEleveId({
+            ...eleveId,
+            idEleve
+
+        })
          
  
     }
@@ -182,20 +129,10 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
          setshowWindowEleveDetailDown(true)
          setshowWindowEleveDetailUp(false)
  
-        // setshowWindowEleveDetailDown(false)
-         //setshowWindowEleveDetailUp(true)
- 
-         ////////////////////////
-         setisOpen(false) //
- 
-         ////////////////////////
- 
+         setisOpen(false) 
          setshowWindowEleveTransfert(false)
          setshowWindowEleveDelete(false)
          setshowWindowEleveUpdate(false)
-         
-         //console.log("vous avez cliqué sur le detail de l'élève")
-         console.log(idEleve)
          
          setEleveId({
              ...eleveId,
@@ -205,13 +142,6 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
  
      }
  
-     //////////////////////////
- 
-     const valeur = () => {
-        // console.log("valeur provisoire")
-     }
- 
-    
     ////////////////////////////////////////////
  
     let [ classeValue, setclasseValue ] = useState({})
@@ -224,23 +154,11 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
         let eleve = ElevesArray.find(element => element.id === idClasse)
         if(eleve){
  
-        // console.log("******** eleve")
-        // console.log(eleve.enseignant)
         setclasseValue(eleve)
         }
  
  
      }, [idClasse, listeClassesContext])
-        
-     console.log("classeValue") 
-     console.log(classeValue) 
-         
-
-    //////    ////////////////////////////////////////////
-
-
-    
-    ////////////////////////////////////////
 
     //gestion de de l'affichage des données  
 
@@ -255,31 +173,16 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
 
    let valeurInput2 =  listeEleves.filter( Eleve =>  Eleve.anciennete === filtrebtn )
 
-   console.log("****** valeurInput dans valeurInput")
-    console.log(valeurInput)
-    
-   // let valeurInput1 =  listeEleves.filter( Eleve =>  ( Eleve.dateInscription  >= dateDebut &&  Eleve.dateInscription  <= dateFin ) )
-
-   // console.log("****** valeurInput dans valeurInput1")
-    //console.log(valeurInput1)
-    
-
-
-
-
-////////////////////////:::::::::::
-
-
-
+  
     return (
         <>
            
         { 
            valeurInput.map( (eleve, index) => 
             
-            <>
+            < div key={ `${eleve.nom}-${index}` }>
               <hr></hr>
-                    <div className='getOneClasseEleves__btn3--bloc' key={ `${eleve.nom}-${index}` }>
+                    <div className='getOneClasseEleves__btn3--bloc'  >
                         
                     
                         <div className='btn3Option'>
@@ -315,7 +218,7 @@ const ElevesSearch = ({ idClasse, listeClassesContext, listeElevesContext, valeu
                     </div> 
                     
                     { isOpen && <DetailsOneEleve   iconEleveDetailDown={iconEleveDetailDown}  idClasse={idClasse}   eleveId={eleve.id} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  }
-            </> 
+            </div> 
             
 
             ) 

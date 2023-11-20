@@ -21,10 +21,6 @@ const Login = () => {
 
     let onchange = (e) => {
 
-        console.log(e.target.name)
-        console.log(e.target.value)
-        console.log(loginObject)
-
         setLoginObject({
 
             ...loginObject,
@@ -37,9 +33,6 @@ const Login = () => {
         e.preventDefault()
         accountServices.login( loginObject)
             .then( (res) => {
-
-                console.log("_______le token est")
-                console.log(res)
 
                 accountServices.saveToken(res.data.token) //récupération du token  dans la reponse et son enregistrement dans le localstorage
                 navigate("/admin")
@@ -58,16 +51,16 @@ const Login = () => {
 
                 <form onSubmit={onsubmit}>
                     <div className='groupe'>
-                        <label className='email'>E-mail</label>
+                        <label  htmlFor='email'  id='email'>E-mail</label>
                         <input type='email' name='email' value={loginObject.email} onChange={onchange}/>
                     </div>
 
                     <div className='groupe'>
-                    <label className='password'>Mot de passe</label>
+                        <label  htmlFor='password' id='password'>Mot de passe</label>
                         <input type='password' name='password' value={loginObject.password} onChange={onchange}/>
                     </div>
                     <div className='groupe'>
-                        <button className='coonnexionbtn'>Connexion</button>
+                        <button type='submit' id='coonnexionbtn'>Connexion</button>
                     </div>
                 </form>
             </div>
@@ -79,7 +72,7 @@ const Login = () => {
                 <p className='loginbloc2__description'>Gérez votre école à distance</p>
             </div>
 
-        </div>
+        </div> 
     );
 };
 

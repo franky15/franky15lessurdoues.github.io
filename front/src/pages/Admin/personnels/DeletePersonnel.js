@@ -7,25 +7,15 @@ const DeletePersonnel = ({ lockwindowDeleteClasse, openwindowDeleteClasse, liste
     
    
     let idPersonnel = personnelId.idPersonnel;
-    console.log("*** idPersonnel")
-    console.log(idPersonnel)
-   
-
+ 
     let [ hidenUpdate, setHidenUpdate ] = useState(false)
     let [ classeUpdate1, setClasseUpdate1 ] = useState(true)
 
     
     let navigate = useNavigate()
 
-    console.log("*******bienvenu au delePersonnel component *****")
-
-    console.log("listePersonnelContext")
-    console.log(listePersonnelContext)
-    
-    
-
     //confirmation de la mise à jour
-   let confirmation1 = () => {
+    let confirmation1 = () => {
 
         setHidenUpdate(true)
         setClasseUpdate1(false)
@@ -47,14 +37,8 @@ const DeletePersonnel = ({ lockwindowDeleteClasse, openwindowDeleteClasse, liste
 
     const deleteEleveClasse = () => {
 
-        console.log("****** bienvenu à la fonction deleteEleve de delete ******* ")
-
         const personnel = listePersonnelContext.find( element => element.id =  idPersonnel )
        
-        console.log(" la classe de delete assynchrone ")
-        console.log(personnel.id)
-        console.log(personnel)
-
         personnelServices.deletePersonnel(idPersonnel) //eleveId.idEleve
             .then( res => {
 

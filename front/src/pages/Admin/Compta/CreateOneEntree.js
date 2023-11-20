@@ -4,11 +4,7 @@ import { comptaServices } from '../../../_services/Compta.Services';
 const CreateOneEntree = ({ openCreateOpen, idEleveCurrent, lockCreateOpen }) => {
 
     let idEleve = idEleveCurrent
-    console.log( "**** idEleve  de CreateOneEntree ")
-    console.log(idEleve)
-
-   
-
+    
     let table = [ ]
 
 
@@ -27,9 +23,6 @@ const CreateOneEntree = ({ openCreateOpen, idEleveCurrent, lockCreateOpen }) => 
 
 
     }
-
-    console.log("***formCompta")
-    console.log(formCompta)
 
     let object
 
@@ -125,25 +118,11 @@ const alerteInitiale = () => {
         
         e.preventDefault()
 
-        console.log("bienvenue au submit test de createOneEntree")
-            
-       
-        console.log("bienvenue au submit test de createOneEntree")
-        //valTextarea
-
     if( !typePaiement|| !datePaiement || !montantPaye ){
-
-    console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
 
     setalerteForm(true)
 
-
-    // }else{
-
-    
     if( !typePaiement  ){
-
-    console.log("bienvenue dans la condition nom")
 
     setalerteForm(true)
 
@@ -154,28 +133,22 @@ const alerteInitiale = () => {
     } 
 
 
-    /*else*/ if( !datePaiement){
+    if( !datePaiement){
 
-    console.log("bienvenue dans la condition anciennete")
+        setalerteForm(true)
 
-    setalerteForm(true)
-
-    const nomClasse = document.querySelector(".datePaiement")
-    nomClasse.style.border = "solid 1px red"
+        const nomClasse = document.querySelector(".datePaiement")
+        nomClasse.style.border = "solid 1px red"
 
     }
 
-    /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
+    if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false  ){
 
-    console.log("bienvenue dans la condition nom")
+        setalerteForm(true)
 
-    setalerteForm(true)
+        const nomClasse = document.querySelector(".montantPaye")
 
-    console.log( regexScolarite.test( montantPaye )  )
-
-    const nomClasse = document.querySelector(".montantPaye")
-
-    nomClasse.style.border = "solid 1px red"
+        nomClasse.style.border = "solid 1px red"
 
     }  
 
@@ -183,8 +156,7 @@ const alerteInitiale = () => {
     } else{
             comptaServices.createCompta(formCompta)
                 .then( res => {
-                    console.log("données du formulaire envoyées")
-                    console.log(res)
+                    
                     //navigate("/admin/classes" ) 
                 ////////////////////////////
 
@@ -197,18 +169,7 @@ const alerteInitiale = () => {
         }
     }
 
-    console.log("**** formCompta")
-    console.log(formCompta)
-
-
-    /////////////////////////////////
-
    
-    
-
-
-    //////////////////////////////////
-
     return (
         <div className='createonentree'>
            

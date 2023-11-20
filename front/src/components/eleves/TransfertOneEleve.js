@@ -1,7 +1,6 @@
 import React,{ useContext, useState } from 'react';
 import { elevesServices } from '../../_services/Eleves.services';
 import { useParams } from 'react-router-dom';
-//import { AddEleveContext } from '../../_utils/ContextAddEleve';
 
 const TransfertOneEleve = ( { lockshowWindowEleveTransfert, openshowWindowEleveTransfert, showWindowEleveTransfert, setshowWindowEleveTransfert, eleveId, listeElevesContext, listeClassesContext , listeEleves} ) => {  //, listeElevesContext, listeClassesContext
 
@@ -9,40 +8,12 @@ const TransfertOneEleve = ( { lockshowWindowEleveTransfert, openshowWindowEleveT
     const {id} = useParams()
     const idClasse = parseInt(id)
 
-  
-
-    console.log("$$la liste listeEleves de la classse est $$" )
-    console.log(listeEleves )
-    console.log(listeEleves[0] )
-    /*
-    console.log("eleveId")
-    console.log(eleveId) 
-    */
-
-    //let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
-
-    console.log("listeElevesContext")
-    console.log(listeElevesContext)
-
-    console.log("listeClassesContext")
-    console.log(listeClassesContext) 
-
-    
-
-
    let idEleve = eleveId.idEleve
-
-   console.log("idEleve est : " + idEleve)
 
    let [ eleveIdentifiant, setEleveId ] = useState({ idEleve: idEleve})
    
    let eleveCurrent = listeElevesContext.find( eleve => eleve.id === idEleve)
    
-   console.log("eleveCurrent")
-   console.log(eleveCurrent)
-
-   
-
    //converstion de l'idSection de chiffre à lettre 
    let sectionAnglophone = "anglophone"
    let sectionFrancophone = "francophone"
@@ -58,17 +29,11 @@ const TransfertOneEleve = ( { lockshowWindowEleveTransfert, openshowWindowEleveT
 
    } 
 
-   console.log("sectionNumber1 est : " + sectionNumber1 )
- 
-
     //gestion du state section 
     let [ valSection, setValSection ] = useState({
 
         sectionNumber : `${sectionNumber1}` //eleveCurrent.section_id/////////
     })
-
-
-    
 
     //gestion du state  classe
     let [ valClasse, setValClasse ] = useState({
@@ -94,21 +59,10 @@ const TransfertOneEleve = ( { lockshowWindowEleveTransfert, openshowWindowEleveT
         })
 
     }
-    console.log("******* ValClasse2 est : ")
-    console.log(valClasse2)
-
+    
       /////////////////////////////////////
 //conversion de la classe de chiffre en lettre
 let classeconversion = listeClassesContext.find( classe => classe.classes_id === valClasse2.classes_id)
-
-console.log("classeconversion")
-console.log(classeconversion)
-//console.log("classeconversion.id")
-//console.log(classeconversion.id)
-
-////////////////////////////////////
-
-    ////////////////////////////////////////
 
     //fonction de la classe
     const classeInput = (e) => {
@@ -122,9 +76,7 @@ console.log(classeconversion)
         })
 
     }
-    console.log("******* ValClasse est : ")
-    console.log(valClasse)
-
+    
     //fonction de la section
     const sectionInput = (e) => {
 
@@ -139,18 +91,8 @@ console.log(classeconversion)
          
     }
 
-    console.log("******* ValSection est : ")
-    console.log(valSection.section_id)
-
-    ////////////////////////////////:
     //conversion de la classe chiffre en lettre
     const classeConverter = listeClassesContext.find( classeId => classeId.id === valClasse.classes_id)
-    
-    //console.log("******* classeConverter  est : ")
-    console.log(classeConverter)
-
-    ///////////////////////////////
-
     
     let [ eleveCreate, setEleveCreate ] = useState(false) //false
     //let [ hidenEleveCreate, setHidenEleveCreate ] = useState(true)
@@ -158,12 +100,8 @@ console.log(classeconversion)
      //confirmation de la mise à jour
     let confirmationEleveCreate = () => {
  
-    
-     //setEleveCreate(true)
-    // setHidenEleveCreate(false)
     lockshowWindowEleveTransfert()
     
- 
      //cacher la confirmation après 3000 millisecondes
      setTimeout( () => {
  
@@ -197,46 +135,20 @@ console.log(classeconversion)
   
 
 }
-console.log("******* ValDate est : ********")
-console.log( (valDate.dateInscription))
-
-
-
-console.log("l'object transfert")
-
-console.log({ ...eleveIdentifiant, ...valClasse2, ...valSection, ...valDate})
-//console.log( (valDate.dateNaissance).slice(0,10).replace(""))
- 
-  ///////////////////////////////////////////////::::
 
     const submit = () => {
 
-        
-        //e.preventDefault()
-
-        
-        console.log("bienvenue au submit test du transfert")
-
-
-       
         elevesServices.updateEleve({ ...eleveIdentifiant, ...valClasse2, ...valSection, ...valDate})
             .then( res => {
-                console.log("données du formulaire envoyées")
-                console.log(res)
-               // navigate("/admin/classes" ) 
-               ////////////////////////////
-
+               
                confirmationEleveCreate()
 
-               ////////////////////////////
             })
             .catch( err => console.log(err))
         
         
     }
 
-    console.log("**** valSection.sectionNumber ****")
-    console.log( valSection.sectionNumber)
     return (
 
         <div className='transfertOneEleve'>

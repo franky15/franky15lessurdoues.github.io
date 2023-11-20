@@ -6,11 +6,6 @@ import AddAdministration from './AddAdministration';
 import AddAutrePersonnel from "./AddAutrePersonnel"
 import AddFondateur from "./AddFondateur"
 
-
-//import { AddEleveContext } from '../../_utils/ContextAddEleve';
-
-
-
 const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, listePersonnelContext, lockaddEnseignantgroupe,  openaddEnseignantgroupe  } ) => { 
 
   
@@ -29,9 +24,6 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
 
 
     }
-
-    console.log("***formPersonnel")
-    console.log(formPersonnel)
 
     let groupeSalarialValueExForm = formPersonnel.groupeSalariale;
     let nomValueExForm = formPersonnel.nom;
@@ -72,9 +64,6 @@ const AddPersonnels = ({ listeClassesContext, openAddEleveWindow ,lockAddEleveWi
 //    let {  nom, prenom, contact,email, groupeSalariale,poste, section_id, classes_id, salaire } = formPersonnel
 let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salaire } = formPersonnel
    
-    console.log("******** nom")
-    console.log(nom)
-
    const nomClasse = document.querySelector(".nom")
    const nomClasse1 = document.querySelector(".prenom")
    const nomClasse2 = document.querySelector(".contact")
@@ -86,94 +75,87 @@ let {  nom, prenom, contact,email, groupeSalariale,poste, section, classe, salai
    const nomClasse8 = document.querySelector(".salaire")
    
 
+    // gestion des expressions régulières 
+    let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
 
-   console.log("******** nomClasse1")
-   console.log(nomClasse1)
+    let regexScolarite = new RegExp("^[0-9]{1,6}$")
 
-     // gestion des expressions régulières 
-     let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
+    let reagexTel = new RegExp("^[0-9]{1,20}$")
 
-     let regexScolarite = new RegExp("^[0-9]{1,6}$")
- 
-     let reagexTel = new RegExp("^[0-9]{1,20}$")
- 
-     let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
+    let regexEmail = new RegExp("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+")
 
    //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
     if( nom   ){
  
-     nomClasse.style.border = "solid 1px black "
-     
-     //nomClasse1.style.display = "none"
+        nomClasse.style.border = "solid 1px black "
+        
+        //nomClasse1.style.display = "none"
  
     }
   
     
     if(prenom){
  
-     nomClasse1.style.border = "solid  1px black"
-     //nomClasse3.style.display = "none"
+        nomClasse1.style.border = "solid  1px black"
+        //nomClasse3.style.display = "none"
  
     }
     
     if(contact ){
  
-     nomClasse2.style.border = "solid 1px black"
-     //nomClasse4.style.display = "none"
+        nomClasse2.style.border = "solid 1px black"
+        //nomClasse4.style.display = "none"
  
     }
     
     if(email && regexEmail.test( email ) === true   ){
  
-     nomClasse3.style.border = "solid 1px black"
-     //nomClasse5.style.display = "none"
+        nomClasse3.style.border = "solid 1px black"
+        //nomClasse5.style.display = "none"
  
     }
     
     if(groupeSalariale ){
  
-     nomClasse4.style.border = "solid 1px black"
-     //nomClasse6.style.display = "none"
+        nomClasse4.style.border = "solid 1px black"
+        //nomClasse6.style.display = "none"
  
     }
     
     if(poste  ){
  
-     nomClasse5.style.border = "solid 1px black"
-    // nomClasse7.style.display = "none"
+        nomClasse5.style.border = "solid 1px black"
+        // nomClasse7.style.display = "none"
  
     }
     
     if(section ){ //section_id
  
-     nomClasse6.style.border = "solid 1px black"
-     //nomClasse8.style.display = "none"
+        nomClasse6.style.border = "solid 1px black"
+        //nomClasse8.style.display = "none"
  
     }
     
     if(classe ){ //classes_id
  
-     nomClasse7.style.border = "solid 1px black"
-     //nomClasse9.style.display = "none"
+        nomClasse7.style.border = "solid 1px black"
+        //nomClasse9.style.display = "none"
  
     }
  
-     if(salaire ){
+    if(salaire ){
  
-     nomClasse8.style.border = "solid  1px black"
-     //nomClasse10.style.display = "none"
- 
-    }
-    
-    
- 
-    
+        nomClasse8.style.border = "solid  1px black"
+        //nomClasse10.style.display = "none"
  
     }
+    
+
+}
  
-    alerteInitiale()
+alerteInitiale()
  
   
     /////////////////////////////////////////////////////////////////
@@ -186,173 +168,122 @@ const alerteInitiale = () => {
         
         e.preventDefault()
 
-        console.log("bienvenue au submit test de addpersonnels")
-                                                                    //valTextarea
-
-         console.log("bienvenue au submit test de createEleve")
-
         if( !nom || !prenom || !contact || !email || !groupeSalariale || !poste || !section || !classe || !salaire ){  //section_id, classes_id
     
-            console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
-        
             setalerteForm(true)
-
-            
-           // }else{
 
             if( !nom || regexNomPrenom.test( nom ) === false ){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test( nom )  )
-        
-                    const nomClasse = document.querySelector(".nom")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".nom")
+                nomClasse.style.border = "solid 1px red"
 
             } 
 
-            /*else*/ if( !prenom || regexNomPrenom.test( prenom ) === false ){
+            if( !prenom || regexNomPrenom.test( prenom ) === false ){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test( prenom )  )
-        
-                    const nomClasse = document.querySelector(".prenom")
-                    
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".prenom")
+                
+                nomClasse.style.border = "solid 1px red"
 
             }  
             
-            /*else*/ if( !parseInt(contact ) || reagexTel.test( parseInt(contact )) === false){
+            if( !parseInt(contact ) || reagexTel.test( parseInt(contact )) === false){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    const nomClasse = document.querySelector(".contact")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".contact")
+                nomClasse.style.border = "solid 1px red"
 
             } 
 
-           /*else*/ if( !email || regexEmail.test( email ) === false ){
+            if( !email || regexEmail.test( email ) === false ){
 
-                    console.log("bienvenue dans la condition sectionNumber")
-
-                    setalerteForm(true)
-        
-                    const nomClasse = document.querySelector(".email")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+    
+                const nomClasse = document.querySelector(".email")
+                nomClasse.style.border = "solid 1px red"
 
             }  
 
             if( !groupeSalariale){
-
-                console.log("bienvenue dans la condition sectionNumber")
 
                 setalerteForm(true)
     
                 const nomClasse = document.querySelector(".groupeSalariale")
                 nomClasse.style.border = "solid 1px red"
 
-        }  
+            }  
             
-            /*else*/ if( !poste || regexNomPrenom.test( poste ) === false ){
+            if( !poste || regexNomPrenom.test( poste ) === false ){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    const nomClasse = document.querySelector(".poste")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".poste")
+                nomClasse.style.border = "solid 1px red"
 
             } 
             
-            /*else*/ if( !section){ //section_id
+            if( !section){ //section_id
 
-                    console.log("bienvenue dans la condition regexScolarite")
+                   
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    console.log( regexScolarite.test( parseInt(section) )  ) //section_id
-        
-                    const nomClasse = document.querySelector(".section_id")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".section_id")
+                nomClasse.style.border = "solid 1px red"
 
             }  
             
-            /*else*/ if( !classe ){ //classes_id
+            if( !classe ){ //classes_id
 
-                    console.log("bienvenue dans la condition nomParent1")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test(classe)  ) //classes_id
-        
-                    const nomClasse = document.querySelector(".classes_id")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".classes_id")
+                nomClasse.style.border = "solid 1px red"
 
             }
             
   
             
-            /*else*/ if(!parseInt(salaire) || regexScolarite.test( parseInt(salaire)) === false  ){
-
-                console.log("bienvenue dans la condition nomParent1")
+            if(!parseInt(salaire) || regexScolarite.test( parseInt(salaire)) === false  ){
 
                 setalerteForm(true)
     
                 const nomClasse = document.querySelector(".salaire")
                 nomClasse.style.border = "solid 1px red"
 
-                    
-
             }
             
             
             
-            } else{
+        } else{
 
-                personnelServices.createPersonnel (formPersonnel)
-                .then( res => {
-                    console.log("données du formulaire envoyées")
-                    console.log(res)
-                    //navigate("/admin/classes" ) 
-                ////////////////////////////
-
-                confirmationPersonnelCreate()
-
-                ////////////////////////////
-                })
-                //.catch( err => console.log(err))
-                .catch( err => {
-
-                    setclassExist(`Vous ne pouvez pas créer le personnel ${nom} car il existe déjà` )
-                 
-                    console.log(` **** le personnel ${nom} existe déjà : ` + err)
-                   
-                
-                })
-
-            }
-
-        /*
-        personnelServices.createPersonnel (formPersonnel)
+            personnelServices.createPersonnel (formPersonnel)
             .then( res => {
-                console.log("données du formulaire envoyées")
-                console.log(res)
+              
                 //navigate("/admin/classes" ) 
-               ////////////////////////////
+            ////////////////////////////
 
-               confirmationPersonnelCreate()
+            confirmationPersonnelCreate()
 
-               ////////////////////////////
+            ////////////////////////////
             })
-            .catch( err => console.log(err))
-        */
+            //.catch( err => console.log(err))
+            .catch( err => {
+
+                setclassExist(`Vous ne pouvez pas créer le personnel ${nom} car il existe déjà` )
+                
+                console.log(` **** le personnel ${nom} existe déjà : ` + err)
+                
+            
+            })
+
+        }
+
+       
         
     }
 
@@ -423,8 +354,6 @@ const alerteInitiale = () => {
         //gestion d'affichage des composants
         if(formPersonnel.groupeSalariale === "administration"){
 
-            console.log("**** bienvenue à la condition formPersonnel.administration")
-
             openadministrationgroupe()
 
             lockautrePersonnelgroupe()
@@ -432,8 +361,6 @@ const alerteInitiale = () => {
             lockenseignantgroupe()
            // lockaddEnseignantgroupe()
         }else if(formPersonnel.groupeSalariale === "fondateurs"){
-
-            console.log("**** bienvenue à la condition formPersonnel.fondateurs")
 
             openfondateurgroupe()
             
@@ -444,8 +371,6 @@ const alerteInitiale = () => {
            // lockaddEnseignantgroupe()
         }else if(formPersonnel.groupeSalariale === "autrePersonnel"){
 
-            console.log("**** bienvenue à la condition formPersonnel.autrePersonnel")
-
             openautrePersonnelgroupe()
 
             lockfondateurgroupe()
@@ -454,8 +379,6 @@ const alerteInitiale = () => {
             
 
         }else if(formPersonnel.groupeSalariale === "enseignant"){
-
-            console.log("**** bienvenue à la condition formPersonnel.administration")
 
             openaddEnseignantgroupe()
 

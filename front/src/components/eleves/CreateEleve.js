@@ -1,32 +1,10 @@
 import React, { useState, useContext, useEffect, useMemo } from 'react';
-
 import { elevesServices } from '../../_services/Eleves.services';
-
-
 import { AddEleveContext } from '../../_utils/ContextAddEleve';
-
-
 
 const CreateEleves = () => { //{lockAddEleveWindow }
 
-    //////////////////////:
-
     const { listeClassesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow } = useContext(AddEleveContext)
-
-   console.log("listeClassesContext")
-   console.log(listeClassesContext)
-
-   console.log("addEleveWindow")
-   console.log(addEleveWindow)
-   
-
-    /////////////////////////
-
-    //const listeClassesContext = useContext(AddEleveContext)
-    //console.log("listeClassesContext")
-   //console.log(listeClassesContext)
-
-    //let navigate = useNavigate()
 
     // gestion du state de l'input radio
     let [ inputRadio, setInputRadio ] = useState({})
@@ -100,23 +78,10 @@ const CreateEleves = () => { //{lockAddEleveWindow }
       
 
     }
-   //console.log("******* inputRadio est : ")
-   //console.log(inputRadio)
 
     //fonction du textarea decouverte
     const textareaInput = (e) => {  //textareaAncien
 
-        //lockTextareaAncien()
-
-        /*
-        setValTextarea({
-
-            ...valTextarea,
-            [e.target.name] : e.target.value
-            //decouverte: e.target.value   //setvalDateDecouverte 
-        })
-        */
-       
         setvalDateDecouverte({
 
             ...valDateDecouverte,
@@ -127,25 +92,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
 
     }
 
-    console.log("valDateDecouverte")
-    console.log(valDateDecouverte)
-
-    /*
-     //fonction du textarea monatnt
-    const textareaInputDate = (e) => {  //textareaAncien
-
-        //lockTextareaAncien()
-
-        
-        setValTextarea({
-
-            ...valTextarea,
-            dateArrivee: e.target.value
-        })
-      
-
-    }
-    */
+   
 
      //fonction de la date d'arrivée
      const dateInputAncien = (e) => {
@@ -158,10 +105,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
       
 
     }
-    console.log("******* valTextarea est : ")
-    console.log(valTextarea)
     
-
     //fonction des noms et prénoms
     const nomPrenomInput = (e) => {
 
@@ -173,9 +117,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
       
        
     }
-   //console.log("******* valInput nom prenom est : ")
-    //console.log(valInput)
-
+   
     //fonction de la date de naissance
     const dateInput = (e) => {
 
@@ -187,9 +129,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
       
 
     }
-    //console.log("******* ValDate est : ")
-    //console.log(valDate)
-
+   
     //fonction de la section
     const sectionInput = (e) => {
 
@@ -203,9 +143,6 @@ const CreateEleves = () => { //{lockAddEleveWindow }
          
     }
 
-    //console.log("******* ValSection est : ")
-    //console.log(valSection.section_id)
-   
     //fonction de la classe
     const classeInput = (e) => {
 
@@ -217,9 +154,7 @@ const CreateEleves = () => { //{lockAddEleveWindow }
         })
 
     }
-    //console.log("******* ValSection est : ")
-    //console.log(valClasse)
-
+    
     //fonction du parent
     const parentInput = (e) => {
 
@@ -232,57 +167,37 @@ const CreateEleves = () => { //{lockAddEleveWindow }
 
         })
     }
-    console.log("******* valInputParent est : ")
-    console.log(valInputParent)
-
-    console.log({...inputRadio, ...valTextarea, ...valInput, ...valDate, ...valSection, ...valClasse, ...valInputParent})
-    
-    console.log("******* valeur du formulaire est : ")
-
+  
     let valformulaire = {...inputRadio, ...valTextarea, ...valInput, ...valDate, ...valSection, ...valClasse, ...valInputParent}
-    console.log("valformulaire")
-    console.log(valformulaire)
+  
 
-        ///////////////////////////////////////////////:::: 
-        let [ alerteForm, setalerteForm ] = useState(false)
+    ///////////////////////////////////////////////:::: 
+    let [ alerteForm, setalerteForm ] = useState(false)
 
-        let [ eleveCreate, setEleveCreate ] = useState(false) //false
-        //let [ hidenEleveCreate, setHidenEleveCreate ] = useState(true)
-     
-         //confirmation de la mise à jour
-        let confirmationEleveCreate = () => {
-     
-        
-         setEleveCreate(true)
-        // setHidenEleveCreate(false)
-        
-     
-         //cacher la confirmation après 3000 millisecondes
-         setTimeout( () => {
-     
-             
-             setEleveCreate(false)
-             window.location.reload();
-             
-         }, 3000)
-        
-        
-     
-     }
-     
-      ///////////////////////////////////////////////:::: 
-
-     
+    let [ eleveCreate, setEleveCreate ] = useState(false) //false
     
-
-
-   //////////////////////////////////////
-
+    //confirmation de la mise à jour
+    let confirmationEleveCreate = () => {
+    
+    
+        setEleveCreate(true)
+        // setHidenEleveCreate(false)
+    
+    
+        //cacher la confirmation après 3000 millisecondes
+        setTimeout( () => {
+    
+            
+            setEleveCreate(false)
+            window.location.reload();
+            
+        }, 3000)
+   
+    }
+     
+ 
    let { anciennete, nom, prenom, dateNaissance, sectionNumber,
-    classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = valformulaire
-
-    console.log("******** nom")
-    console.log(nom)
+   classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 } = valformulaire
 
    const nomClasse = document.querySelector(".anciennete")
    const nomClasse1 = document.querySelector(".nom")
@@ -298,55 +213,20 @@ const CreateEleves = () => { //{lockAddEleveWindow }
    const nomClasse11 = document.querySelector(".nomParent2")
    const nomClasse12 = document.querySelector(".contactParent1")
 
-
-   console.log("******** nomClasse1")
-   console.log(nomClasse1)
-
-    ////////////////////////////////////////////////////////////////////
-/*
-let listeElementsTag = useMemo( () => [ { anciennete : nomClasse}, {nom : nomClasse1 }, {prenom : nomClasse2}, {dateNaissance : nomClasse3 }, {sectionNumber : nomClasse4}, {classes_id : nomClasse5},
-    {dateInscription : nomClasse6},{montantPaye :  nomClasse7}, {nomParent1 : nomClasse8}, {contactParent1 : nomClasse9}, {nomParent2 : nomClasse10}, {contactParent2 : nomClasse11} ],[nomClasse, nomClasse1, nomClasse10, nomClasse11, nomClasse2, nomClasse3, nomClasse4, nomClasse5, nomClasse6, nomClasse7, nomClasse8, nomClasse9] )
-
-
-let listeValue  = useMemo( () => [ {anciennete : anciennete} , {nom : nom}, {prenom : prenom}, {dateNaissance : dateNaissance}, {sectionNumber : sectionNumber},
-{classes_id : classes_id} , {dateInscription : dateInscription}, {montantPaye : montantPaye}, {nomParent1 : nomParent1}, {contactParent1 : contactParent1},{ nomParent2 :  nomParent2}, {contactParent2 : contactParent2} ], [anciennete, classes_id, contactParent1, contactParent2, dateInscription, dateNaissance, montantPaye, nom, nomParent1, nomParent2, prenom, sectionNumber] )
-*/
-
-
-    //////////////////////////////////////////////////////////////////
-   
-   
-
-   
-
     useEffect( ()=> {
-
-       
-
-        if( anciennete || nom || prenom  || dateNaissance || sectionNumber
-            || classes_id || dateInscription || montantPaye || nomParent1 || contactParent1 ){
-    
-    
-                setalerteForm(false)
-        }
-
-        //////////////////////////////////////////////
 
         
 
+        if( anciennete || nom || prenom  || dateNaissance || sectionNumber
+            || classes_id || dateInscription || montantPaye || nomParent1 || contactParent1 ){
 
 
-
-        /////////////////////////////////////////////
-
-      
+                setalerteForm(false)
+        }
 
     }, [ anciennete, nom, prenom, dateNaissance, sectionNumber,
         classes_id, dateInscription, montantPaye, nomParent1, contactParent1, nomParent2, contactParent2 /*, listeValue,  listeElementsTag */])
     
-
-
-
 //gestion des alerte à l'origine
 const alerteInitiale = () => {
 
@@ -437,9 +317,9 @@ const alerteInitiale = () => {
 
    
 
-   }
+}
 
-   alerteInitiale()
+alerteInitiale()
 
     // gestion des expressions régulières 
     let regexNomPrenom = new RegExp("^[a-zA-Z]{2,}$")
@@ -462,174 +342,120 @@ const alerteInitiale = () => {
        
         e.preventDefault()
 
-        console.log("bienvenue au submit test de createEleve")
-
         if( !anciennete || !nom || !prenom  || !dateNaissance || !sectionNumber
         || !classes_id || !dateInscription || !montantPaye || !nomParent1 || !contactParent1 ){
     
-            console.log("*** Tous les champs avec étoiles ou en rouge doivent être remplis *** ")
-        
             setalerteForm(true)
-
-            
-           // }else{
 
             if( !nom || regexNomPrenom.test( nom ) === false ){
 
-                    console.log("bienvenue dans la condition nom")
 
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test( nom )  )
-        
-                    const nomClasse = document.querySelector(".nom")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".nom")
+                nomClasse.style.border = "solid 1px red"
 
             } 
             
-            /*else*/ if( !anciennete){
+            if( !anciennete){
 
-                    console.log("bienvenue dans la condition anciennete")
-
-                    setalerteForm(true)
-        
-                    const nomClasse = document.querySelector(".formulaireRadio__option")
-                    nomClasse.style.border = "solid 1px red"
+                  
+                setalerteForm(true)
+    
+                const nomClasse = document.querySelector(".formulaireRadio__option")
+                nomClasse.style.border = "solid 1px red"
 
             }
 
-            /*else*/ if( !prenom || regexNomPrenom.test( prenom ) === false ){
+            if( !prenom || regexNomPrenom.test( prenom ) === false ){
 
-                    console.log("bienvenue dans la condition nom")
-
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test( prenom )  )
-        
-                    const nomClasse = document.querySelector(".prenom")
-                    
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".prenom")
+                
+                nomClasse.style.border = "solid 1px red"
 
             }  
             
-            /*else*/ if( !dateNaissance ){
+            if( !dateNaissance ){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    const nomClasse = document.querySelector(".dateNaissance")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".dateNaissance")
+                nomClasse.style.border = "solid 1px red"
 
             } 
 
-           /*else*/ if( !sectionNumber){
+            if( !sectionNumber){
 
-                    console.log("bienvenue dans la condition sectionNumber")
-
-                    setalerteForm(true)
-        
-                    const nomClasse = document.querySelector(".section")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+    
+                const nomClasse = document.querySelector(".section")
+                nomClasse.style.border = "solid 1px red"
 
             }  
 
             if( !classes_id){
-
-                console.log("bienvenue dans la condition sectionNumber")
 
                 setalerteForm(true)
     
                 const nomClasse = document.querySelector(".classe")
                 nomClasse.style.border = "solid 1px red"
 
-        }  
+            }  
             
-            /*else*/ if( !dateInscription ){
+            if( !dateInscription ){
 
-                    console.log("bienvenue dans la condition nom")
+                setalerteForm(true)
 
-                    setalerteForm(true)
-
-                    const nomClasse = document.querySelector(".dateInscription")
-                    nomClasse.style.border = "solid 1px red"
+                const nomClasse = document.querySelector(".dateInscription")
+                nomClasse.style.border = "solid 1px red"
 
             } 
             
-            /*else*/ if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false ){
+            if( !parseInt(montantPaye) || regexScolarite.test( parseInt(montantPaye)) === false ){
 
-                    console.log("bienvenue dans la condition regexScolarite")
-
-                    setalerteForm(true)
-
-                    console.log( regexScolarite.test( parseInt(montantPaye) )  )
-        
-                    const nomClasse = document.querySelector(".montantPaye")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".montantPaye")
+                nomClasse.style.border = "solid 1px red"
 
             }  
             
-            /*else*/ if( !nomParent1 || regexNomPrenom.test( nomParent1 ) === false ){
+            if( !nomParent1 || regexNomPrenom.test( nomParent1 ) === false ){
 
-                    console.log("bienvenue dans la condition nomParent1")
-
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test(nomParent1)  )
-        
-                    const nomClasse = document.querySelector(".nomParent1")
-                    nomClasse.style.border = "solid 1px red"
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".nomParent1")
+                nomClasse.style.border = "solid 1px red"
 
             }
             
-            /*else*/if( !parseInt(contactParent1 ) || reagexTel.test( parseInt(contactParent1 )) === false ){
+            if( !parseInt(contactParent1 ) || reagexTel.test( parseInt(contactParent1 )) === false ){
 
-                    console.log("bienvenue dans la condition contactParent1 ")
+                setalerteForm(true)
+                const nomClasse = document.querySelector(".contactParent1 ")
+                nomClasse.style.border = "solid 1px red"
+
+            }  
+            
+            if( nomParent2  ){
+
+                if( regexNomPrenom.test( nomParent2 ) === false){
 
                     setalerteForm(true)
+                    const nomClasse = document.querySelector(".nomParent2")
+                    nomClasse.style.border = "solid 1px red"
 
-                    console.log( regexScolarite.test( parseInt(contactParent1 ) )  )
-        
+                }
+
+            }
+            
+            if( parseInt(contactParent2 ) ){
+
+                if( reagexTel.test( parseInt(contactParent2 )) === false ){
+
+                    setalerteForm(true)
                     const nomClasse = document.querySelector(".contactParent1 ")
                     nomClasse.style.border = "solid 1px red"
 
-            }  
-            
-            /*else*/ if( nomParent2  ){
-
-                    if( regexNomPrenom.test( nomParent2 ) === false){
-
-                        console.log("bienvenue dans la condition nomParent1")
-
-                    setalerteForm(true)
-
-                    console.log( regexNomPrenom.test(nomParent1)  )
-        
-                   const nomClasse = document.querySelector(".nomParent2")
-                   nomClasse.style.border = "solid 1px red"
-
-                    }
-
-                    
-
-            }
-            
-            /*else*/ if( parseInt(contactParent2 ) ){
-
-                    if( reagexTel.test( parseInt(contactParent2 )) === false ){
-
-                        console.log("bienvenue dans la condition contactParent1 ")
-
-                        setalerteForm(true)
-        
-                        console.log( regexScolarite.test( parseInt(contactParent1 ) )  )
-            
-                        const nomClasse = document.querySelector(".contactParent1 ")
-                        nomClasse.style.border = "solid 1px red"
-
-                    }
-
-                    
+                }
 
             }
             
@@ -637,16 +463,10 @@ const alerteInitiale = () => {
 
                 elevesServices.createEleve({...inputRadio, ...valInput, ...valDateDecouverte, ...valDate, ...valSection, ...valClasse, ...valInputParent})
                 .then( res => {
-                    console.log("données du formulaire envoyées")
-                    console.log(res)
-                // navigate("/admin/classes" ) 
-             
-                confirmationEleveCreate() 
+                   
+                    confirmationEleveCreate() 
 
-               // lockAddEleveWindow()
-               
                 })
-                //.catch( err => console.log(err))
                 .catch( err => {
 
                     setclassExist(`Vous ne pouvez pas créer l'élève ${nom} car il existe déjà` )
@@ -656,19 +476,10 @@ const alerteInitiale = () => {
                 
                 })
 
-               
-               
-
             }
 
-       
-                                                                   
-        
-        
+     
     }
-
-    
-
 
     return (
 

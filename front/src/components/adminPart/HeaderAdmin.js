@@ -14,24 +14,6 @@ const HeaderAdmin = () => {
    const { listePositionPageContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow, confirmationEleveCreate, eleveCreate,listeClassesContext } = useContext(AddEleveContext)
     /////////////////////////////
 
-   // const openWindowAddEleveContext = useContext(AddEleveContext)
-
-
-    /*
-   let [ addEleveWindow, setAddEleveWindow ] = useState(false)
-
-   const openAddEleveWindow  = () => {
-
-    setAddEleveWindow(true)
-
-    }
-    const lockAddEleveWindow  = () => {
-
-        setAddEleveWindow(false)
-
-    }
-    */
-
     //let navigate = useNavigate();
 
     const logout = () => {
@@ -40,24 +22,13 @@ const HeaderAdmin = () => {
     }
 
     ////////////////////////////////////////
-    //gestion des position de la page
-
-    /*
-    useEffect( () => {
-
-
-
-    }, [])
-    */
-
-    console.log("****** listePositionPageContext")
-    console.log(listePositionPageContext)
-
+   
     let listeAcceuil = listePositionPageContext[0]
     let listeEleve = listePositionPageContext[1]
     let listePersonnel = listePositionPageContext[2]
     let listeCharge = listePositionPageContext[3]
     let listeEntrees = listePositionPageContext[4]
+    
     
     //gestion de la barre Acceuil
     const acceuilPosition = () => {
@@ -135,11 +106,7 @@ const HeaderAdmin = () => {
        // const lockColorEntrees = listeEntrees.lockpositionEntreesContext()
 
     }
-
-
-
-
-
+    
     //////////////////////////////////////////::
     
     return (

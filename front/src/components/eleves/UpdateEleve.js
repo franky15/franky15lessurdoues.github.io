@@ -1,45 +1,21 @@
 import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { elevesServices } from '../../_services/Eleves.services';
-
-
 import { AddEleveContext } from '../../_utils/ContextAddEleve';
-
-
 
 const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClasse, eleveId } ) => { 
 
     //récupération du params
     const {id} = useParams()
-    console.log("**** idEleve params est : ****")
-    console.log(id)
-
-    console.log("****  eleveId est : ****")
-    console.log( eleveId)
-    //////////////////////:
 
     const { listeClassesContext, listeElevesContext, openAddEleveWindow ,lockAddEleveWindow, addEleveWindow } = useContext(AddEleveContext)
 
-   console.log("listeClassesContext")
-   console.log(listeClassesContext)
-
-   console.log("addEleveWindow")
-   console.log(addEleveWindow)
-
-   
-
    let idEleve = eleveId.idEleve
-
-   console.log("idEleve est : " + idEleve)
 
    let [ eleveIdentifiant, setEleveId ] = useState({ idEleve: idEleve})
    
    let eleveCurrent = listeElevesContext.find( eleve => eleve.id === idEleve)
    
-   console.log("eleveCurrent")
-   console.log(eleveCurrent)
-
    //converstion de l'idSection de chiffre à lettre 
    let sectionAnglophone = "anglophone"
    let sectionFrancophone = "francophone"
@@ -54,15 +30,6 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
        sectionNumber1 = sectionFrancophone
 
    } 
-
-   console.log("sectionNumber1 est : " + sectionNumber1 )
-    /////////////////////////
-
-    //const listeClassesContext = useContext(AddEleveContext)
-    //console.log("listeClassesContext")
-   //console.log(listeClassesContext)
-
-    //let navigate = useNavigate()
 
     // gestion du state de l'input radio
     let [ inputRadio, setInputRadio ] = useState({
@@ -130,8 +97,6 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
     })
 
 
-    
-
     //gestion du state section 
     let [ valSection, setValSection ] = useState({
 
@@ -167,15 +132,10 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
       
 
     }
-   //console.log("******* inputRadio est : ")
-   //console.log(inputRadio)
-
+   
     //fonction du textarea decouverte
     const textareaInput = (e) => {  //textareaAncien
 
-        //lockTextareaAncien()
-
-        
         setValTextarea({
 
             ...valTextarea,
@@ -183,15 +143,11 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
             //decouverte: e.target.value
         })
       
-
     }
 
      //fonction du textarea monatnt
     const textareaInputDate = (e) => {  //textareaAncien
 
-        //lockTextareaAncien()
-
-        
         setValTextarea({
 
             ...valTextarea,
@@ -212,10 +168,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
       
 
     }
-    console.log("******* valTextarea est : ")
-    console.log(valTextarea)
-    
-
+   
     //fonction des noms et prénoms
     const nomPrenomInput = (e) => {
 
@@ -227,9 +180,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
       
        
     }
-   //console.log("******* valInput nom prenom est : ")
-    //console.log(valInput)
-
+  
     //fonction de la date de naissance
     const dateInput = (e) => {
 
@@ -242,9 +193,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
       
 
     }
-    console.log("******* ValDate est : ********")
-    console.log( (valDate.dateNaissance).slice(0,10).replace(""))
-
+   
     //fonction de la section
     const sectionInput = (e) => {
 
@@ -259,9 +208,6 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
          
     }
 
-    //console.log("******* ValSection est : ")
-    //console.log(valSection.section_id)
-   
     //fonction de la classe
     const classeInput = (e) => {
 
@@ -274,9 +220,7 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
         })
 
     }
-    //console.log("******* ValSection est : ")
-    //console.log(valClasse)
-
+   
     //fonction du parent
     const parentInput = (e) => {
 
@@ -289,25 +233,17 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
 
         })
     }
-    console.log("******* valInputParent est : ")
-    console.log(valInputParent)
-
-    console.log({ ...eleveIdentifiant, ...inputRadio, ...valTextarea, ...valInput, ...valDate, ...valSection, ...valClasse, ...valInputParent})
-    
-
+   
         ///////////////////////////////////////////////:::: 
 
-        let [ eleveCreate, setEleveCreate ] = useState(false) //false
-        //let [ hidenEleveCreate, setHidenEleveCreate ] = useState(true)
-     
-         //confirmation de la mise à jour
-        let confirmationEleveCreate = () => {
+    let [ eleveCreate, setEleveCreate ] = useState(false) //false
+  
+    //confirmation de la mise à jour
+    let confirmationEleveCreate = () => {
      
         
          setEleveCreate(true)
-        // setHidenEleveCreate(false)
         
-     
          //cacher la confirmation après 3000 millisecondes
          setTimeout( () => {
      
@@ -320,35 +256,22 @@ const UpdateEleve = ( { showWindowEleveUpdate, setshowWindowEleveUpdate,  idClas
         
      
      }
-     
-      ///////////////////////////////////////////////:::: 
-
-      
+    
     const submit = () => {
-
-        
-        //e.preventDefault()
-
-        
-        console.log("bienvenue au submit test de createEleve")
 
         //elevesServices.updateEleve({...inputRadio, ...valInput, ...valTextarea, ...valDate, ...valSection, ...valClasse, ...valInputParent})
         elevesServices.updateEleve({ ...eleveIdentifiant, ...inputRadio, ...valTextarea, ...valInput, ...valDate, ...valSection, ...valClasse, ...valInputParent})
-            .then( res => {
-                console.log("données du formulaire envoyées")
-                console.log(res)
-               // navigate("/admin/classes" ) 
-               ////////////////////////////
-               confirmationEleveCreate()
-               ////////////////////////////
-            })
-            .catch( err => console.log(err))
+        .then( res => {
+            
+            // navigate("/admin/classes" ) 
+            ////////////////////////////
+            confirmationEleveCreate()
+        
+        })
+        .catch( err => console.log(err))
         
         
     }
-
-
-
 
     return (
 

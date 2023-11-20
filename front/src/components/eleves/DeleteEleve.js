@@ -1,30 +1,15 @@
 import React,{useState} from 'react';
-
-//import { elevesServices } from '@/_services/Eleves.services'; 
 import { elevesServices } from '../../_services/Eleves.services';
-
 import { useNavigate } from 'react-router-dom';
 
 const DeleteEleve = ({ lockwindowDeleteClasse, openwindowDeleteClasse, listeElevesContext, eleveId }) => {
     
     let [ hidenUpdate, setHidenUpdate ] = useState(false)
     let [ classeUpdate1, setClasseUpdate1 ] = useState(true)
-
-    
-
     let navigate = useNavigate()
 
-    console.log("*******bienvenu au deleteEleve component *****")
-
-    console.log("eleveId est : ")
-    console.log( eleveId)
-
-    console.log("listeElevesContext")
-    console.log(listeElevesContext)
-    
-
     //confirmation de la mise à jour
-   let confirmation1 = () => {
+    let confirmation1 = () => {
 
         setHidenUpdate(true)
         setClasseUpdate1(false)
@@ -39,21 +24,13 @@ const DeleteEleve = ({ lockwindowDeleteClasse, openwindowDeleteClasse, listeElev
             window.location.reload();
             
         }, 3000)
-   
-   
-
+    
     }
 
     const deleteEleveClasse = () => {
 
-        console.log("****** bienvenu à la fonction deleteEleve de delete ******* ")
-
         const eleve = listeElevesContext.find( element => element.id = eleveId.idEleve)
        
-        console.log(" la classe de delete assynchrone ")
-        console.log(eleveId)
-        console.log(eleve)
-
         elevesServices.deleteEleve (eleveId.idEleve) 
             .then( res => {
 
@@ -61,7 +38,6 @@ const DeleteEleve = ({ lockwindowDeleteClasse, openwindowDeleteClasse, listeElev
             
             } )
             .catch((error) => console.log(error))
-
     }
     
     return (

@@ -5,14 +5,11 @@ import SectionFrancophone from '../../../components/classes/SectionFrancophone';
 import SectionSearch from '../../../components/classes/SectionSearch';
 
 import AddClasses from '../../../components/classes/AddClasses';
-//import AddClasse from './AddClasse';
-
 
 import SectionUpdate from '../../../components/classes/SectionUpdate'; 
 
 
 import DeleteClasses from '../../../components/classes/DeleteClasses';
-//import DeleteOneClasse from './DeleteOneClasse'; 
 
 import { AddEleveContext } from '../../../_utils/ContextAddEleve';
 
@@ -23,25 +20,6 @@ const GetAllClasses = () => {
     let [ eleveValue, seteleveValue ] = useState(" ")
     /////////////////////////////////////////////////////
     let  { listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
-
-    console.log("**** listePositionPageContext")
-    console.log(listePositionPageContext)
-
-    //const  openpositionPersonnelContext = listePositionPageContext[2].openpositionPersonnelContext()
-
-    //openpositionPersonnelContext()
-
-    
-
-   console.log("*****listeElevesContext dans le composant getAll classes***")
-   console.log(listeElevesContext)
-
-   console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
-   console.log(listeElevesContext)
-
-    console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
-    console.log(listeClassesContext)
-
 
      /////////////////////////////////////////////////////
     
@@ -100,15 +78,6 @@ const GetAllClasses = () => {
     let lockwindowDeleteClasse = () => setWindowDeleteClasse(false); 
     let openwindowDeleteClasse = () => setWindowDeleteClasse(true); 
 
-    //gestion de l'affichage d'ajout d'élèves
-    /*
-    let [ showAddEleve, setShowAddEleve ] = useState(false)
-
-    let openShowAddEleve = () => setShowAddEleve(true)
-    let lockShowAddEleve = () => setShowAddEleve(false)
-    */
-
-
     //gestion du dataset
     let [ classeId, setClasseId] = useState("")
 
@@ -159,13 +128,6 @@ const GetAllClasses = () => {
 
     }, [])
 
-    
-    
-
-    //const anglophoneRef = useRef(null);
-    //const francophoneRef = useRef(null);
-
-    
     const btnSectionAn = (classes) => {
 
        lockFr()
@@ -227,15 +189,9 @@ const GetAllClasses = () => {
       
        let value = e.target.value;
        value.length > 0 && setValeurInput( value  )
-
-       console.log("mon  value : " +  e.target.value)
        
     }
-    console.log("valeurInput")
-    console.log(valeurInput)
-   
     
-
     //récupération de la id de la classe
     const classeIdRef = useRef(null);
     //const classeIdRefs = useRef([]); ref={ (element) => classeIdRefs.current.push(element) }
@@ -249,9 +205,6 @@ const GetAllClasses = () => {
         setClasseId(id)
         openwindowDeleteClasse()
         
-        
-        console.log("bienvenue openwindowDelete")
-       // console.log("idClasse current est : " + idClasse)
     }
    
 
@@ -276,24 +229,9 @@ const GetAllClasses = () => {
    useEffect( () => {
 
         const idClasse = document.querySelector(".effectifId")
-        console.log("******* idClasse")
-       // console.log(idClasse.id)
-      /* let ElevesArray = [...listeElevesContext]
-      //let eleve = ElevesArray.find(element => element.id === idClasse)
-      if(eleve){
-
-      // console.log("******** eleve")
-      // console.log(eleve.enseignant)
-      seteleveValue(eleve.enseignant)
-      }*/
-
-
+      
    }, [listeElevesContext])
       
-   console.log("eleveValue") 
-   console.log(eleveValue) 
-      
-    
    let tableEffectifClasse = []
 
    //////////////////////////////////
@@ -397,7 +335,7 @@ const GetAllClasses = () => {
                          
                       <p className='nomEffectif'  > { element.nom } </p>
 
-                      <p className='nomEffectif effectifId' id={`${ element.id}`} > { element.effectif } </p>
+                      <p className='nomEffectif effectifId' id={`${ element.id}`} > { element.effectif ?? 0  } </p>
                       
                       <p className='enseignant'   >{element.enseignant } </p>
                       <p className='section'  > {  section(element.section_id) } </p>

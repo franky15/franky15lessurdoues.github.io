@@ -39,7 +39,7 @@ const GetClassesIframe = () => {
             /////////////////////////////////////fonctionne sans le if on l'a juste ajouté pour éviter d'avoir deux usEffect
             classesServices.getAllClasses()
                 .then( res => {
-                    console.log(res.data)
+                    
                     setClasse(res.data)
                 })
                 .catch(err => console.log(err))

@@ -1,42 +1,18 @@
-import React, {  useRef,useState, useContext } from 'react';
-//import { Link, useNavigate } from 'react-router-dom'; // useNavigate permet de parametrer un lien vers lequel on sera redirigé 
+import React, {  useRef,useState } from 'react';
 import { useEffect } from 'react';
 
 //import { classesServices } from '@/_services/Classes.services';
 import { classesServices } from '../../_services/Classes.services';
 
 import { useNavigate } from 'react-router-dom';
-import { GetAllClassesEleves } from '../../components/eleves';
-import { AddEleveContext } from '../../_utils/ContextAddEleve';
-
-
 
 const Dashboard = ( ) => {
-
-    let  { listeutilisateurContext, listeElevesContext, listeClassesContext , listePositionPageContext}  = useContext(AddEleveContext)
-    
-    let openpositionAcceuilContext = listePositionPageContext[0].openpositionAcceuilContext()
-    
-     
-
-    console.log("**** listeutilisateurContext  dans getallpersonnels")
-    console.log(listeutilisateurContext)
-
-
-    console.log("**** openpositionAcceuilContext  dans getallpersonnels")
-    console.log(openpositionAcceuilContext)
-    console.log("*** Bienvenue dans le dashboard ***")
 
     let navigate = useNavigate()
 
     let [ classe, setClasse ] = useState([])
 
     const flag = useRef(false)
-
-    //const contextValue = useContext(myContext);
-   // console.log("context value" + contextValue)
-
-   let idUtilisateur 
 
    useEffect( () => {
 
@@ -45,15 +21,9 @@ const Dashboard = ( ) => {
         classesServices.getAllClasses()
             .then( res => {
 
-                console.log(res.data)//////
-
                 setClasse(res.data)
             })
             .catch(err => console.log(err))
-
-           
-
-            
 
     }
     return () => flag.current = true
@@ -68,8 +38,6 @@ const Dashboard = ( ) => {
     ///////////////////////////////////////////////////////////////////
     const getElevesOneClasse = (idClasse) => {
 
-        console.log("idClasse est : " + idClasse)
-        
         navigate(`/admin/eleves/getallclasseseleve/${idClasse}`)
         //navigate(`/admin/eleves/getallclasseseleve/${idClasse}`)
 
@@ -79,8 +47,6 @@ const Dashboard = ( ) => {
     return (
         <div className='dashboardContainer'>
 
-            
-            
             <p className='dashboardContainer__utilisateur'> Bienvenue votre espace CARRERA</p>
             <div className='dashboardContainer__bar'></div>
             

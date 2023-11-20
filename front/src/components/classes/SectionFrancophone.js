@@ -6,21 +6,6 @@ import DeleteClasses from './DeleteClasses';
 
 const SectionFrancophone = ({classes}) => {
 
-
-    console.log("**** bienvenue au composant sectionFrancophone ****")
-      /////////////////////////////////////////////////////
-    
-
-   
-   
-
-    
-
-     /////////////////////////////////////////////////////
-    
-    //gestion du state de toutes les classes
-    //let [ classes, setclasses ] = useState([])
-
     //gestion du state des quantité de classes Anglophone
     let [ classesFilterAnglo, setClassesFilterAnglo ] = useState([])
 
@@ -85,8 +70,7 @@ const SectionFrancophone = ({classes}) => {
     let [ sectionFilterFrancophone, setSectionFilterFrancophone ] = useState([])
 
     useEffect( () => {
-        console.log( " clique sur la section Francophone " )
-
+      
         //filtre des sections
         let tableFrancophone = listeclasses.filter( element => element.section_id === 2)
         setSectionFilterFrancophone(tableFrancophone)
@@ -148,9 +132,6 @@ const SectionFrancophone = ({classes}) => {
          setClasseId(id)
          openwindowDeleteClasse()
          
-         
-         console.log("bienvenue openwindowDelete")
-        // console.log("idClasse current est : " + idClasse)
      }
     
  
@@ -160,34 +141,6 @@ const SectionFrancophone = ({classes}) => {
          openwindowUpdateClasse()
      }
  
-     /*
-     //////////////////////////////////////////////////
-
-     let [ sectionValeur, setSectionValeur ] = useState(true)
-     let [ tableClasses, setTableClasses ] = useState([])
-     let tableSection
-
-     if(sectionValeur ){
-
-        console.log("sectionValeur est  pour l'anglophone: " + sectionValeur)
-
-        tableSection= listeclasses.filter( element => element.section_id === 2)
-        setTableClasses(tableSection)
-     
-    }else if(sectionValeur !== 1){
-        
-        setSectionValeur(false)
-
-        tableSection = listeclasses.filter( element => element.section_id === 2)
-        setTableClasses(tableSection)
-
-        console.log("sectionValeur est  pour Francophone: " + sectionValeur)
-     }
-
-     console.log("sectionValeur est  pour Francophone: " + sectionValeur)
-     ///////////////////////////////////////////////////
- */
-
     return (
        
         <div>
@@ -197,11 +150,14 @@ const SectionFrancophone = ({classes}) => {
                 { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
                 
                 {sectionFilterFrancophone.map((element, index) => (  
-                                    
-                <div className='valeurs' key={`index-${element.nom}`}>
+                       
+                <>
+                <hr></hr>
+
+                <div className='valeurs effectifClass' key={`index-${element.nom}`}>
                         
                     <p className='nomEffectif'> { element.nom } </p>
-                    <p className='nomEffectif'> { element.effectif } </p>
+                    <p className='nomEffectif'> { element.effectif ?? 0 } </p>
                     <p className='enseignant'>{element.enseignant } </p>
                     <p className='section'> {  section(element.section_id) } </p>
                                 
@@ -219,45 +175,13 @@ const SectionFrancophone = ({classes}) => {
                         </div>
                     </div>
                         
-                </div> ) ) }
+                </div>
+                </>
+                
+                ) ) }
             
         </div>
    );
 };
 
 export default SectionFrancophone;
-
-/*
- <div>
-                { windowUpdateClasse && < SectionUpdate classes = { classes}  windowAddClasse = { windowAddClasse} lockWindowAddClasse  = { lockWindowAddClasse }
-                lockwindowUpdateClasse = {lockwindowUpdateClasse} openwindowUpdateClasse = { openwindowUpdateClasse } idclasse = {classeId} /> }
-               
-                { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
-                
-                {sectionFilterFrancophone.map((element, index) => (  
-                                    
-                <div className='valeurs' key={`index-${element.nom}`}>
-                        
-                    <p className='nomEffectif'> { element.nom } </p>
-                    <p className='nomEffectif'> { element.effectif } </p>
-                    <p className='enseignant'>{element.enseignant } </p>
-                    <p className='section'> {  section(element.section_id) } </p>
-                                
-                    <div className='actionValeurs'>
-
-                        <div className='actionValeurs__element' >
-                            <i className="fa-solid fa-pen-to-square icons" title='Modifier la classe'  data-id= "idDonnee" onClick={ () => openwindowUpdate(element.id)  }></i>
-                        </div>
-
-                        <div className='actionValeurs__element'>
-                            <i className="fa-solid fa-x  icons"  title='Supprimer la classe'  data-id={element.id} id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
-                        </div>
-                        <div className='actionValeurs__element  icons'>
-                            <i className="fa-solid fa-circle-info" title='Afficher plus de détails' id= {element.id} onClick={ () => openwindowDelete(element.id)  } ></i>
-                        </div>
-                    </div>
-                        
-                </div> ) ) }
-            
-        </div>
-*/

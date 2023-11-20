@@ -14,10 +14,6 @@ export const AddEleveContext = createContext({})
 
 export const ContextAddEleveProvider = ({ children }) => {
 
-    //console.log("***** Bienvenue dans le ContextAddEleve ******")
-
-    
-
     let [ listeClassesContext, setListeClassesContext ] = useState([])
 
     let [ listeElevesContext, setListeElevesContext ] = useState([])
@@ -61,21 +57,12 @@ export const ContextAddEleveProvider = ({ children }) => {
         {positionEntreesContext, openpositionEntreesContext, lockpositionEntreesContext}
     ]
 
-    ///////////////////////
-
-    /*****************************/
-     
     // Vérifiez l'URL actuelle
     const currentURL = window.location.href; 
 
     // Vérifiez si l'URL contient le chemin spécifique
     const shouldExecute = !currentURL.includes("/auth/login");  //"http://localhost:3001/auth/login"
 
-
-    /*****************************/
-     
-
-   
     let [ section, setSection ] = useState([]) 
 
     let flag = useRef(false)
@@ -129,9 +116,6 @@ export const ContextAddEleveProvider = ({ children }) => {
 
                     setListePersonnelContext(res.data)
 
-                    console.log("***** liste personnel du contexte ")
-                    console.log( res.data)
-                    
                 })
                 .catch(err => console.log(err))
 

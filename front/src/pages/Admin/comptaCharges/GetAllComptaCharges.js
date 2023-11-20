@@ -11,34 +11,12 @@ const GetAllComptaCharges = () => {
 
     let openpositionChargesContext = listePositionPageContext[3].openpositionChargesContext()
     
-    console.log("**** openpositionChargesContext  dans getallpersonnels")
-    console.log(openpositionChargesContext )
-
-
-    console.log("***** listeElevesContext dans le composant getAllComptaCharges  ***")
-   console.log(listeElevesContext)
-
-    console.log("*****listeClassesContext dans le composant getAllComptaCharges   ***")
-    console.log(listeClassesContext)
-
-    console.log("*****listePaiementContext dans le composant getAllComptaCharges   ***")
-    console.log(listePaiementContext)
-
-    console.log("*****listeChargesContext dans le composant getAllComptaCharges  ***")
-    console.log(listeChargesContext)
-
-    console.log("***** listePersonnelContext dans le composant getAllComptaCharges  ***")
-    console.log( listePersonnelContext)
-
     //gestion du state de l'affichage de la fenêtre de creation
     let [ createOpen, setcreateOpen ] = useState(false)
 
     const lockCreateOpen = () => {setcreateOpen (false)}
     const openCreateOpen = () => { setcreateOpen (true) }
                                    
-                                   
-                                
-
     let [ idChargeCurrent, setidChargeCurrent ] = useState({})
 
     //gestion de l'affichage de la creation du paiement
@@ -69,8 +47,8 @@ const GetAllComptaCharges = () => {
 
    let [ isOpen, setisOpen ] = useState(false) // true
 
-     //fonction d'affichage du detail de l'élève de l'élève iconEleveDetailDown
-     const iconEleveDetailUp = ( idCharge) => {
+    //fonction d'affichage du detail de l'élève de l'élève iconEleveDetailDown
+    const iconEleveDetailUp = ( idCharge) => {
 
         
        //gestde l'affichage du detail
@@ -83,140 +61,89 @@ const GetAllComptaCharges = () => {
        const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
        arrowUp.style.display = "block"
   
+       setidChargeCurrent({
+
+            ...idChargeCurrent,
+            idCharge
+       })
+          
   
-         /////////////////
-          //console.log("vous avez cliqué sur le detail de l'élève")
-          console.log( idCharge)
-  
-          setidChargeCurrent({
+    }
+
+    //fonction d'affichage du detail du personnel 
+    const iconEleveDetailDown = (idCharge) => {
+
+        
+        //gestde l'affichage du detail
+        const detail = document.querySelector(`.detail${idCharge}`)
+        detail.style.display = "none"
+
+        const arrowDow = document.querySelector(`.arrowDow${idCharge}`)
+        arrowDow.style.display = "block"
+
+        const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
+        arrowUp.style.display = "none"
+
+        setidChargeCurrent({
 
             ...idChargeCurrent,
             idCharge
         })
-          
-  
-     }
 
-     //fonction d'affichage du detail du personnel 
-   const iconEleveDetailDown = (idCharge) => {
+    }
 
-        
-     //gestde l'affichage du detail
-     const detail = document.querySelector(`.detail${idCharge}`)
-     detail.style.display = "none"
 
-     const arrowDow = document.querySelector(`.arrowDow${idCharge}`)
-     arrowDow.style.display = "block"
-
-     const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
-     arrowUp.style.display = "none"
-
-    
-    //console.log("vous avez cliqué sur le detail de l'élève")
-    console.log( idCharge)
-    
-    setidChargeCurrent({
-
-        ...idChargeCurrent,
-        idCharge
-    })
-
-}
-
-//console.log("**** idChargeCurrent " )
-//console.log( idChargeCurrent)
-
-   
 let paiementCurrent = listeChargesContext.filter( (paiement) => paiement.personnels_id === idChargeCurrent.idCharge)  //eleve.id
 
-//console.log("***** paiementCurrent")
-// console.log(paiementCurrent)
 
+let dernierElementPaiementCurrent = paiementCurrent[paiementCurrent.length - 1]
 
- let dernierElementPaiementCurrent = paiementCurrent[paiementCurrent.length - 1]
+///////////////////////////////////////:
+//récupération de tous les montants payé
+const listeMontantPaye =  listeChargesContext.map( element => element.montantPaye)
 
-// console.log("***** dernierElementPaiementCurrent")
-// console.log(dernierElementPaiementCurrent)
+//calcul du chifffre d'affaire
+const mergeChargeTotale = listeMontantPaye.reduce( (acc, current) => {
 
- ///////////////////////////////////////:
-    //récupération de tous les montants payé
-    const listeMontantPaye =  listeChargesContext.map( element => element.montantPaye)
+    return acc + current
 
-   // console.log("***** listeMontantPaye")
-   // console.log(listeMontantPaye)
+}, 0 )
 
+//récupération de tous les montants payé
+const listeMontantPayeEntree = listePaiementContext.map( element => element.montantPaye)
 
-    //calcul du chifffre d'affaire
-    const mergeChargeTotale = listeMontantPaye.reduce( (acc, current) => {
+//calcul du chifffre d'affaire
+const mergeChiffreAffaire =  listeMontantPayeEntree.reduce( (acc, current) => {
 
-       // console.log("***** acc.montantPaye += current.montantPaye")
-       // console.log(acc + current)
+    return acc + current
 
-        return acc + current
+}, 0 )
 
-    }, 0 )
-
-   // console.log("****** mergeChargeTotale  dans charges")
-   // console.log(mergeChargeTotale )
-
-     //récupération de tous les montants payé
-     const listeMontantPayeEntree = listePaiementContext.map( element => element.montantPaye)
-
-    // console.log("***** listeMontantPaye")
-    // console.log(listeMontantPaye)
- 
-    //calcul du chifffre d'affaire
-    const mergeChiffreAffaire =  listeMontantPayeEntree.reduce( (acc, current) => {
-
-       // console.log("***** acc.montantPaye += current.montantPaye")
-       // console.log(acc + current)
-
-        return acc + current
-
-    }, 0 )
+//calcul du benefice
+const benefice = mergeChiffreAffaire - mergeChargeTotale
   
-    //calcul du benefice
-    const benefice = mergeChiffreAffaire - mergeChargeTotale
-     //récupération des entrées totales par catégorie
-      
-     
+//récupération des clés ou noms des proprietés de chaque objet du tableau 
+let listeClesPaiement = Object.keys(listePaiementContext)
 
-    
-     //récupération des clés ou noms des proprietés de chaque objet du tableau 
-     let listeClesPaiement = Object.keys(listePaiementContext)
+ 
+let [ valeurInput, setvaleurInput ] = useState({})
 
-     
-    // console.log("******listeClesPaiement")
-    // console.log(listeClesPaiement)
-
-     
-    
-  //  console.log("listePersonnelContext[0].datePaiement")
-   // console.log(listePersonnelContext[0])
- ///////////////////////////////////////:
-
-
-
- ////////////////////////////////////////////
-
- let [ valeurInput, setvaleurInput ] = useState({})
-
- let [ valeurInputDate, setvaleurInputDate ] = useState({
+let [ valeurInputDate, setvaleurInputDate ] = useState({
 
                                                         dateDebut: "",
                                                         dateFin: ""                             
     
                                                         })
 
- let [  isOpenbodyDataNormal, setisOpenbodyDataNormal ] = useState(true)
+let [  isOpenbodyDataNormal, setisOpenbodyDataNormal ] = useState(true)
 
- let lockOpenbodyDataNormal = () => { setisOpenbodyDataNormal(false)} 
- let openOpenbodyDataNormal= () => { setisOpenbodyDataNormal(true)} 
+let lockOpenbodyDataNormal = () => { setisOpenbodyDataNormal(false)} 
+let openOpenbodyDataNormal= () => { setisOpenbodyDataNormal(true)} 
 
- let [ isOpenSearch, setisOpenSearch ] = useState(false)
+let [ isOpenSearch, setisOpenSearch ] = useState(false)
 
- let lockSearch = () => { setisOpenSearch(false)} 
- let openSearch = () => { setisOpenSearch(true)} 
+let lockSearch = () => { setisOpenSearch(false)} 
+let openSearch = () => { setisOpenSearch(true)} 
 
 //gestion de la couleur du bouton filtre
 let [ isopenColor, setisopenColor  ] = useState(false)
@@ -264,16 +191,7 @@ let [ filtrebtn, setfiltrebtn ] = useState({})
 //récupération de l'entrée de l'input et mise à jor du state
 const onchange = (e) => {
 
-    
-    console.log("***** bienvenue dans onchange " )
-
-    console.log("mon  value : " +  e.target.value)
-
-    
-
     if( e.target.name === "dateDebut" || e.target.name === "dateFin" ){
-
-        console.log("****** bienvenue à la condition date") 
 
         for( let i=0; i<= tableDate.length; i++){
 
@@ -291,12 +209,7 @@ const onchange = (e) => {
 
         }
 
-        console.log("******  valeurInputDate") 
-        console.log( valeurInputDate) 
-       
     }else if(e.target.name === "recherche"){
-
-        console.log("***** bienvenue à la condition recherche" )
 
         let value = [ e.target.name]
         value = e.target.value;
@@ -305,53 +218,20 @@ const onchange = (e) => {
         setfiltrebtn({})
         formSubmit.reset()
 
-       // setvaleurInput({})
+        // setvaleurInput({})
 
         setvaleurInput({value})
 
-        console.log("mon  value : " +  e.target.value)
-    
     }else if(e.target.value === "salaire" || e.target.value === "autreCharge" || e.target.value === "electricite"   ){
 
-        console.log("***** bienvenue dans onchange  bouton filtre" )
-
-        
-
         let value = e.target.name;
-         value = e.target.value;
+        value = e.target.value;
         
       
-        /*
-         setvaleurInput({})
-         setvaleurInputDate({})
-         formSubmit.reset()
-        
-         setfiltrebtn({value})
-    
-      
-         console.log("****** filtrebtn") 
-         console.log(filtrebtn)  
-
-         openisopenColor()
-         */
-
-         //////////////////////////////:::
-
-         if(e.target.value === "salaire"){
+        if(e.target.value === "salaire"){
 
             
-            /*
-            setvaleurInput({})
-            setvaleurInputDate({})
-            setfiltrebtn({})
-   
-            openOpenbodyDataNormal()
-            lockSearch()
-            */
-
-           ////////:
-
-           openisopenColor()
+            openisopenColor()
             
             lockisopenColor2()
             lockisopenColor3()
@@ -362,25 +242,7 @@ const onchange = (e) => {
             
             setfiltrebtn({value})
         
-        
-            console.log("****** filtrebtn") 
-            console.log(filtrebtn)  
-
-            //////////
-
         }else if(e.target.value === "autreCharge"){
-
-
-            /*
-            setvaleurInput({})
-            setvaleurInputDate({})
-            setfiltrebtn({})
-   
-            openOpenbodyDataNormal()
-            lockSearch()
-            */
-   
-            ////////:
 
 
             openisopenColor2()
@@ -396,26 +258,10 @@ const onchange = (e) => {
             setfiltrebtn({value})
             lockSearch()
         
-            console.log("****** filtrebtn") 
-            console.log(filtrebtn)  
-            
-            //////////
 
         }else if(e.target.value === "electricite" ){
 
-            
-          
-            /*
-            setvaleurInput({})
-            setvaleurInputDate({})
-            setfiltrebtn({})
-   
-            openOpenbodyDataNormal()
-            lockSearch()
-            */
-   
-            ////////:
-
+           
             openisopenColor3()
             
             lockisopenColor()
@@ -429,38 +275,13 @@ const onchange = (e) => {
             setfiltrebtn({value})
         
         
-            console.log("****** filtrebtn") 
-            console.log(filtrebtn)  
-            
-            //////////
-
         }
 
-
-
-         ///////////////////////////////////
 
     }
     
     
 }
-
-
-
-
-
-
-console.log("******  valeurInputDate") 
-console.log( valeurInputDate)  
-
-console.log("dateDebut "+ valeurInputDate.dateDebut) 
-console.log( "dateFin "+valeurInputDate.dateFin) 
-
-
-
-
-console.log("filtrebtn")
-console.log(filtrebtn)
 
 
 useEffect( () => {
@@ -488,35 +309,18 @@ useEffect( () => {
 
      if( valeurInput.value === "" ){
  
-        console.log("***** condition  valeurInputEntree.value")
-
         lockSearch()
         openOpenbodyDataNormal()
-        
-         
- 
- 
-     }
     
-
-
-
+    }
+    
 })
 
 
 
 const onchange2 = (e) => {
 
-    
-    console.log("***** bienvenue dans onchange " )
-
-    console.log("mon  value : " +  e.target.value)
-
-    
-
-  if(e.target.value === "salaire" || e.target.value === "autreCharge" || e.target.value === "electricite"   ){
-
-    console.log("***** bienvenue dans onchange  bouton filtre" )
+    if(e.target.value === "salaire" || e.target.value === "autreCharge" || e.target.value === "electricite"   ){
 
         if(e.target.value === "salaire"){
 
@@ -573,20 +377,11 @@ const onchange2 = (e) => {
            // formSubmit.reset()
 
         }
-       
-
-        
-    
-
+  
     }
-    
-    
+      
 }
 
-
-
- /////////////////////////////////////////
-    
 
     return (
         <div className='getAllEntreeContainer'>
@@ -653,16 +448,16 @@ const onchange2 = (e) => {
 
                     <form className='containerDateFiltre '>
 
-                        <di className='containerDateFiltre__btn '>
-                            <label for="dateDebut" className='date'> Date début</label>
+                        <div className='containerDateFiltre__btn '>
+                            <label htmlFor="dateDebut" className='date'> Date début</label>
                             <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDate.dateDebut  } onChange  ={  onchange } />
                             
-                        </di>
-                        <di className='containerDateFiltre__btn date'>
-                            <label for="dateFin" className='date'> Date de fin</label>
+                        </div>
+                        <div className='containerDateFiltre__btn date'>
+                            <label htmlFor="dateFin" className='date'> Date de fin</label>
                             <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre' value={ valeurInputDate.dateFin  }  onChange ={  onchange }/>
                             
-                        </di>
+                        </div>
 
                     </form>
 
@@ -673,7 +468,7 @@ const onchange2 = (e) => {
 
                      <form className='rechercheContainer'>
 
-                        <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
+                        <label htmlFor="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
                         <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Nom personnel, électricité, salaire, poste'
                             value={ valeurInput.value} onFocus={openFocus} onBlur={lockFocus}  onChange ={  onchange }/>
                 
@@ -707,9 +502,9 @@ const onchange2 = (e) => {
 
                        listeChargesContext.map( (charge, index) => 
                         
-                        <>
+                        <div key={ `${charge.nomPrenom}-${index}` }>
                             <hr></hr>
-                            <div className='valeurs' key={ charge.nomPrenom-`${index}` }>
+                            <div className='valeurs' >
 
                                 <div className='valeurs__container'>
 
@@ -757,7 +552,7 @@ const onchange2 = (e) => {
 
                             
                             
-                        </>
+                        </div>
                         
                                 
                         
@@ -787,26 +582,3 @@ const onchange2 = (e) => {
 };
 
 export default GetAllComptaCharges;
-
-//{  <span className='arrow'> <i className="fa-solid fa-angle-up"   ></i> </span>} 
-//{ < ComptaDetail/> }  
-
-/*
-  
-
-    { 
-        listeChargesContext.map( (charge, index) =>
-
-            <div className='detail__titre1 detailCharges__titre' key={ charge.categorie-`${index}` } >
-
-            {  <div className='detail__titre1--item valeur detailCharges__valeur'> pour quel mois ? { charge.electriciteMois }</div>}
-            {  <div className='detail__titre1--item valeur detailCharges__valeur'>  Nom et prénom :  { charge.nomPrenom }</div>}
-            {  <div className='detail__titre1--item valeur detailCharges__valeur'> poste :  {charge.poste }</div>}
-
-
-            </div>
-        
-        )
-
-    }
-*/

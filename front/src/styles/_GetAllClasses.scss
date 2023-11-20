@@ -16,6 +16,8 @@
     width: 60%;
     display: flex;
     justify-content: space-between;
+    margin-left: 30px;
+    margin-top: 50px;
    // border: solid;
 
     &__mini {
@@ -60,18 +62,20 @@
 
 .GetAllClassesContainerFiltre {
 
-    width: 40%;
+    width: 30%;
     height: 50px;
     margin-top: 15px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-  
+
+    margin-left: 30px;
    // border: solid;
 
     &__mini1 {
 
-        width: 65%;
+        // width: 65%; 
+        width: 62%;
         border-radius: 5px;
         background-color: #e5e5e5;
         border: solid 1px#c1c1c1;
@@ -97,19 +101,19 @@
 
                 
 
-               // border: solid yellow;
+                //border: solid yellow;
 
                 label {
 
-                    width: 20%;
+                    width: 10%;
                     height: 45px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                   // border: solid;
+                    //border: solid;
 
                     .fa-magnifying-glass{
-                        font-size: 40px;
+                        font-size: 28px; //40px;
                     }
                 }
                 
@@ -147,8 +151,9 @@
         border-radius: 5px;
         background-color: #e5e5e5;
         border: solid 1px#c1c1c1;
-       
         opacity: 0.8;
+
+        
         //border: solid red;
 
         &:hover{
@@ -175,6 +180,8 @@
 .GetAllClassesContainerTable__mini {
 
     
+    width: 97%;
+    margin: auto;
     .GetAllClassesContainerValeur__mini--valeur{
 
         margin-bottom: -20px;
@@ -183,7 +190,7 @@
         justify-content: space-between;
         font-weight: bolder;
         font-size: 18px;
-       // border: solid;
+        //border: solid;
     }
 
     .GetAllClassesContainerValeur2__mini--valeur {
@@ -195,8 +202,8 @@
 
             display: flex;
             justify-content: space-between;
-            //width: 90%;
-            //border: solid red;
+            // width: 90%;
+            //border: solid blue;
 
         }
         .actionValeurs{
@@ -215,6 +222,7 @@
     .nomEffectif {
 
         width: 17.5%;
+        
         //border: solid;
     }
     .enseignant {

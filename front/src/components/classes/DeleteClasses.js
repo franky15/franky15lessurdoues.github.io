@@ -10,11 +10,6 @@ const DeleteClasses = ( { classes, lockwindowDeleteClasse, idclasse } ) => {
 
     let navigate = useNavigate()
 
-    console.log("*******bienvenu au deleteClasses component *****")
-
-    console.log("idclasse est : " + idclasse)
-    
-
     //confirmation de la mise à jour
    let confirmation1 = () => {
 
@@ -38,14 +33,8 @@ const DeleteClasses = ( { classes, lockwindowDeleteClasse, idclasse } ) => {
 
     const deleteClasse = () => {
 
-        console.log("****** bienvenu à la fonction deleteClasse de delete ******* ")
-
         const classe = classes.find( element => element.id = idclasse )
-       
-        console.log(" la classe de delete assynchrone ")
-        console.log(classes)
-        console.log(classe)
-
+     
         classesServices.deleteClasse(idclasse) 
             .then( res => {
 

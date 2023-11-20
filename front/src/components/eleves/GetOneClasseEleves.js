@@ -12,23 +12,11 @@ import CreateEleve from "./CreateEleve"
 
 const GetOneClasseEleves = () => {
 
-    //console.log("***** Bienvenue dans le GetOneClasseEleves ******")
-
     //récupération du params
     const {id} = useParams()
     const idClasse = parseInt(id)
 
-    //console.log("l'id du params de la classse est "+ idClasse )
-
-    //const date = new Date();
-
     let  { listeElevesContext, listeClassesContext }  = useContext(AddEleveContext)
-
-   console.log("*****listeElevesContext dans le composant getOneClasseEleves***")
-   console.log(listeElevesContext)
-
-    console.log("*****listeClassesContext dans le composant getOneClasseEleves***")
-    console.log(listeClassesContext)
 
     //gestion du state d'affichage de la fenêtre de modification de l'élève
    let [ showWindowEleveUpdate, setshowWindowEleveUpdate ] = useState(false)
@@ -56,22 +44,9 @@ const GetOneClasseEleves = () => {
    //récupération de la liste des élèves d'une classe précise
     let listeEleves = listeElevesContext.filter( element => element.classes_id === idClasse  )
 
-    console.log("$$la liste listeEleves de la classse est $$" )
-    console.log(listeEleves )
-
     const ancienEleveTotal = listeEleves.filter( total => total.anciennete === "Oui")
 
-    console.log("$$la liste lancienEleveTotal de la classse est $$" )
-    console.log(ancienEleveTotal.length )
-
     const nouveauEleveTotal = listeEleves.filter( total => total.anciennete === "Non")
-
-    console.log("$$la liste nouveauEleveTotal  de la classse est $$" )
-    console.log(nouveauEleveTotal.length   )
-
-   
-
-   //////////////////////////////
 
     //gestion de la suppréssion
     let [ windowDeleteClasse, setWindowDeleteClasse ] = useState(false)
@@ -79,36 +54,25 @@ const GetOneClasseEleves = () => {
     let lockwindowDeleteClasse = () => setWindowDeleteClasse(false); 
     let openwindowDeleteClasse = () => setWindowDeleteClasse(true); 
 
-   //////////////////////////////
-
-   
     //fonction de la modification de l'élève
    const iconEleveUpdate = (idEleve) => {
 
         
 
-            setshowWindowEleveUpdate(true)
+        setshowWindowEleveUpdate(true)
 
-            setshowWindowEleveDelete(false)
-            setshowWindowEleveTransfert(false)
+        setshowWindowEleveDelete(false)
+        setshowWindowEleveTransfert(false)
 
-            setshowWindowEleveDetailUp(false)
-            setshowWindowEleveDetailDown(true)
+        setshowWindowEleveDetailUp(false)
+        setshowWindowEleveDetailDown(true)
 
-            //setshowWindowEleveDetailUp(true)
-            //setshowWindowEleveDetailDown(false)
+        setEleveId({
+            ...eleveId,
+            idEleve
 
-            //console.log("vous avez cliqué sur modifier")
-            //console.log(idEleve)
-
-            setEleveId({
-                ...eleveId,
-                idEleve
-
-            })
-        
-        
-
+        })
+    
    }
 
    //fonction de la suppresssion de l'élève
@@ -123,12 +87,6 @@ const GetOneClasseEleves = () => {
 
         setshowWindowEleveDetailUp(false)
         setshowWindowEleveDetailDown(true)
-
-        //setshowWindowEleveDetailUp(true)
-        //setshowWindowEleveDetailDown(false)
-
-        //console.log("vous avez cliqué sur supression")
-        //console.log(idEleve)
 
         setEleveId({
             ...eleveId,
@@ -147,12 +105,6 @@ const GetOneClasseEleves = () => {
         setshowWindowEleveUpdate(false)
         setshowWindowEleveDetailUp(false)
         setshowWindowEleveDetailDown(true)
-
-       // setshowWindowEleveDetailUp(true)
-       // setshowWindowEleveDetailDown(false)
-       
-        //console.log("vous avez cliqué sur transfert de l'élève")
-        //console.log(idEleve)
 
         setEleveId({
             ...eleveId,
@@ -176,27 +128,18 @@ const GetOneClasseEleves = () => {
        const arrowUp = document.querySelector(`.arrowUp${idEleve}`)
        arrowUp.style.display = "block"
 
-       //setshowWindowEleveDetailUp(false)
-       //setshowWindowEleveDetailDown(true)
-       ////////////////////
        setisOpen(true) //
 
+       setshowWindowEleveTransfert(false)
+       setshowWindowEleveDelete(false)
+       setshowWindowEleveUpdate(false)
 
-       /////////////////
-    
-        
-        setshowWindowEleveTransfert(false)
-        setshowWindowEleveDelete(false)
-        setshowWindowEleveUpdate(false)
+       setEleveId({
 
-        //console.log("vous avez cliqué sur le detail de l'élève")
-        console.log(idEleve)
+        ...eleveId,
+        idEleve
 
-        setEleveId({
-            ...eleveId,
-            idEleve
-
-        })
+       })
         
 
    }
@@ -215,22 +158,14 @@ const GetOneClasseEleves = () => {
         const arrowUp = document.querySelector(`.arrowUp${idEleve}`)
         arrowUp.style.display = "none"
 
-       // setshowWindowEleveDetailDown(false)
-        //setshowWindowEleveDetailUp(true)
-
-        ////////////////////////
-        setisOpen(false) //
-
-        ////////////////////////
+        setisOpen(false)
 
         setshowWindowEleveTransfert(false)
         setshowWindowEleveDelete(false)
         setshowWindowEleveUpdate(false)
         
-        //console.log("vous avez cliqué sur le detail de l'élève")
-        console.log(idEleve)
-        
         setEleveId({
+
             ...eleveId,
             idEleve
 
@@ -238,40 +173,22 @@ const GetOneClasseEleves = () => {
 
     }
 
-    //////////////////////////
-
-    const valeur = () => {
-       // console.log("valeur provisoire")
-    }
-
-   
-   ////////////////////////////////////////////
-
    let [ classeValue, setclasseValue ] = useState({})
-    //copie du tableau par élément complexe
-    
-    
+   
     useEffect( () => {
 
         let ElevesArray = [...listeClassesContext]
        let eleve = ElevesArray.find(element => element.id === idClasse)
        if(eleve){
 
-       // console.log("******** eleve")
-       // console.log(eleve.enseignant)
-       setclasseValue(eleve)
+        setclasseValue(eleve)
        }
 
        
 
 
     }, [idClasse, listeClassesContext])
-       
-   // console.log("classeValue") 
-   // console.log(classeValue) 
-
-     //////////////////////////////////
-
+     
      //gestion du state de l'apparition de la fenêtre creation élévève
      let [ createEleve, setcreateEleve ] = useState(false)
 
@@ -285,11 +202,6 @@ const GetOneClasseEleves = () => {
         setshowWindowEleveTransfert(false)
         setshowWindowEleveDelete(false)
     }
-
-   ///////////////////////////////:::
-
-
-   ////////////////////////////////////
 
    let [ valeurInput, setvaleurInput ] = useState({})
 
@@ -350,17 +262,8 @@ const GetOneClasseEleves = () => {
   //récupération de l'entrée de l'input et mise à jor du state
 const onchange = (e) => {
   
-      
-      console.log("***** bienvenue dans onchange " )
-  
-      console.log("mon  value : " +  e.target.value)
-
-      if( e.target.name === "dateDebut" || e.target.name === "dateFin" ){
+    if( e.target.name === "dateDebut" || e.target.name === "dateFin" ){
  
-        console.log("****** bienvenue à la condition date") 
-
-        
-
         for( let i=0; i<= tableDate.length; i++){
  
             setvaleurInput({})
@@ -373,16 +276,11 @@ const onchange = (e) => {
                 [ e.target.name]: e.target.value
                     
             })
-            
-
+          
         }
        
-       
     
-  
     } else if(e.target.name === "recherche"){
-  
-          console.log("***** bienvenue à la condition recherche" )
   
           let value = [ e.target.name]
           value = e.target.value;
@@ -393,153 +291,73 @@ const onchange = (e) => {
         
         setvaleurInput({value})
   
-          console.log("mon  value : " +  e.target.value)
-      
     }else if(e.target.value === "Oui" || e.target.value === "Non"   ){
   
-          console.log("***** bienvenue dans onchange  bouton filtre" )
-  
-          
-  
-          let value = e.target.name;
-           value = e.target.value;
-          
+        let value = e.target.name;
+        value = e.target.value;
         
-        
-           //////////////////////////////:::
-  
-           if(e.target.value === "Oui"){
-  
-             ////////:
-  
-             openisopenColor()
-              
+        if(e.target.value === "Oui"){
+
+            openisopenColor()
             lockisopenColor2()
-          
             setvaleurInput({})
-            
-             // formSubmit.reset()
-              
             setfiltrebtn({value})
-           //openSearch()
-            //lockSearch()
-          
-          
-              console.log("****** filtrebtn oui") 
-              console.log(filtrebtn)  
-  
-              //////////
-  
-          }else if(e.target.value === "Non"){
-  
-     
-              ////////:
-  
-  
-              openisopenColor2()
-  
-              lockisopenColor()
            
-              setvaleurInput({})
-              setfiltrebtn({value})
-             // openSearch()
-              //lockSearch()
+
+        }else if(e.target.value === "Non"){
+
+            openisopenColor2()
+            lockisopenColor()
+            setvaleurInput({})
+            setfiltrebtn({value})
             
-              
-              //////////
-  
-          }
+        }
           
-              console.log("****** filtrebtn non") 
-              console.log(filtrebtn)  
-              
-              //////////
-  
     }
    
-  
-  
-  
-        
-  
+
 }
   
   
-  console.log("filtrebtn")
-  console.log(filtrebtn)
+useEffect( () => {
 
-  console.log("****** valeurInput")
-  console.log(valeurInput)
+    
 
-  console.log("******  valeurInputDateEntree") 
-  console.log( valeurInputDate) 
-  
-  
-  useEffect( () => {
-  
-      
-  
-      if( valeurInput.value){
-  
-          console.log("***** condition valeurInput.value ")
-  
-          lockOpenbodyDataNormal()
-          openSearch()
-          
-  
-  
-      }else if(  valeurInputDate.dateDebut && valeurInputDate.dateFin ){
- 
-        console.log("***** condition  valeurInputDateEntree.dateDebut && valeurInputDateEntree.dateFin ")
+    if( valeurInput.value){
+
+        lockOpenbodyDataNormal()
+        openSearch()
         
+    }else if(  valeurInputDate.dateDebut && valeurInputDate.dateFin ){
+
         openSearch()
         lockOpenbodyDataNormal()
-        
- 
-     } else if(filtrebtn.value ){
-  
-          console.log("***** condition filtrebtn.value  ")
-  
-          lockOpenbodyDataNormal()
-          openSearch()
-  
-      }else if( valeurInput.value === "" ){
+    
+
+    } else if(filtrebtn.value ){
+
+        lockOpenbodyDataNormal()
+        openSearch()
+
+    }else if( valeurInput.value === "" ){
+
+        lockSearch()
+        openOpenbodyDataNormal()
    
-          console.log("***** condition  valeurInputEntree.value")
-  
-          lockSearch()
-          openOpenbodyDataNormal()
-          
-           
-   
-   
-       }
-     
-   
-  })
+    }
+    
+
+})
   
   
   
   
-  const onchange2 = (e) => {
-  
-      
-      console.log("***** bienvenue dans onchange " )
-  
-      console.log("mon  value : " +  e.target.value)
-  
-      
+const onchange2 = (e) => {
   
     if(e.target.value === "Oui"    ){
   
-      console.log("***** bienvenue dans onchange  bouton filtre" )
-  
       lockisopenColor()
-     
-  
       lockisopenColor2()
-     
-  
       setvaleurInput({})
       setfiltrebtn({})
   
@@ -550,33 +368,22 @@ const onchange = (e) => {
      } else if( e.target.value === "Non"){
   
             
-            
-              lockisopenColor()
-  
-              lockisopenColor2()
-              
-  
-              setvaleurInput({})
-              setfiltrebtn({})
-     
-              openOpenbodyDataNormal()
-              lockSearch()
-     
-          }
-      
-  
-      
-      
-    }
-
-
-
-
-    ////////////////////////////////////
         
-       
+        lockisopenColor()
 
-   
+        lockisopenColor2()
+        
+
+        setvaleurInput({})
+        setfiltrebtn({})
+
+        openOpenbodyDataNormal()
+        lockSearch()
+    
+    }
+      
+}
+
 
     return (
         <div className='getOneClasseEleves'>
@@ -615,17 +422,17 @@ const onchange = (e) => {
 
                     <form className='containerDateFiltre '>
 
-                        <di className='containerDateFiltre__btn '>
-                            <label for="dateDebut" className='date'> Date début</label>
+                        <div className='containerDateFiltre__btn '>
+                            <label htmlFor="dateDebut" className='date'> Date début</label>
                             <input type='date' name='dateDebut' id='dateDebut' className='containerDateFiltre__btn--titre'  value={ valeurInputDate.dateDebut  } onChange  ={  onchange } />
                             
-                        </di>
+                        </div>
 
-                        <di className='containerDateFiltre__btn date'>
-                            <label for="dateFin" className='date'> Date de fin</label>
+                        <div className='containerDateFiltre__btn date'>
+                            <label htmlFor="dateFin" className='date'> Date de fin</label>
                             <input type='date' name='dateFin' id='dateFin' className='containerDateFiltre__btn--titre' value={ valeurInputDate.dateFin  }  onChange ={  onchange }/>
                             
-                        </di>
+                        </div>
 
                     </form>
                         
@@ -648,7 +455,7 @@ const onchange = (e) => {
 
                     <form className='btnInput'>
 
-                        <label for="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
+                        <label htmlFor="recherche" className='labelRecherche' ><i className="fa-solid fa-magnifying-glass"></i></label>
                         <input type='text' name='recherche' id='recherche' className='recherche' placeholder='Rechercher par nom, prénom'
                         value={ valeurInput.value} onFocus={openFocus} onBlur={lockFocus}  onChange ={  onchange }/>
                     
@@ -665,12 +472,7 @@ const onchange = (e) => {
             </div>
 
             <div className='getOneClasseEleves__btn3'>
-                
-             
-                
-                
-                
-                    
+                   
                 {
                     <div className='getOneClasseEleves__btn3--titre'>
 
@@ -683,17 +485,15 @@ const onchange = (e) => {
                     
                     </div>
                 }
-                
-             
                
                 { isOpenbodyDataNormal &&
 
                     listeEleves.map( (eleve, index) => 
                   
-                    <>
+                    <div key={ `${eleve.nom}-${index}` }>
                             <hr></hr>
                     
-                            <div className='getOneClasseEleves__btn3--bloc' key={ `${eleve.nom}-${index}` }> 
+                            <div className='getOneClasseEleves__btn3--bloc' > 
                                 
                             
                                 <div className='btn3Option'>
@@ -714,8 +514,6 @@ const onchange = (e) => {
                                     <div className='btn3IconChoice'> <i className="fa-solid fa-x" title="supprimer l'élève" onClick={ () => iconEleveDelete(eleve.id) } ></i> </div>
                                     <div className='btn3IconChoice'><i className="fa-solid fa-right-left" title="changer la classe de l'élève" onClick={ () => iconEleveUpdateTransfert(eleve.id) } ></i></div>
                                 
-                                
-                                   
                                     <div className='btn3IconChoice'>
                                     
                                         { <span   style={{ display: 'block' }} className={ `arrow  arrowDow${eleve.id}` }> <i className="fa-solid fa-angle-down" id={`${eleve.id}`} title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> </span> }
@@ -738,7 +536,7 @@ const onchange = (e) => {
                             </div>
                             
                            
-                    </> 
+                    </div> 
                     
 
                     ) 
@@ -764,41 +562,3 @@ const onchange = (e) => {
 };
 
 export default GetOneClasseEleves;
-
-/*
-
- {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down" id={`${eleve.id}`} title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> </span> }
-{ showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up" id={`${eleve.id}`}  onClick={ () => iconEleveDetailDown(eleve.id) } ></i> </span>} 
-
-
-{  showWindowEleveDetailDown && <DetailsOneEleve showWindowEleveDetailDown={showWindowEleveDetailDown} setshowWindowEleveDetailDown={setshowWindowEleveDetailDown} idClasse={idClasse}   eleveId={eleveId} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  }
-
-
-{   isOpen && <DetailsOneEleve   idClasse={idClasse}   eleveId={eleve.id} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  }
-
-*/
-
-/*
-        {  showWindowEleveDetailDown && <span className='arrow'> <i className="fa-solid fa-angle-down" id={`${eleve.id}`} title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> </span> }
-        { showWindowEleveDetailUp && <span className='arrow'> <i className="fa-solid fa-angle-up" id={`${eleve.id}`}  onClick={ () => iconEleveDetailDown(eleve.id) } ></i> </span>} 
-
-
-
-        { 
-                                        
-            showWindowEleveDetailDown ? <span className='arrow'> <i className="fa-solid fa-angle-down" id={`${eleve.id}`} title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> gg</span> 
-            :
-            
-            
-            <DetailsOneEleve   iconEleveDetailDown={iconEleveDetailDown}  idClasse={idClasse}   eleveId={eleve.id} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  
-        } 
-
-
-        { isOpen && <DetailsOneEleve   iconEleveDetailDown={iconEleveDetailDown}  idClasse={idClasse}   eleveId={eleve.id} listeElevesContext={listeElevesContext} listeClassesContext={listeClassesContext} listeEleves={listeEleves}/>  }
-*/
-
-/*
-{  showWindowEleveDetailDown ? <span className='arrow'> <i className="fa-solid fa-angle-down" id={`${eleve.id}`} title="plus de détails" onClick={ () => iconEleveDetailUp(eleve.id) } ></i> </span> 
-                                        :   <span className='arrow'> <i className="fa-solid fa-angle-up" id={`${eleve.id}`}  onClick={ () => iconEleveDetailDown(eleve.id) } ></i> </span> }
-
-*/

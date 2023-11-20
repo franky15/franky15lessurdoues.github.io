@@ -1,32 +1,25 @@
-import React, { useState, useContext } from 'react'; //, useRef,useEffect
+import React, { useState, useContext, useEffect } from 'react'; //, useRef,useEffect
 import { AddEleveContext } from '../../_utils/ContextAddEleve';
 import { useNavigate } from 'react-router-dom';
 
-const GetAllClassesEleves = () => {
 
-    console.log("***** Bienvenue dans le GetAllClassesEleves ******")
+
+
+const  GetAllClassesEleves = () => {
+
 
     let navigate = useNavigate()
-
-    const {listeClassesContext, listePositionPageContext} = useContext(AddEleveContext)
-
-    let openpositionEleveContext = listePositionPageContext[1].openpositionEleveContext()
     
-    console.log("**** openpositionEleveContext  dans getallpersonnels")
-    console.log(openpositionEleveContext)
-
-    //gestion du choix des sections
-    //let [ classeChoice, setClasseChoice ] = useState([])
+    const {listeClassesContext, listePositionPageContext} = useContext(AddEleveContext)
+    let openpositionEleveContext = listePositionPageContext[1].openpositionEleveContext()
 
     //gestion de l'input de la recherche
     let [ inputSearch, setInputSearch ] = useState({})
        
-
     //gestion de l'affichage et masquage de l'input de la recherche
     let [ inputSearchShow, setInputSearchShow ] = useState(true)
 
    
-
     //gestion du focus sur la recherche
     let [ isFocused , setIsFocus ] = useState(false)
  
@@ -35,49 +28,26 @@ const GetAllClassesEleves = () => {
     const sectionAnglophone = listeClassesContext.filter( classe => classe.section_id === 1)
     const sectionFrancophone = listeClassesContext.filter( classe => classe.section_id === 2)
     
-
-    //console.log("listeClassesContext GetAllClassesEleves")
-    //console.log(listeClassesContext)
-
     
-   ///////////////////////////////////////////////////////////////////
     const getElevesOneClasse = (idClasse) => {
-
-        console.log("idClasse est : " + idClasse)
-        
-        //navigate(`/admin/eleves/getallclasseseleve/GetOneClasseEleves/${idClasse}`)
 
         navigate(`/admin/eleves/getallclasseseleve/${idClasse}`)
 
     }
-    ///////////////////////////////////////////////////////////////////
-    //console.log("classeChoice est : ")
-    //console.log(classeChoice)
-
-    
+  
     /////////////////://////////////
     let searchClasse = (e) => {
 
         setInputSearch({
             ...inputSearch,
-            [e.target.name] : e.target.value  ///.toLowerCase()
+            [e.target.name] : e.target.value  
         })
         
 
     }
-   // console.log("**** inputSearch est ")
-    //console.log(inputSearch)
-
+   
     const inputSearchClassesFilter = listeClassesContext.filter( element => element.nom === inputSearch.filtreClasseEleve )
 
-    console.log("inputSearchClassesFilter resultat recherche ")
-    console.log(inputSearchClassesFilter)
-
-    console.log("inputSearchClassesFilter.length")
-    console.log(inputSearchClassesFilter.length)
-    //////////////////////////////
-
-    /////////////////////////////
     let [ placeholder, setPlaceholder ] = useState({ place: 'Filtrer sur une ou plusieurs classes'})
     
 
@@ -89,7 +59,6 @@ const GetAllClassesEleves = () => {
     
     let lockFocus = () => {
 
-       // console.log("bienvenueeeeeeee ")
        if(inputSearchClassesFilter.length === 0) {
 
         setPlaceholder({
@@ -181,5 +150,3 @@ const GetAllClassesEleves = () => {
 };
 
 export default GetAllClassesEleves;
-
-//placeholder='Filtrer sur une ou plusieurs classes'

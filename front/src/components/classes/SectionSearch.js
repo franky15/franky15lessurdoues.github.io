@@ -1,26 +1,19 @@
 
 import React, {  useState, useEffect} from 'react';
-//import { classesServices } from '../../../_services/Classes.services';
-
 
 const SectionSearch = ({classes, valeurInput}) => {
 
     const listeclasses = classes;
     let input = valeurInput;
-    console.log("valeurInput")
-    console.log(valeurInput)
 
     //gestion du state des section
     let [ sectionInput, setsectionInput ] = useState([])
 
     useEffect( () => {
-        console.log( " entrain de taper sur l'input " )
-
+        
         //filtre des sections
          let listeSearch = listeclasses.filter( element => element.nom.toLowerCase() === input.toLowerCase())
-        
-
-        
+      
         setsectionInput(listeSearch )
 
     }, [listeclasses, input])
@@ -47,11 +40,13 @@ const SectionSearch = ({classes, valeurInput}) => {
             {
                
                sectionInput.map((element, index) => (  
-                                    
-                <div className='valeurs' key={`index-${element.nom}`}>
+                  
+                <>
+                <hr></hr>
+                <div className='valeurs effectifClass' key={`index-${element.nom}`}>
                         
                     <p className='nomEffectif'> { element.nom } </p>
-                    <p className='nomEffectif'> { element.effectif } </p>
+                    <p className='nomEffectif'> {  element.effectif ?? 0} </p>
                     <p className='enseignant'>{element.enseignant } </p>
                     <p className='section'> {  section(element.section_id) } </p>
                                 
@@ -68,7 +63,11 @@ const SectionSearch = ({classes, valeurInput}) => {
                         </div>
                     </div>
                         
-                </div> ) ) 
+                </div> </>
+                
+                ) ) 
+
+                
             }
         </div>
    );

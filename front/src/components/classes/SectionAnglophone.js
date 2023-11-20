@@ -2,28 +2,7 @@ import React, {  useState, useEffect } from 'react';
 import SectionUpdate from './SectionUpdate';
 import DeleteClasses from './DeleteClasses';
 
-
-
-//import SectionFrancophone from './SectionFrancophone';
-//import { classesServices } from '../../../_services/Classes.services';
-
-
-
 const SectionAnglophone = ( {classes} ) => {
-
-
-      /////////////////////////////////////////////////////
-    
-
-   
-   
-
-    
-
-     /////////////////////////////////////////////////////
-    
-    //gestion du state de toutes les classes
-    //let [ classes, setclasses ] = useState([])
 
     //gestion du state des quantité de classes Anglophone
     let [ classesFilterAnglo, setClassesFilterAnglo ] = useState([])
@@ -92,7 +71,7 @@ const SectionAnglophone = ( {classes} ) => {
     let [ sectionFilterAnglophone, setSectionFilterAnglophone ] = useState([])
 
     useEffect( () => {
-        console.log( " clique sur la section Anglophone " )
+        
             //filtre des sections
         let tableAnglophone = listeclasses.filter( element => element.section_id === 1)
         setSectionFilterAnglophone(tableAnglophone)
@@ -164,9 +143,6 @@ const SectionAnglophone = ( {classes} ) => {
         setClasseId(id)
         openwindowDeleteClasse()
         
-        
-        console.log("bienvenue openwindowDelete")
-       // console.log("idClasse current est : " + idClasse)
     }
    
 
@@ -176,10 +152,6 @@ const SectionAnglophone = ( {classes} ) => {
         openwindowUpdateClasse()
     }
 
-
-
-
-    /////////////////////////////////////////
     return (
        
         <div>
@@ -190,11 +162,13 @@ const SectionAnglophone = ( {classes} ) => {
                 { windowDeleteClasse && <DeleteClasses classes = {classes} lockwindowDeleteClasse = { lockwindowDeleteClasse }  idclasse = { classeId } />   } 
                 
                 {sectionFilterAnglophone.map((element, index) => (  
-                                    
-                <div className='valeurs' key={`index-${element.nom}`}>
+                         
+                <>
+                <hr></hr>
+                <div className='valeurs effectifClass' key={`index-${element.nom}`}>
                         
                     <p className='nomEffectif'> { element.nom } </p>
-                    <p className='nomEffectif'> { element.effectif } </p>
+                    <p className='nomEffectif'> { element.effectif ?? 0} </p>
                     <p className='enseignant'>{element.enseignant } </p>
                     <p className='section'> {  section(element.section_id) } </p>
                                 
@@ -212,7 +186,11 @@ const SectionAnglophone = ( {classes} ) => {
                     </div>
                 </div>
                         
-                </div> ) )  }
+                </div> 
+                
+                </>
+                
+                ) )  }
                 
             
         </div>

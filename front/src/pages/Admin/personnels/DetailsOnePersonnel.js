@@ -5,12 +5,6 @@ const DetailsOnePersonnel = ( {  personnelId, listeElevesContext, listePersonnel
     
     const personnel = listePersonnelContext.find( element => element.id === personnelId)
    
-
-   // console.log("listePersonnelContext")
-    //console.log(listePersonnelContext)
-
-    
-
     return (
         <div className='detailsOneEleve'>
             
@@ -23,5 +17,3 @@ const DetailsOnePersonnel = ( {  personnelId, listeElevesContext, listePersonnel
 };
 
 export default DetailsOnePersonnel;
-
-// <p> GroupeSalariale : { personnel.groupeSalariale }</p>

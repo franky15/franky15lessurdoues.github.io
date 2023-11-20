@@ -2,36 +2,13 @@ import React, { useState } from 'react';
 
 const ComptaDetail = ( { listeElevesContext,  idEleveCurrent, listePaiementContext }) => {
 
-
-     /*
-    /////////////////////////
-    let [ total, setTotal ] = useState({
-                                            datePaiement : " ",
-                                            montantPaye : " ",
-                                            scolarite : " ",
-                                            tenueClasse : " ",
-                                            transport : " ",
-                                            cantine : " ",
-
-                                        })
-
-
-    ///////////////////////
-
-    */
     const idEleve = idEleveCurrent.idEleve;
-
-    console.log("idEleve : " + idEleve)
 
     const eleveCurrent = listeElevesContext.find( element => element.id === idEleve)
 
     //récupération de tous les paiements de l'élève en encours
     const paiementCurrentEleve = listePaiementContext.filter( paiements => paiements.eleves_id === idEleve)
 
-    console.log("**** paiementCurrentEleve  tous les paiements de l'élève  dans comptaDetail ")
-    console.log(paiementCurrentEleve )
-   
-    
     ////////////////////////////////////
 
     //récupération de chaque objet  paiement  de l'élève qui ont la même date
@@ -42,11 +19,6 @@ const ComptaDetail = ( { listeElevesContext,  idEleveCurrent, listePaiementConte
     
     )
     
-    console.log("**** listeOnePaiementDateIdentiqueEleve tous les paiements de l'élève dont les dates sont identiques  dans comptaDetail ")
-    console.log(listeOnePaiementDateIdentiqueEleve)
-
-   
-
    ////////////////////////////////////::
 
    /* réduction du tableau de tous les paiements de l'élève on veut réduire
@@ -59,9 +31,6 @@ const ComptaDetail = ( { listeElevesContext,  idEleveCurrent, listePaiementConte
    const mergedPaiement = paiementCurrentEleve.reduce( (acc, current) => {
 
         const existingPaiement = acc.find( (obj) => obj.datePaiement === current.datePaiement)
-
-        console.log("****** existingPaiement")
-        console.log(existingPaiement)
 
         if(existingPaiement){
 
@@ -98,12 +67,6 @@ const ComptaDetail = ( { listeElevesContext,  idEleveCurrent, listePaiementConte
         return acc;
 
    }, [] )
-
-
-   console.log( "***** mergedPaiement ")
-   console.log( mergedPaiement)
-   ////////////////////////////////////::
-   
 
 
     return (

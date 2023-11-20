@@ -46,27 +46,7 @@ const ComptaChargeSearch = ({ listeChargesContext, listePersonnelContext, listeP
        const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
        arrowUp.style.display = "block"
 
-
-        ////////////////////////////////////
-
-
-        /*
-
-        setshowWindowEleveDetailUp(true)
-        setshowWindowEleveDetailDown(false)
-  
-       
-         ////////////////////
-        
-         setisOpen(true)
-         */
-  
-  
-         /////////////////
-          //console.log("vous avez cliqué sur le detail de l'élève")
-          console.log( idCharge)
-  
-          setidChargeCurrent({
+        setidChargeCurrent({
 
             ...idChargeCurrent,
             idCharge
@@ -76,73 +56,32 @@ const ComptaChargeSearch = ({ listeChargesContext, listePersonnelContext, listeP
      }
 
      //fonction d'affichage du detail du personnel 
-   const iconEleveDetailDown = (idCharge) => {
+    const iconEleveDetailDown = (idCharge) => {
 
-    ////////////////////////////////////:
-     //gestde l'affichage du detail
-     const detail = document.querySelector(`.detail${idCharge}`)
-     detail.style.display = "none"
+        ////////////////////////////////////:
+        //gestde l'affichage du detail
+        const detail = document.querySelector(`.detail${idCharge}`)
+        detail.style.display = "none"
 
-     const arrowDow = document.querySelector(`.arrowDow${idCharge}`)
-     arrowDow.style.display = "block"
+        const arrowDow = document.querySelector(`.arrowDow${idCharge}`)
+        arrowDow.style.display = "block"
 
-     const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
-     arrowUp.style.display = "none"
+        const arrowUp = document.querySelector(`.arrowUp${idCharge}`)
+        arrowUp.style.display = "none"
 
+        setidChargeCurrent({
 
+            ...idChargeCurrent,
+            idCharge
+        })
 
-
-    //////////////////////////////////////
-
-
-       /* 
-    setshowWindowEleveDetailDown(true)
-    setshowWindowEleveDetailUp(false)
-
-   
-
-    ////////////////////////
-    
-    setisOpen(false)*/
-
-    ////////////////////////
-
-    
-    //console.log("vous avez cliqué sur le detail de l'élève")
-    console.log( idCharge)
-    
-    setidChargeCurrent({
-
-        ...idChargeCurrent,
-        idCharge
-    })
-
-}
-
-console.log("**** idChargeCurrent " )
-console.log( idChargeCurrent)
-
-////////////////////////////////////////
-
+    }
 let dateDebut = valeurInputDate.dateDebut
 let dateFin = valeurInputDate.dateFin
-
-
-/*
-let dateDebut = datePaiement.dateDebut
-let dateFin = datePaiement.dateFin
-*/
 
 let valeurInput = listeChargesContext.filter( charge => charge.categorie === valeurInputSearch || charge.nomPrenom === valeurInputSearch || charge.poste === valeurInputSearch  || 
    ( charge.datePaiement >= dateDebut &&  charge.datePaiement <= dateFin ) || charge.categorie === filtrebtn )
     
-    
-
-
-
-
-////////////////////////:::::::::::
-
     return (
         <div>
            
